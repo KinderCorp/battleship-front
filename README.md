@@ -32,17 +32,9 @@ We use [ClickUp](https://app.clickup.com/42620567/v/l/7-42620567-1).
 
 Naming all branchs/commits in english.
 
-### Branch / Pull requests
+### Branch
 
-Each branch is attached to a ticket on ClickUp.
-
-For naming the branch :
-
-> ticketId-name-of-the-branch
-
-For naming the pull request :
-
-> [#ticketId] Name of the branch
+Each branch is attached to a ticket on ClickUp, create the branch directly on ClickUp
 
 ### Commit
 
