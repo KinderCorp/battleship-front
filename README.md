@@ -30,11 +30,25 @@ We use [ClickUp](https://app.clickup.com/42620567/v/l/7-42620567-1).
 
 ## Usage
 
+Naming all branchs/commits in english.
+
+### Branch / Pull requests
+
+Each branch is attached to a ticket on ClickUp.
+
+For naming the branch :
+
+> ticketId-name-of-the-branch
+
+For naming the pull request :
+
+> [#ticketId] Name of the branch
+
 ### Commit
 
-For naming the commit : **\<gitmoji\> \<Message\>**
+For naming the commit (use [gitmoji](https://gitmoji.dev/)) :
 
-> 🎉 Init project
+> 🎉 Name of the commit
 
 ## Team
 
