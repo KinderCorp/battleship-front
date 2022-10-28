@@ -1,6 +1,6 @@
 # ⚓ Battleship
 
-A battleship game.
+A online battleship game.
 
 ## Getting Started
 
