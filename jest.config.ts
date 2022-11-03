@@ -1,11 +1,11 @@
-export default {
+const jestConfig = {
   collectCoverage: true,
-  coverageDirectory: "coverage",
-  coverageProvider: "v8",
   collectCoverageFrom: [
     '**/*.{js,jsx}',
     '!**/node_modules/**',
   ],
+  coverageDirectory: "coverage",
+  coverageProvider: "v8",
   rootDir: "./",
   testMatch: ['**/*.spec.js'],
   testPathIgnorePatterns: [
@@ -16,3 +16,5 @@ export default {
     "^.+\\.tsx?$": "ts-jest",
   },
 };
+
+export default jestConfig;
