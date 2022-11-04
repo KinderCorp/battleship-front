@@ -5,8 +5,8 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "format:check": "prettier --check \"src/**/*.ts\" \"test/**/*.ts\"",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format:check": "prettier --check \"pages/**/*.(ts|tsx)\"",
+    "format": "prettier --write \"pages/**/*.(ts|tsx)\"",
     "lint": "next lint",
     "prepare": "husky install",
     "start": "next start"
