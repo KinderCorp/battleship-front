@@ -1,9 +1,9 @@
 // Library
-import type { AppProps } from 'next/app'
-import { ReactNode } from 'react'
+import type { AppProps } from 'next/app';
+import { ReactNode } from 'react';
 
 // Styles
-import '../styles/globals.css'
+import '../styles/globals.css';
 
 /**
  * App component.
@@ -12,7 +12,7 @@ import '../styles/globals.css'
  * @return {ReactNode}
  */
 export const App = ({ Component, pageProps }: AppProps): ReactNode => {
-  return <Component {...pageProps} />
-}
+  return <Component {...pageProps} />;
+};
 
 export default App;

@@ -1,5 +1,5 @@
 // Library
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 /**
  * Home page.
@@ -8,6 +8,6 @@ import { ReactNode } from "react";
  */
 export const Home = (): ReactNode => {
   return <p>HomePage</p>;
-}
+};
 
 export default Home;
