@@ -30,6 +30,8 @@ jobs:
 
       - run: npm run build --if-present
 
+      - run: npm run stylelint
+
       - run: npm run format:check
 
       - run: npm run lint
