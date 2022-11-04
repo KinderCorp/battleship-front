@@ -1,20 +1,11 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "@typescript-eslint",
-    "jsdoc"
-  ],
+  "plugins": ["@typescript-eslint", "jsdoc"],
   "rules": {
-    "default-param-last": [
-      "warn"
-    ],
-    "no-console": [
-      "error"
-    ],
-    "no-underscore-dangle": [
-      "error"
-    ],
+    "default-param-last": ["warn"],
+    "no-console": ["error"],
+    "no-underscore-dangle": ["error"],
     "import/extensions": [
       "error",
       {
@@ -41,9 +32,7 @@
     "jsdoc/no-undefined-types": [
       1,
       {
-        "definedTypes": [
-          "jest"
-        ]
+        "definedTypes": ["jest", "JSX"]
       }
     ],
     "require-jsdoc": [

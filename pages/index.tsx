@@ -1,12 +1,9 @@
-// Library
-import { ReactNode } from 'react';
-
 /**
  * Home page.
  *
- * @return {ReactNode}
+ * @return {JSX.Element}
  */
-export const Home = (): ReactNode => {
+export const Home = (): JSX.Element => {
   return <p>HomePage</p>;
 };
 
