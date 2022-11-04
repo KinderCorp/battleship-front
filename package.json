@@ -7,7 +7,7 @@
     "dev": "next dev",
     "format:check": "prettier --check \"pages/**/*.(ts|tsx)\"",
     "format": "prettier --write \"pages/**/*.(ts|tsx)\"",
-    "lint": "next lint",
+    "lint:check": "next lint",
     "prepare": "husky install",
     "start": "next start",
     "stylelint:check": "stylelint \"**/styles/**/*.scss\"",
