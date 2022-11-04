@@ -7,6 +7,7 @@ const jestConfig = {
   coverageDirectory: "coverage",
   coverageProvider: "v8",
   rootDir: "./",
+  setupFilesAfterEnv: ["<rootDir>/setupTests.js"],
   testMatch: ['**/*.spec.js'],
   testPathIgnorePatterns: [
     '/node_modules/',
