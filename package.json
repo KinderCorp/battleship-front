@@ -1,20 +1,19 @@
 {
   "name": "battleship-front",
   "version": "0.1.0",
-  "private": true,
+  "author": "Kinder Corp.",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
     "format:check": "prettier --check \"pages/**/*.(ts|tsx)\"",
     "format": "prettier --write \"pages/**/*.(ts|tsx)\"",
     "lint:check": "next lint",
+    "prepare": "husky install",
     "start": "next start",
     "stylelint:check": "stylelint \"**/styles/**/*.scss\"",
     "stylelint": "stylelint --fix \"**/styles/**/*.scss\"",
-    "prepare": "husky install",
-    "test": "jest",
-    "test:watch": "jest — watch",
-    "test:coverage": "jest — coverage"
+    "test:watch": "jest --coverage --watchAll",
+    "test": "jest --coverage"
   },
   "dependencies": {
     "next": "13.0.0",
