@@ -22,6 +22,12 @@ Run the development server.
 npm run dev
 ```
 
+Prepare husky.
+
+```bash
+npm run prepare
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Project management
@@ -45,11 +51,13 @@ For naming the commit (use [gitmoji](https://gitmoji.dev/)) :
 ## Team
 
 ### Front
+
 - [Alexandra FARINA](https://github.com/DrakenLine)
 - [Manon FARGUES](https://github.com/ManonFargues)
 - [Baptiste BONNIN](https://github.com/exender)
 - [Quentin MASBERNAT](https://github.com/MASBERNATQ)
 
 ### Back
+
 - [Maxime WARLUZEL](https://github.com/MaximeWrlz)
 - [Flavian ENGEVIN](https://github.com/FlavianEng)
