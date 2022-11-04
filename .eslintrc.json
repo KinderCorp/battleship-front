@@ -7,12 +7,12 @@
     "no-console": ["error"],
     "no-underscore-dangle": ["error"],
     "sort-imports": [
-        "error",
-        {
-            "allowSeparatedGroups": true,
-            "ignoreCase": true
-        }
-    ], 
+      "error",
+      {
+        "allowSeparatedGroups": true,
+        "ignoreCase": true
+      }
+    ],
     "sort-keys": ["error", "asc", { "natural": true }],
     "jsdoc/require-description": 1,
     "jsdoc/require-returns-description": 0,
