@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "dev": "next dev",
+    "format:check": "prettier --check \"pages/**/*.(ts|tsx)\"",
+    "format": "prettier --write \"pages/**/*.(ts|tsx)\"",
     "lint": "next lint",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "start": "next start"
   },
   "dependencies": {
     "next": "13.0.0",
