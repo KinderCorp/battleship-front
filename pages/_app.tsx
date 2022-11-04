@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app';
 import { ReactNode } from 'react';
 
 // Styles
-import '../styles/globals.css';
+import '../styles/globals.scss';
 
 /**
  * App component.

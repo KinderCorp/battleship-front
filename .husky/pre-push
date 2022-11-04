@@ -3,4 +3,5 @@
 
 npm run build
 npm run format:check
-npm run lint
+npm run stylelint:check
+npm run lint:check
