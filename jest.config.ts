@@ -15,7 +15,7 @@ const jestConfig: Config = {
   },
   setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
   testEnvironment: 'node',
-  testMatch: ['**/_tests_/*.test.(ts|tsx)'],
+  testMatch: ['**/tests/*.test.(ts|tsx)'],
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
   transform: {
     '^.+\\.(ts|tsx)$': '<rootDir>/node_modules/babel-jest',
