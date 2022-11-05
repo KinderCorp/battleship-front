@@ -6,19 +6,20 @@ const jestConfig: Config = {
   coverageDirectory: 'coverage',
   coverageProvider: 'v8',
   moduleNameMapper: {
+    '\\.(css|scss|sass)$': 'identity-obj-proxy',
     '^@home/(.*)$': '<rootDir>/src/home/$1',
     '^@pages/(.*)$': '<rootDir>/pages/$1',
     '^@shared/(.*)$': '<rootDir>/src/shared/$1',
     '^@src/(.*)$': '<rootDir>/src/$1',
     '^@styles/(.*)$': '<rootDir>/styles/$1',
   },
-  preset: 'ts-jest',
-  rootDir: './',
   setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
   testEnvironment: 'node',
   testMatch: ['**/_tests_/*.test.(ts|tsx)'],
-  testPathIgnorePatterns: ['/node_modules/', '/.next/'],
-  transform: { '^.+\\.tsx?$': 'ts-jest' },
+  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
+  transform: {
+    '^.+\\.(ts|tsx)$': '<rootDir>/node_modules/babel-jest',
+  },
   verbose: true,
 };
 
