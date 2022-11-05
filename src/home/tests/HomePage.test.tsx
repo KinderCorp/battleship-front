@@ -1,5 +1,4 @@
 import { shallow, ShallowWrapper } from 'enzyme';
-import React from 'react';
 
 // Components
 import HomePage from '@home/components/HomePage';
@@ -11,11 +10,11 @@ describe('HomePage', () => {
     component = shallow(<HomePage />);
   });
 
-  it('renders component', () => {
+  it('should renders component', () => {
     expect(component).toBeDefined();
   });
 
-  it('renders the expected component', () => {
+  it('should renders the expected component', () => {
     const paragraph = component.find('p');
 
     expect(paragraph).toHaveLength(1);
