@@ -11,7 +11,10 @@
     "moduleResolution": "node",
     "noEmit": true,
     "paths": {
+      "@home/*": ["./src/home/*"],
       "@pages/*": ["./pages/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@src/*": ["./src/*"],
       "@styles/*": ["./styles/*"]
     },
     "resolveJsonModule": true,

@@ -2,13 +2,13 @@ import { shallow, ShallowWrapper } from 'enzyme';
 import React from 'react';
 
 // Components
-import Home from '@pages/index';
+import HomePage from '@home/components/HomePage';
 
-describe('Home', () => {
-  let component: ShallowWrapper<typeof Home>;
+describe('HomePage', () => {
+  let component: ShallowWrapper<typeof HomePage>;
 
   beforeEach(() => {
-    component = shallow(<Home />);
+    component = shallow(<HomePage />);
   });
 
   it('renders component', () => {

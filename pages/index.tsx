@@ -1,10 +1,16 @@
+// Components
+import HomePage from '@src/home/components/HomePage';
+import Layout from '@shared/Layout/components/Layout';
+
 /**
- * Home page.
+ * Home component.
  *
  * @return {JSX.Element}
  */
-export const Home = (): JSX.Element => {
-  return <p>HomePage</p>;
+const Home = (): JSX.Element => {
+  return <HomePage />;
 };
+
+Home.getLayout = (page: JSX.Element): JSX.Element => <Layout>{page}</Layout>;
 
 export default Home;

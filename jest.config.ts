@@ -6,7 +6,10 @@ const jestConfig: Config = {
   coverageDirectory: 'coverage',
   coverageProvider: 'v8',
   moduleNameMapper: {
+    '^@home/(.*)$': '<rootDir>/src/home/$1',
     '^@pages/(.*)$': '<rootDir>/pages/$1',
+    '^@shared/(.*)$': '<rootDir>/src/shared/$1',
+    '^@src/(.*)$': '<rootDir>/src/$1',
     '^@styles/(.*)$': '<rootDir>/styles/$1',
   },
   preset: 'ts-jest',
