@@ -1,18 +1,27 @@
-// Library
 import type { AppProps } from 'next/app';
-import { ReactNode } from 'react';
+import type { NextPage } from 'next';
 
 // Styles
-import '../styles/globals.scss';
+import '@styles/globals.scss';
+
+type PageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: JSX.Element) => JSX.Element;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: PageWithLayout;
+};
 
 /**
  * App component.
  *
- * @param {AppProps} AppProps Props
- * @return {ReactNode}
+ * @param {AppPropsWithLayout} AppPropsWithLayout App props with layout
+ * @return {JSX.Element}
  */
-export const App = ({ Component, pageProps }: AppProps): ReactNode => {
-  return <Component {...pageProps} />;
+const App = ({ Component, pageProps }: AppPropsWithLayout): JSX.Element => {
+  const getLayout = Component.getLayout || ((page) => page);
+
+  return getLayout(<Component {...pageProps} />);
 };
 
 export default App;

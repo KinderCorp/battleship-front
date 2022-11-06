@@ -1,13 +1,16 @@
-// Library
-import { ReactNode } from 'react';
+// Components
+import HomePage from '@src/home/components/HomePage';
+import Layout from '@shared/Layout/components/Layout';
 
 /**
- * Home page.
+ * Home component.
  *
- * @return {ReactNode}
+ * @return {JSX.Element}
  */
-export const Home = (): ReactNode => {
-  return <p>HomePage</p>;
+const Home = (): JSX.Element => {
+  return <HomePage />;
 };
+
+Home.getLayout = (page: JSX.Element): JSX.Element => <Layout>{page}</Layout>;
 
 export default Home;
