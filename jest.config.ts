@@ -2,13 +2,14 @@ import type { Config } from 'jest';
 
 const jestConfig: Config = {
   collectCoverage: true,
-  collectCoverageFrom: ['src/**/*.(ts|tsx)', '!**/node_modules/**'],
+  collectCoverageFrom: ['src/**/!(models).(ts|tsx)', '!**/node_modules/**'],
   coverageDirectory: 'coverage',
   coverageProvider: 'v8',
   moduleNameMapper: {
     '\\.(css|scss|sass)$': 'identity-obj-proxy',
     '^@core/(.*)$': '<rootDir>/src/core/$1',
     '^@home/(.*)$': '<rootDir>/src/home/$1',
+    '^@mocks/(.*)$': '<rootDir>/mocks/$1',
     '^@pages/(.*)$': '<rootDir>/pages/$1',
     '^@shared/(.*)$': '<rootDir>/src/shared/$1',
     '^@src/(.*)$': '<rootDir>/src/$1',
@@ -16,7 +17,7 @@ const jestConfig: Config = {
   },
   setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
   testEnvironment: 'node',
-  testMatch: ['**/tests/*.test.(ts|tsx)'],
+  testMatch: ['**/tests/**/*.test.(ts|tsx)'],
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
   transform: {
     '^.+\\.(ts|tsx)$': '<rootDir>/node_modules/babel-jest',
