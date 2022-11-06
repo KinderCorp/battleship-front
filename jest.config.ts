@@ -7,6 +7,7 @@ const jestConfig: Config = {
   coverageProvider: 'v8',
   moduleNameMapper: {
     '\\.(css|scss|sass)$': 'identity-obj-proxy',
+    '^@core/(.*)$': '<rootDir>/src/core/$1',
     '^@home/(.*)$': '<rootDir>/src/home/$1',
     '^@pages/(.*)$': '<rootDir>/pages/$1',
     '^@shared/(.*)$': '<rootDir>/src/shared/$1',
