@@ -1,8 +1,8 @@
 import { shallow, type ShallowWrapper } from 'enzyme';
 
-import HomePage from '../components/HomePage';
+import HomePage from '@home/components/HomePage';
 
-describe('HomePage', () => {
+describe('home/components/HomePage', () => {
   let component: ShallowWrapper<typeof HomePage>;
 
   beforeEach(() => {
