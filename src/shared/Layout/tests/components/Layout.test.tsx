@@ -1,9 +1,9 @@
 import { shallow, type ShallowWrapper } from 'enzyme';
 
 import HomePage from '@home/components/HomePage';
-import Layout from '../components/Layout';
+import Layout from '@shared/Layout/components/Layout';
 
-describe('Layout', () => {
+describe('shared/components/Layout', () => {
   let component: ShallowWrapper<typeof Layout>;
 
   beforeEach(() => {
