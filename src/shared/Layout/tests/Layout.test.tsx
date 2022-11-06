@@ -1,8 +1,7 @@
-import { shallow, ShallowWrapper } from 'enzyme';
+import { shallow, type ShallowWrapper } from 'enzyme';
 
-// Components
 import HomePage from '@home/components/HomePage';
-import Layout from '@shared/Layout/components/Layout';
+import Layout from '../components/Layout';
 
 describe('Layout', () => {
   let component: ShallowWrapper<typeof Layout>;
