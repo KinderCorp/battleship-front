@@ -17,7 +17,7 @@ export const HomePage = (): JSX.Element => {
       <hr />
       <button onClick={() => dispatch(decrement())}>-</button>
       <button onClick={() => dispatch(increment())}>+</button>
-      <p>{value}</p>
+      <p data-testid="container-value">{value}</p>
     </>
   );
 };

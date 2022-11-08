@@ -1,3 +1,4 @@
+import { fireEvent, screen } from '@testing-library/react';
 import type { RenderResult } from '@testing-library/react';
 
 import HomePage from '@home/components/HomePage';
@@ -12,5 +13,19 @@ describe('home/components/HomePage', () => {
 
   it('should renders component', () => {
     expect(component).toBeDefined();
+  });
+
+  it('should simulate click to decrement value', () => {
+    const paragraph = screen.getByTestId('container-value');
+    expect(paragraph).toHaveTextContent('0');
+    fireEvent.click(screen.getByText('-'));
+    expect(paragraph).toHaveTextContent('-1');
+  });
+
+  it('should simulate click to increment value', () => {
+    const paragraph = screen.getByTestId('container-value');
+    expect(paragraph).toHaveTextContent('0');
+    fireEvent.click(screen.getByText('+'));
+    expect(paragraph).toHaveTextContent('1');
   });
 });
