@@ -1,13 +1,14 @@
-import { shallow, type ShallowWrapper } from 'enzyme';
+import type { RenderResult } from '@testing-library/react';
 
 import HomePage from '@home/components/HomePage';
 import Layout from '@shared/Layout/components/Layout';
+import renderWithProviders from '@core/utils/testUtils';
 
 describe('shared/components/Layout', () => {
-  let component: ShallowWrapper<typeof Layout>;
+  let component: RenderResult;
 
   beforeEach(() => {
-    component = shallow(
+    component = renderWithProviders(
       <Layout>
         <HomePage />
       </Layout>,
@@ -16,9 +17,5 @@ describe('shared/components/Layout', () => {
 
   it('should renders component', () => {
     expect(component).toBeDefined();
-  });
-
-  it('should renders the expected component', () => {
-    expect(component.find(HomePage)).toHaveLength(1);
   });
 });

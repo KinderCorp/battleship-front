@@ -1,4 +1,16 @@
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import { configure } from 'enzyme';
+/**
+ * Fake match media.
+ *
+ * @return {object}
+ */
+const fakeMatchMedia = () => ({
+  addListener: jest.fn(),
+  matches: false,
+  removeListener: jest.fn(),
+});
 
-configure({ adapter: new Adapter() });
+window.matchMedia = window.matchMedia || fakeMatchMedia;
+
+window.open = jest.fn();
+
+export {};

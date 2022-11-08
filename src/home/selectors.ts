@@ -4,7 +4,7 @@ import type { HomeState } from '@home/models';
 import type { RootState } from '@core/models';
 
 /**
- * Select home state.
+ * Select global home state.
  *
  * @param {RootState} state Current state
  * @return {HomeState}

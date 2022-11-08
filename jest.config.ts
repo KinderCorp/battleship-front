@@ -16,7 +16,7 @@ const jestConfig: Config = {
     '^@styles/(.*)$': '<rootDir>/styles/$1',
   },
   setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
-  testEnvironment: 'node',
+  testEnvironment: 'jsdom',
   testMatch: ['**/tests/**/*.test.(ts|tsx)'],
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
   transform: {

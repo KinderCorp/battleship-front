@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import { Provider } from 'react-redux';
 
 import '@styles/globals.scss';
-import store from '@src/core/store';
+import setupStore from '@src/core/store';
 
 type PageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: JSX.Element) => JSX.Element;
@@ -22,7 +22,7 @@ type AppPropsWithLayout = AppProps & {
 const App = ({ Component, pageProps }: AppPropsWithLayout): JSX.Element => {
   const getLayout = Component.getLayout || ((page) => page);
 
-  return <Provider store={store}>{getLayout(<Component {...pageProps} />)}</Provider>;
+  return <Provider store={setupStore()}>{getLayout(<Component {...pageProps} />)}</Provider>;
 };
 
 export default App;
