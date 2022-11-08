@@ -8,7 +8,9 @@
     "import/extensions": [
       "error",
       {
-        "js": "ignorePackages"
+        "js": "ignorePackages",
+        "mock": "always",
+        "utils": "always"
       }
     ],
     "jsdoc/require-description": 1,
