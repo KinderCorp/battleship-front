@@ -1,5 +1,6 @@
-import { decrement, increment } from '@home/reducer';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { decrement, increment } from '@home/reducer';
 import { selectHomeValue } from '@home/selectors';
 
 /**

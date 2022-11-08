@@ -1,5 +1,6 @@
 import type { PreloadedState } from '@reduxjs/toolkit';
 import type { RenderOptions } from '@testing-library/react';
+
 import type { rootReducer } from '@core/store';
 import type setupStore from '@core/store';
 

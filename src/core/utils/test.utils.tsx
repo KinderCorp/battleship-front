@@ -1,8 +1,9 @@
-import type { ExtendedRenderOptions } from '@core/models';
 import type { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
 import { render } from '@testing-library/react';
 import type { RenderResult } from '@testing-library/react';
+
+import type { ExtendedRenderOptions } from '@core/models';
 import setupStore from '@core/store';
 
 /**

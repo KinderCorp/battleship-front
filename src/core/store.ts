@@ -1,7 +1,8 @@
-import type { AppStore, RootState } from './models';
-import { combineReducers, configureStore, type PreloadedState } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import type { PreloadedState } from '@reduxjs/toolkit';
 
 import * as homeConstants from '@home/constants';
+import type { AppStore, RootState } from '@core/models';
 import homeReducer from '@home/reducer';
 
 export const rootReducer = combineReducers({
