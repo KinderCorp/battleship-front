@@ -1,7 +1,7 @@
 import type { RenderResult } from '@testing-library/react';
 
 import HomePage from '@home/components/HomePage';
-import renderWithProviders from '@core/utils/testUtils';
+import renderWithProviders from '@core/utils/test.utils';
 
 describe('home/components/HomePage', () => {
   let component: RenderResult;

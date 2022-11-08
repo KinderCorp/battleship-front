@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import * as homeConstants from './constants';
-import type { HomeState } from './models';
+import * as homeConstants from '@home/constants';
+import type { HomeState } from '@home/models';
 
 const initialState: HomeState = {
   value: 0,

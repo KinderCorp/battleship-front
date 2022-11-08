@@ -1,3 +1,3 @@
-export type HomeState = {
+export interface HomeState {
   value: number;
-};
+}

@@ -1,6 +1,6 @@
 import * as homeConstants from '@home/constants';
 import * as homeSelectors from '@home/selectors';
-import homeStateMock from '@mocks/state/homeStateMock';
+import homeStateMock from '@mocks/state/homeState.mock';
 
 const { NAME } = homeConstants;
 

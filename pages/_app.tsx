@@ -14,7 +14,7 @@ type AppPropsWithLayout = AppProps & {
 };
 
 /**
- * App component.
+ * App.
  *
  * @param {AppPropsWithLayout} AppPropsWithLayout App props with layout
  * @return {JSX.Element}
