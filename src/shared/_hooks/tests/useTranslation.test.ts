@@ -29,6 +29,6 @@ describe('hooks/useTranslation', () => {
   });
 
   it('should return the expected translations with specific language', () => {
-    expect(translate('test.key', {}, translationsConstants.FRENCH)).toBe('Clé de test');
+    expect(translate('test.key', {}, translationsConstants.LANGUAGES.FR)).toBe('Clé de test');
   });
 });
