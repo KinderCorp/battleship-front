@@ -11,7 +11,9 @@
     "moduleResolution": "node",
     "noEmit": true,
     "paths": {
+      "@core/*": ["./src/core/*"],
       "@home/*": ["./src/home/*"],
+      "@mocks/*": ["./mocks/*"],
       "@pages/*": ["./pages/*"],
       "@shared/*": ["./src/shared/*"],
       "@src/*": ["./src/*"],

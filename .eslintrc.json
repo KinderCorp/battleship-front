@@ -3,13 +3,14 @@
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint", "jsdoc"],
   "rules": {
+    "@typescript-eslint/consistent-type-imports": ["warn"],
     "default-param-last": ["warn"],
-    "no-console": ["error"],
-    "no-underscore-dangle": ["error"],
     "import/extensions": [
       "error",
       {
-        "js": "ignorePackages"
+        "js": "ignorePackages",
+        "mock": "always",
+        "utils": "always"
       }
     ],
     "jsdoc/require-description": 1,
@@ -35,6 +36,8 @@
         "definedTypes": ["jest", "JSX"]
       }
     ],
+    "no-console": ["error"],
+    "no-underscore-dangle": ["error"],
     "require-jsdoc": [
       "error",
       {
