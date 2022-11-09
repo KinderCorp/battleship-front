@@ -1,1 +1,4 @@
-{}
+{
+  "test.key": "Clé de test",
+  "test.keyWithReplacedValue": "Pour moi, c’est un {value}. Un {value}, tout le monde sait ce que c’est…"
+}

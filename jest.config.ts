@@ -10,6 +10,7 @@ const jestConfig: Config = {
     '^@core/(.*)$': '<rootDir>/src/core/$1',
     '^@helpers/(.*)$': '<rootDir>/src/shared/_helpers/$1',
     '^@home/(.*)$': '<rootDir>/src/home/$1',
+    '^@hooks/(.*)$': '<rootDir>/src/shared/_hooks/$1',
     '^@mocks/(.*)$': '<rootDir>/mocks/$1',
     '^@pages/(.*)$': '<rootDir>/pages/$1',
     '^@shared/(.*)$': '<rootDir>/src/shared/$1',
