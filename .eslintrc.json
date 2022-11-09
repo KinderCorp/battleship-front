@@ -4,17 +4,17 @@
   "plugins": ["@typescript-eslint", "jsdoc"],
   "rules": {
     "@typescript-eslint/consistent-type-imports": ["warn"],
+    "@typescript-eslint/no-explicit-any": "off",
     "default-param-last": ["warn"],
     "import/extensions": [
       "error",
       {
         "js": "ignorePackages",
+        "json": "always",
         "mock": "always",
         "utils": "always"
       }
     ],
-    "jsdoc/require-description": 1,
-    "jsdoc/require-returns-description": 0,
     "jsdoc/match-description": [
       "error",
       {
@@ -36,17 +36,19 @@
         "definedTypes": ["jest", "JSX"]
       }
     ],
+    "jsdoc/require-description": 1,
+    "jsdoc/require-returns-description": 0,
     "no-console": ["error"],
     "no-underscore-dangle": ["error"],
     "require-jsdoc": [
       "error",
       {
         "require": {
-          "FunctionDeclaration": true,
-          "MethodDefinition": true,
-          "ClassDeclaration": false,
           "ArrowFunctionExpression": true,
-          "FunctionExpression": true
+          "ClassDeclaration": false,
+          "FunctionDeclaration": true,
+          "FunctionExpression": true,
+          "MethodDefinition": true
         }
       }
     ],
