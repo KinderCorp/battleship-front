@@ -12,12 +12,14 @@
     "noEmit": true,
     "paths": {
       "@core/*": ["./src/core/*"],
+      "@helpers/*": ["./src/shared/_helpers/*"],
       "@home/*": ["./src/home/*"],
       "@mocks/*": ["./mocks/*"],
       "@pages/*": ["./pages/*"],
       "@shared/*": ["./src/shared/*"],
       "@src/*": ["./src/*"],
-      "@styles/*": ["./styles/*"]
+      "@styles/*": ["./styles/*"],
+      "@translation/*": ["./src/translation/*"]
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,
