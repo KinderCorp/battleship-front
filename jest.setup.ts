@@ -15,4 +15,8 @@ window.matchMedia = window.matchMedia || fakeMatchMedia;
 
 window.open = jest.fn();
 
-export {};
+jest.mock('next/config', () => () => ({
+  publicRuntimeConfig: {
+    API_HOST: 'api-host',
+  },
+}));

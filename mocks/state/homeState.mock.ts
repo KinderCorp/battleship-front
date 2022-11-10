@@ -5,6 +5,7 @@ const { NAME } = homeConstants;
 
 const homeState: Record<typeof NAME, HomeState> = {
   [NAME]: {
+    helloWorld: '',
     value: 8,
   },
 };
