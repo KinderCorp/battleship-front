@@ -8,7 +8,7 @@ import { selectHomeValue } from '@home/selectors';
  *
  * @return {JSX.Element}
  */
-export const HomePage = (): JSX.Element => {
+const HomePage = (): JSX.Element => {
   const value = useSelector(selectHomeValue);
   const dispatch = useDispatch();
 
