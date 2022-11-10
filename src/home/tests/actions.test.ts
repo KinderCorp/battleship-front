@@ -9,10 +9,10 @@ describe('home/actions', () => {
     expect(getHelloWorld).toBeDefined();
   });
 
-  it('should get the hello world', () => {
+  it('should get the hello world', async () => {
     const spyRequestWithAxios = jest.spyOn(apiHelpers, 'requestWithAxios');
 
-    const axiosParams = {
+    const axiosConfig = {
       method: 'GET',
       url: apiConstants.API_HELLO,
     };
@@ -21,7 +21,7 @@ describe('home/actions', () => {
 
     expect(spyRequestWithAxios).toHaveBeenCalledTimes(1);
     expect(spyRequestWithAxios).toHaveBeenCalledWith(
-      axiosParams,
+      axiosConfig,
       getHelloWorldRequest,
       getHelloWorldResponse,
       getHelloWorldFailure,

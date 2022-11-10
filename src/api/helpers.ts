@@ -1,8 +1,10 @@
-import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 import type { Action } from 'redux';
 import axios from 'axios';
+import type { AxiosRequestConfig } from 'axios';
 
-import type { AppDispatch } from '@core/models';
+import setupStore from '@core/store';
+
+const store = setupStore();
 
 // Override axios inteceptors to pervent it from throwing errors
 axios.interceptors.request.use(
@@ -18,56 +20,34 @@ axios.interceptors.response.use(
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 
 /**
- * Call requestDispatchWithAxios with dispatcher.
- *
- * @param {AxiosRequestConfig} axiosParams Params for axios
- * @param {Action} actionRequest Action called when the request starts
- * @param {Action} actionResponse Action called if the request is succeeds
- * @param {Action} actionFailed Action called if the request fails
- * @return {Promise<void>}
- */
-export const requestWithAxios =
-  (
-    axiosParams: AxiosRequestConfig,
-    actionRequest: Action,
-    actionResponse: Action,
-    actionFailed: Action,
-  ) =>
-  (dispatch: AppDispatch) =>
-    requestDispatchWithAxios(axiosParams, actionRequest, actionResponse, actionFailed, dispatch);
-
-/**
  * Helpers that make requests with Axios and dispatch some events to the store.
  *
- * @param {AxiosRequestConfig} axiosParams Params for axios
+ * @param {AxiosRequestConfig} axiosConfig Params for axios
  * @param {Action} actionRequest Action called when the request starts
  * @param {Action} actionResponse Action called if the request is succeeds
  * @param {Action} actionFailed Action called if the request fails
- * @param {AppDispatch} dispatch Dispatch the action
  * @return {Promise<void>}
  */
-export const requestDispatchWithAxios = (
-  axiosParams: AxiosRequestConfig,
+export const requestWithAxios = async (
+  axiosConfig: AxiosRequestConfig,
   actionRequest: Action,
   actionResponse: Action,
   actionFailed: Action,
-  dispatch: AppDispatch,
 ): Promise<void> => {
-  dispatch(actionRequest);
+  store.dispatch(actionRequest);
 
-  return axios(axiosParams)
-    .then(({ data }: AxiosResponse) => {
-      dispatch({
-        payload: data,
-        type: actionResponse.type,
-      });
-    })
-    .catch((error) => {
-      dispatch({
-        payload: error,
-        type: actionFailed.type,
-      });
+  try {
+    const { data } = await axios(axiosConfig);
+    store.dispatch({
+      payload: data,
+      type: actionResponse.type,
     });
+  } catch (error) {
+    store.dispatch({
+      payload: error,
+      type: actionFailed.type,
+    });
+  }
 };
 
 /**

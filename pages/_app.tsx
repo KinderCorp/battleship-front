@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import { Provider } from 'react-redux';
 
 import '@styles/globals.scss';
-import setupStore from '@src/core/store';
+import setupStore from '@core/store';
 
 type PageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: JSX.Element) => JSX.Element;

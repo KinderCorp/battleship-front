@@ -7,14 +7,14 @@ import { getHelloWorldFailure, getHelloWorldRequest, getHelloWorldResponse } fro
  *
  * @return {Promise<void>}
  */
-export const getHelloWorld = (): any => {
-  const axiosParams = {
+export const getHelloWorld = async (): Promise<void> => {
+  const axiosConfig = {
     method: 'GET',
     url: apiConstants.API_HELLO,
   };
 
   return apiHelpers.requestWithAxios(
-    axiosParams,
+    axiosConfig,
     getHelloWorldRequest,
     getHelloWorldResponse,
     getHelloWorldFailure,

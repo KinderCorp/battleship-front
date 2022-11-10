@@ -1,5 +1,4 @@
 import '@testing-library/jest-dom';
-
 /**
  * Fake match media.
  *
