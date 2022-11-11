@@ -4,7 +4,7 @@ const { publicRuntimeConfig } = getConfig();
 
 const { API_HOST } = publicRuntimeConfig;
 
-export const HTTP_STATUS_CODE: Record<Uppercase<string>, number> = {
+export const HTTP_STATUS_CODE: Record<string, number> = {
   BAD_REQUEST: 400,
   CREATED: 201,
   INTERNAL_SERVER_ERROR: 500,
