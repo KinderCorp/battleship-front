@@ -1,7 +1,7 @@
-import type { Action } from 'redux';
 import axios from 'axios';
 import type { AxiosRequestConfig } from 'axios';
 
+import type { Action } from '@api/models';
 import setupStore from '@core/store';
 
 const store = setupStore();
@@ -38,14 +38,16 @@ export const requestWithAxios = async (
 
   try {
     const { data } = await axios(axiosConfig);
+
     store.dispatch({
+      ...actionResponse,
       payload: data,
-      type: actionResponse.type,
     });
-  } catch (error) {
+  } catch (error: any) {
     store.dispatch({
-      payload: error,
-      type: actionFailed.type,
+      ...actionFailed,
+      error: true,
+      payload: error?.message,
     });
   }
 };
