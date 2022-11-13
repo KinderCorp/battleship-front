@@ -1,7 +1,7 @@
 import axios from 'axios';
 import type { AxiosRequestConfig } from 'axios';
 
-import type { Action } from '@api/models';
+import type { Action, ApiResponse, ApiResponseParsed } from '@api/models';
 import setupStore from '@core/store';
 
 const store = setupStore();
@@ -34,7 +34,7 @@ export const requestWithAxios = async (
   actionResponse: Action,
   actionFailed: Action,
 ): Promise<void> => {
-  store.dispatch(actionRequest);
+  store.dispatch({ ...actionRequest });
 
   try {
     const { data } = await axios(axiosConfig);
@@ -64,4 +64,15 @@ export const getAuthorizationHeaders = (token: string): Record<string, Record<st
       Authorization: `Bearer ${token}`,
     },
   };
+};
+
+/**
+ * Parse API response.
+ *
+ * @param {ApiResponse} apiResponse Api response
+ * @return {ApiResponseParsed}
+ */
+export const parseApiResponse = (apiResponse: ApiResponse): ApiResponseParsed => {
+  const { data = {} } = apiResponse;
+  return { data };
 };

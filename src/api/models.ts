@@ -1,3 +1,5 @@
+import type { GetHelloWorldResponse } from '@home/models';
+
 export interface HttpResponse {
   data: any;
   status?: number;
@@ -10,3 +12,17 @@ export type Action = {
   type: string;
   meta?: Record<string, any>;
 };
+
+export type ApiResponse<T = Record<string, any>> = {
+  data?: T;
+};
+
+export type ApiResponseParsed = {
+  data: Record<string, any>;
+};
+
+type UnknownKeys = {
+  [key: string]: any;
+};
+
+export type ApiGetHelloWorldResponse = Partial<GetHelloWorldResponse> & UnknownKeys;
