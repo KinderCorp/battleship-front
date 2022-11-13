@@ -1,18 +1,19 @@
 import axios from 'axios';
-import mockAxios from 'jest-mock-axios';
+import type { AxiosRequestConfig } from 'axios';
 
 import * as apiConstants from '@api/constants';
 import * as apiHelpers from '@api/helpers';
-import * as homeActions from '@home/actions';
-import * as homeSelectors from '@home/selectors';
-import type { GetHelloWorldResponse } from '@home/models';
-import type { HttpResponse } from '@api/models';
+import type { Action, HttpResponse } from '@api/models';
+import setupStore from '@core/store';
+
+// const mockedStore = setupStore() as unknown as jest.MockedFunction<typeof setupStore>;
 
 jest.mock('axios');
+const mockedAxios = axios as jest.MockedFunction<typeof axios>;
 
 describe('api/helpers', () => {
   afterEach(() => {
-    mockAxios.reset();
+    mockedAxios.mockReset();
   });
 
   it('should have defined methods', () => {
@@ -21,28 +22,30 @@ describe('api/helpers', () => {
   });
 
   xit('should have a successful request', async () => {
-    const data: GetHelloWorldResponse = {
-      message: 'Welcome !',
+    const actionRequest: Action = { type: 'actionRequestType' };
+    const actionResponse: Action = { meta: { value: 10 }, type: 'actionResponseType' };
+    const actionFailure: Action = { type: 'actionFailureType' };
+
+    const spyStoreDispatch = jest.spyOn(setupStore(), 'dispatch');
+
+    const axiosConfig: AxiosRequestConfig = {
+      method: 'GET',
+      url: 'api-test',
     };
-    // const reponse: HttpResponse = {
-    //   data,
-    //   status: apiConstants.HTTP_STATUS_CODE.OK,
-    // };
-    // mockAxios.mockResponse(reponse);
 
-    // mockAxios.get.mockImplementationOnce(() => {
-    //   return Promise.resolve(data);
-    // });
+    const response: HttpResponse = {
+      data: {},
+      status: apiConstants.HTTP_STATUS_CODE.OK,
+    };
 
-    (axios.get as jest.Mock).mockResolvedValue({ data });
+    mockedAxios.mockResolvedValueOnce(response);
 
-    await homeActions.getHelloWorld();
+    await apiHelpers.requestWithAxios(axiosConfig, actionRequest, actionResponse, actionFailure);
 
-    expect(mockAxios).toHaveBeenCalledWith(apiConstants.API_HELLO);
+    // Mocker store.dispatch pour savoir si la fonction a bien été appelé avec les bons paramètres
 
-    // Store dispatch request is called
-    // Store dispatch response is called
-    // Store dispatch failure is not called
+    expect(spyStoreDispatch).toHaveBeenCalledTimes(1);
+    expect(spyStoreDispatch).toHaveBeenCalledWith({});
   });
 
   it('should return the expected header with token authorization', () => {

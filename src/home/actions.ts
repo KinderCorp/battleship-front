@@ -13,7 +13,7 @@ export const getHelloWorld = async (): Promise<void> => {
     url: apiConstants.API_HELLO,
   };
 
-  return apiHelpers.requestWithAxios(
+  return await apiHelpers.requestWithAxios(
     axiosConfig,
     getHelloWorldRequest,
     getHelloWorldResponse,
