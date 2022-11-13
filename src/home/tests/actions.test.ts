@@ -53,8 +53,6 @@ describe('home/actions', () => {
 
     expect(mockedAxios).toHaveBeenCalledWith({ method: 'GET', url: apiConstants.API_HELLO });
 
-    // Store dispatch request is called
-    // Store dispatch response is called
-    // Store dispatch failure is not called
+    // TODO: Mock store.dispatch to check if functions are called with good parameters for request/response request, same for test if called is rejected
   });
 });
