@@ -24,7 +24,7 @@ export const homeSlice = createSlice({
       state,
       action: PayloadAction<ApiResponseParsed<ApiGetHelloWorldResponse>>,
     ) => {
-      if (action.payload?.data) {
+      if (action.payload.data) {
         const parsedHelloWorld = homeHelpers.parseHelloWorld(action.payload.data);
         state.helloWorld = parsedHelloWorld.message;
       }
