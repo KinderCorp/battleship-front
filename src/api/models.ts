@@ -13,8 +13,8 @@ export type Action = {
   meta?: Record<string, any>;
 };
 
-export type ApiResponse = {
-  data?: Record<string, any>;
+export type ApiResponse<T = Record<string, any>> = {
+  data?: T;
 };
 
 export type ApiResponseParsed = {
