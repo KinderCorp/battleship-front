@@ -1,6 +1,7 @@
 import axios from 'axios';
 import type { AxiosRequestConfig } from 'axios';
 
+import * as apiHelpers from '@api/helpers';
 import type { Action, ApiResponse, ApiResponseParsed } from '@api/models';
 import store from '@core/store';
 
@@ -39,7 +40,7 @@ export const requestWithAxios = async (
 
     store.dispatch({
       ...actionResponse,
-      payload: data,
+      payload: apiHelpers.parseApiResponse(data),
     });
   } catch (error: any) {
     store.dispatch({
@@ -70,7 +71,6 @@ export const getAuthorizationHeaders = (token: string): Record<string, Record<st
  * @param {ApiResponse} apiResponse Api response
  * @return {ApiResponseParsed}
  */
-export const parseApiResponse = (apiResponse: ApiResponse): ApiResponseParsed => {
-  const { data = {} } = apiResponse;
-  return { data };
-};
+export const parseApiResponse = (apiResponse: ApiResponse = {}): ApiResponseParsed => ({
+  data: apiResponse.data || {},
+});

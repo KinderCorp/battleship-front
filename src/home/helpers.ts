@@ -7,6 +7,6 @@ import type { GetHelloWorldResponse } from '@home/models';
  * @param {ApiGetHelloWorldResponse} data Data from API
  * @return {GetHelloWorldResponse}
  */
-export const parseHelloWorld = (data: ApiGetHelloWorldResponse): GetHelloWorldResponse => ({
+export const parseHelloWorld = (data: ApiGetHelloWorldResponse = {}): GetHelloWorldResponse => ({
   message: data.message || '',
 });
