@@ -15,7 +15,7 @@ export const rootReducer = combineReducers({
  * @param {PreloadedState<RootState>} preloadedState Preloaded store
  * @return {AppStore}
  */
-const setupStore = (preloadedState?: PreloadedState<RootState>) => {
+export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
@@ -26,4 +26,6 @@ const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   });
 };
 
-export default setupStore;
+const store = setupStore();
+
+export default store;

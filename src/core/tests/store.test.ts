@@ -1,6 +1,6 @@
 import * as homeConstants from '@home/constants';
 import { homeSlice } from '@home/reducer';
-import setupStore from '@core/store';
+import { setupStore } from '@core/store';
 
 describe('core/store', () => {
   it('should return global initial state', () => {

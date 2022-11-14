@@ -2,9 +2,7 @@ import axios from 'axios';
 import type { AxiosRequestConfig } from 'axios';
 
 import type { Action, ApiResponse, ApiResponseParsed } from '@api/models';
-import setupStore from '@core/store';
-
-const store = setupStore();
+import store from '@core/store';
 
 // Override axios inteceptors to pervent it from throwing errors
 axios.interceptors.request.use(
@@ -47,7 +45,7 @@ export const requestWithAxios = async (
     store.dispatch({
       ...actionFailed,
       error: true,
-      payload: error?.message,
+      payload: error,
     });
   }
 };
