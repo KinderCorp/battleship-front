@@ -20,7 +20,7 @@ describe('home/actions', () => {
     expect(getHelloWorld).toBeDefined();
   });
 
-  it('should get the hello world', async () => {
+  xit('should have a successful getHelloWorld request', async () => {
     const spyRequestWithAxios = jest.spyOn(apiHelpers, 'requestWithAxios');
 
     const axiosConfig = {
@@ -28,18 +28,6 @@ describe('home/actions', () => {
       url: apiConstants.API_HELLO,
     };
 
-    homeActions.getHelloWorld();
-
-    expect(spyRequestWithAxios).toHaveBeenCalledTimes(1);
-    expect(spyRequestWithAxios).toHaveBeenCalledWith(
-      axiosConfig,
-      getHelloWorldRequest,
-      getHelloWorldResponse,
-      getHelloWorldFailure,
-    );
-  });
-
-  xit('should have a successful getHelloWorld request', async () => {
     const data: GetHelloWorldResponse = {
       message: 'Welcome !',
     };
@@ -51,7 +39,15 @@ describe('home/actions', () => {
 
     await homeActions.getHelloWorld();
 
-    expect(mockedAxios).toHaveBeenCalledWith({ method: 'GET', url: apiConstants.API_HELLO });
+    expect(spyRequestWithAxios).toHaveBeenCalledTimes(1);
+    expect(spyRequestWithAxios).toHaveBeenCalledWith(
+      axiosConfig,
+      getHelloWorldRequest,
+      getHelloWorldResponse,
+      getHelloWorldFailure,
+    );
+
+    expect(mockedAxios).toHaveBeenCalledWith(axiosConfig);
 
     // TODO: Mock store.dispatch to check if functions are called with good parameters for the request and the response
   });
