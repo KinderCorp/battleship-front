@@ -1,3 +1,5 @@
+/* eslint-disable jsdoc/require-returns */
+
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import type { PreloadedState } from '@reduxjs/toolkit';
 
@@ -13,9 +15,8 @@ export const rootReducer = combineReducers({
  * Setup store.
  *
  * @param {PreloadedState<RootState>} preloadedState Preloaded store
- * @return {any}
  */
-export const setupStore = (preloadedState?: PreloadedState<RootState>): any => {
+export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
