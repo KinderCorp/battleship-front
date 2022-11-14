@@ -39,7 +39,7 @@ describe('home/actions', () => {
     );
   });
 
-  xit('should have a successful request - getHelloWorld', async () => {
+  xit('should have a successful getHelloWorld request', async () => {
     const data: GetHelloWorldResponse = {
       message: 'Welcome !',
     };
@@ -53,6 +53,10 @@ describe('home/actions', () => {
 
     expect(mockedAxios).toHaveBeenCalledWith({ method: 'GET', url: apiConstants.API_HELLO });
 
-    // TODO: Mock store.dispatch to check if functions are called with good parameters for request/response request, same for test if called is rejected
+    // TODO: Mock store.dispatch to check if functions are called with good parameters for the request and the response
+  });
+
+  xit('should have a rejected getHelloWorld request', async () => {
+    // TODO: Mock store.dispatch to check if functions are called with good parameters for the request and the failure
   });
 });

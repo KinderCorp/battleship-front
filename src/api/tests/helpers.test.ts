@@ -18,7 +18,7 @@ describe('api/helpers', () => {
     expect(apiHelpers.getAuthorizationHeaders).toBeDefined();
   });
 
-  it('should have a successful request', async () => {
+  xit('should have a successful request', async () => {
     const actionRequest: Action = { type: 'actionRequestType' };
     const actionResponse: Action = { meta: { value: 10 }, type: 'actionResponseType' };
     const actionFailure: Action = { type: 'actionFailureType' };
@@ -37,7 +37,11 @@ describe('api/helpers', () => {
 
     await apiHelpers.requestWithAxios(axiosConfig, actionRequest, actionResponse, actionFailure);
 
-    // TODO: Mock store.dispatch to check if functions are called with good parameters for request/response request
+    // TODO: Mock store.dispatch to check if functions are called with good parameters for the request and the response
+  });
+
+  xit('should have a rejected request', async () => {
+    // TODO: Mock store.dispatch to check if functions are called with good parameters for the request and the failure
   });
 
   it('should return the expected header with token authorization', () => {

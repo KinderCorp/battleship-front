@@ -41,7 +41,7 @@ describe('home/reducer', () => {
       undefined,
       homeReducerAction.getHelloWorldResponse(apiGetHelloWorldResponseMock),
     );
-    expect(state.helloWorld).toBe(''); // FIXME: change with good value 'Hello world!' when bug webpack is fixed
+    expect(state.helloWorld).toBe('Hello world!');
   });
 
   it('should get hello world failure', () => {
