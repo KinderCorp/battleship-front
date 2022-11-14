@@ -17,8 +17,8 @@ export type ApiResponse<T = Record<string, any>> = {
   data?: T;
 };
 
-export type ApiResponseParsed = {
-  data: Record<string, any>;
+export type ApiResponseParsed<T = Record<string, any>> = {
+  data: T;
 };
 
 type OtherUnknownKeys = {

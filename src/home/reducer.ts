@@ -3,7 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 
 import * as homeConstants from '@home/constants';
 import * as homeHelpers from '@home/helpers';
-import type { ApiGetHelloWorldResponse } from '@api/models';
+import type { ApiGetHelloWorldResponse, ApiResponseParsed } from '@api/models';
 import type { HomeState } from '@home/models';
 
 const initialState: HomeState = {
@@ -20,9 +20,12 @@ export const homeSlice = createSlice({
     },
     getHelloWorldFailure: (state) => state,
     getHelloWorldRequest: (state) => state,
-    getHelloWorldResponse: (state, action: PayloadAction<ApiGetHelloWorldResponse>) => {
-      if (action.payload) {
-        const parsedHelloWorld = homeHelpers.parseHelloWorld(action.payload);
+    getHelloWorldResponse: (
+      state,
+      action: PayloadAction<ApiResponseParsed<ApiGetHelloWorldResponse>>,
+    ) => {
+      if (action.payload?.data) {
+        const parsedHelloWorld = homeHelpers.parseHelloWorld(action.payload.data);
         state.helloWorld = parsedHelloWorld.message;
       }
     },

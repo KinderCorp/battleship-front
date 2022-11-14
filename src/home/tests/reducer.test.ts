@@ -1,3 +1,4 @@
+import * as apiHelpers from '@api/helpers';
 import * as homeConstants from '@home/constants';
 import homeReducer, * as homeReducerAction from '@home/reducer';
 import apiGetHelloWorldResponseMock from '@mocks/api/apiGetHelloWorldResponse.mock';
@@ -39,7 +40,9 @@ describe('home/reducer', () => {
   it('should get hello world response', () => {
     const state = homeReducer(
       undefined,
-      homeReducerAction.getHelloWorldResponse(apiGetHelloWorldResponseMock),
+      homeReducerAction.getHelloWorldResponse(
+        apiHelpers.parseApiResponse(apiGetHelloWorldResponseMock),
+      ),
     );
     expect(state.helloWorld).toBe('Hello world!');
   });
