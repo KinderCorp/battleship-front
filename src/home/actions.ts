@@ -1,6 +1,6 @@
 import * as apiConstants from '@api/constants';
 import * as apiHelpers from '@api/helpers';
-import { getHelloWorldFailure, getHelloWorldRequest, getHelloWorldResponse } from './reducer';
+import { getHelloWorldFailure, getHelloWorldRequest, getHelloWorldResponse } from '@home/reducer';
 
 /**
  * Get hello world, a route just for fun.
