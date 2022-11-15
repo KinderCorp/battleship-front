@@ -1,5 +1,22 @@
 .icon {
+  @include fixedSize(30);
   display: block;
+
+  &.small {
+    @include fixedSize(26);
+  }
+
+  &.medium {
+    @include fixedSize(30);
+  }
+
+  &.large {
+    @include fixedSize(60);
+  }
+
+  &.extra-large {
+    @include fixedSize(80);
+  }
 
   .icon-svg {
     .icon-svg-borderColor {
