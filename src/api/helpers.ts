@@ -66,7 +66,7 @@ export const getAuthorizationHeaders = (token: string): Record<string, Record<st
 };
 
 /**
- * Parse API response.
+ * Parse api response.
  *
  * @param {ApiResponse} apiResponse Api response
  * @return {ApiResponseParsed}
