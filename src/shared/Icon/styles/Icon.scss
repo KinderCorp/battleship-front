@@ -1,0 +1,13 @@
+.icon {
+  display: block;
+
+  .icon-svg {
+    .icon-svg-borderColor {
+      fill: $color-purple-dark;
+    }
+
+    .icon-svg-color {
+      fill: $color-white;
+    }
+  }
+}
