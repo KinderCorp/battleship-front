@@ -13,16 +13,16 @@ export type Action = {
   meta?: Record<string, any>;
 };
 
-export type ApiResponse<T = Record<string, any>> = {
+export type ApiResponse<T = any> = {
   data?: T;
 };
 
-export type ApiResponseParsed<T = Record<string, any>> = {
+export type ApiResponseParsed<T = any> = {
   data: T;
 };
 
-type OtherUnknownKeys = {
-  [key: string]: any;
-};
+// type OtherUnknownKeys = {
+//   [key: string]: any;
+// };
 
-export type ApiGetHelloWorldResponse = Partial<GetHelloWorldResponse> & OtherUnknownKeys;
+export type ApiGetHelloWorldResponse = GetHelloWorldResponse;

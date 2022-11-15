@@ -20,7 +20,7 @@ describe('home/actions', () => {
     expect(getHelloWorld).toBeDefined();
   });
 
-  xit('should have a successful getHelloWorld request', async () => {
+  it('should have a successful getHelloWorld request', async () => {
     const spyRequestWithAxios = jest.spyOn(apiHelpers, 'requestWithAxios');
 
     const axiosConfig = {
@@ -28,9 +28,7 @@ describe('home/actions', () => {
       url: apiConstants.API_HELLO,
     };
 
-    const data: GetHelloWorldResponse = {
-      message: 'Welcome !',
-    };
+    const data: GetHelloWorldResponse = 'Welcome !';
     const response: HttpResponse = {
       data,
       status: apiConstants.HTTP_STATUS_CODE.OK,

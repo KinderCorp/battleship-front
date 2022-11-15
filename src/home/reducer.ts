@@ -26,7 +26,7 @@ export const homeSlice = createSlice({
     ) => {
       if (action.payload.data) {
         const parsedHelloWorld = homeHelpers.parseHelloWorld(action.payload.data);
-        state.helloWorld = parsedHelloWorld.message;
+        state.helloWorld = parsedHelloWorld;
       }
     },
     increment: (state) => {

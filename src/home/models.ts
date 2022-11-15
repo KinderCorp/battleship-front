@@ -3,6 +3,4 @@ export interface HomeState {
   value: number;
 }
 
-export type GetHelloWorldResponse = {
-  message: string;
-};
+export type GetHelloWorldResponse = string;
