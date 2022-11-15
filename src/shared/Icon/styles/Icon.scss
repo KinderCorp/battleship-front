@@ -1,30 +1,21 @@
 .icon {
-  @include fixedSize(30);
+  @include fixed-size(30);
+
   display: block;
 
   &.small {
-    @include fixedSize(26);
+    @include fixed-size(26);
   }
 
   &.medium {
-    @include fixedSize(30);
+    @include fixed-size(30);
   }
 
   &.large {
-    @include fixedSize(60);
+    @include fixed-size(60);
   }
 
   &.extra-large {
-    @include fixedSize(80);
-  }
-
-  .icon-svg {
-    .icon-svg-borderColor {
-      fill: $color-purple-dark;
-    }
-
-    .icon-svg-color {
-      fill: $color-white;
-    }
+    @include fixed-size(80);
   }
 }
