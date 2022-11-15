@@ -1,0 +1,6 @@
+@mixin fixedSize($size) {
+  height: toRem($size);
+  max-height: toRem($size);
+  max-width: toRem($size);
+  width: toRem($size);
+}
