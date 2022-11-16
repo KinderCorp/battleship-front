@@ -21,8 +21,4 @@ export type ApiResponseParsed<T = any> = {
   data: T;
 };
 
-// type OtherUnknownKeys = {
-//   [key: string]: any;
-// };
-
 export type ApiGetHelloWorldResponse = GetHelloWorldResponse;
