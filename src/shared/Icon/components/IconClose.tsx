@@ -1,7 +1,7 @@
 import type { IconSvgProps } from '@shared/Icon/models';
 
 /**
- * Icon add component.
+ * Icon close component.
  *
  * @param {IconSvgProps} props Props
  * @return {JSX.Element}
