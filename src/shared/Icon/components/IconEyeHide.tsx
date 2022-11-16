@@ -8,8 +8,8 @@ import type { IconSvgProps } from '@shared/Icon/models';
  */
 const IconEyeHide = ({ borderColor, color }: IconSvgProps): JSX.Element => (
   <svg
-    className="icon-svg icon-eye-add"
-    data-testid="icon-eye-add"
+    className="icon-svg icon-eye-hide"
+    data-testid="icon-eye-hide"
     fill="none"
     viewBox="0 0 50 50"
     xmlns="http://www.w3.org/2000/svg"
