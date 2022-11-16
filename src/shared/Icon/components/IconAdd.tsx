@@ -3,7 +3,7 @@ import type { IconSvgProps } from '@shared/Icon/models';
 /**
  * Icon add component.
  *
- * @param {IconSvgProps} props Icon add props
+ * @param {IconSvgProps} props Props
  * @return {JSX.Element}
  */
 const IconAdd = ({ borderColor, color }: IconSvgProps): JSX.Element => (

@@ -8,7 +8,7 @@ import type { IconProps } from '@shared/Icon/models';
 /**
  * Icon component.
  *
- * @param {IconProps} props Icon props
+ * @param {IconProps} props Props
  * @return {JSX.Element}
  */
 const Icon = ({
