@@ -1,14 +1,10 @@
-import { act, cleanup, render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 
 import { COLORS } from '@core/constants';
 import IconArrowLeft from '@shared/Icon/components/IconArrowLeft';
 import type { IconSvgProps } from '@shared/Icon/models';
 
 describe('shared/components/IconArrowLeft', () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it('should renders the expected component', async () => {
     const props: IconSvgProps = { borderColor: COLORS.PURPLE, color: COLORS.WHITE };
 
