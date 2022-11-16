@@ -1,21 +1,21 @@
 .icon {
-  @include fixed-size(30);
+  @include fixed-size($icon-size-medium);
 
   display: block;
 
   &.small {
-    @include fixed-size(26);
+    @include fixed-size($icon-size-small);
   }
 
   &.medium {
-    @include fixed-size(30);
+    @include fixed-size($icon-size-medium);
   }
 
   &.large {
-    @include fixed-size(60);
+    @include fixed-size($icon-size-large);
   }
 
   &.extra-large {
-    @include fixed-size(80);
+    @include fixed-size($icon-size-extra-large);
   }
 }
