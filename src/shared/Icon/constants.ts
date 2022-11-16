@@ -10,5 +10,6 @@ export const ICON_LIST: Record<IconName, ComponentType<IconSvgProps>> = {
   Check: dynamic(() => import('@shared/Icon/components/IconCheck')),
   Close: dynamic(() => import('@shared/Icon/components/IconClose')),
   Copy: dynamic(() => import('@shared/Icon/components/IconCopy')),
+  Dice: dynamic(() => import('@shared/Icon/components/IconDice')),
   People: dynamic(() => import('@shared/Icon/components/IconPeople')),
 };
