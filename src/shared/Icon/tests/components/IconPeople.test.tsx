@@ -15,6 +15,6 @@ describe('shared/components/IconPeople', () => {
     const icon = screen.getByTestId('icon-people');
 
     expect(icon).toBeInTheDocument();
-    expect(icon).toHaveClass('icon-svg people');
+    expect(icon).toHaveClass('icon-svg icon-people');
   });
 });

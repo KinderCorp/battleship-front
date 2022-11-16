@@ -8,7 +8,7 @@ import type { IconSvgProps } from '@shared/Icon/models';
  */
 const IconAdd = ({ borderColor, color }: IconSvgProps): JSX.Element => (
   <svg
-    className="icon-svg add"
+    className="icon-svg icon-add"
     data-testid="icon-add"
     fill="none"
     viewBox="0 0 50 50"

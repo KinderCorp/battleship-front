@@ -15,6 +15,6 @@ describe('shared/components/IconCopy', () => {
     const icon = screen.getByTestId('icon-copy');
 
     expect(icon).toBeInTheDocument();
-    expect(icon).toHaveClass('icon-svg copy');
+    expect(icon).toHaveClass('icon-svg icon-copy');
   });
 });

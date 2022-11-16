@@ -8,7 +8,7 @@ import type { IconSvgProps } from '@shared/Icon/models';
  */
 const IconCopy = ({ borderColor, color }: IconSvgProps): JSX.Element => (
   <svg
-    className="icon-svg copy"
+    className="icon-svg icon-copy"
     data-testid="icon-copy"
     fill="none"
     viewBox="0 0 50 50"

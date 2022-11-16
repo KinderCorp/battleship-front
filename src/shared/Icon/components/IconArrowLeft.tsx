@@ -8,7 +8,7 @@ import type { IconSvgProps } from '@shared/Icon/models';
  */
 const IconArrowLeft = ({ borderColor, color }: IconSvgProps): JSX.Element => (
   <svg
-    className="icon-svg arrow-left"
+    className="icon-svg icon-arrow-left"
     data-testid="icon-arrow-left"
     fill="none"
     viewBox="0 0 50 50"

@@ -15,6 +15,6 @@ describe('shared/components/IconClose', () => {
     const icon = screen.getByTestId('icon-close');
 
     expect(icon).toBeInTheDocument();
-    expect(icon).toHaveClass('icon-svg close');
+    expect(icon).toHaveClass('icon-svg icon-close');
   });
 });

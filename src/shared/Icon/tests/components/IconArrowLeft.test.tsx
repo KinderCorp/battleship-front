@@ -15,6 +15,6 @@ describe('shared/components/IconArrowLeft', () => {
     const icon = screen.getByTestId('icon-arrow-left');
 
     expect(icon).toBeInTheDocument();
-    expect(icon).toHaveClass('icon-svg arrow-left');
+    expect(icon).toHaveClass('icon-svg icon-arrow-left');
   });
 });

@@ -15,6 +15,6 @@ describe('shared/components/IconCheck', () => {
     const icon = screen.getByTestId('icon-check');
 
     expect(icon).toBeInTheDocument();
-    expect(icon).toHaveClass('icon-svg check');
+    expect(icon).toHaveClass('icon-svg icon-check');
   });
 });
