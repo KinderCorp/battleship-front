@@ -20,8 +20,5 @@ describe('shared/components/IconPeople', () => {
 
     expect(iconPeople).toBeInTheDocument();
     expect(iconPeople).toHaveClass('icon-svg people');
-    expect(iconPeople.querySelector('path:first-child')).toHaveAttribute('fill', COLORS.WHITE);
-    expect(iconPeople.querySelector('path:nth-child(2)')).toHaveAttribute('fill', COLORS.WHITE);
-    expect(iconPeople.querySelector('path:last-child')).toHaveAttribute('fill', COLORS.PURPLE);
   });
 });
