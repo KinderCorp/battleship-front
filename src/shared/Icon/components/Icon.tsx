@@ -1,22 +1,14 @@
 import { Suspense, useMemo } from 'react';
 import classNames from 'clsx';
 
-import type { IconName, IconSize } from '@shared/Icon/models';
 import { COLORS } from '@core/constants';
 import { ICON_LIST } from '@shared/Icon/constants';
-
-interface Props {
-  borderColor?: string;
-  className?: string;
-  color?: string;
-  name: IconName;
-  size?: IconSize;
-}
+import type { IconProps } from '@shared/Icon/models';
 
 /**
  * Icon component.
  *
- * @param {Props} props Icon props
+ * @param {IconProps} props Icon props
  * @return {JSX.Element}
  */
 const Icon = ({
@@ -25,7 +17,7 @@ const Icon = ({
   color = COLORS.WHITE,
   name,
   size = 'medium',
-}: Props): JSX.Element => {
+}: IconProps): JSX.Element => {
   const IconComponent = useMemo(() => ICON_LIST[name], [name]);
 
   const iconClassName = useMemo(

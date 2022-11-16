@@ -1,14 +1,15 @@
-import type { IconProps } from '@shared/Icon/models';
+import type { IconSvgProps } from '@shared/Icon/models';
 
 /**
  * Icon people component.
  *
- * @param {IconProps} props Icon people props
+ * @param {IconSvgProps} props Icon people props
  * @return {JSX.Element}
  */
-const IconPeople = ({ borderColor, color }: IconProps): JSX.Element => (
+const IconPeople = ({ borderColor, color }: IconSvgProps): JSX.Element => (
   <svg
     className="icon-svg people"
+    data-testid="icon-people"
     fill="none"
     viewBox="0 0 50 50"
     xmlns="http://www.w3.org/2000/svg"
