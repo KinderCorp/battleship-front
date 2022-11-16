@@ -2,7 +2,7 @@ import getConfig from 'next/config';
 
 const { publicRuntimeConfig } = getConfig();
 
-const { API_HOST } = publicRuntimeConfig;
+const { API_URL } = publicRuntimeConfig;
 
 export const HTTP_STATUS_CODE: Record<string, number> = {
   BAD_REQUEST: 400,
@@ -15,4 +15,4 @@ export const HTTP_STATUS_CODE: Record<string, number> = {
 };
 
 // Routes
-export const API_HELLO = `${API_HOST}/hello`;
+export const API_HELLO = `${API_URL}/hello`;
