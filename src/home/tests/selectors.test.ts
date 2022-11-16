@@ -11,4 +11,11 @@ describe('home/selectors', () => {
 
     expect(selected).toEqual(expectedResult);
   });
+
+  it('should return hello world', () => {
+    const selected = homeSelectors.selectHomeHelloWorld(homeStateMock);
+    const expectedResult = homeStateMock[NAME].helloWorld;
+
+    expect(selected).toEqual(expectedResult);
+  });
 });

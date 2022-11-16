@@ -8,7 +8,7 @@ interface Props {
  * @param {Props} props Layout props
  * @return {JSX.Element}
  */
-export const Layout = ({ children }: Props): JSX.Element => {
+const Layout = ({ children }: Props): JSX.Element => {
   return children;
 };
 

@@ -31,7 +31,7 @@ const useTranslation = (): UseTranslation => {
    */
   const translate = useCallback(
     (key = '', keysToReplace: Record<string, string> = {}, lang: LANGUAGE = language): string => {
-      let translation = TRANSLATIONS?.[lang || language]?.[key] ?? null;
+      let translation = TRANSLATIONS?.[lang]?.[key] ?? null;
 
       // Remplace keys
       if (!ObjectHelpers.isEmpty(keysToReplace)) {

@@ -13,3 +13,7 @@ import type { RootState } from '@core/models';
 export const selectHomeState = (state: RootState): HomeState => state[homeConstants.NAME];
 
 export const selectHomeValue = createSelector(selectHomeState, (state: HomeState) => state.value);
+export const selectHomeHelloWorld = createSelector(
+  selectHomeState,
+  (state: HomeState) => state.helloWorld,
+);

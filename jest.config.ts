@@ -7,6 +7,7 @@ const jestConfig: Config = {
   coverageProvider: 'v8',
   moduleNameMapper: {
     '\\.(css|scss|sass)$': 'identity-obj-proxy',
+    '^@api/(.*)$': '<rootDir>/src/api/$1',
     '^@core/(.*)$': '<rootDir>/src/core/$1',
     '^@helpers/(.*)$': '<rootDir>/src/shared/_helpers/$1',
     '^@home/(.*)$': '<rootDir>/src/home/$1',
@@ -18,7 +19,7 @@ const jestConfig: Config = {
     '^@styles/(.*)$': '<rootDir>/styles/$1',
     '^@translation/(.*)$': '<rootDir>/src/translation/$1',
   },
-  setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   testEnvironment: 'jsdom',
   testMatch: ['**/tests/**/*.test.(ts|tsx)'],
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
