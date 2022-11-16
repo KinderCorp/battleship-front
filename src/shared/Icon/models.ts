@@ -6,6 +6,7 @@ export type IconName =
   | 'Close'
   | 'Copy'
   | 'Dice'
+  | 'EyeHide'
   | 'People';
 
 export type IconSize = 'small' | 'medium' | 'large' | 'extra-large';
