@@ -12,9 +12,9 @@ describe('shared/components/IconArrowLeft', () => {
       render(<IconArrowLeft {...props} />);
     });
 
-    const iconPeople = screen.getByTestId('icon-arrow-left');
+    const icon = screen.getByTestId('icon-arrow-left');
 
-    expect(iconPeople).toBeInTheDocument();
-    expect(iconPeople).toHaveClass('icon-svg arrow-left');
+    expect(icon).toBeInTheDocument();
+    expect(icon).toHaveClass('icon-svg arrow-left');
   });
 });

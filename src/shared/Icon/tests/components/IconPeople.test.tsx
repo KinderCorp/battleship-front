@@ -12,9 +12,9 @@ describe('shared/components/IconPeople', () => {
       render(<IconPeople {...props} />);
     });
 
-    const iconPeople = screen.getByTestId('icon-people');
+    const icon = screen.getByTestId('icon-people');
 
-    expect(iconPeople).toBeInTheDocument();
-    expect(iconPeople).toHaveClass('icon-svg people');
+    expect(icon).toBeInTheDocument();
+    expect(icon).toHaveClass('icon-svg people');
   });
 });

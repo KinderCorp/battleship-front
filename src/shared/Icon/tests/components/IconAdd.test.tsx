@@ -12,9 +12,9 @@ describe('shared/components/IconAdd', () => {
       render(<IconAdd {...props} />);
     });
 
-    const iconPeople = screen.getByTestId('icon-add');
+    const icon = screen.getByTestId('icon-add');
 
-    expect(iconPeople).toBeInTheDocument();
-    expect(iconPeople).toHaveClass('icon-svg add');
+    expect(icon).toBeInTheDocument();
+    expect(icon).toHaveClass('icon-svg add');
   });
 });
