@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react';
 
 import * as translationsConstants from '@translation/constants';
 import useTranslation from '@hooks/useTranslation';
