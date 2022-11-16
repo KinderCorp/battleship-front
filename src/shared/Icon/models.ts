@@ -1,4 +1,4 @@
-export type IconName = 'Add' | 'ArrowLeft' | 'Boat' | 'People';
+export type IconName = 'Add' | 'ArrowLeft' | 'Boat' | 'Check' | 'People';
 
 export type IconSize = 'small' | 'medium' | 'large' | 'extra-large';
 
