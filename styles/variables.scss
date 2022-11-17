@@ -39,7 +39,7 @@ $font-weight-regular: 400;
 }
 
 // Animations
-@-webkit-keyframes animation_spin {
+@-webkit-keyframes animation-spin {
   from {
     transform: rotate(0);
   }
@@ -47,7 +47,8 @@ $font-weight-regular: 400;
     transform: rotate(-1turn);
   }
 }
-@keyframes animation_spin {
+
+@keyframes animation-spin {
   from {
     transform: rotate(0);
   }
