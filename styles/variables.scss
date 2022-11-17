@@ -11,7 +11,7 @@ $color-purple-dark-2: #25143c;
 $color-purple-dark: #3a1d62;
 $color-purple-light: #a452da;
 $color-purple: #7e29c2;
-$color-white: #ffffff;
+$color-white: #fff;
 $color-yellow: #f9d722;
 
 // Border
@@ -43,6 +43,7 @@ $font-weight-regular: 400;
   from {
     transform: rotate(0);
   }
+
   to {
     transform: rotate(-1turn);
   }
@@ -52,6 +53,7 @@ $font-weight-regular: 400;
   from {
     transform: rotate(0);
   }
+
   to {
     transform: rotate(-1turn);
   }
