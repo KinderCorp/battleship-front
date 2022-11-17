@@ -13,7 +13,8 @@ export type IconName =
   | 'Lock'
   | 'Logout'
   | 'Pen'
-  | 'People';
+  | 'People'
+  | 'Reload';
 
 export type IconSize = 'small' | 'medium' | 'large' | 'extra-large';
 
