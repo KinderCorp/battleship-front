@@ -9,6 +9,7 @@ export type IconName =
   | 'Eye'
   | 'EyeHide'
   | 'GearWheel'
+  | 'Infinity'
   | 'People';
 
 export type IconSize = 'small' | 'medium' | 'large' | 'extra-large';
