@@ -8,6 +8,7 @@ export type IconName =
   | 'Dice'
   | 'Eye'
   | 'EyeHide'
+  | 'GearWheel'
   | 'People';
 
 export type IconSize = 'small' | 'medium' | 'large' | 'extra-large';
