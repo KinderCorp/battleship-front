@@ -40,6 +40,7 @@
     "jsdoc/require-returns-description": 0,
     "no-console": ["error"],
     "no-underscore-dangle": ["error"],
+    "react/no-unknown-property": ["error"],
     "require-jsdoc": [
       "error",
       {
