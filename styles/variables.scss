@@ -1,25 +1,41 @@
 // Colors
-$color-black: '#1C1C1C';
-$color-gray-dark: '#636363';
-$color-gray-light: '#A9A9A9';
-$color-gray: '#EEEEEE';
-$color-orange-dark: '#F39221';
-$color-orange: '#F7B623';
-$color-pink: '#E290FF';
-$color-purple-dark-2: '#25143C';
-$color-purple-dark: '#3A1D62';
-$color-purple-light: '#A452DA';
-$color-purple: '#7E29C2';
-$color-white: '#FFFFFF';
-$color-yellow: '#F9D722';
+$color-black: #1c1c1c;
+$color-brown: #873100;
+$color-gray-dark: #636363;
+$color-gray-light: #a9a9a9;
+$color-gray: #eeeeee;
+$color-orange-dark: #f39221;
+$color-orange: #f7b623;
+$color-pink: #e290ff;
+$color-purple-dark-2: #25143c;
+$color-purple-dark: #3a1d62;
+$color-purple-light: #a452da;
+$color-purple: #7e29c2;
+$color-white: #ffffff;
+$color-yellow: #f9d722;
 
-// Icons size
-$icon-size-small: 26;
-$icon-size-medium: 30;
-$icon-size-large: 60;
+// Icon sizes
 $icon-size-extra-large: 80;
+$icon-size-large: 60;
+$icon-size-medium: 30;
+$icon-size-small: 26;
 
-// Animation
+// Fonts name
+$font-name-roboto: 'Roboto';
+
+// Fonts weight
+$font-weight-black: 900;
+$font-weight-bold: 700;
+$font-weight-regular: 400;
+
+// Text styles
+@mixin font-label {
+  font-family: $font-name-roboto;
+  font-size: to-rem(22);
+  font-weight: $font-weight-black;
+}
+
+// Animations
 @-webkit-keyframes animation_spin {
   from {
     transform: rotate(0);
