@@ -11,6 +11,7 @@ export type IconName =
   | 'GearWheel'
   | 'Infinity'
   | 'Lock'
+  | 'Logout'
   | 'People';
 
 export type IconSize = 'small' | 'medium' | 'large' | 'extra-large';
