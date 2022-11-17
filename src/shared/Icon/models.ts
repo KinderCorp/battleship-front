@@ -16,7 +16,8 @@ export type IconName =
   | 'People'
   | 'Reload'
   | 'Remove'
-  | 'Share';
+  | 'Share'
+  | 'Target';
 
 export type IconSize = 'small' | 'medium' | 'large' | 'extra-large';
 
