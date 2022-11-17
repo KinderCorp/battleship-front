@@ -6,6 +6,7 @@ export type IconName =
   | 'Close'
   | 'Copy'
   | 'Dice'
+  | 'Eye'
   | 'EyeHide'
   | 'People';
 
