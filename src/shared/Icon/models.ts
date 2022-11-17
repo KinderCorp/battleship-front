@@ -12,6 +12,7 @@ export type IconName =
   | 'Infinity'
   | 'Lock'
   | 'Logout'
+  | 'Pen'
   | 'People';
 
 export type IconSize = 'small' | 'medium' | 'large' | 'extra-large';
