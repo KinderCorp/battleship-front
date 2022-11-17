@@ -14,7 +14,8 @@ export type IconName =
   | 'Logout'
   | 'Pen'
   | 'People'
-  | 'Reload';
+  | 'Reload'
+  | 'Remove';
 
 export type IconSize = 'small' | 'medium' | 'large' | 'extra-large';
 
