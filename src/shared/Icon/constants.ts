@@ -23,4 +23,5 @@ export const ICON_LIST: Record<IconName, ComponentType<IconSvgProps>> = {
   Remove: dynamic(() => import('@shared/Icon/components/IconRemove')),
   Share: dynamic(() => import('@shared/Icon/components/IconShare')),
   Target: dynamic(() => import('@shared/Icon/components/IconTarget')),
+  Trophy: dynamic(() => import('@shared/Icon/components/IconTrophy')),
 };

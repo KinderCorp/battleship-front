@@ -17,7 +17,8 @@ export type IconName =
   | 'Reload'
   | 'Remove'
   | 'Share'
-  | 'Target';
+  | 'Target'
+  | 'Trophy';
 
 export type IconSize = 'small' | 'medium' | 'large' | 'extra-large';
 
