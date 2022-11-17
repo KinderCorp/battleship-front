@@ -1,4 +1,4 @@
-$animation-loader-spin: animation-spin 0.7s linear infinite;
+$animation-loader-spin: keyframes-spin 0.7s linear infinite;
 
 .icon-loader {
   -webkit-animation: $animation-loader-spin;

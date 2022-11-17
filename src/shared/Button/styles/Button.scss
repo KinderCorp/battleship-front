@@ -1,5 +1,8 @@
 $inset-shadow: to-rem(4);
 
+$button-size-medium: to-rem(60);
+$button-size-small: to-rem(46);
+
 .button {
   @include font-label;
 
@@ -7,17 +10,41 @@ $inset-shadow: to-rem(4);
   -webkit-appearance: none;
   align-items: center;
   appearance: none;
-  background-color: $color-orange;
   border-radius: $border-radius;
-  border: to-rem(2) solid $color-brown;
-  box-shadow: inset 0 $inset-shadow $color-yellow, inset 0 - $inset-shadow $color-orange-dark;
-  color: $color-brown;
+  border-style: solid;
+  border-width: to-rem(2);
   cursor: pointer;
   display: flex;
   flex-direction: row;
-  padding: to-rem(15) to-rem(30);
+  justify-content: center;
+  outline: none;
   position: relative;
   text-transform: uppercase;
+
+  .button-content,
+  & > .icon {
+    margin-right: to-rem(8);
+  }
+
+  & > :last-child {
+    margin-right: 0;
+  }
+
+  &.has-content {
+    padding: 0 to-rem(30);
+  }
+
+  &.medium {
+    height: $button-size-medium;
+    max-height: $button-size-medium;
+    min-width: $button-size-medium;
+  }
+
+  &.small {
+    height: $button-size-small;
+    max-height: $button-size-small;
+    min-width: $button-size-small;
+  }
 
   &::before {
     background-color: $color-white;
@@ -32,6 +59,13 @@ $inset-shadow: to-rem(4);
     border-radius: 0 0 $border-radius $border-radius;
   }
 
+  &.primary {
+    background-color: $color-orange;
+    border-color: $color-brown;
+    box-shadow: inset 0 $inset-shadow $color-yellow, inset 0 - $inset-shadow $color-orange-dark;
+    color: $color-brown;
+  }
+
   &.secondary {
     background-color: $color-purple-light;
     border-color: $color-purple-dark;
@@ -39,11 +73,19 @@ $inset-shadow: to-rem(4);
     color: $color-white;
   }
 
-  &.disabled {
+  &.is-disabled {
     background-color: $color-gray;
     border-color: $color-black;
     box-shadow: inset 0 $inset-shadow $color-gray-light, inset 0 - $inset-shadow $color-gray-dark;
     color: $color-white;
     pointer-events: none;
+  }
+
+  &:hover {
+    @include animation-push;
+  }
+
+  &:active {
+    @include animation-bounce;
   }
 }

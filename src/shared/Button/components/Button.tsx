@@ -13,12 +13,13 @@ import Icon from '@shared/Icon/components/Icon';
  * @return {JSX.Element}
  */
 const Button = ({
-  children,
+  children = null,
   className = '',
+  iconName = null,
   isDisabled = false,
   isLoading = false,
-  iconName = null,
   onClick,
+  size = 'medium',
   style = 'primary',
   type = 'button',
 }: ButtonProps): JSX.Element => {
@@ -33,15 +34,18 @@ const Button = ({
 
   const buttonClassName = useMemo(
     (): string =>
-      classNames('button', style, className, {
+      classNames('button', style, size, className, {
+        'has-content': children,
         'is-disabled': disabled,
         'is-loading': isLoading,
       }),
-    [className, disabled, isLoading, style],
+    [children, className, disabled, isLoading, size, style],
   );
 
-  const iconColor = useMemo(() => BUTTON_ICON_STYLES[style].color, [style]);
-  const iconBorderColor = useMemo(() => BUTTON_ICON_STYLES[style].borderColor, [style]);
+  const iconStyle = useMemo(
+    () => BUTTON_ICON_STYLES[disabled ? 'disabled' : style],
+    [disabled, style],
+  );
 
   return (
     <button
@@ -52,8 +56,10 @@ const Button = ({
       role="button"
       type={type}
     >
-      {iconName && <Icon borderColor={iconBorderColor} color={iconColor} name={iconName} />}
-      <div className="button-content">{children}</div>
+      {iconName && (
+        <Icon borderColor={iconStyle.borderColor} color={iconStyle.color} name={iconName} />
+      )}
+      {children && <div className="button-content">{children}</div>}
     </button>
   );
 };
