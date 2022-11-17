@@ -15,7 +15,8 @@ export type IconName =
   | 'Pen'
   | 'People'
   | 'Reload'
-  | 'Remove';
+  | 'Remove'
+  | 'Share';
 
 export type IconSize = 'small' | 'medium' | 'large' | 'extra-large';
 
