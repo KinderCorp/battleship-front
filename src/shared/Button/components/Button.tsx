@@ -47,6 +47,8 @@ const Button = ({
     [disabled, style],
   );
 
+  // TODO: add loader
+
   return (
     <button
       className={buttonClassName}
