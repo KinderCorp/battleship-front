@@ -5,7 +5,7 @@ interface Props {
 /**
  * Layout component.
  *
- * @param {Props} props Layout props
+ * @param {Props} props Props
  * @return {JSX.Element}
  */
 const Layout = ({ children }: Props): JSX.Element => {

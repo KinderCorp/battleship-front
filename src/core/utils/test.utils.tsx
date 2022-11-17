@@ -31,7 +31,7 @@ const renderWithProviders = (
   /**
    * Wrapper.
    *
-   * @param {PropsWithChildren} children Children
+   * @param {PropsWithChildren} props Props
    * @return {JSX.Element}
    */
   const Wrapper = ({ children }: PropsWithChildren): JSX.Element => {

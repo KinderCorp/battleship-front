@@ -1,0 +1,21 @@
+.icon {
+  @include fixed-size($icon-size-medium);
+
+  display: block;
+
+  &.small {
+    @include fixed-size($icon-size-small);
+  }
+
+  &.medium {
+    @include fixed-size($icon-size-medium);
+  }
+
+  &.large {
+    @include fixed-size($icon-size-large);
+  }
+
+  &.extra-large {
+    @include fixed-size($icon-size-extra-large);
+  }
+}
