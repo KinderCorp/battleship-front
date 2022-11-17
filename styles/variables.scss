@@ -18,3 +18,21 @@ $icon-size-small: 26;
 $icon-size-medium: 30;
 $icon-size-large: 60;
 $icon-size-extra-large: 80;
+
+// Animation
+@-webkit-keyframes animation_spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(-1turn);
+  }
+}
+@keyframes animation_spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(-1turn);
+  }
+}
