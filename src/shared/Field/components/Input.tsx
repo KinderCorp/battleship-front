@@ -1,8 +1,9 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import type { ChangeEvent } from 'react';
 
 import * as fieldHelpers from '@shared/Field/helpers';
-import type { InputAutocomplete, InputMode, InputType } from '@shared/Field/models';
+import type { FieldTextValue, InputAutocomplete, InputMode, InputType } from '@shared/Field/models';
+import Button from '@shared/Button/components/Button';
 import FieldContainer from '@shared/Field/components/FieldStructure/FieldContainer';
 import { INPUT_PATTERNS } from '@shared/Field/constants';
 
@@ -15,14 +16,14 @@ interface Props {
   isReadonly?: boolean;
   isRequired?: boolean;
   label?: string;
-  maxLength: number;
-  minLength: number;
+  maxLength?: number;
+  minLength?: number;
   name: string;
   pattern?: string;
   placeholder?: string;
   type?: InputType;
-  value: string; // FieldTextValue
-  onChange: (name: string, value: string) => void;
+  value: FieldTextValue;
+  onChange: (name: string, value: FieldTextValue) => void;
 }
 
 /**
@@ -40,7 +41,7 @@ const Input = ({
   isReadonly = false,
   isRequired = true,
   label = '',
-  maxLength = 524288, // Default Javascript value for inputs,
+  maxLength = 524288, // Default Javascript value for inputs
   minLength = 0,
   name,
   onChange,
@@ -49,6 +50,10 @@ const Input = ({
   type = 'text',
   value,
 }: Props): JSX.Element => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+
+  const isPassword = useMemo((): boolean => type === 'password', [type]);
+
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>): void => {
       event.preventDefault();
@@ -57,6 +62,11 @@ const Input = ({
       onChange(name, newValue);
     },
     [name, onChange],
+  );
+
+  const togglePasswordVisible = useCallback(
+    (): void => setIsPasswordVisible(!isPasswordVisible),
+    [isPasswordVisible, setIsPasswordVisible],
   );
 
   const newId = useMemo((): string => fieldHelpers.getFieldId(name), [name]);
@@ -88,6 +98,16 @@ const Input = ({
         type={type}
         value={value}
       />
+
+      {isPassword && (
+        <Button
+          className="toggle-password"
+          iconName={isPasswordVisible ? 'EyeHide' : 'Eye'}
+          onClick={togglePasswordVisible}
+          size="small"
+          style="none"
+        />
+      )}
     </FieldContainer>
   );
 };

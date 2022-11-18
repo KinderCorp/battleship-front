@@ -1,11 +1,12 @@
 import classNames from 'clsx';
+import type { ReactNode } from 'react';
 import { useMemo } from 'react';
 
 import FieldError from '@shared/Field/components/FieldStructure/FieldError';
 import FieldLabel from '@shared/Field/components/FieldStructure/FieldLabel';
 
 interface Props {
-  children: JSX.Element;
+  children: ReactNode;
   className?: string;
   errorMessage?: string;
   htmlFor?: string;
