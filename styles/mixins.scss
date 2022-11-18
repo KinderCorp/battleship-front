@@ -1,3 +1,23 @@
+// Text styles
+@mixin font-label {
+  font-family: $font-name-roboto;
+  font-size: to-rem(22);
+  font-weight: $font-weight-black;
+  line-height: to-rem(26);
+}
+
+// Animations
+@mixin animation-push {
+  -webkit-animation: keyframes-push 0.1s linear forwards;
+  animation: keyframes-push 0.1s linear forwards;
+}
+
+@mixin animation-bounce {
+  -webkit-animation: keyframes-bounce 0.25s ease-out;
+  animation: keyframes-bounce 0.25s ease-out;
+}
+
+// Size
 @mixin fixed-size($size) {
   height: $size;
   max-height: $size;
