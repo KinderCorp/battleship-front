@@ -9,10 +9,6 @@ const props: FieldLabelProps = {
 };
 
 describe('shared/components/FieldLabel', () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
   afterEach(() => {
     cleanup();
   });

@@ -1,18 +1,15 @@
 import classNames from 'clsx';
 import { useMemo } from 'react';
 
-interface Props {
-  className?: string;
-  message?: string;
-}
+import type { FieldErrorProps } from '@shared/Field/models';
 
 /**
  * Field error component.
  *
- * @param {Props} props Props
+ * @param {FieldErrorProps} props Props
  * @return {JSX.Element|null}
  */
-const FieldError = ({ className = '', message = '' }: Props): JSX.Element | null => {
+const FieldError = ({ className = '', message = '' }: FieldErrorProps): JSX.Element | null => {
   const fieldErrorClassName = useMemo(
     (): string => classNames('field-error', className),
     [className],
@@ -20,7 +17,11 @@ const FieldError = ({ className = '', message = '' }: Props): JSX.Element | null
 
   if (!message) return null;
 
-  return <p className={fieldErrorClassName}>{message}</p>;
+  return (
+    <p className={fieldErrorClassName} data-testid="field-error">
+      {message}
+    </p>
+  );
 };
 
 export default FieldError;
