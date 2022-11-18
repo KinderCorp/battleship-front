@@ -14,7 +14,7 @@ describe('shared/components/Button', () => {
     cleanup();
   });
 
-  it('should renders the expected component', async () => {
+  it('should renders the expected component', () => {
     render(<Button {...props} />);
 
     const button = screen.getByTestId('button');
@@ -46,7 +46,7 @@ describe('shared/components/Button', () => {
     expect(button).toContainElement(icon);
   });
 
-  it('should renders the component with children', async () => {
+  it('should renders the component with children', () => {
     const newProps: ButtonProps = { ...props, children: 'Click me!' };
 
     render(<Button {...newProps} />);
@@ -58,17 +58,17 @@ describe('shared/components/Button', () => {
     expect(button).toHaveTextContent('Click me!');
   });
 
-  it('should renders the component with another class name', async () => {
+  it('should renders the component with another class name', () => {
     const newProps: ButtonProps = { ...props, className: 'button-other-class' };
 
     render(<Button {...newProps} />);
 
     const button = screen.getByTestId('button');
 
-    expect(button).toHaveClass('button-other-class');
+    expect(button).toHaveClass('button primary medium button-other-class');
   });
 
-  it('should renders the component disabled', async () => {
+  it('should renders the component disabled', () => {
     const newProps: ButtonProps = { ...props, isDisabled: true };
 
     render(<Button {...newProps} />);
@@ -82,7 +82,7 @@ describe('shared/components/Button', () => {
     expect(props.onClick).toHaveBeenCalledTimes(0);
   });
 
-  it('should renders the component with another type', async () => {
+  it('should renders the component with another type', () => {
     const newProps: ButtonProps = { ...props, type: 'submit' };
 
     render(<Button {...newProps} />);
@@ -92,7 +92,7 @@ describe('shared/components/Button', () => {
     expect(button).toHaveAttribute('type', 'submit');
   });
 
-  it('should renders the component with another style', async () => {
+  it('should renders the component with another style', () => {
     const newProps: ButtonProps = { ...props, style: 'secondary' };
 
     render(<Button {...newProps} />);
@@ -103,7 +103,7 @@ describe('shared/components/Button', () => {
     expect(button).not.toHaveClass('primary');
   });
 
-  it('should renders the component with another size', async () => {
+  it('should renders the component with another size', () => {
     const newProps: ButtonProps = { ...props, size: 'small' };
 
     render(<Button {...newProps} />);
