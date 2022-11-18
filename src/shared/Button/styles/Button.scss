@@ -21,7 +21,6 @@ $button-size-small: to-rem(30);
   justify-content: center;
   outline: none;
   position: relative;
-  text-transform: uppercase;
 
   &.has-content {
     padding: 0 to-rem(30);
@@ -57,7 +56,7 @@ $button-size-small: to-rem(30);
     }
   }
 
-  &::before {
+  &:not(.none)::before {
     background-color: $color-white;
     content: '';
     height: 50%;
