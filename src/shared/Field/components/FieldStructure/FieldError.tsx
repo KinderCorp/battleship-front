@@ -14,7 +14,7 @@ interface Props {
  */
 const FieldError = ({ className = '', message = '' }: Props): JSX.Element | null => {
   const fieldErrorClassName = useMemo(
-    (): string => classNames('field-message-error', className),
+    (): string => classNames('field-error', className),
     [className],
   );
 
