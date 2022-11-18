@@ -4,6 +4,7 @@ import type { SyntheticEvent } from 'react';
 
 import { BUTTON_ICON_STYLES } from '@shared/Button/constants';
 import type { ButtonProps } from '@shared/Button/models';
+import { COLORS } from '@core/constants';
 import Icon from '@shared/Icon/components/Icon';
 
 /**
@@ -47,8 +48,6 @@ const Button = ({
     [disabled, style],
   );
 
-  // TODO: add loader
-
   return (
     <button
       className={buttonClassName}
@@ -58,10 +57,15 @@ const Button = ({
       role="button"
       type={type}
     >
-      {iconName && (
-        <Icon borderColor={iconStyle.borderColor} color={iconStyle.color} name={iconName} />
+      {isLoading && <Icon className="button-loader" name="Loader" borderColor={COLORS.WHITE} />}
+      {(iconName || children) && (
+        <div className="button-content">
+          {iconName && (
+            <Icon borderColor={iconStyle.borderColor} color={iconStyle.color} name={iconName} />
+          )}
+          {children && <div className="button-content-text">{children}</div>}
+        </div>
       )}
-      {children && <div className="button-content">{children}</div>}
     </button>
   );
 };

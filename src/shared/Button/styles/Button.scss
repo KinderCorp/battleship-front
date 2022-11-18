@@ -20,15 +20,6 @@ $button-size-small: to-rem(46);
   position: relative;
   text-transform: uppercase;
 
-  .button-content,
-  & > .icon {
-    margin-right: to-rem(8);
-  }
-
-  & > :last-child {
-    margin-right: 0;
-  }
-
   &.has-content {
     padding: 0 to-rem(30);
   }
@@ -80,11 +71,36 @@ $button-size-small: to-rem(46);
     pointer-events: none;
   }
 
-  &:hover {
-    @include animation-push;
+  &:not(.is-disabled) {
+    &:hover {
+      @include animation-push;
+    }
+
+    &:active {
+      @include animation-bounce;
+    }
   }
 
-  &:active {
-    @include animation-bounce;
+  &.is-loading {
+    .button-loader {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .button-content {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  .button-content-text,
+  .button-content > .icon {
+    margin-right: to-rem(8);
+  }
+
+  .button-content > :last-child {
+    margin-right: 0;
   }
 }
