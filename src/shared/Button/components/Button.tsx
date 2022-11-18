@@ -36,9 +36,9 @@ const Button = ({
   const buttonClassName = useMemo(
     (): string =>
       classNames('button', style, size, className, {
-        'has-content': children,
-        'is-disabled': disabled,
-        'is-loading': isLoading,
+        'has-content': !!children,
+        'is-disabled': !!disabled,
+        'is-loading': !!isLoading,
       }),
     [children, className, disabled, isLoading, size, style],
   );
