@@ -1,9 +1,28 @@
 // Text styles
 @mixin font-label {
-  font-family: $font-name-roboto;
   font-size: to-rem(22);
   font-weight: $font-weight-black;
   line-height: to-rem(26);
+  text-transform: uppercase;
+}
+
+@mixin font-label-small {
+  font-size: to-rem(18);
+  font-weight: $font-weight-black;
+  line-height: to-rem(22);
+  text-transform: uppercase;
+}
+
+@mixin font-text {
+  font-size: to-rem(18);
+  font-weight: $font-weight-regular;
+  line-height: to-rem(22);
+}
+
+@mixin font-text-small {
+  font-size: to-rem(14);
+  font-weight: $font-weight-regular;
+  line-height: to-rem(16);
 }
 
 // Animations
