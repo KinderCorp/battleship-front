@@ -1,7 +1,6 @@
 // import de l'Icon
-import classNames from 'clsx';
-import { useMemo } from 'react';
-
+// import classNames from 'clsx';
+// import { useMemo } from 'react';
 
 
 /**
@@ -13,6 +12,7 @@ import { useMemo } from 'react';
 export interface Props {
     title: string,
     subtitle?: string,
+    children: React.ReactNode;
     className?: '';
     type : string,
     // iconName: Icon, // Models icon, sera défini lorsque la PR sur les composants icones sera faites 
@@ -27,16 +27,16 @@ export type TitleType = |'h1'|'h2'|'h3'|'h4';
  * @return {JSX.Element}
  */
 export const Title = ({ type, title, subtitle, className }: Props): JSX.Element => {
-  const TitleComponent = type;
+  // const TitleComponent = type;
 
-  const titleclassName = useMemo(
-    (): string => classNames('title', className),
-    [className],
-  );
+  // const titleclassName = useMemo(
+  //   (): string => classNames('title', className),
+  //   [className],
+  // );
 
   return (
     <>
-      <TitleComponent className={titleclassName} type="">{title}</TitleComponent>
+      {/* <TitleComponent className={titleclassName}>{title}</TitleComponent> */}
       {subtitle && <p>{subtitle}</p>}
     </>
   );
