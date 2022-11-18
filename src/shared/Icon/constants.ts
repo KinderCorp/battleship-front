@@ -15,6 +15,7 @@ export const ICON_LIST: Record<IconName, ComponentType<IconSvgProps>> = {
   EyeHide: dynamic(() => import('@shared/Icon/components/IconEyeHide')),
   GearWheel: dynamic(() => import('@shared/Icon/components/IconGearWheel')),
   Infinity: dynamic(() => import('@shared/Icon/components/IconInfinity')),
+  Loader: dynamic(() => import('@shared/Icon/components/IconLoader')),
   Lock: dynamic(() => import('@shared/Icon/components/IconLock')),
   Logout: dynamic(() => import('@shared/Icon/components/IconLogout')),
   Pen: dynamic(() => import('@shared/Icon/components/IconPen')),

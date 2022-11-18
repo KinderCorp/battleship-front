@@ -10,6 +10,7 @@ export type IconName =
   | 'EyeHide'
   | 'GearWheel'
   | 'Infinity'
+  | 'Loader'
   | 'Lock'
   | 'Logout'
   | 'Pen'

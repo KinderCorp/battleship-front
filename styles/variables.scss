@@ -1,20 +1,128 @@
 // Colors
-$color-black: '#1C1C1C';
-$color-gray-dark: '#636363';
-$color-gray-light: '#A9A9A9';
-$color-gray: '#EEEEEE';
-$color-orange-dark: '#F39221';
-$color-orange: '#F7B623';
-$color-pink: '#E290FF';
-$color-purple-dark-2: '#25143C';
-$color-purple-dark: '#3A1D62';
-$color-purple-light: '#A452DA';
-$color-purple: '#7E29C2';
-$color-white: '#FFFFFF';
-$color-yellow: '#F9D722';
+$color-black: #1c1c1c;
+$color-brown: #873100;
+$color-gray-dark: #636363;
+$color-gray-light: #a9a9a9;
+$color-gray: #808080;
+$color-orange-dark: #f39221;
+$color-orange: #f7b623;
+$color-pink: #e290ff;
+$color-purple-dark-2: #25143c;
+$color-purple-dark: #3a1d62;
+$color-purple-light: #a452da;
+$color-purple: #7e29c2;
+$color-white: #fff;
+$color-yellow: #f9d722;
 
-// Icons size
-$icon-size-small: 26;
-$icon-size-medium: 30;
-$icon-size-large: 60;
-$icon-size-extra-large: 80;
+// Border
+$border-radius: to-rem(6);
+
+// Icon sizes
+$icon-size-extra-large: to-rem(80);
+$icon-size-large: to-rem(60);
+$icon-size-medium: to-rem(30);
+$icon-size-small: to-rem(26);
+
+// Fonts name
+$font-name-roboto: 'Roboto';
+
+// Fonts weight
+$font-weight-black: 900;
+$font-weight-bold: 700;
+$font-weight-regular: 400;
+
+// Text styles
+@mixin font-label {
+  font-family: $font-name-roboto;
+  font-size: to-rem(22);
+  font-weight: $font-weight-black;
+  line-height: to-rem(26);
+}
+
+// Keyframes
+@-webkit-keyframes keyframes-spin {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(-1turn);
+  }
+}
+@keyframes keyframes-spin {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(-1turn);
+  }
+}
+
+@-webkit-keyframes keyframes-push {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(0.8);
+  }
+}
+@keyframes keyframes-push {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(0.98);
+  }
+}
+
+@-webkit-keyframes keyframes-bounce {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+
+  25% {
+    transform: scale(0.9, 1.1);
+  }
+
+  50% {
+    transform: scale(1.1, 0.9);
+  }
+
+  75% {
+    transform: scale(0.95, 1.05);
+  }
+}
+
+@keyframes keyframes-bounce {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+
+  25% {
+    transform: scale(0.95, 1.05);
+  }
+
+  50% {
+    transform: scale(1.05, 0.95);
+  }
+
+  75% {
+    transform: scale(0.98, 1.02);
+  }
+}
+
+// Animations
+@mixin animation-push {
+  -webkit-animation: keyframes-push 0.1s linear forwards;
+  animation: keyframes-push 0.1s linear forwards;
+}
+
+@mixin animation-bounce {
+  -webkit-animation: keyframes-bounce 0.25s ease-out;
+  animation: keyframes-bounce 0.25s ease-out;
+}

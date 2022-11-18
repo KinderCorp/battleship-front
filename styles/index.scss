@@ -1,7 +1,11 @@
-@import 'variables';
 @import 'functions';
+@import 'variables';
 @import 'mixins';
+@import 'normalize';
+@import 'fonts';
 @import 'global';
 
 // Shared styles
+@import '~@shared/Button/styles/Button';
 @import '~@shared/Icon/styles/Icon';
+@import '~@shared/Icon/styles/IconLoader';
