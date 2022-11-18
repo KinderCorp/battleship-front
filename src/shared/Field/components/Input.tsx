@@ -100,13 +100,14 @@ const Input = ({
       />
 
       {isPassword && (
-        <Button
-          className="toggle-password"
-          iconName={isPasswordVisible ? 'EyeHide' : 'Eye'}
-          onClick={togglePasswordVisible}
-          size="small"
-          style="none"
-        />
+        <div className="toggle-password">
+          <Button
+            iconName={isPasswordVisible ? 'EyeHide' : 'Eye'}
+            onClick={togglePasswordVisible}
+            size="small"
+            style="none"
+          />
+        </div>
       )}
     </FieldContainer>
   );
