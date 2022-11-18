@@ -1,4 +1,10 @@
 .field {
   display: flex;
   flex-direction: column;
+  width: 100%;
+
+  .field-content {
+    position: relative;
+    width: 100%;
+  }
 }
