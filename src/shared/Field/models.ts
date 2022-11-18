@@ -1,4 +1,4 @@
-export type InputAutocomplete = 'current-password' | 'off' | 'on' | 'username';
+export type InputAutocomplete = 'current-password' | 'new-password' | 'off' | 'on' | 'username';
 
 export type InputMode = 'email' | 'numeric' | 'text';
 
