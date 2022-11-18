@@ -1,6 +1,7 @@
 .field {
   display: flex;
   flex-direction: column;
+  margin-bottom: to-rem(30);
   width: 100%;
 
   .field-content {

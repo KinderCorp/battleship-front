@@ -64,6 +64,14 @@ const Input = ({
     [name, onChange],
   );
 
+  const getType = useCallback((): InputType => {
+    if (isPassword) {
+      return isPasswordVisible ? 'text' : 'password';
+    }
+
+    return type;
+  }, [isPassword, isPasswordVisible, type]);
+
   const togglePasswordVisible = useCallback(
     (): void => setIsPasswordVisible(!isPasswordVisible),
     [isPasswordVisible, setIsPasswordVisible],
@@ -71,6 +79,7 @@ const Input = ({
 
   const newId = useMemo((): string => fieldHelpers.getFieldId(name), [name]);
   const newPlaceholder = useMemo((): string => placeholder || label, [placeholder, label]);
+  const newType = useMemo((): string => getType(), [getType]);
 
   return (
     <FieldContainer
@@ -95,7 +104,7 @@ const Input = ({
         placeholder={newPlaceholder}
         readOnly={isReadonly}
         required={isRequired}
-        type={type}
+        type={newType}
         value={value}
       />
 
