@@ -1,0 +1,6 @@
+.field-error {
+  @include font-text-small;
+
+  color: $color-orange-dark;
+  margin-top: to-rem(4);
+}
