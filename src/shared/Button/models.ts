@@ -3,9 +3,9 @@ import type { IconName } from '@shared/Icon/models';
 
 export type ButtonType = 'button' | 'submit';
 
-export type ButtonSize = 'medium' | 'small';
+export type ButtonSize = 'large' | 'medium' | 'small';
 
-export type ButtonStyle = 'primary' | 'secondary';
+export type ButtonStyle = 'none' | 'primary' | 'secondary';
 
 export type ButtonIconStyle = ButtonStyle | 'disabled';
 

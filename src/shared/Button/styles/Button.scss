@@ -1,6 +1,7 @@
 $inset-shadow: to-rem(4);
-$button-size-medium: to-rem(60);
-$button-size-small: to-rem(46);
+$button-size-large: to-rem(60);
+$button-size-medium: to-rem(46);
+$button-size-small: to-rem(30);
 
 .button {
   @include font-label;
@@ -9,6 +10,8 @@ $button-size-small: to-rem(46);
   -webkit-appearance: none;
   align-items: center;
   appearance: none;
+  background-color: $color-transparent;
+  border-color: $color-transparent;
   border-radius: $border-radius;
   border-style: solid;
   border-width: to-rem(2);
@@ -24,16 +27,34 @@ $button-size-small: to-rem(46);
     padding: 0 to-rem(30);
   }
 
+  &.large {
+    height: $button-size-large;
+    max-height: $button-size-large;
+    min-width: $button-size-large;
+
+    &:not(.has-content) {
+      max-width: $button-size-large;
+    }
+  }
+
   &.medium {
     height: $button-size-medium;
     max-height: $button-size-medium;
     min-width: $button-size-medium;
+
+    &:not(.has-content) {
+      max-width: $button-size-medium;
+    }
   }
 
   &.small {
     height: $button-size-small;
     max-height: $button-size-small;
     min-width: $button-size-small;
+
+    &:not(.has-content) {
+      max-width: $button-size-small;
+    }
   }
 
   &::before {
