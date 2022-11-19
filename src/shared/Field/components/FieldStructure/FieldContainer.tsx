@@ -1,23 +1,14 @@
 import classNames from 'clsx';
-import type { ReactNode } from 'react';
 import { useMemo } from 'react';
 
+import type { FieldContainerProps } from '@shared/Field/models';
 import FieldError from '@shared/Field/components/FieldStructure/FieldError';
 import FieldLabel from '@shared/Field/components/FieldStructure/FieldLabel';
-
-interface Props {
-  children: ReactNode;
-  className?: string;
-  errorMessage?: string;
-  htmlFor?: string;
-  isDisabled?: boolean;
-  label?: string;
-}
 
 /**
  * Field container component.
  *
- * @param {Props} props Props
+ * @param {FieldContainerProps} props Props
  * @return {JSX.Element}
  */
 const FieldContainer = ({
@@ -27,7 +18,7 @@ const FieldContainer = ({
   htmlFor = '',
   isDisabled = false,
   label = '',
-}: Props): JSX.Element => {
+}: FieldContainerProps): JSX.Element => {
   const fieldContainerClassName = useMemo(
     (): string =>
       classNames('field', className, {
@@ -38,7 +29,7 @@ const FieldContainer = ({
   );
 
   return (
-    <div className={fieldContainerClassName}>
+    <div className={fieldContainerClassName} data-testid="field">
       <FieldLabel htmlFor={htmlFor} label={label} />
       <div className="field-content">{children}</div>
       <FieldError message={errorMessage} />

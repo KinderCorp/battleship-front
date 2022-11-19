@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 export type InputAutocomplete = 'current-password' | 'new-password' | 'off' | 'on' | 'username';
 
 export type InputMode = 'email' | 'numeric' | 'text';
@@ -17,4 +19,13 @@ export interface FieldLabelProps {
 export interface FieldErrorProps {
   className?: string;
   message?: string;
+}
+
+export interface FieldContainerProps {
+  children: ReactNode;
+  className?: string;
+  errorMessage?: string;
+  htmlFor?: string;
+  isDisabled?: boolean;
+  label?: string;
 }
