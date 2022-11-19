@@ -16,15 +16,15 @@ describe('shared/components/FieldContainer', () => {
   it('should renders the expected component', () => {
     render(<FieldContainer {...props} />);
 
-    const field = screen.getByTestId('field');
+    const fieldContainer = screen.getByTestId('field');
 
-    expect(field).toBeInTheDocument();
-    expect(field).toHaveClass('field');
-    expect(field).not.toHaveClass('is-error is-disabled');
-    expect(field.querySelector('.field-label')).not.toBeInTheDocument();
-    expect(field.querySelector('.field-error')).not.toBeInTheDocument();
-    expect(field.querySelector('.field-content')).toBeInTheDocument();
-    expect(field).toHaveTextContent('Field here');
+    expect(fieldContainer).toBeInTheDocument();
+    expect(fieldContainer).toHaveClass('field');
+    expect(fieldContainer).not.toHaveClass('is-error is-disabled');
+    expect(fieldContainer.querySelector('.field-label')).not.toBeInTheDocument();
+    expect(fieldContainer.querySelector('.field-error')).not.toBeInTheDocument();
+    expect(fieldContainer.querySelector('.field-content')).toBeInTheDocument();
+    expect(fieldContainer).toHaveTextContent('Field here');
   });
 
   it('should renders the component with label', () => {
@@ -35,11 +35,11 @@ describe('shared/components/FieldContainer', () => {
 
     render(<FieldContainer {...newProps} />);
 
-    const field = screen.getByTestId('field');
+    const fieldContainer = screen.getByTestId('field');
     const fieldLabel = screen.getByTestId('field-label');
 
-    expect(field).toBeInTheDocument();
-    expect(field).toContainElement(fieldLabel);
+    expect(fieldContainer).toBeInTheDocument();
+    expect(fieldContainer).toContainElement(fieldLabel);
     expect(fieldLabel).toHaveAttribute('for', 'field-id');
   });
 
@@ -51,12 +51,12 @@ describe('shared/components/FieldContainer', () => {
 
     render(<FieldContainer {...newProps} />);
 
-    const field = screen.getByTestId('field');
+    const fieldContainer = screen.getByTestId('field');
     const fieldError = screen.getByTestId('field-error');
 
-    expect(field).toBeInTheDocument();
-    expect(field).toHaveClass('field is-error');
-    expect(field).toContainElement(fieldError);
+    expect(fieldContainer).toBeInTheDocument();
+    expect(fieldContainer).toHaveClass('field is-error');
+    expect(fieldContainer).toContainElement(fieldError);
   });
 
   it('should renders the component with another class name', () => {
@@ -67,10 +67,10 @@ describe('shared/components/FieldContainer', () => {
 
     render(<FieldContainer {...newProps} />);
 
-    const field = screen.getByTestId('field');
+    const fieldContainer = screen.getByTestId('field');
 
-    expect(field).toBeInTheDocument();
-    expect(field).toHaveClass('field field-other-class');
+    expect(fieldContainer).toBeInTheDocument();
+    expect(fieldContainer).toHaveClass('field field-other-class');
   });
 
   it('should renders the component disabled', () => {
@@ -81,9 +81,9 @@ describe('shared/components/FieldContainer', () => {
 
     render(<FieldContainer {...newProps} />);
 
-    const field = screen.getByTestId('field');
+    const fieldContainer = screen.getByTestId('field');
 
-    expect(field).toBeInTheDocument();
-    expect(field).toHaveClass('field is-disabled');
+    expect(fieldContainer).toBeInTheDocument();
+    expect(fieldContainer).toHaveClass('field is-disabled');
   });
 });
