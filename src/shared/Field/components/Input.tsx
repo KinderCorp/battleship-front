@@ -40,9 +40,9 @@ const Input = ({
       event.preventDefault();
       const { value: newValue } = event.target;
 
-      onChange(name, newValue);
+      if (!(isDisabled || isReadonly)) onChange(name, newValue);
     },
-    [name, onChange],
+    [isDisabled, isReadonly, name, onChange],
   );
 
   const getType = useCallback((): InputType => {

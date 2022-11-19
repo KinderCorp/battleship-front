@@ -5,10 +5,12 @@ import { INPUT_PATTERNS } from '@shared/Field/constants';
 import type { InputProps } from '@shared/Field/models';
 
 const props: InputProps = {
-  name: 'email',
+  name: 'firstname',
   onChange: jest.fn(),
   value: 'value',
 };
+
+const newValue = 'newValue';
 
 describe('shared/components/Input', () => {
   beforeEach(() => {
@@ -19,7 +21,7 @@ describe('shared/components/Input', () => {
     cleanup();
   });
 
-  it('should renders the expected component', async () => {
+  it('should renders the expected component', () => {
     render(<Input {...props} />);
 
     const fieldContainer = screen.getByTestId('field');
@@ -27,7 +29,6 @@ describe('shared/components/Input', () => {
 
     expect(fieldContainer).toBeInTheDocument();
     expect(fieldContainer).toContainElement(input);
-
     expect(input.querySelector('.toggle-password')).not.toBeInTheDocument();
     expect(input).toHaveClass('field-input');
     expect(input).toHaveAttribute('autocomplete', 'off');
@@ -45,7 +46,6 @@ describe('shared/components/Input', () => {
     expect(input).toHaveAttribute('placeholder', '');
     expect(input).toHaveValue(props.value);
 
-    const newValue = 'newValue';
     fireEvent.change(input, {
       target: { value: newValue },
     });
@@ -85,5 +85,69 @@ describe('shared/components/Input', () => {
     expect(button.querySelector('.icon-eye')).toBeInTheDocument();
     expect(button.querySelector('.icon-eye-hide')).not.toBeInTheDocument();
     expect(input).toHaveAttribute('type', newProps.type);
+  });
+
+  it('should renders the component with label', () => {
+    const newProps: InputProps = {
+      ...props,
+      label: 'Label',
+    };
+
+    render(<Input {...newProps} />);
+
+    const input = screen.getByTestId('field-input');
+    const fieldLabel = screen.getByTestId('field-label');
+
+    expect(fieldLabel).toBeInTheDocument();
+    expect(input).toHaveAttribute('placeholder', props.placeholder);
+  });
+
+  it('should renders the component disabled', () => {
+    const newProps: InputProps = {
+      ...props,
+      isDisabled: true,
+    };
+
+    render(<Input {...newProps} />);
+
+    const input = screen.getByTestId('field-input');
+
+    expect(input).toBeDisabled();
+
+    fireEvent.change(input, {
+      target: { value: newValue },
+    });
+    expect(props.onChange).not.toBeCalled();
+  });
+
+  it('should renders the component read only', () => {
+    const newProps: InputProps = {
+      ...props,
+      isReadonly: true,
+    };
+
+    render(<Input {...newProps} />);
+
+    const input = screen.getByTestId('field-input');
+
+    expect(input).toHaveAttribute('readonly');
+
+    fireEvent.change(input, {
+      target: { value: newValue },
+    });
+    expect(props.onChange).not.toBeCalled();
+  });
+
+  it('should renders the component with error', () => {
+    const newProps: InputProps = {
+      ...props,
+      errorMessage: 'Error',
+    };
+
+    render(<Input {...newProps} />);
+
+    const fieldError = screen.getByTestId('field-error');
+
+    expect(fieldError).toBeInTheDocument();
   });
 });
