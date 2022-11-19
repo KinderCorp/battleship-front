@@ -2,34 +2,15 @@ import { useCallback, useMemo, useState } from 'react';
 import type { ChangeEvent } from 'react';
 
 import * as fieldHelpers from '@shared/Field/helpers';
-import type { FieldTextValue, InputAutocomplete, InputMode, InputType } from '@shared/Field/models';
+import type { InputProps, InputType } from '@shared/Field/models';
 import Button from '@shared/Button/components/Button';
 import FieldContainer from '@shared/Field/components/FieldStructure/FieldContainer';
 import { INPUT_PATTERNS } from '@shared/Field/constants';
 
-interface Props {
-  autoComplete?: InputAutocomplete;
-  className?: string;
-  errorMessage?: string;
-  inputMode?: InputMode;
-  isDisabled?: boolean;
-  isReadonly?: boolean;
-  isRequired?: boolean;
-  label?: string;
-  maxLength?: number;
-  minLength?: number;
-  name: string;
-  pattern?: string;
-  placeholder?: string;
-  type?: InputType;
-  value: FieldTextValue;
-  onChange: (name: string, value: FieldTextValue) => void;
-}
-
 /**
  * Input component.
  *
- * @param {Props} props Props
+ * @param {InputProps} props Props
  * @return {JSX.Element}
  */
 const Input = ({
@@ -49,7 +30,7 @@ const Input = ({
   placeholder = '',
   type = 'text',
   value,
-}: Props): JSX.Element => {
+}: InputProps): JSX.Element => {
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
   const isPassword = useMemo((): boolean => type === 'password', [type]);
@@ -93,6 +74,7 @@ const Input = ({
         autoComplete={autoComplete}
         autoCorrect="off"
         className="field-input"
+        data-testid="field-input"
         disabled={isDisabled}
         id={newId}
         inputMode={inputMode}

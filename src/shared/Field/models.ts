@@ -29,3 +29,22 @@ export interface FieldContainerProps {
   isDisabled?: boolean;
   label?: string;
 }
+
+export interface InputProps {
+  autoComplete?: InputAutocomplete;
+  className?: string;
+  errorMessage?: string;
+  inputMode?: InputMode;
+  isDisabled?: boolean;
+  isReadonly?: boolean;
+  isRequired?: boolean;
+  label?: string;
+  maxLength?: number;
+  minLength?: number;
+  name: string;
+  pattern?: string;
+  placeholder?: string;
+  type?: InputType;
+  value: FieldTextValue;
+  onChange: (name: string, value: FieldTextValue) => void;
+}
