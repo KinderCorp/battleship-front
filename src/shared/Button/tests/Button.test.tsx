@@ -23,7 +23,7 @@ describe('shared/components/Button', () => {
     expect(button).toBeEmptyDOMElement();
     expect(button).toHaveClass('button primary medium');
     expect(button).not.toHaveClass('secondary small');
-    expect(button).not.toHaveClass('has-content is-disabled is-loading');
+    expect(button).not.toHaveClass('has-text is-disabled is-loading');
     expect(button).toHaveAttribute('role', 'button');
     expect(button).toHaveAttribute('type', 'button');
     expect(button).not.toBeDisabled();
@@ -54,7 +54,7 @@ describe('shared/components/Button', () => {
     const button = screen.getByTestId('button');
 
     expect(button).not.toBeEmptyDOMElement();
-    expect(button).toHaveClass('has-content');
+    expect(button).toHaveClass('has-text');
     expect(button).toHaveTextContent('Click me!');
   });
 

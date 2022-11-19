@@ -20,9 +20,11 @@ $button-size-small: to-rem(30);
   flex-direction: row;
   justify-content: center;
   outline: none;
+  overflow: hidden;
   position: relative;
+  white-space: nowrap;
 
-  &.has-content {
+  &.has-text {
     padding: 0 to-rem(30);
   }
 
@@ -31,7 +33,7 @@ $button-size-small: to-rem(30);
     max-height: $button-size-large;
     min-width: $button-size-large;
 
-    &:not(.has-content) {
+    &:not(.has-text) {
       max-width: $button-size-large;
     }
   }
@@ -41,7 +43,7 @@ $button-size-small: to-rem(30);
     max-height: $button-size-medium;
     min-width: $button-size-medium;
 
-    &:not(.has-content) {
+    &:not(.has-text) {
       max-width: $button-size-medium;
     }
   }
@@ -51,22 +53,38 @@ $button-size-small: to-rem(30);
     max-height: $button-size-small;
     min-width: $button-size-small;
 
-    &:not(.has-content) {
+    &:not(.has-text) {
       max-width: $button-size-small;
     }
   }
 
-  &:not(.none)::before {
-    background-color: $color-white;
-    content: '';
-    height: 50%;
-    left: 0;
-    opacity: 0.1;
-    pointer-events: none;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    border-radius: 0 0 $border-radius $border-radius;
+  &:not(.none) {
+    &::before {
+      background-color: $color-white;
+      content: '';
+      height: 50%;
+      left: 0;
+      opacity: 0.1;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      border-radius: $border-radius;
+    }
+
+    &::after {
+      background: radial-gradient($color-white, $color-transparent);
+      border-radius: 50%;
+      content: '';
+      height: to-rem(4);
+      left: to-rem(4);
+      position: absolute;
+      top: to-rem(4);
+      transform: translate(-50%, -50%) rotate(-20deg);
+      pointer-events: none;
+      width: to-rem(6);
+      filter: blur(to-rem(0.5));
+    }
   }
 
   &.primary {
