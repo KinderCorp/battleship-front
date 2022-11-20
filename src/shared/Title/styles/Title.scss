@@ -1,27 +1,6 @@
 $margin-icon-right: to-rem(10);
 
 .title-container {
-  .title,
-  .subtitle {
-    margin: 0;
-  }
-
-  &.h1 .title {
-    @include font-title-h1;
-  }
-
-  &.h2 .title {
-    @include font-title-h2;
-  }
-
-  &.h3 .title {
-    @include font-title-h3;
-  }
-
-  &.h4 .title {
-    @include font-title-h4;
-  }
-
   .title-content {
     align-items: center;
     display: flex;
@@ -30,6 +9,26 @@ $margin-icon-right: to-rem(10);
     .icon {
       margin-right: $margin-icon-right;
     }
+
+    .title {
+      margin: 0;
+
+      &.h1 {
+        @include font-title-h1;
+      }
+
+      &.h2 {
+        @include font-title-h2;
+      }
+
+      &.h3 {
+        @include font-title-h3;
+      }
+
+      &.h4 {
+        @include font-title-h4;
+      }
+    }
   }
 
   .subtitle {
@@ -37,6 +36,7 @@ $margin-icon-right: to-rem(10);
 
     color: $color-pink;
     margin-top: to-rem(6);
+    margin: 0;
   }
 
   &.has-icon .subtitle {

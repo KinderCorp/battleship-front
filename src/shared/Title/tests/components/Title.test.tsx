@@ -17,13 +17,14 @@ describe('shared/components/Title', () => {
     const title = titleContainer.querySelector('h2.title');
 
     expect(titleContainer).toBeInTheDocument();
-    expect(titleContainer).toHaveClass('title-container h2');
+    expect(titleContainer).toHaveClass('title-container');
     expect(titleContainer).not.toHaveClass('has-icon');
     expect(titleContainer.querySelector('.title-content')).toBeInTheDocument();
     expect(titleContainer.querySelector('.subtitle')).not.toBeInTheDocument();
     expect(titleContainer.querySelector('.icon')).not.toBeInTheDocument();
 
     expect(title).toBeInTheDocument();
+    expect(title).toHaveClass('title h2');
     expect(title).toHaveTextContent(props.title);
   });
 
@@ -38,7 +39,7 @@ describe('shared/components/Title', () => {
     const titleContent = titleContainer.querySelector('.title-content');
     const iconBoat = screen.getByTestId('icon-boat');
 
-    expect(titleContainer).toHaveClass('title-container h2 has-icon');
+    expect(titleContainer).toHaveClass('title-container has-icon');
     expect(titleContent).toBeInTheDocument();
     expect(titleContent).toContainElement(iconBoat);
   });
@@ -62,7 +63,7 @@ describe('shared/components/Title', () => {
 
     const titleContainer = screen.getByTestId('title');
 
-    expect(titleContainer).toHaveClass('title-container h2 title-other-class');
+    expect(titleContainer).toHaveClass('title-container title-other-class');
   });
 
   it('should renders the component with none type', () => {
@@ -71,8 +72,10 @@ describe('shared/components/Title', () => {
     render(<Title {...newProps} />);
 
     const titleContainer = screen.getByTestId('title');
+    const title = titleContainer.querySelector('p.title');
 
-    expect(titleContainer).toHaveClass('title-container none');
-    expect(titleContainer.querySelector('p.title')).toBeInTheDocument();
+    expect(titleContainer).toHaveClass('title-container');
+    expect(title).toBeInTheDocument();
+    expect(title).toHaveClass('title none');
   });
 });

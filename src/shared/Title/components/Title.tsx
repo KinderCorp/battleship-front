@@ -8,7 +8,7 @@ import type { TitleProps } from '@shared/Title/models';
 /**
  * Title component.
  *
- * @param {TitleProps} props Propss
+ * @param {TitleProps} props Props
  * @return {JSX.Element}
  */
 export const Title = ({
@@ -20,21 +20,23 @@ export const Title = ({
 }: TitleProps): JSX.Element => {
   const TitleComponent = useMemo(() => (type === 'none' ? 'p' : type), [type]);
 
-  const titleClassName = useMemo(
+  const titleContainerClassName = useMemo(
     (): string =>
-      classNames('title-container', type, className, {
+      classNames('title-container', className, {
         'has-icon': !!iconName,
       }),
-    [className, iconName, type],
+    [className, iconName],
   );
 
+  const titleClassName = useMemo((): string => classNames('title', type), [type]);
+
   return (
-    <div className={titleClassName} data-testid="title">
+    <div className={titleContainerClassName} data-testid="title">
       <div className="title-content">
         {iconName && (
           <Icon borderColor={COLORS.TRANSPARENT} color={COLORS.PURPLE_LIGHT} name={iconName} />
         )}
-        <TitleComponent className="title">{title}</TitleComponent>
+        <TitleComponent className={titleClassName}>{title}</TitleComponent>
       </div>
 
       {subTitle && <p className="subtitle">{subTitle}</p>}
