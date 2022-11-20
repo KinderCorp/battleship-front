@@ -11,6 +11,7 @@ $color-purple-dark-2: #25143c;
 $color-purple-dark: #3a1d62;
 $color-purple-light: #a452da;
 $color-purple: #7e29c2;
+$color-transparent: transparent;
 $color-white: #fff;
 $color-yellow: #f9d722;
 
@@ -30,14 +31,6 @@ $font-name-roboto: 'Roboto';
 $font-weight-black: 900;
 $font-weight-bold: 700;
 $font-weight-regular: 400;
-
-// Text styles
-@mixin font-label {
-  font-family: $font-name-roboto;
-  font-size: to-rem(22);
-  font-weight: $font-weight-black;
-  line-height: to-rem(26);
-}
 
 // Keyframes
 @-webkit-keyframes keyframes-spin {
@@ -114,15 +107,4 @@ $font-weight-regular: 400;
   75% {
     transform: scale(0.98, 1.02);
   }
-}
-
-// Animations
-@mixin animation-push {
-  -webkit-animation: keyframes-push 0.1s linear forwards;
-  animation: keyframes-push 0.1s linear forwards;
-}
-
-@mixin animation-bounce {
-  -webkit-animation: keyframes-bounce 0.25s ease-out;
-  animation: keyframes-bounce 0.25s ease-out;
 }

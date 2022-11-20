@@ -7,6 +7,10 @@ export const BUTTON_ICON_STYLES: Record<ButtonIconStyle, Record<keyof IconSvgPro
     borderColor: COLORS.BLACK,
     color: COLORS.WHITE,
   },
+  none: {
+    borderColor: COLORS.TRANSPARENT,
+    color: COLORS.WHITE,
+  },
   primary: {
     borderColor: COLORS.BROWN,
     color: COLORS.WHITE,

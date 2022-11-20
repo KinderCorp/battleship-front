@@ -1,0 +1,30 @@
+.field-input {
+  background-color: $color-purple-dark-2;
+  border-radius: $border-radius;
+  border: to-rem(2) solid $color-transparent;
+  box-sizing: border-box;
+  color: $color-white;
+  height: to-rem(46);
+  max-height: to-rem(46);
+  padding: 0 to-rem(16);
+  transition: border 0.4s;
+  width: 100%;
+
+  &::placeholder {
+    @include font-text;
+
+    color: $color-white;
+  }
+
+  &:hover,
+  &:focus {
+    border-color: $color-purple;
+  }
+}
+
+.field-input + .toggle-password {
+  position: absolute;
+  right: to-rem(16);
+  top: 50%;
+  transform: translate(0, -50%);
+}

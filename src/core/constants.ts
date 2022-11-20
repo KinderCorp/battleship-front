@@ -11,6 +11,7 @@ export const COLORS = {
   PURPLE_DARK: '#3A1D62',
   PURPLE_DARK_2: '#25143C',
   PURPLE_LIGHT: '#A452DA',
+  TRANSPARENT: 'transparent',
   WHITE: '#FFFFFF',
   YELLOW: '#F9D722',
 };

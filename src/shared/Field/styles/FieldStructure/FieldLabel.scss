@@ -1,0 +1,5 @@
+.field-label {
+  @include font-label-small;
+
+  margin-bottom: to-rem(6);
+}

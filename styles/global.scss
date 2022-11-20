@@ -1,4 +1,12 @@
 html,
 body {
+  background-color: $color-purple-dark-2;
+  box-sizing: border-box;
+  color: $color-white;
   font-family: $font-name-roboto, sans-serif;
+}
+
+input {
+  outline: none;
+  border: none;
 }
