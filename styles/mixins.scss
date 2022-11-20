@@ -1,4 +1,31 @@
 // Text styles
+@mixin font-title-h1 {
+  font-size: to-rem(36);
+  font-weight: $font-weight-black;
+  line-height: to-rem(42);
+  text-transform: uppercase;
+}
+
+@mixin font-title-h2 {
+  font-size: to-rem(30);
+  font-weight: $font-weight-black;
+  line-height: to-rem(34);
+  text-transform: uppercase;
+}
+
+@mixin font-title-h3 {
+  font-size: to-rem(26);
+  font-weight: $font-weight-bold;
+  line-height: to-rem(30);
+  text-transform: uppercase;
+}
+
+@mixin font-title-h4 {
+  font-size: to-rem(20);
+  font-weight: $font-weight-bold;
+  line-height: to-rem(22);
+}
+
 @mixin font-label {
   font-size: to-rem(22);
   font-weight: $font-weight-black;
@@ -41,5 +68,7 @@
   height: $size;
   max-height: $size;
   max-width: $size;
+  min-height: $size;
+  min-width: $size;
   width: $size;
 }
