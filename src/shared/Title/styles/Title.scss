@@ -35,8 +35,7 @@ $margin-icon-right: to-rem(10);
     @include font-text-small;
 
     color: $color-pink;
-    margin-top: to-rem(6);
-    margin: 0;
+    margin: to-rem(6) 0 0 0;
   }
 
   &.has-icon .subtitle {
