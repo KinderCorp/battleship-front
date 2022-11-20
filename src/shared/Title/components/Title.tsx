@@ -1,49 +1,45 @@
-// import classNames from 'clsx';
-// import { useMemo } from 'react';
-// import Icon from '@shared/Icon/components/Icon';
+import classNames from 'clsx';
+import { useMemo } from 'react';
 
-
-/**
- * Title component.
- * 
- * @return {JSX.Element}
- */
-
-export interface Props {
-    title: string,
-    subtitle?: string,
-    iconName: null,
-    className?: '',
-    type : string,
-    // iconName: Icon, // Models icon, sera défini lorsque la PR sur les composants icones sera faites 
-}
-
-export type TitleType = |'h1'|'h2'|'h3'|'h4';
+import { COLORS } from '@core/constants';
+import Icon from '@shared/Icon/components/Icon';
+import type { TitleProps } from '@shared/Title/models';
 
 /**
  * Title component.
  *
- * @param {Props} props Title props
+ * @param {TitleProps} props Propss
  * @return {JSX.Element}
  */
-export const Title = ({ type, title, subtitle, className }: Props): JSX.Element => {
-  // const TitleComponent = type;
+export const Title = ({
+  className = '',
+  iconName = null,
+  subTitle = '',
+  title,
+  type = 'h2',
+}: TitleProps): JSX.Element => {
+  const TitleComponent = useMemo(() => (type === 'none' ? 'p' : type), [type]);
 
-  // const titleclassName = useMemo(
-  //   (): string => classNames('title', className),
-  //   [className],
-  // );
+  const titleClassName = useMemo(
+    (): string =>
+      classNames('title-container', type, className, {
+        'has-icon': !!iconName,
+      }),
+    [className, iconName, type],
+  );
 
   return (
-    <>
-      {/* <TitleComponent type="h1" lassName={titleclassName}>
-      {iconName && (
-        <Icon borderColor={iconStyle.borderColor} color={iconStyle.color} name={iconName} />
-      )}
-      {title}</TitleComponent> */}
-      {subtitle && <p>{subtitle}</p>}
-    </>
+    <div className={titleClassName} data-testid="title">
+      <div className="title-content">
+        {iconName && (
+          <Icon borderColor={COLORS.TRANSPARENT} color={COLORS.PURPLE_LIGHT} name={iconName} />
+        )}
+        <TitleComponent className="title">{title}</TitleComponent>
+      </div>
+
+      {subTitle && <p className="subtitle">{subTitle}</p>}
+    </div>
   );
 };
-  
+
 export default Title;

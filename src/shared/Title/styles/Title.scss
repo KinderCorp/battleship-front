@@ -1,0 +1,45 @@
+$margin-icon-right: to-rem(10);
+
+.title-container {
+  .title,
+  .subtitle {
+    margin: 0;
+  }
+
+  &.h1 .title {
+    @include font-title-h1;
+  }
+
+  &.h2 .title {
+    @include font-title-h2;
+  }
+
+  &.h3 .title {
+    @include font-title-h3;
+  }
+
+  &.h4 .title {
+    @include font-title-h4;
+  }
+
+  .title-content {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+
+    .icon {
+      margin-right: $margin-icon-right;
+    }
+  }
+
+  .subtitle {
+    @include font-text-small;
+
+    color: $color-pink;
+    margin-top: to-rem(6);
+  }
+
+  &.has-icon .subtitle {
+    margin-left: calc($icon-size-medium + $margin-icon-right);
+  }
+}
