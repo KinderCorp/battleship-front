@@ -15,6 +15,15 @@ $color-transparent: transparent;
 $color-white: #fff;
 $color-yellow: #f9d722;
 
+// Gradient colors
+$color-gradient-linear: linear-gradient(
+    180deg,
+    $color-purple-dark 12.5%,
+    $color-purple-dark 12.51%,
+    rgba($color-purple, 0.6) 99.95%
+  ),
+  $color-purple-dark;
+
 // Border
 $border-radius: to-rem(6);
 
