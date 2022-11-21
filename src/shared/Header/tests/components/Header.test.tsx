@@ -40,8 +40,8 @@ describe('shared/components/Header', () => {
   it('should renders the component with children on the side', () => {
     const newProps: HeaderProps = {
       ...props,
-      leftSide: <span>Left side</span>,
-      rightSide: <span>Right side</span>,
+      leftSideNode: <span>Left side</span>,
+      rightSideNode: <span>Right side</span>,
     };
 
     render(<Header {...newProps} />);
