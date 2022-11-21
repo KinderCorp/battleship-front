@@ -12,7 +12,7 @@ import Title from '@shared/Title/components/Title';
  */
 const Header = ({
   className = '',
-  height = 'medium',
+  height = 'small',
   leftSide = null,
   rightSide = null,
   title,
@@ -23,7 +23,7 @@ const Header = ({
   );
 
   return (
-    <div className={headerClassName}>
+    <div className={headerClassName} data-testid="header">
       {leftSide && <div className="header-left-side">{leftSide}</div>}
       <Title className="header-title" title={title} type="h2" />
       {rightSide && <div className="header-right-side">{rightSide}</div>}
