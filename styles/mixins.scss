@@ -72,3 +72,28 @@
   min-width: $size;
   width: $size;
 }
+
+// Media breakpoints
+@mixin bp-phablet {
+  @media (min-width: $breakpoint-xs) {
+    @content;
+  }
+}
+
+@mixin bp-tablet {
+  @media (min-width: $breakpoint-sm) {
+    @content;
+  }
+}
+
+@mixin bp-desktop {
+  @media (min-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin bp-large-desktop {
+  @media (min-width: $breakpoint-lg) {
+    @content;
+  }
+}

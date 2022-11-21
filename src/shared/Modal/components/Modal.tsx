@@ -30,7 +30,7 @@ const Modal = ({
   );
 
   const ButtonClose = useMemo(
-    () => <Button iconName="Close" onClick={handleClose} />,
+    () => <Button iconName="Close" onClick={handleClose} style="secondary" />,
     [handleClose],
   );
 
@@ -38,9 +38,9 @@ const Modal = ({
     <div className={modalClassName}>
       <Header
         className="modal-header"
-        title={title}
         leftSideNode={position === 'rightSide' && ButtonClose}
         rightSideNode={position === 'centered' ? ButtonClose : headerNode}
+        title={title}
       />
       <div className="modal-content">{children}</div>
     </div>

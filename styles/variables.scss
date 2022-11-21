@@ -24,6 +24,12 @@ $color-gradient-linear: linear-gradient(
   ),
   $color-purple-dark;
 
+// Breakpoints
+$breakpoint-xs: 480px;
+$breakpoint-sm: 768px;
+$breakpoint-md: 1024px;
+$breakpoint-lg: 1300px;
+
 // Border
 $border-radius: to-rem(6);
 

@@ -5,7 +5,7 @@ export type ModalPosition = 'centered' | 'rightSide';
 export interface ModalProps {
   children: ReactNode;
   className?: string;
-  headerNode: ReactNode;
+  headerNode?: ReactNode;
   isVisible: boolean;
   position?: ModalPosition;
   title: string;
