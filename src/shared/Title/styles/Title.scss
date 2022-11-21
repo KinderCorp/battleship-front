@@ -12,6 +12,7 @@ $margin-icon-right: to-rem(10);
 
     .title {
       margin: 0;
+      width: 100%;
 
       &.h1 {
         @include font-title-h1;
