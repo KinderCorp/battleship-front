@@ -1,0 +1,18 @@
+.behind-overlay {
+  backdrop-filter: blur(4px);
+  background-color: rgba($color-purple-dark-2, 0.8);
+  height: 100vh;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  transition: opacity 0.2s ease-in-out;
+  width: 100vw;
+  z-index: 499;
+
+  &.is-visible {
+    pointer-events: visible;
+    opacity: 1;
+  }
+}
