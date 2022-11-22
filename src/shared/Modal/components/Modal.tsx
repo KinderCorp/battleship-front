@@ -43,7 +43,7 @@ const Modal = ({
       <div className={modalClassName} data-testid="modal">
         <Header
           className="modal-header"
-          leftSideNode={position === 'rightSide' && ButtonClose}
+          leftSideNode={position === 'right-side' && ButtonClose}
           rightSideNode={position === 'centered' ? ButtonClose : headerNode}
           title={title}
         />
