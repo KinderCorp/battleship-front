@@ -19,7 +19,9 @@ const BehindOverlay = ({ className = '', isVisible, onClose }: BehindOverlayProp
     [className, isVisible],
   );
 
-  return <div className={behindOverlayClassName} onClick={handleClose} />;
+  return (
+    <div className={behindOverlayClassName} data-testid="behind-overlay" onClick={handleClose} />
+  );
 };
 
 export default BehindOverlay;
