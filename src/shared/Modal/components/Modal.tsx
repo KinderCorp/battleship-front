@@ -35,10 +35,12 @@ const Modal = ({
     [handleClose],
   );
 
+  // TODO: rightSide modal
+
   return (
     <>
       <BehindOverlay isVisible={isVisible} onClose={handleClose} />
-      <div className={modalClassName}>
+      <div className={modalClassName} data-testid="modal">
         <Header
           className="modal-header"
           leftSideNode={position === 'rightSide' && ButtonClose}
