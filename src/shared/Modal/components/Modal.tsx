@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import classNames from 'clsx';
 
+import BehindOverlay from '@shared/Modal/components/BehindOverlay';
 import Button from '@shared/Button/components/Button';
 import Header from '@shared/Header/components/Header';
 import type { ModalProps } from '@shared/Modal/models';
@@ -35,15 +36,18 @@ const Modal = ({
   );
 
   return (
-    <div className={modalClassName}>
-      <Header
-        className="modal-header"
-        leftSideNode={position === 'rightSide' && ButtonClose}
-        rightSideNode={position === 'centered' ? ButtonClose : headerNode}
-        title={title}
-      />
-      <div className="modal-content">{children}</div>
-    </div>
+    <>
+      <BehindOverlay isVisible={isVisible} onClose={handleClose} />
+      <div className={modalClassName}>
+        <Header
+          className="modal-header"
+          leftSideNode={position === 'rightSide' && ButtonClose}
+          rightSideNode={position === 'centered' ? ButtonClose : headerNode}
+          title={title}
+        />
+        <div className="modal-content">{children}</div>
+      </div>
+    </>
   );
 };
 

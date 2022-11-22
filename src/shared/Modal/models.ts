@@ -11,3 +11,9 @@ export interface ModalProps {
   title: string;
   onClose: () => void;
 }
+
+export interface BehindOverlayProps {
+  className?: string;
+  isVisible: boolean;
+  onClose: () => void;
+}
