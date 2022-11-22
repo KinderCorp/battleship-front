@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-export type ModalPosition = 'centered' | 'rightSide';
+export type ModalPosition = 'centered' | 'right-side';
 
 export interface ModalProps {
   children: ReactNode;
