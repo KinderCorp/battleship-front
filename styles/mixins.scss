@@ -124,13 +124,27 @@
 }
 
 // Size
-@mixin fixed-size($size) {
-  height: $size;
-  max-height: $size;
-  max-width: $size;
-  min-height: $size;
-  min-width: $size;
-  width: $size;
+@mixin fixed-size($width, $height: $width) {
+  height: $height;
+  max-height: $height;
+  max-width: $width;
+  min-height: $height;
+  min-width: $width;
+  width: $width;
+}
+
+// Other
+@mixin light-reflection {
+  background-color: $color-white;
+  border-radius: $border-radius;
+  content: '';
+  height: 50%;
+  left: 0;
+  opacity: 0.1;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
 // Media breakpoints
