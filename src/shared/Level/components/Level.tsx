@@ -12,7 +12,7 @@ import type { LevelProps } from '@shared/Level/models';
 const Level = ({
   className = '',
   currentXp = 0,
-  rank = 0,
+  // rank = 0,
   showProgressBar = false,
   size = 'medium',
   title = '',

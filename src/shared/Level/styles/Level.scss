@@ -20,6 +20,25 @@ $level-inset-shadow: to-rem(2);
     justify-content: center;
     position: relative;
 
+    .progress-bar-title {
+      @include font-text-small;
+
+      left: 50%;
+      margin: 0;
+      position: absolute;
+      text-shadow: 0 to-rem(1.5) to-rem(2) $color-purple-dark;
+      top: 0;
+      transform: translate(-50%, -65%);
+      z-index: 1;
+    }
+
+    .progress-bar-value {
+      @include font-label-small;
+
+      margin: 0;
+      z-index: 1;
+    }
+
     .progress-bar-background {
       background-color: $color-purple;
       border-radius: 0 $border-radius $border-radius 0;
@@ -34,25 +53,6 @@ $level-inset-shadow: to-rem(2);
       &::before {
         @include light-reflection;
       }
-    }
-
-    .progress-bar-title {
-      @include font-text-small;
-
-      left: 50%;
-      margin: 0;
-      position: absolute;
-      text-shadow: 0 to-rem(1.5) to-rem(2) $color-purple-dark;
-      top: 0;
-      transform: translate(-50%, -60%);
-      z-index: 1;
-    }
-
-    .progress-bar-value {
-      @include font-label-small;
-
-      margin: 0;
-      z-index: 1;
     }
   }
 
