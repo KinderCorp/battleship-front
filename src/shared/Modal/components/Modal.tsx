@@ -35,8 +35,6 @@ const Modal = ({
     [handleClose],
   );
 
-  // TODO: rightSide modal
-
   return (
     <>
       <BehindOverlay isVisible={isVisible} onClose={handleClose} />
