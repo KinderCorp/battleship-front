@@ -78,13 +78,13 @@ const Level = ({
 
   return (
     <div className={levelClassName} data-testid="level">
-      <div className="badge">{rank}</div>
+      <div className="badge">{/* Put image here */}</div>
 
       {!!showProgressBar && (
         <div className="progress-bar">
-          <span className="progress-bar-background" style={{ width: progressWidth }} />
-          <p className="progress-bar-value">{progressValue}</p>
           <p className="progress-bar-title">{title}</p>
+          <p className="progress-bar-value">{progressValue}</p>
+          <span className="progress-bar-background" style={{ width: progressWidth }} />
         </div>
       )}
     </div>
