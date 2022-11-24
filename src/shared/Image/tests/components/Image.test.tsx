@@ -47,6 +47,7 @@ describe('shared/components/Image', () => {
     expect(image).toBeInTheDocument();
     expect(image).toHaveClass('image');
     expect(image).toHaveStyle({ height: '80px', width: '80px' });
+    expect(image).toHaveAttribute('draggable', 'false');
     expect(image).toContainElement(imageElement);
 
     expect(imageElement).toHaveAccessibleName('image-test-fixed');
@@ -70,6 +71,7 @@ describe('shared/components/Image', () => {
     expect(image).toBeInTheDocument();
     expect(image).toHaveClass('image image-fit-contain');
     expect(image).not.toHaveStyle({ height: '80px', width: '80px' });
+    expect(image).toHaveAttribute('draggable', 'false');
     expect(image).toContainElement(imageElement);
 
     expect(imageElement).toHaveAccessibleName('image-test-responsive');
