@@ -34,7 +34,7 @@ export const Image = ({
   if (!src || !alt) return null;
 
   return (
-    <div className={imageClassName} data-testid="image" style={imageSizes}>
+    <div className={imageClassName} data-testid="image">
       <NextImage
         {...imageSizes}
         draggable="false"
