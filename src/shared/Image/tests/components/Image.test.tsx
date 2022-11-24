@@ -19,7 +19,7 @@ describe('shared/components/Image', () => {
     expect(container.querySelector('.image')).not.toBeInTheDocument();
   });
 
-  it('should not renders the component if src is empty', () => {
+  it('should not renders the component if alt is empty', () => {
     const props: ImageProps = {
       alt: '',
       src: '/images/my-test-image.png',
