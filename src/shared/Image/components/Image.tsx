@@ -37,6 +37,7 @@ export const Image = ({
     <div className={imageClassName} data-testid="image" style={imageSizes}>
       <NextImage
         {...imageSizes}
+        draggable="false"
         alt={alt}
         fill={!!objectFit}
         priority={priority}
