@@ -18,6 +18,7 @@
       "@hooks/*": ["./src/shared/_hooks/*"],
       "@mocks/*": ["./mocks/*"],
       "@pages/*": ["./pages/*"],
+      "@public/*": ["./public/*"],
       "@shared/*": ["./src/shared/*"],
       "@src/*": ["./src/*"],
       "@styles/*": ["./styles/*"],
