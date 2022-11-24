@@ -22,7 +22,7 @@ export const BlockContainer = ({
 
     const blockContainerClassName = useMemo(
         (): string =>
-          classNames('', className, {
+          classNames('block-container', className, {
             'has-icon': !!iconName,
           }),
         [className, iconName],
