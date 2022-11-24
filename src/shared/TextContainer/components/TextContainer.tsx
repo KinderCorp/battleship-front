@@ -9,10 +9,14 @@ import type { TextContainerProps } from '@shared/TextContainer/models';
  * @param {TextContainerProps} props Props
  * @return {JSX.Element}
  */
-const TextContainer = ({ children, className = '' }: TextContainerProps): JSX.Element => {
+const TextContainer = ({
+  children,
+  className = '',
+  height = 'medium',
+}: TextContainerProps): JSX.Element => {
   const textContainerClassName = useMemo(
-    (): string => classNames('text-container', className),
-    [className],
+    (): string => classNames('text-container', `text-container-height-${height}`, className),
+    [className, height],
   );
 
   return (
