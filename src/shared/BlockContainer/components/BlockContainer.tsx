@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import type { BlockContainerProps } from '@shared/BlockContainer/model';
+import type { BlockContainerProps } from '@shared/BlockContainer/models';
 import classNames from 'clsx';
 import Title from '@shared/Title/components/Title';
 
@@ -27,7 +27,7 @@ const BlockContainer = ({
 
     return (
         <>
-          <div className={blockContainerClassName}>
+          <div className={blockContainerClassName} data-testid="block-container">
             <Title className="block-container-title" title={title} type="h2" iconName={iconName} />
             <div className={blockContainerClassName}>{children}</div>
           </div>
