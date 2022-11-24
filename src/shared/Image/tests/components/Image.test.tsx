@@ -46,10 +46,10 @@ describe('shared/components/Image', () => {
 
     expect(image).toBeInTheDocument();
     expect(image).toHaveClass('image');
-    expect(image).toHaveAttribute('draggable', 'false');
     expect(image).toContainElement(imageElement);
 
     expect(imageElement).toHaveAccessibleName('image-test-fixed');
+    expect(imageElement).toHaveAttribute('draggable', 'false');
     expect(imageElement).toHaveAttribute('height', '80');
     expect(imageElement).toHaveAttribute('width', '80');
     expect(imageElement).toHaveAttribute('sizes', '80px');
@@ -69,10 +69,10 @@ describe('shared/components/Image', () => {
 
     expect(image).toBeInTheDocument();
     expect(image).toHaveClass('image image-fit-contain');
-    expect(image).toHaveAttribute('draggable', 'false');
     expect(image).toContainElement(imageElement);
 
     expect(imageElement).toHaveAccessibleName('image-test-responsive');
+    expect(imageElement).toHaveAttribute('draggable', 'false');
     expect(imageElement).not.toHaveAttribute('height');
     expect(imageElement).not.toHaveAttribute('width');
   });
