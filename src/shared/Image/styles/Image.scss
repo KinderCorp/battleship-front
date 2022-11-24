@@ -1,0 +1,21 @@
+.image {
+  position: relative;
+
+  &.image-fit-contain {
+    img {
+      object-fit: contain;
+    }
+  }
+
+  &.image-fit-cover {
+    img {
+      object-fit: cover;
+    }
+  }
+
+  &.image-fit-fill {
+    img {
+      object-fit: fill;
+    }
+  }
+}

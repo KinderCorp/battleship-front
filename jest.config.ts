@@ -14,6 +14,7 @@ const jestConfig: Config = {
     '^@hooks/(.*)$': '<rootDir>/src/shared/_hooks/$1',
     '^@mocks/(.*)$': '<rootDir>/mocks/$1',
     '^@pages/(.*)$': '<rootDir>/pages/$1',
+    '^@public/(.*)$': '<rootDir>/public/$1',
     '^@shared/(.*)$': '<rootDir>/src/shared/$1',
     '^@src/(.*)$': '<rootDir>/src/$1',
     '^@styles/(.*)$': '<rootDir>/styles/$1',

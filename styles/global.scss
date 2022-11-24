@@ -4,6 +4,7 @@ body {
   box-sizing: border-box;
   color: $color-white;
   font-family: $font-name-roboto, sans-serif;
+  user-select: none;
 }
 
 input {
