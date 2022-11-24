@@ -16,7 +16,7 @@ const Level = ({
   badgeSrc = '',
   className = '',
   currentXp = 0,
-  rank = 0,
+  rank = 1,
   showProgressBar = false,
   size = 'medium',
   title = '',
@@ -61,15 +61,15 @@ const Level = ({
       ) : (
         <Image
           {...propsImage}
-          alt={translate('badge.level.unknow')}
+          alt={translate('badge.level.unknown')}
           src="/images/badges/badge-none.png"
         />
       )}
 
       {!!showProgressBar && (
         <div className="progress-bar">
-          <p className="progress-bar-title">{title}</p>
-          <p className="progress-bar-value">{progressValue}</p>
+          {title && <p className="progress-bar-title">{title}</p>}
+          {progressValue && <p className="progress-bar-value">{progressValue}</p>}
           <span className="progress-bar-background" style={{ width: progressWidth }} />
         </div>
       )}
