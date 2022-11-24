@@ -7,23 +7,28 @@ $header-height-medium: to-rem(120);
   box-shadow: inset 0 to-rem(-4) rgba($color-white, 0.1),
     0 to-rem(4) to-rem(10) rgba($color-black, 0.3);
   box-sizing: border-box;
-  column-gap: to-rem(20);
-  display: flex;
+  column-gap: to-rem(10);
   display: grid;
-  flex-direction: row;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr minmax(auto, 40%) 1fr;
   overflow: hidden;
   width: 100%;
+
+  @include bp-phablet {
+    column-gap: to-rem(20);
+    grid-template-columns: 1fr minmax(auto, 60%) 1fr;
+  }
 
   &.small {
     height: $header-height-small;
     max-height: $header-height-small;
+    min-height: $header-height-small;
     padding: 0 to-rem(10);
   }
 
   &.medium {
     height: $header-height-medium;
     max-height: $header-height-medium;
+    min-height: $header-height-medium;
     padding: 0 to-rem(40);
   }
 

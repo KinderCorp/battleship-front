@@ -12,6 +12,8 @@ $margin-icon-right: to-rem(10);
 
     .title {
       margin: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
       width: 100%;
 
       &.h1 {

@@ -13,8 +13,8 @@ import Title from '@shared/Title/components/Title';
 const Header = ({
   className = '',
   height = 'small',
-  leftSide = null,
-  rightSide = null,
+  leftSideNode = null,
+  rightSideNode = null,
   title,
 }: HeaderProps): JSX.Element => {
   const headerClassName = useMemo(
@@ -24,9 +24,9 @@ const Header = ({
 
   return (
     <div className={headerClassName} data-testid="header">
-      {leftSide && <div className="header-left-side">{leftSide}</div>}
+      {leftSideNode && <div className="header-left-side">{leftSideNode}</div>}
       <Title className="header-title" title={title} type="h2" />
-      {rightSide && <div className="header-right-side">{rightSide}</div>}
+      {rightSideNode && <div className="header-right-side">{rightSideNode}</div>}
     </div>
   );
 };

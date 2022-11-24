@@ -40,20 +40,20 @@ describe('shared/components/Header', () => {
   it('should renders the component with children on the side', () => {
     const newProps: HeaderProps = {
       ...props,
-      leftSide: <span>Left side</span>,
-      rightSide: <span>Right side</span>,
+      leftSideNode: <span>Left side</span>,
+      rightSideNode: <span>Right side</span>,
     };
 
     render(<Header {...newProps} />);
 
     const header = screen.getByTestId('header');
-    const leftSide = header.querySelector('.header-left-side');
-    const rightSide = header.querySelector('.header-right-side');
+    const leftSideNode = header.querySelector('.header-left-side');
+    const rightSideNode = header.querySelector('.header-right-side');
 
-    expect(leftSide).toBeInTheDocument();
-    expect(leftSide).toContainHTML('<span>Left side</span>');
+    expect(leftSideNode).toBeInTheDocument();
+    expect(leftSideNode).toContainHTML('<span>Left side</span>');
 
-    expect(rightSide).toBeInTheDocument();
-    expect(rightSide).toContainHTML('<span>Right side</span>');
+    expect(rightSideNode).toBeInTheDocument();
+    expect(rightSideNode).toContainHTML('<span>Right side</span>');
   });
 });

@@ -1,0 +1,81 @@
+.modal {
+  background-color: $color-purple-dark;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  pointer-events: none;
+  position: fixed;
+  z-index: 500;
+
+  &.is-visible {
+    pointer-events: visible;
+  }
+
+  &.centered {
+    border-radius: $border-radius;
+    box-shadow: 0 to-rem(4) $color-black;
+    left: 50%;
+    max-height: 90vh;
+    max-width: to-rem(700);
+    opacity: 0;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.4);
+    transition-duration: 0.2s;
+    transition-property: height, opacity, transform;
+    transition-timing-function: ease-in-out;
+    width: 90vw;
+
+    &.is-visible {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    @include bp-tablet {
+      width: 80vw;
+    }
+  }
+
+  &.right-side {
+    height: 100vh;
+    max-width: to-rem(700);
+    right: 0;
+    top: 0;
+    transform: translateX(100%);
+    transition: transform 0.2s ease-in-out;
+    width: 100vw;
+
+    @include bp-phablet {
+      width: 90vw;
+    }
+
+    @include bp-tablet {
+      width: 70vw;
+    }
+
+    @include bp-desktop {
+      width: 60vw;
+    }
+
+    &.is-visible {
+      transform: translateX(0);
+    }
+  }
+
+  .modal-content {
+    overflow-y: auto;
+    padding: to-rem(20);
+    word-break: break-word;
+
+    @include bp-phablet {
+      padding: to-rem(40);
+    }
+
+    @include bp-desktop {
+      padding: to-rem(60);
+    }
+  }
+
+  .modal-header .title-container .title-content .title {
+    @include font-title-h3;
+  }
+}

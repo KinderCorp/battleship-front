@@ -1,29 +1,89 @@
 // Text styles
 @mixin font-title-h1 {
-  font-size: to-rem(36);
-  font-weight: $font-weight-black;
-  line-height: to-rem(42);
-  text-transform: uppercase;
-}
-
-@mixin font-title-h2 {
-  font-size: to-rem(30);
+  font-size: to-rem(28);
   font-weight: $font-weight-black;
   line-height: to-rem(34);
   text-transform: uppercase;
+
+  @include bp-phablet {
+    font-size: to-rem(30);
+    line-height: to-rem(36);
+  }
+
+  @include bp-tablet {
+    font-size: to-rem(32);
+    line-height: to-rem(38);
+  }
+
+  @include bp-desktop {
+    font-size: to-rem(34);
+    line-height: to-rem(40);
+  }
+
+  @include bp-large-desktop {
+    font-size: to-rem(36);
+    line-height: to-rem(42);
+  }
+}
+
+@mixin font-title-h2 {
+  font-size: to-rem(24);
+  font-weight: $font-weight-black;
+  line-height: to-rem(28);
+  text-transform: uppercase;
+
+  @include bp-tablet {
+    font-size: to-rem(26);
+    line-height: to-rem(30);
+  }
+
+  @include bp-desktop {
+    font-size: to-rem(28);
+    line-height: to-rem(32);
+  }
+
+  @include bp-large-desktop {
+    font-size: to-rem(30);
+    line-height: to-rem(34);
+  }
 }
 
 @mixin font-title-h3 {
-  font-size: to-rem(26);
+  font-size: to-rem(20);
   font-weight: $font-weight-bold;
-  line-height: to-rem(30);
+  line-height: to-rem(24);
   text-transform: uppercase;
+
+  @include bp-tablet {
+    font-size: to-rem(22);
+    line-height: to-rem(26);
+  }
+
+  @include bp-desktop {
+    font-size: to-rem(24);
+    line-height: to-rem(28);
+  }
+
+  @include bp-large-desktop {
+    font-size: to-rem(26);
+    line-height: to-rem(30);
+  }
 }
 
 @mixin font-title-h4 {
-  font-size: to-rem(20);
+  font-size: to-rem(18);
   font-weight: $font-weight-bold;
-  line-height: to-rem(22);
+  line-height: to-rem(20);
+
+  @include bp-desktop {
+    font-size: to-rem(18);
+    line-height: to-rem(20);
+  }
+
+  @include bp-desktop {
+    font-size: to-rem(20);
+    line-height: to-rem(22);
+  }
 }
 
 @mixin font-label {
@@ -71,4 +131,29 @@
   min-height: $size;
   min-width: $size;
   width: $size;
+}
+
+// Media breakpoints
+@mixin bp-phablet {
+  @media (min-width: $breakpoint-extra-small) {
+    @content;
+  }
+}
+
+@mixin bp-tablet {
+  @media (min-width: $breakpoint-small) {
+    @content;
+  }
+}
+
+@mixin bp-desktop {
+  @media (min-width: $breakpoint-medium) {
+    @content;
+  }
+}
+
+@mixin bp-large-desktop {
+  @media (min-width: $breakpoint-large) {
+    @content;
+  }
 }
