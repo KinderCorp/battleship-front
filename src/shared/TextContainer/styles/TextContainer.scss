@@ -1,0 +1,17 @@
+.text-container {
+  align-items: center;
+  background-color: $color-purple-dark-2;
+  border-radius: $border-radius;
+  display: flex;
+  justify-content: center;
+  min-width: to-rem(100);
+  padding: 0 to-rem(20);
+
+  &.text-container-height-small {
+    @include fixed-size(initial, to-rem(46));
+  }
+
+  &.text-container-height-medium {
+    @include fixed-size(initial, to-rem(60));
+  }
+}
