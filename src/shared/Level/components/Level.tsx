@@ -6,6 +6,13 @@ import type { ImageProps } from '@shared/Image/models';
 import type { LevelProps } from '@shared/Level/models';
 import useTranslation from '@hooks/useTranslation';
 
+// TODO?: replace multiple props by User props
+
+const propsImage: Pick<ImageProps, 'className' | 'objectFit'> = {
+  className: 'badge',
+  objectFit: 'contain',
+};
+
 /**
  * Level component.
  *
@@ -29,6 +36,7 @@ const Level = ({
     [className, size],
   );
 
+  // DELETE: remove useless logic to secure the both variables
   const newTotalXp = useMemo(() => Math.abs(Math.round(totalXp)), [totalXp]);
   let newCurrentXp = useMemo(() => Math.abs(Math.round(currentXp)), [currentXp]);
   newCurrentXp = useMemo(
@@ -44,11 +52,6 @@ const Level = ({
     (): string => (newTotalXp ? `${(newCurrentXp * 100) / newTotalXp}%` : '0%'),
     [newCurrentXp, newTotalXp],
   );
-
-  const propsImage: Pick<ImageProps, 'className' | 'objectFit'> = {
-    className: 'badge',
-    objectFit: 'contain',
-  };
 
   return (
     <div className={levelClassName} data-testid="level">

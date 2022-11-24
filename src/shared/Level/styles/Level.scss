@@ -44,8 +44,9 @@ $level-inset-shadow: to-rem(2);
       box-shadow: inset 0 to-rem(2) to-rem(3) rgba($color-purple-dark-2, 0.4);
       display: flex;
       justify-content: center;
-      position: relative;
       margin-left: calc($level-badge-large / -2);
+      overflow: hidden;
+      position: relative;
 
       .progress-bar-title {
         @include font-text-small;
