@@ -2,7 +2,7 @@ import classNames from 'clsx';
 import NextImage from 'next/image';
 import { useMemo } from 'react';
 
-import type { ImageProps } from '@shared/Image/constants';
+import type { ImageProps } from '@shared/Image/models';
 
 /**
  * Image component.
@@ -20,6 +20,7 @@ export const Image = ({
   src,
   width = 0,
 }: ImageProps): JSX.Element | null => {
+  // TODO: for the global refacto, use prefix like "image-fit-" for specific class inside components
   const imageClassName = useMemo(
     (): string => classNames('image', { [`image-fit-${objectFit}`]: !!objectFit }, className),
     [className, objectFit],
