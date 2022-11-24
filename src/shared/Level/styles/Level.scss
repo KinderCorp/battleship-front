@@ -8,73 +8,25 @@ $level-inset-shadow: to-rem(2);
   flex-direction: row;
 
   .badge {
+    @include font-text-small;
+
+    overflow: hidden;
     z-index: 1;
   }
 
   .progress-bar {
-    align-items: center;
-    background-color: $color-purple-dark;
-    border-radius: 0 $border-radius $border-radius 0;
-    box-shadow: inset 0 to-rem(2) to-rem(3) rgba($color-purple-dark-2, 0.4);
-    display: flex;
-    justify-content: center;
-    position: relative;
-
-    .progress-bar-title {
-      @include font-text-small;
-
-      left: 50%;
-      margin: 0;
-      position: absolute;
-      text-shadow: 0 to-rem(1.5) to-rem(2) $color-purple-dark;
-      top: 0;
-      transform: translate(-50%, -65%);
-      z-index: 1;
-    }
-
-    .progress-bar-value {
-      @include font-label-small;
-
-      margin: 0;
-      z-index: 1;
-    }
-
-    .progress-bar-background {
-      background-color: $color-purple;
-      border-radius: 0 $border-radius $border-radius 0;
-      box-shadow: inset 0 $level-inset-shadow calc($level-inset-shadow * 2) $color-pink,
-        inset 0 - $level-inset-shadow calc($level-inset-shadow * 2) $color-purple-dark;
-      height: 100%;
-      left: 0;
-      pointer-events: none;
-      position: absolute;
-      top: 0;
-
-      &::before {
-        @include light-reflection;
-      }
-    }
+    display: none;
   }
 
   &.small {
     .badge {
       @include fixed-size(to-rem(12));
     }
-
-    .progress-bar {
-      display: none;
-    }
   }
 
   &.medium {
     .badge {
       @include fixed-size($level-badge-medium);
-    }
-
-    .progress-bar {
-      @include fixed-size(to-rem(100), calc($level-badge-medium / 2));
-
-      margin-left: calc($level-badge-medium / -2);
     }
   }
 
@@ -86,7 +38,49 @@ $level-inset-shadow: to-rem(2);
     .progress-bar {
       @include fixed-size(to-rem(180), calc($level-badge-large / 2));
 
+      align-items: center;
+      background-color: $color-purple-dark;
+      border-radius: 0 $border-radius $border-radius 0;
+      box-shadow: inset 0 to-rem(2) to-rem(3) rgba($color-purple-dark-2, 0.4);
+      display: flex;
+      justify-content: center;
+      position: relative;
       margin-left: calc($level-badge-large / -2);
+
+      .progress-bar-title {
+        @include font-text-small;
+
+        left: 50%;
+        margin: 0;
+        position: absolute;
+        text-shadow: 0 to-rem(1.5) to-rem(2) $color-purple-dark;
+        top: 0;
+        transform: translate(-50%, -65%);
+        z-index: 1;
+      }
+
+      .progress-bar-value {
+        @include font-label-small;
+
+        margin: 0;
+        z-index: 1;
+      }
+
+      .progress-bar-background {
+        background-color: $color-purple;
+        border-radius: 0 $border-radius $border-radius 0;
+        box-shadow: inset 0 $level-inset-shadow calc($level-inset-shadow * 2) $color-pink,
+          inset 0 - $level-inset-shadow calc($level-inset-shadow * 2) $color-purple-dark;
+        height: 100%;
+        left: 0;
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+
+        &::before {
+          @include light-reflection;
+        }
+      }
     }
   }
 }

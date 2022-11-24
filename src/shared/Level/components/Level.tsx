@@ -1,7 +1,10 @@
 import classNames from 'clsx';
 import { useMemo } from 'react';
 
+import Image from '@shared/Image/components/Image';
+import type { ImageProps } from '@shared/Image/models';
 import type { LevelProps } from '@shared/Level/models';
+import useTranslation from '@hooks/useTranslation';
 
 /**
  * Level component.
@@ -10,75 +13,58 @@ import type { LevelProps } from '@shared/Level/models';
  * @return {JSX.Element}
  */
 const Level = ({
+  badgeSrc = '',
   className = '',
   currentXp = 0,
-  // rank = 0,
+  rank = 0,
   showProgressBar = false,
   size = 'medium',
   title = '',
   totalXp = 0,
 }: LevelProps): JSX.Element => {
-  /**
-   * Function to have the correct badge according to user level.
-   *
-   * @param {number | null} rank User rank
-   * @return {JSX.Element}
-   */
-  // const getImageLevel = (rank: number | null) : JSX.Element => {
-  //   switch(rank) {
-  //     case 1:
-  //       return <Image src={defaultBadge} alt={'rankBadge'} width={size == 'small' ? 12 : size == 'medium' ? 40 : 80} height={size == 'small' ? 12 : size == 'medium' ? 40 : 80}/>
-  //     case 2:
-  //       return <Image src={defaultBadge} alt={'rankBadge'} width={size == 'small' ? 12 : size == 'medium' ? 40 : 80} height={size == 'small' ? 12 : size == 'medium' ? 40 : 80}/>
-  //     case 3:
-  //       return <Image src={defaultBadge} alt={'rankBadge'} width={size == 'small' ? 12 : size == 'medium' ? 40 : 80} height={size == 'small' ? 12 : size == 'medium' ? 40 : 80}/>
-  //     case 4:
-  //       return <Image src={defaultBadge} alt={'rankBadge'} width={size == 'small' ? 12 : size == 'medium' ? 40 : 80} height={size == 'small' ? 12 : size == 'medium' ? 40 : 80}/>
-  //     case 5:
-  //       return <Image src={defaultBadge} alt={'rankBadge'} width={size == 'small' ? 12 : size == 'medium' ? 40 : 80} height={size == 'small' ? 12 : size == 'medium' ? 40 : 80}/>
-  //     case 6:
-  //       return <Image src={defaultBadge} alt={'rankBadge'} width={size == 'small' ? 12 : size == 'medium' ? 40 : 80} height={size == 'small' ? 12 : size == 'medium' ? 40 : 80}/>
-  //     case 7:
-  //       return <Image src={defaultBadge} alt={'rankBadge'} width={size == 'small' ? 12 : size == 'medium' ? 40 : 80} height={size == 'small' ? 12 : size == 'medium' ? 40 : 80}/>
-  //     case 8:
-  //       return <Image src={defaultBadge} alt={'rankBadge'} width={size == 'small' ? 12 : size == 'medium' ? 40 : 80} height={size == 'small' ? 12 : size == 'medium' ? 40 : 80}/>
-  //     case 9:
-  //       return <Image src={defaultBadge} alt={'rankBadge'} width={size == 'small' ? 12 : size == 'medium' ? 40 : 80} height={size == 'small' ? 12 : size == 'medium' ? 40 : 80}/>
-  //     case 10:
-  //       return <Image src={defaultBadge} alt={'rankBadge'} width={size == 'small' ? 12 : size == 'medium' ? 40 : 80} height={size == 'small' ? 12 : size == 'medium' ? 40 : 80}/>
-  //     default:
-  //       return <Image src={defaultBadge} alt={'rankBadge'} width={size == 'small' ? 12 : size == 'medium' ? 40 : 80} height={size == 'small' ? 12 : size == 'medium' ? 40 : 80}/>
-  //   }
-  // }
-
-  //   if (showProgressBar) {
-  //     return (
-  //       <div className="progress-bar-out">
-  //         <div className="progress-bar-in" style={{ width: getWidth(progress) + '%' }} />
-  //         <p>
-  //           {progress < 0 ? 0 : progress > 100 ? maxXp : progress} / {maxXp}
-  //         </p>
-  //       </div>
-  //     );
-  //   } else {
-  //     return <div></div>;
-  //   }
-  // };
+  const { translate } = useTranslation();
 
   const levelClassName = useMemo(
     (): string => classNames('level', size, className),
     [className, size],
   );
 
-  const progressValue = useMemo((): string => `${currentXp}/${totalXp}`, [currentXp, totalXp]);
-  const progressWidth = useMemo(
-    (): string => (totalXp ? `${(currentXp * 100) / totalXp}%` : '0%'),
-    [currentXp, totalXp],
+  const newTotalXp = useMemo(() => Math.abs(Math.round(totalXp)), [totalXp]);
+  let newCurrentXp = useMemo(() => Math.abs(Math.round(currentXp)), [currentXp]);
+  newCurrentXp = useMemo(
+    (): number => (newCurrentXp >= newTotalXp ? newTotalXp : newCurrentXp),
+    [newCurrentXp, newTotalXp],
   );
+
+  const progressValue = useMemo(
+    (): string => `${newCurrentXp}/${newTotalXp}`,
+    [newCurrentXp, newTotalXp],
+  );
+  const progressWidth = useMemo(
+    (): string => (newTotalXp ? `${(newCurrentXp * 100) / newTotalXp}%` : '0%'),
+    [newCurrentXp, newTotalXp],
+  );
+
+  const propsImage: Pick<ImageProps, 'className' | 'objectFit'> = {
+    className: 'badge',
+    objectFit: 'contain',
+  };
 
   return (
     <div className={levelClassName} data-testid="level">
-      <div className="badge">{/* Put image here */}</div>
+      {badgeSrc ? (
+        <Image
+          {...propsImage}
+          alt={translate('badge.level', { number: rank.toString() })}
+          src={badgeSrc}
+        />
+      ) : (
+        <Image
+          {...propsImage}
+          alt={translate('badge.level.unknow')}
+          src="/images/badges/badge-none.png"
+        />
+      )}
 
       {!!showProgressBar && (
         <div className="progress-bar">
