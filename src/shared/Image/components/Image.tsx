@@ -26,23 +26,22 @@ export const Image = ({
     [className, objectFit],
   );
 
-  const imageStyles = useMemo(
+  const imageSizes = useMemo(
     () => (!objectFit ? { height, width } : {}),
     [height, objectFit, width],
   );
 
-  if (!src) return null;
+  if (!src || !alt) return null;
 
   return (
-    <div className={imageClassName} data-testid="image" style={imageStyles}>
+    <div className={imageClassName} data-testid="image" style={imageSizes}>
       <NextImage
+        {...imageSizes}
         alt={alt}
         fill={!!objectFit}
-        height={height}
         priority={priority}
         sizes={sizes}
         src={src}
-        width={width}
       />
     </div>
   );
