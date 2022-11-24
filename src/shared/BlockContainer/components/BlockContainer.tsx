@@ -1,30 +1,45 @@
-import type { ButtonProps } from '@shared/Button/models';
-// import type { BlockContainerProps } from '@shared/BlockContainer/model';
-// import Icon from '@shared/Icon/components/Icon';
+import type { BlockContainerProps } from '@shared/BlockContainer/model';
+import classNames from 'clsx';
+import { COLORS } from '@core/constants';
+import { useMemo } from 'react';
+
+// import type { ButtonProps } from '@shared/Button/models';
+import Icon from '@shared/Icon/components/Icon';
 // import Button from '@shared/Button/components/Button';
 
 /**
  * BlockContainer component.
  *
- * @param {BlockContainer} props Props
+ * @param {BlockContainerProps} props Props
  * @return {JSX.Element}
  */
-// const BlockContainer = ({
-//     children = '',
-//     className = '',
-//     iconName = '',
-//     title = '',
-// });
+export const BlockContainer = ({
+    children = '',
+    className = '',
+    iconName = null,
+    title = '',
+}: BlockContainerProps): JSX.Element => {
 
-// const BlockContainerCompenent = ({ className, iconName, title }: BlockContainerProps): JSX.Element => {
-//     return (
-//         <>
-//         <BlockContainer  title="Partager ce lien à un ami" iconName="Share">
-//         {/* <TextContainer value="https://www.battleship.fr/join?code=8b1a292b05c946bc945b8d14a105dd5d" /> */}
-//         <Button onClick={} iconName="Copy" />
-//         </BlockContainer>
-//         </>
-//     );
-// )};
+    const blockContainerClassName = useMemo(
+        (): string =>
+          classNames('', className, {
+            'has-icon': !!iconName,
+          }),
+        [className, iconName],
+      );
 
-// export default BlockContainer;
+    return (
+        <>
+          <BlockContainer  className={blockContainerClassName} title={title} iconName="Share">
+            {iconName && (
+              <Icon borderColor={COLORS.TRANSPARENT} color={COLORS.PURPLE_LIGHT} name={iconName} />
+            )}
+            {/* <TextContainer value="https://www.battleship.fr/join?code=8b1a292b05c946bc945b8d14a105dd5d" /> */}
+            {/* <Button onClick={} iconName="Copy" /> */}
+          </BlockContainer>
+        </>
+    );
+};
+
+
+export default BlockContainer;

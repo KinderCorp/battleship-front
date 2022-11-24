@@ -3,8 +3,8 @@ import type { ReactNode } from 'react';
 
 
 export interface BlockContainerProps {
-    className? : 'string';
-    title?: 'string';
+    className? : string;
+    title?: string;
     children: ReactNode;
-    iconName?: IconName;
+    iconName?: IconName | null;
 }
