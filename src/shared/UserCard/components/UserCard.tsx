@@ -6,7 +6,6 @@ import { COLORS } from '@core/constants';
 import Icon from '@shared/Icon/components/Icon';
 import Image from '@shared/Image/components/Image';
 import Level from '@shared/Level/components/Level';
-import { USER_CARD_PREFIX } from '@shared/UserCard/constants';
 import type { UserCardProps } from '@shared/UserCard/models';
 import useTranslation from '@hooks/useTranslation';
 
@@ -25,6 +24,7 @@ export const UserCard = ({
   name = '',
   onClick,
   rank,
+  showLevel = true,
   size = 'large',
 }: UserCardProps): JSX.Element => {
   const { translate } = useTranslation();
@@ -32,9 +32,9 @@ export const UserCard = ({
   const userCardClassName = useMemo(
     (): string =>
       classNames(
-        USER_CARD_PREFIX,
-        `${USER_CARD_PREFIX}--size-${size}`,
-        `${USER_CARD_PREFIX}--direction-${direction}`,
+        'user-card',
+        `user-card--size-${size}`,
+        `user-card--direction-${direction}`,
         className,
       ),
     [className, direction, size],
@@ -43,31 +43,30 @@ export const UserCard = ({
   const levelSize = useMemo(() => (size === 'large' ? 'medium' : 'small'), [size]);
 
   return (
-    <div className={userCardClassName} data-testid={USER_CARD_PREFIX}>
-      <div className={`${USER_CARD_PREFIX}-content`}>
+    <div className={userCardClassName} data-testid="user-card">
+      <div className="user-card-content">
         {isLoading ? (
-          <Icon className={`${USER_CARD_PREFIX}-loader`} name="Loader" borderColor={COLORS.WHITE} />
+          <Icon className="user-card-loader" name="Loader" borderColor={COLORS.WHITE} />
         ) : (
           <>
-            <Level
-              badgeSrc={badgeSrc}
-              className={`${USER_CARD_PREFIX}-level`}
-              rank={rank}
-              size={levelSize}
-            />
-            <Image
-              alt={translate('skin', { name: 'Sam' })}
-              className={`${USER_CARD_PREFIX}-character`}
-              objectFit="cover"
-              src={characterSrc}
-            />
+            {!!showLevel && (
+              <Level badgeSrc={badgeSrc} className="user-card-level" rank={rank} size={levelSize} />
+            )}
+
+            <div className="user-card-character">
+              <Image
+                alt={translate('skin', { name: 'Sam' })}
+                objectFit="contain"
+                src={characterSrc}
+              />
+            </div>
           </>
         )}
       </div>
 
       {!!name && (
-        <div className={`${USER_CARD_PREFIX}-info`}>
-          <p className={`${USER_CARD_PREFIX}-name`}>{!isLoading ? name : translate('waiting')}</p>
+        <div className="user-card-info">
+          <p className="user-card-name">{!isLoading ? name : translate('waiting')}</p>
           {!!onClick && <Button iconName="Pen" onClick={onClick} size="small" style="none" />}
         </div>
       )}

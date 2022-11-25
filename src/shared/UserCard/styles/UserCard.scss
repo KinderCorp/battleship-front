@@ -1,0 +1,78 @@
+.user-card {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+  &.user-card--size-small {
+    .user-card-content {
+      @include fixed-size(to-rem(60));
+    }
+  }
+
+  &.user-card--size-large {
+    .user-card-content {
+      @include fixed-size(to-rem(200));
+    }
+  }
+
+  .user-card-content {
+    background: $color-gradient-radial-dark;
+    border-radius: $border-radius;
+    position: relative;
+
+    .user-card-level {
+      position: absolute;
+      top: to-rem(2);
+    }
+
+    .user-card-character {
+      bottom: 0;
+      height: 100%;
+      position: absolute;
+      width: 125%;
+
+      .image {
+        height: 100%;
+        width: 100%;
+
+        img {
+          object-position: left;
+        }
+      }
+    }
+  }
+
+  &.user-card--direction-left {
+    .user-card-level {
+      right: to-rem(6);
+    }
+
+    .user-card-character {
+      right: 0;
+      transform: scaleX(-1);
+    }
+  }
+
+  &.user-card--direction-right {
+    .user-card-level {
+      left: to-rem(6);
+    }
+
+    .user-card-character {
+      left: 0;
+    }
+  }
+
+  .user-card-info {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin-top: to-rem(20);
+
+    .user-card-name {
+      @include font-title-h4;
+
+      margin: 0 to-rem(8) 0 0;
+    }
+  }
+}

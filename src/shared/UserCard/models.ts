@@ -13,6 +13,7 @@ export interface UserCardProps extends Pick<LevelProps, 'badgeSrc' | 'rank'> {
   direction?: UserCardDirection;
   isLoading?: boolean;
   name?: string;
+  showLevel?: boolean;
   size?: UserCardSize;
   onClick?: (event: SyntheticEvent<EventTarget>) => void;
 }
