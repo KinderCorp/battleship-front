@@ -1,8 +1,9 @@
 import type { ImageProps } from '@shared/Image/models';
+import type { IntRange } from '@core/models';
 
 export type LevelSize = 'small' | 'medium' | 'large';
 
-export type LevelRank = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+export type LevelRank = IntRange<0, 11>;
 
 export interface LevelProps {
   className?: string;
