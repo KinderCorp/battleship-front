@@ -7,14 +7,12 @@ export type UserCardDirection = 'left' | 'right';
 
 export type UserCardSize = 'large' | 'small';
 
-// TODO: replace some props by User props when is defined
 export interface UserCardProps extends Pick<LevelProps, 'badgeSrc' | 'rank'> {
+  characterSrc: ImageProps['src'];
   className?: string;
   direction?: UserCardDirection;
-  isEditing?: boolean;
   isLoading?: boolean;
   name?: string;
-  skinSrc: ImageProps['src'];
   size?: UserCardSize;
-  onClick: (event: SyntheticEvent<EventTarget>) => void;
+  onClick?: (event: SyntheticEvent<EventTarget>) => void;
 }

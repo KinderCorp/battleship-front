@@ -17,16 +17,15 @@ import useTranslation from '@hooks/useTranslation';
  * @return {JSX.Element}
  */
 export const UserCard = ({
-  badgeSrc = '',
+  badgeSrc,
+  characterSrc,
   className = '',
   direction = 'right',
-  isEditing = false,
   isLoading = false,
   name = '',
   onClick,
-  // rank = 1,
+  rank,
   size = 'large',
-  skinSrc,
 }: UserCardProps): JSX.Element => {
   const { translate } = useTranslation();
 
@@ -35,7 +34,7 @@ export const UserCard = ({
       classNames(
         USER_CARD_PREFIX,
         `${USER_CARD_PREFIX}--size-${size}`,
-        `${USER_CARD_PREFIX}--size-${direction}`,
+        `${USER_CARD_PREFIX}--direction-${direction}`,
         className,
       ),
     [className, direction, size],
@@ -50,11 +49,17 @@ export const UserCard = ({
           <Icon className={`${USER_CARD_PREFIX}-loader`} name="Loader" borderColor={COLORS.WHITE} />
         ) : (
           <>
-            <Level badgeSrc={badgeSrc} className={`${USER_CARD_PREFIX}-level`} size={levelSize} />
+            <Level
+              badgeSrc={badgeSrc}
+              className={`${USER_CARD_PREFIX}-level`}
+              rank={rank}
+              size={levelSize}
+            />
             <Image
               alt={translate('skin', { name: 'Sam' })}
               className={`${USER_CARD_PREFIX}-character`}
-              src={skinSrc}
+              objectFit="cover"
+              src={characterSrc}
             />
           </>
         )}
@@ -62,8 +67,8 @@ export const UserCard = ({
 
       {!!name && (
         <div className={`${USER_CARD_PREFIX}-info`}>
-          <p className={`${USER_CARD_PREFIX}-name`}>{name}</p>
-          {!!isEditing && <Button iconName="Pen" onClick={onClick} size="small" style="none" />}
+          <p className={`${USER_CARD_PREFIX}-name`}>{!isLoading ? name : translate('waiting')}</p>
+          {!!onClick && <Button iconName="Pen" onClick={onClick} size="small" style="none" />}
         </div>
       )}
     </div>
