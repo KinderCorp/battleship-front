@@ -125,10 +125,7 @@ $button-size-small: to-rem(30);
 
   &.is-loading {
     .button-loader {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      @include center-element;
     }
 
     .button-content {
