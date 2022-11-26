@@ -23,6 +23,7 @@ export const UserCard = ({
   isLoading = false,
   name = '',
   onClick,
+  priority,
   rank,
   showLevel = true,
   size = 'large',
@@ -57,6 +58,8 @@ export const UserCard = ({
               <Image
                 alt={translate('skin', { name: 'Sam' })}
                 objectFit="contain"
+                priority={priority}
+                sizes="250px" // TODO: dynamize image sizes
                 src={characterSrc}
               />
             </div>

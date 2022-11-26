@@ -30,6 +30,19 @@
     }
   }
 
+  .user-card-info {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin-top: to-rem(20);
+
+    .user-card-name {
+      @include font-title-h4;
+
+      margin: 0 to-rem(8) 0 0;
+    }
+  }
+
   &.user-card--size-small {
     .user-card-content {
       @include fixed-size(to-rem(60));
@@ -60,19 +73,6 @@
 
     .user-card-character {
       left: 0;
-    }
-  }
-
-  .user-card-info {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    margin-top: to-rem(20);
-
-    .user-card-name {
-      @include font-title-h4;
-
-      margin: 0 to-rem(8) 0 0;
     }
   }
 }
