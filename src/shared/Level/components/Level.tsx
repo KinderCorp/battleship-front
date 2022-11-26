@@ -8,9 +8,10 @@ import useTranslation from '@hooks/useTranslation';
 
 // TODO?: replace multiple props by User props
 
-const propsImage: Pick<ImageProps, 'className' | 'objectFit'> = {
+const propsImage: Pick<ImageProps, 'className' | 'objectFit' | 'sizes'> = {
   className: 'badge',
   objectFit: 'contain',
+  sizes: '40px',
 };
 
 /**
@@ -23,6 +24,7 @@ const Level = ({
   badgeSrc = '',
   className = '',
   currentXp = 0,
+  priority,
   rank = 1,
   showProgressBar = false,
   size = 'medium',
@@ -59,12 +61,14 @@ const Level = ({
         <Image
           {...propsImage}
           alt={translate('badge.level', { number: rank.toString() })}
+          priority={priority}
           src={badgeSrc}
         />
       ) : (
         <Image
           {...propsImage}
           alt={translate('badge.level.unknown')}
+          priority={priority}
           src="/images/badges/badge-none.png"
         />
       )}
