@@ -41,8 +41,6 @@
     margin-top: to-rem(20);
 
     .user-card-name {
-      @include font-title-h4;
-
       margin: 0 to-rem(8) 0 0;
     }
   }
@@ -51,11 +49,21 @@
     .user-card-content {
       @include fixed-size(to-rem(60));
     }
+
+    .user-card-name {
+      @include font-text-small;
+
+      font-weight: $font-weight-bold;
+    }
   }
 
   &.user-card--size-large {
     .user-card-content {
       @include fixed-size(to-rem(200));
+    }
+
+    .user-card-name {
+      @include font-title-h4;
     }
   }
 

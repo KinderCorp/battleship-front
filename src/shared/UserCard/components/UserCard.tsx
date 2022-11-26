@@ -17,15 +17,16 @@ import useTranslation from '@hooks/useTranslation';
  */
 export const UserCard = ({
   badgeSrc,
+  characterName = '',
   characterSrc,
   className = '',
   direction = 'right',
+  hideLevel = false,
   isLoading = false,
   name = '',
   onClick,
   priority,
   rank,
-  showLevel = true,
   size = 'large',
 }: UserCardProps): JSX.Element => {
   const { translate } = useTranslation();
@@ -57,14 +58,14 @@ export const UserCard = ({
           />
         ) : (
           <>
-            {!!showLevel && (
+            {!hideLevel && (
               <Level badgeSrc={badgeSrc} className="user-card-level" rank={rank} size={levelSize} />
             )}
 
-            {!!characterSrc && (
+            {!!characterSrc && !!characterName && (
               <div className="user-card-character">
                 <Image
-                  alt={translate('skin', { name: 'Sam' })}
+                  alt={translate('skin', { name: characterName })}
                   objectFit="contain"
                   priority={priority}
                   // TODO: dynamize image sizes
