@@ -28,6 +28,10 @@
         }
       }
     }
+
+    .user-card-loader {
+      @include center-element;
+    }
   }
 
   .user-card-info {
@@ -73,6 +77,12 @@
 
     .user-card-character {
       left: 0;
+    }
+  }
+
+  &.user-card--is-loading {
+    .user-card-name {
+      opacity: 0.7;
     }
   }
 }

@@ -10,7 +10,7 @@ export type UserCardSize = 'large' | 'small';
 export interface UserCardProps
   extends Pick<LevelProps, 'badgeSrc' | 'rank'>,
     Pick<ImageProps, 'priority'> {
-  characterSrc: ImageProps['src'];
+  characterSrc?: ImageProps['src'];
   className?: string;
   direction?: UserCardDirection;
   isLoading?: boolean;

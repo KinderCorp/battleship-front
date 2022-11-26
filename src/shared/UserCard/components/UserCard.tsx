@@ -36,33 +36,43 @@ export const UserCard = ({
         'user-card',
         `user-card--size-${size}`,
         `user-card--direction-${direction}`,
+        { [`user-card--is-loading`]: !!isLoading },
         className,
       ),
-    [className, direction, size],
+    [className, direction, isLoading, size],
   );
 
   const levelSize = useMemo(() => (size === 'large' ? 'medium' : 'small'), [size]);
+  const loaderSize = useMemo(() => (size === 'large' ? 'large' : 'medium'), [size]);
 
   return (
     <div className={userCardClassName} data-testid="user-card">
       <div className="user-card-content">
         {isLoading ? (
-          <Icon className="user-card-loader" name="Loader" borderColor={COLORS.WHITE} />
+          <Icon
+            className="user-card-loader"
+            name="Loader"
+            borderColor={COLORS.WHITE}
+            size={loaderSize}
+          />
         ) : (
           <>
             {!!showLevel && (
               <Level badgeSrc={badgeSrc} className="user-card-level" rank={rank} size={levelSize} />
             )}
 
-            <div className="user-card-character">
-              <Image
-                alt={translate('skin', { name: 'Sam' })}
-                objectFit="contain"
-                priority={priority}
-                sizes="250px" // TODO: dynamize image sizes
-                src={characterSrc}
-              />
-            </div>
+            {!!characterSrc && (
+              <div className="user-card-character">
+                <Image
+                  alt={translate('skin', { name: 'Sam' })}
+                  objectFit="contain"
+                  priority={priority}
+                  // TODO: dynamize image sizes
+                  sizes="250px"
+                  src={characterSrc}
+                />
+              </div>
+            )}
           </>
         )}
       </div>
