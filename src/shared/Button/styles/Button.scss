@@ -24,40 +24,6 @@ $button-size-small: to-rem(30);
   position: relative;
   white-space: nowrap;
 
-  &.has-text {
-    padding: 0 to-rem(30);
-  }
-
-  &.large {
-    height: $button-size-large;
-    max-height: $button-size-large;
-    min-width: $button-size-large;
-
-    &:not(.has-text) {
-      max-width: $button-size-large;
-    }
-  }
-
-  &.medium {
-    height: $button-size-medium;
-    max-height: $button-size-medium;
-    min-width: $button-size-medium;
-
-    &:not(.has-text) {
-      max-width: $button-size-medium;
-    }
-  }
-
-  &.small {
-    height: $button-size-small;
-    max-height: $button-size-small;
-    min-width: $button-size-small;
-
-    &:not(.has-text) {
-      max-width: $button-size-small;
-    }
-  }
-
   &:not(.none) {
     &::before {
       @include light-reflection;
@@ -76,6 +42,45 @@ $button-size-small: to-rem(30);
       width: to-rem(6);
       filter: blur(to-rem(0.5));
     }
+
+    &.has-text {
+      padding: 0 to-rem(30);
+    }
+
+    &.medium {
+      height: $button-size-medium;
+      max-height: $button-size-medium;
+      min-width: $button-size-medium;
+
+      &:not(.has-text) {
+        max-width: $button-size-medium;
+      }
+    }
+
+    &.small {
+      height: $button-size-small;
+      max-height: $button-size-small;
+      min-width: $button-size-small;
+
+      &:not(.has-text) {
+        max-width: $button-size-small;
+      }
+    }
+
+    &.large {
+      height: $button-size-large;
+      max-height: $button-size-large;
+      min-width: $button-size-large;
+
+      &:not(.has-text) {
+        max-width: $button-size-large;
+      }
+    }
+  }
+
+  &.none {
+    color: $color-white;
+    padding: 0;
   }
 
   &.primary {
