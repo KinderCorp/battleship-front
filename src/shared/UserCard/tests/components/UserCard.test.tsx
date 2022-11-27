@@ -55,7 +55,7 @@ describe('shared/components/UserCard', () => {
     expect(localProps.onClick).toBeCalledTimes(1);
   });
 
-  it('should render the component for logged player', async () => {
+  it('should render the component for logged player', () => {
     const localProps: UserCardProps = {
       badgeSrc: '/images/image-test-badge.png',
       characterName: 'Warrior',
@@ -64,9 +64,7 @@ describe('shared/components/UserCard', () => {
       rank: 2,
     };
 
-    await act(async () => {
-      render(<UserCard {...localProps} />);
-    });
+    render(<UserCard {...localProps} />);
 
     const userCard = screen.getByTestId('user-card');
     const levelImage = screen.getAllByTestId('image')[0];
@@ -76,5 +74,79 @@ describe('shared/components/UserCard', () => {
     expect(levelImageElement).toHaveAccessibleName(translate('badge.level', { number: '2' }));
     expect(userCard.querySelector('.user-card-name')).toHaveTextContent('John Doe');
     expect(userCard.querySelector('.user-card-info .button')).not.toBeInTheDocument();
+  });
+
+  it('should render the component with another class name', () => {
+    const localProps: UserCardProps = {
+      className: 'user-card-other-class',
+    };
+
+    render(<UserCard {...localProps} />);
+
+    const userCard = screen.getByTestId('user-card');
+
+    expect(userCard).toBeInTheDocument();
+    expect(userCard).toHaveClass(
+      'user-card user-card--size-large user-card--direction-right user-card-other-class',
+    );
+  });
+
+  it('should render the component with another direction', () => {
+    const localProps: UserCardProps = {
+      direction: 'left',
+    };
+
+    render(<UserCard {...localProps} />);
+
+    const userCard = screen.getByTestId('user-card');
+
+    expect(userCard).toBeInTheDocument();
+    expect(userCard).toHaveClass('user-card user-card--size-large user-card--direction-left');
+  });
+
+  it('should render the component with another size', () => {
+    const localProps: UserCardProps = {
+      size: 'small',
+    };
+
+    render(<UserCard {...localProps} />);
+
+    const userCard = screen.getByTestId('user-card');
+
+    expect(userCard).toBeInTheDocument();
+    expect(userCard).toHaveClass('user-card user-card--size-small user-card--direction-right');
+  });
+
+  it('should render the component when is loading', async () => {
+    const localProps: UserCardProps = {
+      isLoading: true,
+      onClick: jest.fn(),
+    };
+
+    await act(async () => {
+      render(<UserCard {...localProps} />);
+    });
+
+    const userCard = screen.getByTestId('user-card');
+    const iconLoader = screen.getByTestId('icon-loader');
+    const button = userCard.querySelector('.button');
+
+    expect(userCard).toBeInTheDocument();
+    expect(userCard).toContainElement(iconLoader);
+    expect(button).not.toBeInTheDocument();
+  });
+
+  it('should render the component without level', () => {
+    const localProps: UserCardProps = {
+      hideLevel: true,
+    };
+
+    render(<UserCard {...localProps} />);
+
+    const userCard = screen.getByTestId('user-card');
+    const level = userCard.querySelector('.level');
+
+    expect(userCard).toBeInTheDocument();
+    expect(level).not.toBeInTheDocument();
   });
 });

@@ -81,7 +81,9 @@ export const UserCard = ({
       {!!name && (
         <div className="user-card-info">
           <p className="user-card-name">{!isLoading ? name : translate('waiting')}</p>
-          {!!onClick && <Button iconName="Pen" onClick={onClick} size="small" style="none" />}
+          {!!onClick && !isLoading && (
+            <Button iconName="Pen" onClick={onClick} size="small" style="none" />
+          )}
         </div>
       )}
     </div>
