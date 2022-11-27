@@ -6,8 +6,6 @@ import type { ImageProps } from '@shared/Image/models';
 import type { LevelProps } from '@shared/Level/models';
 import useTranslation from '@hooks/useTranslation';
 
-// TODO?: replace multiple props by User props
-
 const propsImage: Pick<ImageProps, 'className' | 'objectFit' | 'sizes'> = {
   className: 'badge',
   objectFit: 'contain',
