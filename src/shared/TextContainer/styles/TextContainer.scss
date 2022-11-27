@@ -1,0 +1,19 @@
+.text-container {
+  @include fixed-size(initial, to-rem(60));
+
+  align-items: center;
+  background-color: $color-purple-dark-2;
+  border-radius: $border-radius;
+  display: flex;
+  margin: 0;
+  min-width: to-rem(100);
+  padding: 0 to-rem(20);
+
+  .text-container-value {
+    @include font-text;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
