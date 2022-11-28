@@ -9,7 +9,7 @@ import type { TitleProps } from '@shared/Title/models';
  * Title component.
  *
  * @param {TitleProps} props Props
- * @return {JSX.Element}
+ * @return {JSX.Element|null}
  */
 export const Title = ({
   className = '',
@@ -17,7 +17,7 @@ export const Title = ({
   subTitle = '',
   title,
   type = 'h2',
-}: TitleProps): JSX.Element => {
+}: TitleProps): JSX.Element | null => {
   const TitleComponent = useMemo(() => (type === 'none' ? 'p' : type), [type]);
 
   const titleContainerClassName = useMemo(
@@ -29,6 +29,8 @@ export const Title = ({
   );
 
   const titleClassName = useMemo((): string => classNames('title', type), [type]);
+
+  if (!title) return null;
 
   return (
     <div className={titleContainerClassName} data-testid="title">
