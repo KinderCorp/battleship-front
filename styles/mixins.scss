@@ -123,6 +123,14 @@
   animation: keyframes-bounce 0.25s ease-out;
 }
 
+// Element position
+@mixin center-element {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 // Size
 @mixin fixed-size($width, $height: $width) {
   height: $height;

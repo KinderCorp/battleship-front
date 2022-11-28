@@ -2,6 +2,7 @@
   "extends": ["stylelint-config-standard-scss", "stylelint-prettier/recommended"],
   "rules": {
     "at-rule-no-vendor-prefix": null,
-    "property-no-vendor-prefix": null
+    "property-no-vendor-prefix": null,
+    "selector-class-pattern": "^[0-9A-Za-z-]+$"
   }
 }

@@ -3,9 +3,9 @@ import type { IntRange } from '@core/models';
 
 export type LevelSize = 'small' | 'medium' | 'large';
 
-export type LevelRank = IntRange<0, 11>;
+export type LevelRank = IntRange<1, 11>;
 
-export interface LevelProps {
+export interface LevelProps extends Pick<ImageProps, 'priority'> {
   className?: string;
   badgeSrc?: ImageProps['src'];
   currentXp?: number;

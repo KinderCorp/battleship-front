@@ -23,6 +23,11 @@ $color-gradient-linear: linear-gradient(
     rgba($color-purple, 0.6) 99.95%
   ),
   $color-purple-dark;
+$color-gradient-radial-dark: radial-gradient(
+  50% 50% at 50% 50%,
+  $color-purple-dark 0%,
+  $color-purple-dark-2 100%
+);
 
 // Breakpoints
 $breakpoint-large: 1300px;

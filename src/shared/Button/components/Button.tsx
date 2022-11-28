@@ -48,6 +48,8 @@ const Button = ({
     [disabled, style],
   );
 
+  const iconSize = useMemo(() => (size === 'small' ? 'small' : undefined), [size]);
+
   return (
     <button
       className={buttonClassName}
@@ -61,7 +63,12 @@ const Button = ({
       {(iconName || children) && (
         <div className="button-content">
           {iconName && (
-            <Icon borderColor={iconStyle.borderColor} color={iconStyle.color} name={iconName} />
+            <Icon
+              borderColor={iconStyle.borderColor}
+              color={iconStyle.color}
+              name={iconName}
+              size={iconSize}
+            />
           )}
           {children && <div className="button-content-text">{children}</div>}
         </div>
