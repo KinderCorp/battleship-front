@@ -1,0 +1,18 @@
+.block-container {
+  background-color: $color-purple-dark;
+  border-radius: $border-radius;
+  overflow: hidden;
+  padding: to-rem(20);
+
+  @include bp-phablet {
+    padding: to-rem(40);
+  }
+
+  .block-container-title {
+    margin-bottom: to-rem(20);
+
+    @include bp-phablet {
+      margin-bottom: to-rem(30);
+    }
+  }
+}
