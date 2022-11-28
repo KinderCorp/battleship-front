@@ -11,3 +11,14 @@ input {
   outline: none;
   border: none;
 }
+
+#main {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 100vh;
+  position: relative;
+  width: 100vw;
+  overflow: hidden auto;
+}
