@@ -1,9 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux';
-
-import { decrement, increment } from '@home/reducer';
-import { getHelloWorld } from '@home/actions';
-import { selectHomeValue } from '@home/selectors';
-import socket from '@core/socket';
+import Button from '@shared/Button/components/Button';
+import Image from '@shared/Image/components/Image';
+import useTranslation from '@hooks/useTranslation';
 
 /**
  * Home page component.
@@ -11,26 +8,37 @@ import socket from '@core/socket';
  * @return {JSX.Element}
  */
 const HomePage = (): JSX.Element => {
-  const value = useSelector(selectHomeValue);
-  const dispatch = useDispatch();
+  const { translate } = useTranslation();
 
-  /**
-   * Socket test.
-   */
-  const socketTest = () => {
-    socket.emit('UserJoin', `Coucou ${value}`)
-  }
+  // const socketTest = () => {
+  //   socket.emit('UserJoin', `Coucou ${value}`);
+  // };
 
   return (
-    <>
-      <h1>HomePage</h1>
-      <hr />
-      <button onClick={() => dispatch(decrement())}>-</button>
-      <button onClick={() => dispatch(increment())}>+</button>
-      <p data-testid="container-value">{value}</p>
-      <button onClick={getHelloWorld}>Lancer la requête</button>
-      <button onClick={socketTest}>Tester le socket</button>
-    </>
+    <div className="page-home">
+      <Button
+        className="login"
+        iconName="People"
+        onClick={() => null}
+        size="large"
+        style="secondary"
+      />
+
+      <div className="content">
+        <Image
+          alt={translate('battleship-logo')}
+          className="content-logo"
+          objectFit="contain"
+          priority
+          src="/images/logo.png"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
+
+        <Button className="content-play" onClick={() => null} size="large">
+          {translate('create-game')}
+        </Button>
+      </div>
+    </div>
   );
 };
 

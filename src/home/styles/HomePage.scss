@@ -1,0 +1,54 @@
+.page-home {
+  background: $color-gradient-radial-dark;
+  height: 100vh;
+  width: 100vw;
+
+  .button.login {
+    position: fixed;
+    right: to-rem(10);
+    top: to-rem(20);
+
+    @include bp-phablet {
+      right: to-rem(20);
+    }
+
+    @include bp-desktop {
+      right: to-rem(40);
+      top: to-rem(30);
+    }
+  }
+
+  .content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    .content-logo {
+      height: 30vh;
+      margin-bottom: 15vh;
+      max-width: to-rem(1400);
+      min-height: to-rem(200);
+      min-width: to-rem(200);
+      width: 90vw;
+
+      @include bp-phablet {
+        width: 80vw;
+        height: 30vh;
+        min-height: to-rem(150);
+        margin-bottom: 15vh;
+      }
+
+      @include bp-desktop {
+        width: 70vw;
+      }
+
+      @include bp-large-desktop {
+        width: 60vw;
+      }
+    }
+  }
+}
