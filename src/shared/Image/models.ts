@@ -7,7 +7,7 @@ export type ImageObjectFit = 'contain' | 'cover' | 'fill';
 export interface ImageProps extends Omit<NextImageProps, 'sizes'> {
   className?: string;
   objectFit?: ImageObjectFit | null;
-  sizes: ImageSizes;
+  sizes?: ImageSizes;
 }
 
 export type ImageSizes = Partial<Record<Breakpoints, string>>;
