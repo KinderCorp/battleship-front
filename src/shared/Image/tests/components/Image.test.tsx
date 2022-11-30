@@ -34,7 +34,7 @@ describe('shared/components/Image', () => {
     const props: ImageProps = {
       alt: 'image-test-fixed',
       height: 80,
-      sizes: '80px',
+      // sizes: '80px',
       src: '/images/my-test-image.png',
       width: 80,
     };
@@ -52,7 +52,7 @@ describe('shared/components/Image', () => {
     expect(imageElement).toHaveAttribute('draggable', 'false');
     expect(imageElement).toHaveAttribute('height', '80');
     expect(imageElement).toHaveAttribute('width', '80');
-    expect(imageElement).toHaveAttribute('sizes', '80px');
+    // expect(imageElement).toHaveAttribute('sizes', '80px');
   });
 
   it('should renders the component with responsive image', () => {
