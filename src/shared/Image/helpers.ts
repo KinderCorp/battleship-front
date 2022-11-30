@@ -1,22 +1,21 @@
-export {};
-// import type { BreakpointsSizes } from '@shared/Image/models';
-// /**
-//  * Return a string that provides information about how wide the image will be at different breakpoints.
-//  *
-//  * @param {BreakpointsSizes} sizes Breakpoints sizes
-//  * @return {string}
-//  */
-// export const getSizesFormated = (sizes: BreakpointsSizes): string => {
-//   let str: string;
+import { BREAKPOINTS } from '@core/constants';
+import type { ImageSizes } from '@shared/Image/models';
 
-//   str += '(min-width: 768px) 100vw';
-// };
+/**
+ * Return a string that provides information about how wide the image will be at different breakpoints.
+ *
+ * @param {ImageSizes} sizes Breakpoints image sizes
+ * @return {string}
+ */
+export const getSizesFormated = (sizes: ImageSizes): string => {
+  const sizesFormated = [];
 
-/*
-{
-  'default': '40px',
-  'desktop': '80vw
-}
+  if (sizes.default) sizesFormated.push(`${sizes.default}`);
+  if (sizes.phablet) sizesFormated.push(`(min-width: ${BREAKPOINTS.PHABLET}) ${sizes.phablet}`);
+  if (sizes.tablet) sizesFormated.push(`(min-width: ${BREAKPOINTS.TABLET}) ${sizes.tablet}`);
+  if (sizes.desktop) sizesFormated.push(`(min-width: ${BREAKPOINTS.DESKTOP}) ${sizes.desktop}`);
+  if (sizes['large-desktop'])
+    sizesFormated.push(`(min-width: ${BREAKPOINTS.LARGE_DESKTOP}) ${sizes['large-desktop']}`);
 
-=> "40px, (min-width: 1024px) 80vw"
-*/
+  return sizesFormated.join(', ');
+};

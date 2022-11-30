@@ -2,6 +2,7 @@ import classNames from 'clsx';
 import NextImage from 'next/image';
 import { useMemo } from 'react';
 
+import { getSizesFormated } from '@shared/Image/helpers';
 import type { ImageProps } from '@shared/Image/models';
 
 /**
@@ -16,7 +17,7 @@ export const Image = ({
   height = 0,
   objectFit = null,
   priority = false,
-  sizes = '',
+  sizes = {},
   src,
   width = 0,
 }: ImageProps): JSX.Element | null => {
@@ -26,22 +27,20 @@ export const Image = ({
     [className, objectFit],
   );
 
-  const imageSizes = useMemo(
-    () => (!objectFit ? { height, width } : {}),
-    [height, objectFit, width],
-  );
+  const size = useMemo(() => (!objectFit ? { height, width } : {}), [height, objectFit, width]);
+  const sizesFormated = useMemo(() => getSizesFormated(sizes), [sizes]);
 
   if (!src || !alt) return null;
 
   return (
     <div className={imageClassName} data-testid="image">
       <NextImage
-        {...imageSizes}
+        {...size}
         draggable="false"
         alt={alt}
         fill={!!objectFit}
         priority={priority}
-        sizes={sizes}
+        sizes={sizesFormated}
         src={src}
       />
     </div>

@@ -4,6 +4,7 @@
   width: 100vw;
 
   .button.login {
+    z-index: 10;
     position: fixed;
     right: to-rem(10);
     top: to-rem(20);
@@ -19,13 +20,11 @@
   }
 
   .content {
+    @include center-element;
+
     align-items: center;
     display: flex;
     flex-direction: column;
-    left: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
 
     .content-logo {
       height: 30vh;

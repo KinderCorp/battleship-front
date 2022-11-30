@@ -17,8 +17,8 @@ export const COLORS = {
 };
 
 export const BREAKPOINTS = {
-  DESKTOP: '1024px',
-  LARGE_DESKTOP: '1300px',
-  PHABLET: '480px',
-  TABLET: '768px',
+  DESKTOP: 1024,
+  LARGE_DESKTOP: 1300,
+  PHABLET: 480,
+  TABLET: 768,
 };
