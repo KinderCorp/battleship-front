@@ -68,8 +68,9 @@ export const UserCard = ({
                   alt={translate('skin', { name: characterName })}
                   objectFit="contain"
                   priority={priority}
-                  // TODO: dynamize image sizes
-                  // sizes="250px"
+                  sizes={{
+                    default: '250px',
+                  }}
                   src={characterSrc}
                 />
               </div>

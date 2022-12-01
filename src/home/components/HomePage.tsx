@@ -31,7 +31,12 @@ const HomePage = (): JSX.Element => {
           objectFit="contain"
           priority
           src="/images/logo.png"
-          // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          sizes={{
+            default: '90vw',
+            desktop: '70vw',
+            'large-desktop': '60vw',
+            phablet: '80vw',
+          }}
         />
 
         <Button className="content-play" onClick={() => null} size="large">
