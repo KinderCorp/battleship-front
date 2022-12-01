@@ -11,6 +11,7 @@ const filename = fileURLToPath(import.meta.url);
 const nextConfig = {
   publicRuntimeConfig: {
     API_URL: process.env.API_URL,
+    SOCKETS_URL: process.env.SOCKETS_URL,
   },
   reactStrictMode: true,
   sassOptions: {
