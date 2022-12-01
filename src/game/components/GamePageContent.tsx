@@ -14,10 +14,26 @@ import useTranslation from '@hooks/useTranslation';
  * @return {JSX.Element}
  */
 const GamePageContent = (): JSX.Element => {
-  const [shareUrl, setShareUrl] = useState('');
+  const [shareLink, setShareLink] = useState('');
+  const [clickedButtonCopy, setClickedButtonCopy] = useState(false);
+
   const { translate } = useTranslation();
 
-  useEffect(() => setShareUrl(UrlHelpers.getUrl()), []);
+  useEffect(() => setShareLink(UrlHelpers.getUrl()), []);
+
+  /**
+   * Copy share link.
+   *
+   * @return {void}
+   */
+  const handleCopyShareLink = (): void => {
+    navigator.clipboard.writeText(shareLink);
+    setClickedButtonCopy(true);
+
+    setTimeout(() => {
+      setClickedButtonCopy(false);
+    }, 1000);
+  };
 
   return (
     <div className="page-game">
@@ -43,9 +59,17 @@ const GamePageContent = (): JSX.Element => {
           iconName="Share"
           title={translate('share-to-friend')}
         >
-          <TextContainer value={shareUrl} />
-          <Button iconName="Copy" onClick={() => null} style="secondary" size="large" />
+          <TextContainer value={shareLink} />
+          <Button
+            iconName={clickedButtonCopy ? 'Check' : 'Copy'}
+            onClick={handleCopyShareLink}
+            isDisabled={clickedButtonCopy}
+            style="secondary"
+            size="large"
+          />
         </BlockContainer>
+
+        <BlockContainer className="players">cc</BlockContainer>
       </div>
     </div>
   );

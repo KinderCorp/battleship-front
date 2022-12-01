@@ -3,7 +3,9 @@
   width: 100vw;
 
   .content {
+    display: grid;
     padding: to-rem(100) 20%;
+    row-gap: to-rem(30);
 
     .share-link {
       .block-container-content {
@@ -12,6 +14,10 @@
 
         .text-container {
           margin-right: to-rem(10);
+        }
+
+        .button:not(.is-disabled) {
+          border-color: $color-purple-dark-2;
         }
       }
     }
