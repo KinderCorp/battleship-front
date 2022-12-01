@@ -3,11 +3,11 @@ import Image from '@shared/Image/components/Image';
 import useTranslation from '@hooks/useTranslation';
 
 /**
- * Home page component.
+ * Home page content.
  *
  * @return {JSX.Element}
  */
-const HomePage = (): JSX.Element => {
+const HomePageContent = (): JSX.Element => {
   const { translate } = useTranslation();
 
   // const socketTest = () => {
@@ -47,4 +47,4 @@ const HomePage = (): JSX.Element => {
   );
 };
 
-export default HomePage;
+export default HomePageContent;

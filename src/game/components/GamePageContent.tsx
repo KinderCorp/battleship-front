@@ -2,7 +2,7 @@ import Header from '@shared/Header/components/Header';
 import useTranslation from '@hooks/useTranslation';
 
 /**
- * Game page content component.
+ * Game page content.
  *
  * @return {JSX.Element}
  */

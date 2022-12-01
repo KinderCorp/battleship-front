@@ -1,7 +1,7 @@
 import type { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
 import GamePageContent from '@game/components/GamePageContent';
-import type { GamePageContentProps } from '@src/game/models';
+import type { GamePageContentProps } from '@game/models';
 import Layout from '@shared/Layout/components/Layout';
 
 export type GamePageParams = {
