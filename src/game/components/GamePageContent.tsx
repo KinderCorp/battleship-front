@@ -1,13 +1,19 @@
-import type { GamePageContentProps } from '@game/models';
+import Header from '@shared/Header/components/Header';
+import useTranslation from '@hooks/useTranslation';
 
 /**
  * Game page content component.
  *
- * @param {GamePageContentProps} props Props
  * @return {JSX.Element}
  */
-const GamePageContent = ({ gameId }: GamePageContentProps): JSX.Element => {
-  return <p>{gameId}</p>;
+const GamePageContent = (): JSX.Element => {
+  const { translate } = useTranslation();
+
+  return (
+    <div className="page-game">
+      <Header height="medium" title={translate('create-game')} />
+    </div>
+  );
 };
 
 export default GamePageContent;

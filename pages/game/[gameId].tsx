@@ -11,11 +11,10 @@ export type GamePageParams = {
 /**
  * Game page.
  *
- * @param {GamePageContentProps} props Props
  * @return {JSX.Element}
  */
-const GamePage = ({ gameId }: GamePageContentProps): JSX.Element => {
-  return <GamePageContent gameId={gameId} />;
+const GamePage = (): JSX.Element => {
+  return <GamePageContent />;
 };
 
 GamePage.getLayout = (page: JSX.Element): JSX.Element => <Layout>{page}</Layout>;
