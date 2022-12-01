@@ -27,6 +27,7 @@ export const UserCard = ({
   onClick,
   priority,
   rank,
+  hideName = false,
   size = 'large',
 }: UserCardProps): JSX.Element => {
   const { translate } = useTranslation();
@@ -79,7 +80,7 @@ export const UserCard = ({
         )}
       </div>
 
-      {!!name && (
+      {!hideName && (
         <div className="user-card-info">
           <p className="user-card-name">{!isLoading ? name : translate('waiting')}</p>
           {!!onClick && !isLoading && (

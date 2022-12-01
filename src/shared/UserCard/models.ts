@@ -15,6 +15,7 @@ export interface UserCardProps
   className?: string;
   direction?: UserCardDirection;
   hideLevel?: boolean;
+  hideName?: boolean;
   isLoading?: boolean;
   name?: string;
   size?: UserCardSize;
