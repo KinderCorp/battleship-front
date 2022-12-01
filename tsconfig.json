@@ -13,6 +13,7 @@
     "paths": {
       "@api/*": ["./src/api/*"],
       "@core/*": ["./src/core/*"],
+      "@game/*": ["./src/game/*"],
       "@helpers/*": ["./src/shared/_helpers/*"],
       "@home/*": ["./src/home/*"],
       "@hooks/*": ["./src/shared/_hooks/*"],
