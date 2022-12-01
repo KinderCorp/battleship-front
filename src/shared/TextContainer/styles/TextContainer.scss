@@ -8,6 +8,8 @@
   margin: 0;
   min-width: to-rem(100);
   padding: 0 to-rem(20);
+  user-select: text;
+  width: 100%;
 
   .text-container-value {
     @include font-text;
