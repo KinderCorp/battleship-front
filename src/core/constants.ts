@@ -15,3 +15,10 @@ export const COLORS = {
   WHITE: '#FFFFFF',
   YELLOW: '#F9D722',
 };
+
+export const BREAKPOINTS = {
+  DESKTOP: 1024,
+  LARGE_DESKTOP: 1300,
+  PHABLET: 480,
+  TABLET: 768,
+};

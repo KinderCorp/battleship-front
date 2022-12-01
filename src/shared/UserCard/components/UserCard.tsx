@@ -27,6 +27,7 @@ export const UserCard = ({
   onClick,
   priority,
   rank,
+  hideName = false,
   size = 'large',
 }: UserCardProps): JSX.Element => {
   const { translate } = useTranslation();
@@ -68,8 +69,9 @@ export const UserCard = ({
                   alt={translate('skin', { name: characterName })}
                   objectFit="contain"
                   priority={priority}
-                  // TODO: dynamize image sizes
-                  sizes="250px"
+                  sizes={{
+                    default: '250px',
+                  }}
                   src={characterSrc}
                 />
               </div>
@@ -78,7 +80,7 @@ export const UserCard = ({
         )}
       </div>
 
-      {!!name && (
+      {!hideName && (
         <div className="user-card-info">
           <p className="user-card-name">{!isLoading ? name : translate('waiting')}</p>
           {!!onClick && !isLoading && (

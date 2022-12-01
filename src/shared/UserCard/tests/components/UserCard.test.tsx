@@ -133,6 +133,7 @@ describe('shared/components/UserCard', () => {
 
     expect(userCard).toBeInTheDocument();
     expect(userCard).toContainElement(iconLoader);
+    expect(userCard.querySelector('.user-card-name')).toHaveTextContent(translate('waiting'));
     expect(button).not.toBeInTheDocument();
   });
 

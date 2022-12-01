@@ -9,7 +9,9 @@ import useTranslation from '@hooks/useTranslation';
 const propsImage: Pick<ImageProps, 'className' | 'objectFit' | 'sizes'> = {
   className: 'badge',
   objectFit: 'contain',
-  sizes: '40px',
+  sizes: {
+    default: '40px',
+  },
 };
 
 /**
