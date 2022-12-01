@@ -22,3 +22,8 @@ export const BREAKPOINTS = {
   PHABLET: 480,
   TABLET: 768,
 };
+
+export const PATHS = {
+  DEFAULT: '/',
+  GAME: '/game',
+};
