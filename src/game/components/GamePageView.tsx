@@ -33,6 +33,7 @@ const GamePageView = (): JSX.Element => {
         }
         title={view === 'settings' ? translate('create-game') : 'VS'}
       />
+
       {view === 'settings' && <GameSettingsView />}
     </>
   );
