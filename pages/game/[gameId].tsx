@@ -3,6 +3,7 @@ import type { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import GamePageContent from '@game/components/GamePageContent';
 import type { GamePageContentProps } from '@game/models';
 import Layout from '@shared/Layout/components/Layout';
+import { PATHS } from '@core/constants';
 
 export type GamePageParams = {
   gameId?: string;
@@ -32,9 +33,16 @@ export const getServerSideProps = async ({
 > => {
   const { gameId } = params;
 
-  if (!gameId) return { notFound: true };
-
   // TODO: check by the API if game id is correct
+
+  if (!gameId) {
+    return {
+      redirect: {
+        destination: PATHS.DEFAULT,
+        permanent: false,
+      },
+    };
+  }
 
   return {
     props: {
