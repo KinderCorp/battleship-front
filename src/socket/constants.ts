@@ -1,5 +1,6 @@
 export const SOCKET_EVENTS = {
-  UPDATE_SETTINGS: 'update_settings',
-  WAITING_TO_RIVAL: 'waiting_to_rival',
-  WAITING_TO_START: 'waiting_to_start',
+  PLAYER_READY: 'player_ready',
+  SETTINGS: 'settings',
+  SHOOT: 'shoot',
+  START_GAME: 'start_game',
 };

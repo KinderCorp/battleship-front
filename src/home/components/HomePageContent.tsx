@@ -1,5 +1,11 @@
+import { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+
 import Button from '@shared/Button/components/Button';
 import Image from '@shared/Image/components/Image';
+import { initGame } from '@game/reducer';
+import { PATHS } from '@core/constants';
+import UrlHelpers from '@helpers/UrlHelpers';
 import useTranslation from '@hooks/useTranslation';
 
 /**
@@ -9,6 +15,13 @@ import useTranslation from '@hooks/useTranslation';
  */
 const HomePageContent = (): JSX.Element => {
   const { translate } = useTranslation();
+
+  const dispatch = useDispatch();
+
+  const handleCreateGame = useCallback((): void => {
+    dispatch(initGame());
+    UrlHelpers.changeLocation(`${PATHS.GAME}/123456789`);
+  }, [dispatch]);
 
   return (
     <div className="home-page-content">
@@ -35,7 +48,7 @@ const HomePageContent = (): JSX.Element => {
           }}
         />
 
-        <Button className="content-play" onClick={() => null} size="large">
+        <Button className="content-play" onClick={handleCreateGame} size="large">
           {translate('create-game')}
         </Button>
       </div>

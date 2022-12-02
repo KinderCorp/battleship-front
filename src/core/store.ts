@@ -3,12 +3,15 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import type { PreloadedState } from '@reduxjs/toolkit';
 
-import * as homeConstants from '@home/constants';
+import { GAME_NAME } from '@game/constants';
+import gameReducer from '@game/reducer';
+import { HOME_NAME } from '@home/constants';
 import homeReducer from '@home/reducer';
 import type { RootState } from '@core/models';
 
 export const rootReducer = combineReducers({
-  [homeConstants.NAME]: homeReducer,
+  [GAME_NAME]: gameReducer,
+  [HOME_NAME]: homeReducer,
 });
 
 /**

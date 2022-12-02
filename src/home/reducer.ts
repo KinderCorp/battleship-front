@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import * as homeConstants from '@home/constants';
 import * as homeHelpers from '@home/helpers';
 import type { ApiGetHelloWorldResponse, ApiResponseParsed } from '@api/models';
+import { HOME_NAME } from '@home/constants';
 import type { HomeState } from '@home/models';
 
 const initialState: HomeState = {
@@ -13,7 +13,7 @@ const initialState: HomeState = {
 
 export const homeSlice = createSlice({
   initialState,
-  name: homeConstants.NAME,
+  name: HOME_NAME,
   reducers: {
     decrement: (state) => {
       state.value -= 1;
