@@ -7,21 +7,11 @@ body {
   background-color: $color-purple-dark-2;
   color: $color-white;
   font-family: $font-name-roboto, sans-serif;
+  overflow-x: hidden;
   user-select: none;
 }
 
 input {
   outline: none;
   border: none;
-}
-
-#main {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  min-height: 100vh;
-  position: relative;
-  width: 100vw;
-  overflow: hidden auto;
 }
