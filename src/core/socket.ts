@@ -11,11 +11,26 @@ const socket = io(SOCKETS_URL, {
 
 
 socket.on('connect', () => {
-  console.log(`Socket connected with id ${socket.id}`)
+  console.log(`Socket connected with id ${socket.id}`);
 })
 
-socket.on('UserReceived', (data: any) => {
-  console.log(data)
+socket.on('GameCreated', (data: any): void => {
+  console.log('Nouvelle partie créée:');
+  console.log(data);
+})
+
+socket.on('UserJoined', (data: any): void => {
+  console.log('Un joueur a rejoint la partie:');
+  console.log(data);
+})
+
+socket.on('GameNotFound', (): void => {
+  console.log(`La partie que vous tentez de rejoindre n'existe pas.`);
+})
+
+socket.on('Shooted', (data: any): void => {
+  console.log('Un joueur a tiré:');
+  console.log(data);
 })
 
 export default socket;
