@@ -1,0 +1,26 @@
+.container-versus{
+    display: flex;
+    background-color: #A452DA;
+}
+.versus {
+    border-radius: 50%;
+    width: 20px;
+    padding: 10px;
+    background-color: #25143C;
+    font-weight: bold;
+}
+
+.container-versus::before {
+    content: "- - - -";
+    color: #25143C;
+    font-weight: bold;
+    margin-right: 8px;
+    transform: translate(4px, 10px);
+}
+
+.container-versus:after {
+    content: "- - - -";
+    color: #25143C;
+    font-weight: bold;
+    transform: translate(4px, 10px);
+  }
