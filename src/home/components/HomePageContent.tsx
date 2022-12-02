@@ -1,5 +1,4 @@
 import Button from '@shared/Button/components/Button';
-import ContentPage from '@shared/ContentPage/components/ContentPage';
 import Image from '@shared/Image/components/Image';
 import useTranslation from '@hooks/useTranslation';
 
@@ -16,7 +15,7 @@ const HomePageContent = (): JSX.Element => {
   // };
 
   return (
-    <ContentPage className="home-page-content">
+    <div className="home-page-content">
       <Button
         className="login"
         iconName="People"
@@ -44,7 +43,7 @@ const HomePageContent = (): JSX.Element => {
           {translate('create-game')}
         </Button>
       </div>
-    </ContentPage>
+    </div>
   );
 };
 
