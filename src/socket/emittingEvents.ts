@@ -10,8 +10,8 @@ import { SOCKET_EVENTS_EMITTING } from '@socket/constants';
 export const emitGameSettings = (payload: GameSettings) => {
   socket.emit(SOCKET_EVENTS_EMITTING.GAME_SETTINGS, payload);
 };
-/**
 
+/**
  * Emitting event for start the game.
  */
 export const emitStartGame = () => {

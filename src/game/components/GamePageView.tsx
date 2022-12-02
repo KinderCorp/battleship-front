@@ -1,10 +1,13 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+
 import Button from '@shared/Button/components/Button';
 import GameSettingsView from '@game/components/GameSettingsView';
 import Header from '@shared/Header/components/Header';
+import { initGame } from '@game/reducer';
 import { PATHS } from '@core/constants';
 import { selectGameView } from '@game/selectors';
 import UrlHelpers from '@helpers/UrlHelpers';
-import { useSelector } from 'react-redux';
 import useTranslation from '@hooks/useTranslation';
 
 /**
@@ -15,7 +18,13 @@ import useTranslation from '@hooks/useTranslation';
 const GamePageView = (): JSX.Element => {
   const { translate } = useTranslation();
 
+  const dispatch = useDispatch();
+
   const view = useSelector(selectGameView);
+
+  useEffect(() => {
+    dispatch(initGame());
+  }, [dispatch]);
 
   return (
     <>
