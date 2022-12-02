@@ -1,7 +1,7 @@
 import type { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
-import GamePageContent from '@game/components/GamePageContent';
 import type { GamePageContentProps } from '@game/models';
+import GamePageView from '@game/components/GamePageView';
 import Layout from '@shared/Layout/components/Layout';
 import { PATHS } from '@core/constants';
 
@@ -15,7 +15,7 @@ export type GamePageParams = {
  * @return {JSX.Element}
  */
 const GamePage = (): JSX.Element => {
-  return <GamePageContent />;
+  return <GamePageView />;
 };
 
 GamePage.getLayout = (page: JSX.Element): JSX.Element => <Layout>{page}</Layout>;

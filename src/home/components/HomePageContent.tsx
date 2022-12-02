@@ -10,10 +10,6 @@ import useTranslation from '@hooks/useTranslation';
 const HomePageContent = (): JSX.Element => {
   const { translate } = useTranslation();
 
-  // const socketTest = () => {
-  //   socket.emit('UserJoin', `Coucou ${value}`);
-  // };
-
   return (
     <div className="home-page-content">
       <Button

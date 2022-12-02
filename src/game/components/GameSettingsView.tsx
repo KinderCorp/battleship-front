@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react';
 
 import BlockContainer from '@shared/BlockContainer/components/BlockContainer';
 import Button from '@shared/Button/components/Button';
+import type { GameSettings } from '@game/models';
 import Header from '@shared/Header/components/Header';
 import { PATHS } from '@core/constants';
 import TextContainer from '@shared/TextContainer/components/TextContainer';
+import { updateSettingsEmitting } from '@socket/emittingEvents';
 import UrlHelpers from '@helpers/UrlHelpers';
 import UserCard from '@shared/UserCard/components/UserCard';
 import useTranslation from '@hooks/useTranslation';
@@ -14,11 +16,16 @@ import useTranslation from '@hooks/useTranslation';
  *
  * @return {JSX.Element}
  */
-const GameSettings = (): JSX.Element => {
+const GameSettingsView = (): JSX.Element => {
   const { translate } = useTranslation();
 
-  const [shareLink, setShareLink] = useState('');
-  const [clickedButtonCopy, setClickedButtonCopy] = useState(false);
+  const [shareLink, setShareLink] = useState<string>('');
+  const [settings] = useState<GameSettings>({ boardSize: 10 });
+  const [clickedButtonCopy, setClickedButtonCopy] = useState<boolean>(false);
+
+  useEffect(() => {
+    updateSettingsEmitting(settings);
+  }, [settings]);
 
   useEffect(() => setShareLink(UrlHelpers.getUrl()), []);
 
@@ -43,7 +50,6 @@ const GameSettings = (): JSX.Element => {
         leftSideNode={
           <Button
             iconName="ArrowLeft"
-            // TODO: replace by link component
             onClick={() => UrlHelpers.changeLocation(PATHS.DEFAULT)}
             size="large"
             style="secondary"
@@ -84,4 +90,4 @@ const GameSettings = (): JSX.Element => {
   );
 };
 
-export default GameSettings;
+export default GameSettingsView;

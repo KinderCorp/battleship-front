@@ -17,6 +17,7 @@ const jestConfig: Config = {
     '^@pages/(.*)$': '<rootDir>/pages/$1',
     '^@public/(.*)$': '<rootDir>/public/$1',
     '^@shared/(.*)$': '<rootDir>/src/shared/$1',
+    '^@socket/(.*)$': '<rootDir>/src/socket/$1',
     '^@src/(.*)$': '<rootDir>/src/$1',
     '^@styles/(.*)$': '<rootDir>/styles/$1',
     '^@translation/(.*)$': '<rootDir>/src/translation/$1',

@@ -21,6 +21,7 @@
       "@pages/*": ["./pages/*"],
       "@public/*": ["./public/*"],
       "@shared/*": ["./src/shared/*"],
+      "@socket/*": ["./src/socket/*"],
       "@src/*": ["./src/*"],
       "@styles/*": ["./styles/*"],
       "@translation/*": ["./src/translation/*"]
