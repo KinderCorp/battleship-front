@@ -1,10 +1,8 @@
-import * as homeConstants from '@home/constants';
+import { HOME_NAME } from '@home/constants';
 import type { HomeState } from '@home/models';
 
-const { NAME } = homeConstants;
-
-const homeState: Record<typeof NAME, HomeState> = {
-  [NAME]: {
+const homeState: Record<typeof HOME_NAME, HomeState> = {
+  [HOME_NAME]: {
     helloWorld: '',
     value: 8,
   },
