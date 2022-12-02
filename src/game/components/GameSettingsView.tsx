@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-// import { useSelector } from 'react-redux';
 
 import BlockContainer from '@shared/BlockContainer/components/BlockContainer';
 import Button from '@shared/Button/components/Button';
-import { /*gameSettingsEvents,*/ gameStartEvents } from '@socket/events';
-// import { selectGameSettings } from '@game/selectors';
+import { emitStartGame } from '@socket/emittingEvents';
 import { setView } from '@game/reducer';
 import TextContainer from '@shared/TextContainer/components/TextContainer';
 import UrlHelpers from '@helpers/UrlHelpers';
@@ -53,7 +51,7 @@ const GameSettingsView = (): JSX.Element => {
    * @return {void}
    */
   const handleStartGame = useCallback((): void => {
-    gameStartEvents();
+    emitStartGame();
     dispatch(setView('boats_placement'));
   }, [dispatch]);
 

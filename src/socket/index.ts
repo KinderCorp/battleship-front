@@ -1,6 +1,8 @@
-/* eslint-disable no-console */
 import getConfig from 'next/config';
 import io from 'socket.io-client';
+
+import { listeningPlayerJoin } from '@socket/listeningEvents';
+import { SOCKET_EVENTS_LISTENING } from '@socket/constants';
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -10,12 +12,6 @@ const socket = io(SOCKETS_URL, {
   transports: ['websocket'],
 });
 
-// socket.on('connected', () => {
-//   console.log(`Socket connected with id ${socket.id}`);
-// });
-
-// socket.on('UserReceived', (data: any) => {
-//   console.log(data);
-// });
+socket.on(SOCKET_EVENTS_LISTENING.PLAYER_JOIN, listeningPlayerJoin);
 
 export default socket;
