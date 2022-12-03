@@ -1,0 +1,8 @@
+.board-cell {
+  align-items: center;
+  background-color: $color-purple-dark;
+  outline: to-rem(1) solid $color-purple;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}

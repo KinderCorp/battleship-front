@@ -28,7 +28,7 @@ export const Board = ({ className = '', size }: BoardProps): JSX.Element => {
 
       // Create the cells
       for (let col = 0; col < size; col++) {
-        cells.push(<BoardCell state="hit" />);
+        cells.push(<BoardCell />);
       }
 
       board.push(<BoardRow>{cells}</BoardRow>);
