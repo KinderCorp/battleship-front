@@ -17,12 +17,14 @@ const Versus = ({
   const { translate } = useTranslation();
   
   const versusClassName = useMemo(
-    (): string => classNames(className, size),
+    (): string => classNames(
+      'versus',
+      size, className),
     [className, size],
   );
 
   return (
-    <div className={versusClassName}>{translate('versus')}</div>
+    <div className={versusClassName} data-testid="versus">{translate('versus')}</div>
   );
 };
 
