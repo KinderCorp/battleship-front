@@ -1,26 +1,46 @@
-.container-versus {
+.versus{
+  align-items: center;
   display: flex;
+  justify-content: center;
+  padding: 0 to-rem(60);   
+  // position: relative;
+
+  &::before {
+    @include center-element;
+    
+    border-bottom: to-rem(3) dashed $color-purple-dark-2;
+    content: '';
+    height: 0;
+    width: 100%;
+  } 
+
+  &-content {
+    @include font-label-small;
+    
+    align-items: center;
+    background-color: $color-purple-dark-2;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+
+  &.large {
+    .versus-content {
+      @include fixed-size(to-rem(60))
+    }
+  }
+
+  &.medium {
+    .versus-content {
+      @include fixed-size(to-rem(40))
+    }
+  }
+  
+  
 }
 
-.versus {
-  border-radius: 50%;
-  width: 20px;
-  padding: 10px;
-  background-color: #b8a5d1;
-  font-weight: bold;
-}
 
-.container-versus::before {
-  content: '- - - -';
-  color: #25143c;
-  font-weight: bold;
-  margin-right: 8px;
-  transform: translate(4px, 10px);
-}
 
-.container-versus::after {
-  content: '- - - -';
-  color: #25243c;
-  font-weight: bold;
-  transform: translate(4px, 10px);
-}
+
+

@@ -41,7 +41,6 @@ describe('shared/components/Versus', () => {
   it('should render the component with another class name', () => {
     const localProps: VersusProps = {
       className: 'versus-other-class',
-      size: 'medium',
     };
 
     render(<Versus {...localProps} />);

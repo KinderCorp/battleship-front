@@ -24,7 +24,7 @@ const Versus = ({
   );
 
   return (
-    <div className={versusClassName} data-testid="versus">{translate('versus')}</div>
+    <div className={versusClassName} data-testid="versus"><span className="versus-content">{translate('versus')}</span></div>
   );
 };
 
