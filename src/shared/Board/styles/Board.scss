@@ -4,6 +4,12 @@
   display: inline-block;
   overflow: hidden;
   position: relative;
+  transition: opacity 0.5s ease;
+
+  &.is-disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
 
   .board-table {
     @include fixed-size(400px);

@@ -11,10 +11,20 @@ import Icon from '@shared/Icon/components/Icon';
  * @param {BoardCellProps} props Props
  * @return {JSX.Element}
  */
-export const BoardCell = ({ className = '', state }: BoardCellProps): JSX.Element => {
+export const BoardCell = ({
+  className = '',
+  isActive = false,
+  isDisabled = false,
+  state,
+}: BoardCellProps): JSX.Element => {
   const boardCellClassName = useMemo(
-    (): string => classNames('board-cell', { [`board-cell--${state}`]: !!state }, className),
-    [className, state],
+    (): string =>
+      classNames(
+        'board-cell',
+        { [`board-cell--${state}`]: !!state, 'is-active': !!isActive, 'is-disabled': !!isDisabled },
+        className,
+      ),
+    [className, isActive, isDisabled, state],
   );
 
   return (
