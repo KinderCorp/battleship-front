@@ -3,6 +3,12 @@
 
   display: block;
 
+  &.responsive {
+    @include fixed-size(100%);
+
+    display: flex;
+  }
+
   &.small {
     @include fixed-size($icon-size-small);
   }
