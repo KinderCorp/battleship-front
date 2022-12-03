@@ -21,7 +21,7 @@ export type IconName =
   | 'Target'
   | 'Trophy';
 
-export type IconSize = 'small' | 'medium' | 'large' | 'extra-large';
+export type IconSize = 'small' | 'medium' | 'large' | 'extra-large' | 'responsive';
 
 export interface IconProps extends Partial<IconSvgProps> {
   className?: string;
