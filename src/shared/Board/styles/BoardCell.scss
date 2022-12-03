@@ -1,8 +1,18 @@
 .board-cell {
   align-items: center;
   background-color: $color-purple-dark;
-  outline: to-rem(1) solid $color-purple;
   display: flex;
   flex: 1;
   justify-content: center;
+  outline: to-rem(1) solid $color-purple;
+  overflow: hidden;
+
+  &.board-cell--miss::after {
+    background-color: $color-purple;
+    border-radius: 50%;
+    content: '';
+    height: 0;
+    padding-top: 40%;
+    width: 40%;
+  }
 }
