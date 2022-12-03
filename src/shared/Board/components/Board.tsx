@@ -28,10 +28,10 @@ export const Board = ({ className = '', size }: BoardProps): JSX.Element => {
 
       // Create the cells
       for (let col = 0; col < size; col++) {
-        cells.push(<BoardCell />);
+        cells.push(<BoardCell key={`cell-${row}-${col}`} state="hit" />);
       }
 
-      board.push(<BoardRow>{cells}</BoardRow>);
+      board.push(<BoardRow key={`line-${row}`}>{cells}</BoardRow>);
     }
 
     return board;
