@@ -1,22 +1,21 @@
-.versus{
+.versus {
   align-items: center;
   display: flex;
   justify-content: center;
-  padding: 0 to-rem(60);   
-  // position: relative;
+  padding: 0 to-rem(60);
 
   &::before {
     @include center-element;
-    
+
     border-bottom: to-rem(3) dashed $color-purple-dark-2;
     content: '';
     height: 0;
     width: 100%;
-  } 
+  }
 
   &-content {
     @include font-label-small;
-    
+
     align-items: center;
     background-color: $color-purple-dark-2;
     border-radius: 50%;
@@ -27,20 +26,13 @@
 
   &.large {
     .versus-content {
-      @include fixed-size(to-rem(60))
+      @include fixed-size(to-rem(60));
     }
   }
 
   &.medium {
     .versus-content {
-      @include fixed-size(to-rem(40))
+      @include fixed-size(to-rem(40));
     }
   }
-  
-  
 }
-
-
-
-
-
