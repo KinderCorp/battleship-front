@@ -28,7 +28,7 @@ export const Board = ({ className = '', size }: BoardProps): JSX.Element => {
 
       // Create the cells
       for (let col = 0; col < size; col++) {
-        cells.push(<BoardCell key={`cell-${row}-${col}`} state="hit" />);
+        cells.push(<BoardCell key={`cell-${row}-${col}`} />);
       }
 
       board.push(<BoardRow key={`line-${row}`}>{cells}</BoardRow>);
@@ -38,9 +38,11 @@ export const Board = ({ className = '', size }: BoardProps): JSX.Element => {
   }, [size]);
 
   return (
-    <table className={boardClassName} data-testid="board">
-      <tbody className="board-content">{createBoard()}</tbody>
-    </table>
+    <div className={boardClassName} data-testid="board">
+      <table className="board-table">
+        <tbody className="board-body">{createBoard()}</tbody>
+      </table>
+    </div>
   );
 };
 

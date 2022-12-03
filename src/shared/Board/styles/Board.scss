@@ -1,14 +1,21 @@
 .board {
-  @include fixed-size(200px);
+  background-color: $color-purple-dark;
+  border-radius: $border-radius;
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
 
-  border-collapse: collapse;
-  border-spacing: 0;
+  .board-table {
+    @include fixed-size(400px);
 
-  .board-content {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  .board-body {
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: to-rem(1);
     width: 100%;
 
     .board-row:first-child {
