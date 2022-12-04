@@ -15,8 +15,8 @@ export interface BoardCellAffected extends Position {
 }
 
 export interface BoardBoat extends Omit<BoatProps, 'className' | 'height' | 'width'>, Position {
-  height: number;
-  width: number;
+  lengthCell: number;
+  widthCell: number;
 }
 
 export interface BoardProps {

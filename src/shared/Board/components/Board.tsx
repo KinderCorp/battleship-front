@@ -1,5 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import classNames from 'clsx';
+import type { CSSProperties } from 'react';
 
 import type { BoardBoat, BoardCellAffected, BoardProps } from '@shared/Board/models';
 import BoardCell from '@shared/Board/components/BoardCell';
@@ -70,17 +71,15 @@ export const Board = ({
       </table>
 
       {boats.map((boat: BoardBoat, index: number) => {
-        const newHeight = (boat.height * 100) / dimensions;
-        const newWidth = (boat.width * 100) / dimensions;
+        const style: CSSProperties = {
+          height: `${(boat.lengthCell * 100) / dimensions}%`,
+          left: `${(boat.x * 100) / dimensions}%`,
+          top: `${(boat.y * 100) / dimensions}%`,
+          transformOrigin: `50% ${100 / boat.lengthCell / 2}%`,
+          width: `${(boat.widthCell * 100) / dimensions}%`,
+        };
 
-        return (
-          <Boat
-            boatSrc={boat.boatSrc}
-            key={index}
-            height={`${newHeight}%`}
-            width={`${newWidth}%`}
-          />
-        );
+        return <Boat boatSrc={boat.boatSrc} direction={boat.direction} key={index} style={style} />;
       })}
     </div>
   );
