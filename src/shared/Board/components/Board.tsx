@@ -1,9 +1,10 @@
 import { useCallback, useMemo } from 'react';
 import classNames from 'clsx';
 
-import type { BoardCellAffected, BoardProps } from '@shared/Board/models';
+import type { BoardBoat, BoardCellAffected, BoardProps } from '@shared/Board/models';
 import BoardCell from '@shared/Board/components/BoardCell';
 import BoardRow from '@shared/Board/components/BoardRow';
+import Boat from '@shared/Boat/components/Boat';
 
 /**
  * Board component.
@@ -12,6 +13,7 @@ import BoardRow from '@shared/Board/components/BoardRow';
  * @return {JSX.Element}
  */
 export const Board = ({
+  boats,
   className = '',
   isActive = false,
   isDisabled = false,
@@ -66,6 +68,10 @@ export const Board = ({
       <table className="board-table">
         <tbody className="board-body">{createBoard()}</tbody>
       </table>
+
+      {boats.map((boat: BoardBoat, index: number) => (
+        <Boat boatSrc={boat.boatSrc} key={index} height={boat.height} />
+      ))}
     </div>
   );
 };

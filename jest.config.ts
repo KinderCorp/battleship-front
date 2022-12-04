@@ -8,7 +8,6 @@ const jestConfig: Config = {
   moduleNameMapper: {
     '\\.(css|scss|sass)$': 'identity-obj-proxy',
     '^@api/(.*)$': '<rootDir>/src/api/$1',
-    '^@boat/(.*)$': '<rootDir>/src/boat/$1',
     '^@core/(.*)$': '<rootDir>/src/core/$1',
     '^@helpers/(.*)$': '<rootDir>/src/shared/_helpers/$1',
     '^@home/(.*)$': '<rootDir>/src/home/$1',

@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import type { BoatProps } from '@boat/models';
+import type { BoatProps } from '@shared/Boat/models';
 import type { IntRange } from '@core/models';
 
 export interface Position {
@@ -14,7 +14,7 @@ export interface BoardCellAffected extends Position {
   state: BoardCellState;
 }
 
-export interface BoardBoat extends Pick<BoatProps, 'boatSrc' | 'direction'>, Position {}
+export interface BoardBoat extends Omit<BoatProps, 'className'>, Position {}
 
 export interface BoardProps {
   boats: BoardBoat[];

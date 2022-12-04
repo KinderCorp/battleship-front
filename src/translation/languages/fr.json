@@ -2,6 +2,7 @@
   "badge.level.unknown": "Aucun badge",
   "badge.level": "Badge pour le niveau {number}",
   "battleship-logo": "Logo Battleship",
+  "boat": "Bateau {name}",
   "create-game": "Créer une partie",
   "skin": "Skin {name}",
   "test.key": "Clé de test",

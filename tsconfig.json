@@ -12,7 +12,6 @@
     "noEmit": true,
     "paths": {
       "@api/*": ["./src/api/*"],
-      "@boat/*": ["./src/boat/*"],
       "@core/*": ["./src/core/*"],
       "@helpers/*": ["./src/shared/_helpers/*"],
       "@home/*": ["./src/home/*"],
