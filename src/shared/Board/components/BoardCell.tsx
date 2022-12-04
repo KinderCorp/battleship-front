@@ -21,7 +21,11 @@ export const BoardCell = ({
     (): string =>
       classNames(
         'board-cell',
-        { [`board-cell--${state}`]: !!state, 'is-active': !!isActive, 'is-disabled': !!isDisabled },
+        {
+          [`board-cell--${state}`]: !!state,
+          'is-active': !!isActive && !state,
+          'is-disabled': !!isDisabled,
+        },
         className,
       ),
     [className, isActive, isDisabled, state],

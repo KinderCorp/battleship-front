@@ -34,20 +34,17 @@
     }
   }
 
-  &.is-active:not(.is-disabled) {
-    &:not(.board-cell--hit),
-    &:not(.board-cell--miss) {
-      cursor: pointer;
+  &.is-active:not(.is-disabled):not(.board-cell--hit):not(.board-cell--miss) {
+    cursor: pointer;
 
-      &:hover::before {
-        background-color: rgba($color-white, 0.05);
-        content: '';
-        height: 100%;
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 100%;
-      }
+    &:hover::before {
+      background-color: rgba($color-white, 0.1);
+      content: '';
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
     }
   }
 }
