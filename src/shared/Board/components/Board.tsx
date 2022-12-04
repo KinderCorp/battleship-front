@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import classNames from 'clsx';
 
-import type { BoardCellState, BoardProps } from '@shared/Board/models';
+import type { BoardProps, CellAffected } from '@shared/Board/models';
 import BoardCell from '@shared/Board/components/BoardCell';
 import BoardRow from '@shared/Board/components/BoardRow';
 
@@ -16,8 +16,8 @@ export const Board = ({
   isActive = false,
   isDisabled = false,
   onClick,
-  size,
-  stateCells,
+  dimensions,
+  cellsAffected,
 }: BoardProps): JSX.Element => {
   const boardClassName = useMemo(
     (): string => classNames('board', { 'is-disabled': !!isDisabled }, className),
@@ -33,13 +33,13 @@ export const Board = ({
     const board = [];
 
     // Create the lines
-    for (let row = 0; row < size; row++) {
+    for (let row = 0; row < dimensions; row++) {
       const cells = [];
 
       // Create the cells
-      for (let col = 0; col < size; col++) {
-        const cellIsAffected = stateCells.find(
-          (stateCell: BoardCellState) => stateCell.x === col && stateCell.y === row,
+      for (let col = 0; col < dimensions; col++) {
+        const cellAffected = cellsAffected.find(
+          (stateCell: CellAffected) => stateCell.x === col && stateCell.y === row,
         );
 
         cells.push(
@@ -48,7 +48,7 @@ export const Board = ({
             isDisabled={isDisabled}
             key={`cell-${row}-${col}`}
             onClick={onClick}
-            state={cellIsAffected?.state}
+            state={cellAffected?.state}
             x={col}
             y={row}
           />,
@@ -59,7 +59,7 @@ export const Board = ({
     }
 
     return board;
-  }, [isActive, isDisabled, onClick, size, stateCells]);
+  }, [cellsAffected, dimensions, isActive, isDisabled, onClick]);
 
   return (
     <div className={boardClassName} data-testid="board">
