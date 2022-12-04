@@ -14,7 +14,10 @@ export interface BoardCellAffected extends Position {
   state: BoardCellState;
 }
 
-export interface BoardBoat extends Omit<BoatProps, 'className'>, Position {}
+export interface BoardBoat extends Omit<BoatProps, 'className' | 'height' | 'width'>, Position {
+  height: number;
+  width: number;
+}
 
 export interface BoardProps {
   boats: BoardBoat[];

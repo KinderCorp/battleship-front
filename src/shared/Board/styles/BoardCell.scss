@@ -20,13 +20,14 @@
 
   &.board-cell--hit {
     &::before {
-      background-color: rgba($color-purple-dark, 0.8);
+      background-color: rgba($color-purple-dark, 0.6);
       content: '';
       height: 100%;
       left: 0;
       position: absolute;
       top: 0;
       width: 100%;
+      z-index: 1;
     }
 
     .icon {

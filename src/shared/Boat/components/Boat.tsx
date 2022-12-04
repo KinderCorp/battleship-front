@@ -16,7 +16,9 @@ export const Boat = ({
   boatSrc,
   className = '',
   direction = 'horizontal',
+  height,
   priority,
+  width,
 }: BoatProps): JSX.Element => {
   const { translate } = useTranslation();
 
@@ -26,7 +28,14 @@ export const Boat = ({
   );
 
   return (
-    <div className={boatClassName} data-testid="boat">
+    <div
+      className={boatClassName}
+      data-testid="boat"
+      style={{
+        height,
+        width,
+      }}
+    >
       <Image
         alt={translate('boat', { name: boatName })}
         className="boat-image"

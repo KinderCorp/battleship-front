@@ -69,9 +69,19 @@ export const Board = ({
         <tbody className="board-body">{createBoard()}</tbody>
       </table>
 
-      {boats.map((boat: BoardBoat, index: number) => (
-        <Boat boatSrc={boat.boatSrc} key={index} height={boat.height} />
-      ))}
+      {boats.map((boat: BoardBoat, index: number) => {
+        const newHeight = (boat.height * 100) / dimensions;
+        const newWidth = (boat.width * 100) / dimensions;
+
+        return (
+          <Boat
+            boatSrc={boat.boatSrc}
+            key={index}
+            height={`${newHeight}%`}
+            width={`${newWidth}%`}
+          />
+        );
+      })}
     </div>
   );
 };
