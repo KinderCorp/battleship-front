@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import classNames from 'clsx';
 
-import type { BoardProps, CellAffected } from '@shared/Board/models';
+import type { BoardCellAffected, BoardProps } from '@shared/Board/models';
 import BoardCell from '@shared/Board/components/BoardCell';
 import BoardRow from '@shared/Board/components/BoardRow';
 
@@ -39,7 +39,7 @@ export const Board = ({
       // Create the cells
       for (let col = 0; col < dimensions; col++) {
         const cellAffected = cellsAffected.find(
-          (stateCell: CellAffected) => stateCell.x === col && stateCell.y === row,
+          (stateCell: BoardCellAffected) => stateCell.x === col && stateCell.y === row,
         );
 
         cells.push(

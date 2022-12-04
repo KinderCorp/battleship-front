@@ -10,7 +10,7 @@ export interface Position {
 
 export type BoardCellState = 'hit' | 'miss';
 
-export interface CellAffected extends Position {
+export interface BoardCellAffected extends Position {
   state: BoardCellState;
 }
 
@@ -18,7 +18,7 @@ export interface BoardBoat extends Pick<BoatProps, 'boatSrc' | 'direction'>, Pos
 
 export interface BoardProps {
   boats: BoardBoat[];
-  cellsAffected: CellAffected[];
+  cellsAffected: BoardCellAffected[];
   className?: string;
   dimensions: IntRange<8, 13>;
   isActive?: boolean;
