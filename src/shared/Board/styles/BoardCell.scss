@@ -34,7 +34,7 @@
     }
   }
 
-  &.is-active:not(.is-disabled):not(.board-cell--hit):not(.board-cell--miss) {
+  &.is-active:not(.is-disabled, .board-cell--hit, .board-cell--miss) {
     cursor: pointer;
 
     &:hover::before {
