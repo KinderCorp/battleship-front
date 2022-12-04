@@ -1,5 +1,6 @@
+import { useCallback, useMemo } from 'react';
 import classNames from 'clsx';
-import { useMemo } from 'react';
+import type { SyntheticEvent } from 'react';
 
 import type { BoardCellProps } from '@shared/Board/models';
 import { COLORS } from '@core/constants';
@@ -15,7 +16,10 @@ export const BoardCell = ({
   className = '',
   isActive = false,
   isDisabled = false,
+  onClick,
   state,
+  x,
+  y,
 }: BoardCellProps): JSX.Element => {
   const boardCellClassName = useMemo(
     (): string =>
@@ -31,8 +35,20 @@ export const BoardCell = ({
     [className, isActive, isDisabled, state],
   );
 
+  const handleClick = useCallback(
+    (event: SyntheticEvent<EventTarget>) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (!isDisabled && !!isActive && !state && onClick) {
+        onClick(x, y);
+      }
+    },
+    [isActive, isDisabled, onClick, state, x, y],
+  );
+
   return (
-    <td className={boardCellClassName} data-testid="board-cell">
+    <td className={boardCellClassName} data-testid="board-cell" onClick={handleClick}>
       {state === 'hit' && (
         <Icon
           borderColor={COLORS.PINK}

@@ -16,9 +16,12 @@ export interface BoardProps {
   isDisabled?: boolean;
   size: IntRange<8, 13>;
   stateCells: BoardCellState[];
+  onClick: (x: BoardCellState['x'], y: BoardCellState['y']) => void;
 }
 
-export interface BoardCellProps extends Pick<BoardProps, 'isActive' | 'isDisabled'> {
+export interface BoardCellProps
+  extends Pick<BoardProps, 'isActive' | 'isDisabled' | 'onClick'>,
+    Pick<BoardCellState, 'x' | 'y'> {
   className?: string;
   state?: CellState;
 }

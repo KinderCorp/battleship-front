@@ -15,6 +15,7 @@ export const Board = ({
   className = '',
   isActive = false,
   isDisabled = false,
+  onClick,
   size,
   stateCells,
 }: BoardProps): JSX.Element => {
@@ -43,10 +44,13 @@ export const Board = ({
 
         cells.push(
           <BoardCell
-            key={`cell-${row}-${col}`}
             isActive={isActive}
             isDisabled={isDisabled}
+            key={`cell-${row}-${col}`}
+            onClick={onClick}
             state={cellIsAffected?.state}
+            x={col}
+            y={row}
           />,
         );
       }
@@ -55,7 +59,7 @@ export const Board = ({
     }
 
     return board;
-  }, [isActive, isDisabled, size, stateCells]);
+  }, [isActive, isDisabled, onClick, size, stateCells]);
 
   return (
     <div className={boardClassName} data-testid="board">
