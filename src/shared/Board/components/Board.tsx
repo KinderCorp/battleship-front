@@ -75,7 +75,7 @@ export const Board = ({
           height: `${(boatBoat.lengthCell * 100) / dimensions}%`,
           left: `${(boatBoat.x * 100) / dimensions}%`,
           top: `${(boatBoat.y * 100) / dimensions}%`,
-          transformOrigin: `50% ${100 / boatBoat.lengthCell / 2}%`,
+          transformOrigin: `${100 / boatBoat.widthCell / 2}% ${100 / boatBoat.lengthCell / 2}%`,
           width: `${(boatBoat.widthCell * 100) / dimensions}%`,
         };
 
