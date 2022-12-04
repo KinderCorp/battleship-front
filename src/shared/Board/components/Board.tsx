@@ -70,16 +70,24 @@ export const Board = ({
         <tbody className="board-body">{createBoard()}</tbody>
       </table>
 
-      {boats.map((boat: BoardBoat, index: number) => {
+      {boats.map((boatBoat: BoardBoat, index: number) => {
         const style: CSSProperties = {
-          height: `${(boat.lengthCell * 100) / dimensions}%`,
-          left: `${(boat.x * 100) / dimensions}%`,
-          top: `${(boat.y * 100) / dimensions}%`,
-          transformOrigin: `50% ${100 / boat.lengthCell / 2}%`,
-          width: `${(boat.widthCell * 100) / dimensions}%`,
+          height: `${(boatBoat.lengthCell * 100) / dimensions}%`,
+          left: `${(boatBoat.x * 100) / dimensions}%`,
+          top: `${(boatBoat.y * 100) / dimensions}%`,
+          transformOrigin: `50% ${100 / boatBoat.lengthCell / 2}%`,
+          width: `${(boatBoat.widthCell * 100) / dimensions}%`,
         };
 
-        return <Boat boatSrc={boat.boatSrc} direction={boat.direction} key={index} style={style} />;
+        return (
+          <Boat
+            boatName={boatBoat.boatName}
+            boatSrc={boatBoat.boatSrc}
+            direction={boatBoat.direction}
+            key={index}
+            style={style}
+          />
+        );
       })}
     </div>
   );
