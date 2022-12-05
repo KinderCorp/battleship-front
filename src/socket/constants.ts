@@ -3,9 +3,9 @@ export const SOCKET_EVENTS_EMITTING = {
   GAME_SETTINGS: 'game-settings',
   PLAYER_JOINING_GAME: 'player-joining-game',
   PLAYER_READY_TO_PLACE_BOATS: 'player-ready-to-place-boats',
-  PLAYER_VALIDATE_BOATS_PLACEMENT: 'player-validate-boats-placement',
   SHOOT: 'shoot',
   START_GAME: 'start-game',
+  VALIDATE_PLAYER_BOATS_PLACEMENT: 'validate-player-boats-placement',
 };
 
 export const SOCKET_EVENTS_LISTENING = {
@@ -16,6 +16,7 @@ export const SOCKET_EVENTS_LISTENING = {
   GAME_NOT_FOUND: 'game-not-found',
   GAME_SETTINGS_ERROR: 'game-settings-error',
   GAME_STARTED: 'game-started',
+  MISPLACED_BOATS: 'misplaced-boats',
   ONE_PLAYER_HAS_PLACED_HIS_BOATS: 'one-player-has-placed-his-boats',
   PLAYER_JOINED: 'player-joined',
   SHOT: 'shot',

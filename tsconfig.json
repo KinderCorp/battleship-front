@@ -19,6 +19,7 @@
       "@hooks/*": ["./src/shared/_hooks/*"],
       "@mocks/*": ["./mocks/*"],
       "@pages/*": ["./pages/*"],
+      "@player/*": ["./src/player/*"],
       "@public/*": ["./public/*"],
       "@shared/*": ["./src/shared/*"],
       "@socket/*": ["./src/socket/*"],
