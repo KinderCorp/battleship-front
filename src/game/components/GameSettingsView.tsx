@@ -74,9 +74,19 @@ const GameSettingsView = (): JSX.Element => {
         </BlockContainer>
 
         <BlockContainer className="players">
-          <UserCard name="Player_978" />
+          <UserCard
+            name="Player_978"
+            characterSrc="/images/characters/character-sam.png"
+            characterName="Sam"
+          />
           VS
-          <UserCard isLoading />
+          <UserCard
+            characterName="Sam"
+            characterSrc="/images/characters/character-sam.png"
+            direction="left"
+            name="Player_978"
+            isLoading
+          />
         </BlockContainer>
 
         <Button onClick={handleStartGame} size="large">
