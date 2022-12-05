@@ -2,16 +2,19 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 import { GAME_NAME, GAME_SETTINGS } from '@game/constants';
-import type { GameSettings, GameState, GameView } from '@game/models';
+import type { GameRoom, GameSettings, GameState, GameView } from '@game/models';
 
-const initialState: GameState = { settings: GAME_SETTINGS, view: 'settings' };
+const initialState: GameState = { game: {}, settings: GAME_SETTINGS, view: 'settings' };
 
 export const gameSlice = createSlice({
   initialState,
   name: GAME_NAME,
   reducers: {
-    initGame: (state) => {
+    initView: (state) => {
       state.view = 'settings';
+    },
+    setInstanceId: (state, action: PayloadAction<GameRoom['instanceId']>) => {
+      state.game.instanceId = action.payload;
     },
     setView: (state, action: PayloadAction<GameView>) => {
       state.view = action.payload;
@@ -22,6 +25,6 @@ export const gameSlice = createSlice({
   },
 });
 
-export const { initGame, setView, updateSettings } = gameSlice.actions;
+export const { initView, setInstanceId, setView, updateSettings } = gameSlice.actions;
 
 export default gameSlice.reducer;

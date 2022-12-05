@@ -11,4 +11,10 @@ export interface GameSettings {
 export interface GameState {
   view: GameView;
   settings: GameSettings;
+  game: Partial<GameRoom>;
+}
+
+export interface GameRoom {
+  instanceId: string;
+  data: any;
 }

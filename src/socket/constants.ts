@@ -14,6 +14,7 @@ export const SOCKET_EVENTS_LISTENING = {
   GAME_CREATED: 'game-created',
   GAME_IS_FULL: 'game-is-full',
   GAME_NOT_FOUND: 'game-not-found',
+  GAME_SETTINGS_CHANGED: 'game-settings-changed',
   GAME_SETTINGS_ERROR: 'game-settings-error',
   GAME_STARTED: 'game-started',
   MISPLACED_BOATS: 'misplaced-boats',

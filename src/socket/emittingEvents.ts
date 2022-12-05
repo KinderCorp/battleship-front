@@ -6,7 +6,7 @@ import { SOCKET_EVENTS_EMITTING } from '@socket/constants';
 /**
  * Emitting event for create the game.
  *
- * @param {GuestPlayer} payload Payload
+ * @param {GuestPlayer} data Data
  */
 export const emitCreateGame = ({ pseudo }: GuestPlayer) => {
   socket.emit(SOCKET_EVENTS_EMITTING.CREATE_GAME, { pseudo, socketId: socket.id });
@@ -15,8 +15,8 @@ export const emitCreateGame = ({ pseudo }: GuestPlayer) => {
 /**
  * Emitting event for game settings.
  *
- * @param {GameSettings} payload Payload
+ * @param {GameSettings} data Data
  */
-export const emitGameSettings = (payload: GameSettings) => {
-  socket.emit(SOCKET_EVENTS_EMITTING.GAME_SETTINGS, payload);
+export const emitGameSettings = (data: GameSettings) => {
+  socket.emit(SOCKET_EVENTS_EMITTING.GAME_SETTINGS, data);
 };

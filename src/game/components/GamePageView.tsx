@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import Button from '@shared/Button/components/Button';
 import GameSettingsView from '@game/components/GameSettingsView';
 import Header from '@shared/Header/components/Header';
-import { initGame } from '@game/reducer';
+import { initView } from '@game/reducer';
 import { PATHS } from '@core/constants';
 import { selectGameView } from '@game/selectors';
 import UrlHelpers from '@helpers/UrlHelpers';
@@ -23,7 +23,7 @@ const GamePageView = (): JSX.Element => {
   const view = useSelector(selectGameView);
 
   useEffect(() => {
-    dispatch(initGame());
+    dispatch(initView());
   }, [dispatch]);
 
   return (
