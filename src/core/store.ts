@@ -7,11 +7,14 @@ import { GAME_NAME } from '@game/constants';
 import gameReducer from '@game/reducer';
 import { HOME_NAME } from '@home/constants';
 import homeReducer from '@home/reducer';
+import { PLAYER_NAME } from '@player/constants';
+import playerReducer from '@player/reducer';
 import type { RootState } from '@core/models';
 
 export const rootReducer = combineReducers({
   [GAME_NAME]: gameReducer,
   [HOME_NAME]: homeReducer,
+  [PLAYER_NAME]: playerReducer,
 });
 
 /**
