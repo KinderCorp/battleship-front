@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import BlockContainer from '@shared/BlockContainer/components/BlockContainer';
 import Button from '@shared/Button/components/Button';
-import { emitStartGame } from '@socket/emittingEvents';
+// import { emitStartGame } from '@socket/emittingEvents';
 import { setView } from '@game/reducer';
 import TextContainer from '@shared/TextContainer/components/TextContainer';
 import UrlHelpers from '@helpers/UrlHelpers';
@@ -51,7 +51,7 @@ const GameSettingsView = (): JSX.Element => {
    * @return {void}
    */
   const handleStartGame = useCallback((): void => {
-    emitStartGame();
+    // emitStartGame();
     dispatch(setView('boats_placement'));
   }, [dispatch]);
 

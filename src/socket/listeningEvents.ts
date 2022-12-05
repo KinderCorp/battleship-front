@@ -1,6 +1,6 @@
 /**
- * Listening event when player join the game.
+ * Listening event when game is created.
  *
  * @return {null}
  */
-export const listeningPlayerJoin = (): null => null;
+export const listeningGameCreated = (): null => null;
