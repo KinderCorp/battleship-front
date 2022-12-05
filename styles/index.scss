@@ -10,6 +10,10 @@
 
 // Shared styles
 @import '~@shared/BlockContainer/styles/BlockContainer';
+@import '~@shared/Board/styles/Board';
+@import '~@shared/Board/styles/BoardCell';
+@import '~@shared/Board/styles/BoardRow';
+@import '~@shared/Boat/styles/Boat';
 @import '~@shared/Button/styles/Button';
 @import '~@shared/Field/styles/FieldStructure/FieldContainer';
 @import '~@shared/Field/styles/FieldStructure/FieldError';

@@ -1,0 +1,13 @@
+.boat {
+  position: absolute;
+  pointer-events: none;
+
+  &.boat--horizontal {
+    rotate: -90deg;
+  }
+
+  .boat-image {
+    height: 100%;
+    width: 100%;
+  }
+}

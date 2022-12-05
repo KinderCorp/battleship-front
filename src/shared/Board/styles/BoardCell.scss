@@ -1,0 +1,51 @@
+.board-cell {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  border: to-rem(1) solid $color-purple;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+
+  &.board-cell--miss::after {
+    background-color: $color-purple;
+    border-radius: 50%;
+    content: '';
+    height: 0;
+    margin: 10%;
+    padding-top: 40%;
+    width: 40%;
+  }
+
+  &.board-cell--hit {
+    &::before {
+      background-color: rgba($color-purple-dark, 0.6);
+      content: '';
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 1;
+    }
+
+    .icon {
+      z-index: 1;
+    }
+  }
+
+  &.is-active:not(.is-disabled, .board-cell--hit, .board-cell--miss) {
+    cursor: pointer;
+
+    &:hover::before {
+      background-color: rgba($color-white, 0.1);
+      content: '';
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+  }
+}
