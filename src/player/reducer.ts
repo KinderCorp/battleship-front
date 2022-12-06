@@ -13,6 +13,4 @@ export const playerSlice = createSlice({
   reducers: {},
 });
 
-// export const {} = playerSlice.actions;
-
 export default playerSlice.reducer;
