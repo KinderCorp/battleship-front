@@ -16,7 +16,7 @@ import useTranslation from '@hooks/useTranslation';
 const GamePageView = (): JSX.Element => {
   const { translate } = useTranslation();
 
-  const [view, setView] = useState<GameView>('settings');
+  const [view] = useState<GameView>('settings');
 
   return (
     <>
@@ -35,7 +35,7 @@ const GamePageView = (): JSX.Element => {
         title={view === 'settings' ? translate('create-game') : 'VS'}
       />
 
-      {view === 'settings' && <GameSettingsView setView={setView} />}
+      {view === 'settings' && <GameSettingsView />}
     </>
   );
 };
