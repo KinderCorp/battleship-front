@@ -4,7 +4,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { GAME_NAME, GAME_SETTINGS } from '@game/constants';
 import type { GameRoom, GameSettings, GameState, GameView } from '@game/models';
 
-const initialState: GameState = { game: {}, settings: GAME_SETTINGS, view: 'settings' };
+const initialState: GameState = { gameRoom: {}, settings: GAME_SETTINGS, view: 'settings' };
 
 export const gameSlice = createSlice({
   initialState,
@@ -14,7 +14,7 @@ export const gameSlice = createSlice({
       state.view = 'settings';
     },
     setInstanceId: (state, action: PayloadAction<GameRoom['instanceId']>) => {
-      state.game.instanceId = action.payload;
+      state.gameRoom.instanceId = action.payload;
     },
     setView: (state, action: PayloadAction<GameView>) => {
       state.view = action.payload;

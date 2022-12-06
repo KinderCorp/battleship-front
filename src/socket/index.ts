@@ -1,7 +1,7 @@
 import getConfig from 'next/config';
 import io from 'socket.io-client';
 
-import { listeningGameCreated } from '@socket/listeningEvents';
+import { listeningGameCreated, listeningPlayerJoined } from '@socket/listeningEvents';
 import { SOCKET_EVENTS_LISTENING } from '@socket/constants';
 
 const { publicRuntimeConfig } = getConfig();
@@ -13,5 +13,6 @@ const socket = io(SOCKETS_URL, {
 });
 
 socket.on(SOCKET_EVENTS_LISTENING.GAME_CREATED, listeningGameCreated);
+socket.on(SOCKET_EVENTS_LISTENING.PLAYER_JOINED, listeningPlayerJoined);
 
 export default socket;

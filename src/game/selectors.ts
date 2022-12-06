@@ -17,5 +17,9 @@ export const selectGameSettings = createSelector(
   (state: GameState) => state.settings,
 );
 
-export const selectGame = createSelector(selectGameState, (state: GameState) => state.game);
+export const selectGameRoom = createSelector(selectGameState, (state: GameState) => state.gameRoom);
 export const selectGameView = createSelector(selectGameState, (state: GameState) => state.view);
+export const selectGameInstance = createSelector(
+  selectGameState,
+  (state: GameState) => state.gameRoom.instanceId || '',
+);

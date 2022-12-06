@@ -5,9 +5,10 @@ import Button from '@shared/Button/components/Button';
 import { emitCreateGame } from '@socket/emittingEvents';
 import Image from '@shared/Image/components/Image';
 import { PATHS } from '@core/constants';
-import { selectGame } from '@game/selectors';
+import { selectGameInstance } from '@game/selectors';
 import { selectPlayer } from '@player/selectors';
 import UrlHelpers from '@helpers/UrlHelpers';
+import usePrevious from '@hooks/usePrevious';
 import useTranslation from '@hooks/useTranslation';
 
 /**
@@ -19,13 +20,15 @@ const HomePageContent = (): JSX.Element => {
   const { translate } = useTranslation();
 
   const player = useSelector(selectPlayer);
-  const { instanceId } = useSelector(selectGame);
+  const instanceId = useSelector(selectGameInstance);
+
+  const prevInstanceId = usePrevious(instanceId);
 
   useEffect(() => {
-    if (instanceId) {
+    if (instanceId && prevInstanceId !== instanceId) {
       UrlHelpers.changeLocation(`${PATHS.GAME}/${instanceId}`);
     }
-  }, [instanceId]);
+  }, [instanceId, prevInstanceId]);
 
   const handleCreateGame = useCallback((): void => {
     emitCreateGame(player);

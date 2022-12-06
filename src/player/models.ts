@@ -4,4 +4,5 @@ export interface GuestPlayer {
 
 export interface PlayerState {
   player: GuestPlayer;
+  socketId: string;
 }

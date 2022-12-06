@@ -1,11 +1,10 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 
 import BlockContainer from '@shared/BlockContainer/components/BlockContainer';
 import Button from '@shared/Button/components/Button';
-// import { emitStartGame } from '@socket/emittingEvents';
-import { setView } from '@game/reducer';
+import { selectPlayer } from '@player/selectors';
 import TextContainer from '@shared/TextContainer/components/TextContainer';
 import UrlHelpers from '@helpers/UrlHelpers';
 import UserCard from '@shared/UserCard/components/UserCard';
@@ -19,15 +18,12 @@ import useTranslation from '@hooks/useTranslation';
 const GameSettingsView = (): JSX.Element => {
   const { translate } = useTranslation();
 
-  const dispatch = useDispatch();
-  // const settings = useSelector(selectGameSettings);
+  // const dispatch = useDispatch();
+
+  const player = useSelector(selectPlayer);
 
   const [shareLink, setShareLink] = useState<string>('');
   const [clickedButtonCopy, setClickedButtonCopy] = useState<boolean>(false);
-
-  // useEffect(() => {
-  //   gameSettingsEvents(settings);
-  // }, [settings]);
 
   useEffect(() => setShareLink(UrlHelpers.getUrl()), []);
 
@@ -51,9 +47,8 @@ const GameSettingsView = (): JSX.Element => {
    * @return {void}
    */
   const handleStartGame = useCallback((): void => {
-    // emitStartGame();
-    dispatch(setView('boats_placement'));
-  }, [dispatch]);
+    // dispatch(setView('boats_placement'));
+  }, []);
 
   return (
     <div className="game-settings">
@@ -75,7 +70,7 @@ const GameSettingsView = (): JSX.Element => {
 
         <BlockContainer className="players">
           <UserCard
-            name="Player_978"
+            name={player.pseudo}
             characterSrc="/images/characters/character-sam.png"
             characterName="Sam"
           />

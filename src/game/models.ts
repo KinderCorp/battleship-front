@@ -1,4 +1,5 @@
 import type { GamePageParams } from '@pages/game/[gameId]';
+import type { GuestPlayer } from '@player/models';
 
 export type GamePageContentProps = Required<GamePageParams>;
 
@@ -11,10 +12,25 @@ export interface GameSettings {
 export interface GameState {
   view: GameView;
   settings: GameSettings;
-  game: Partial<GameRoom>;
+  gameRoom: Partial<GameRoom>;
 }
 
-export interface GameRoom {
+export interface GameSettingsViewProps {
+  setView: (view: GameView) => void;
+}
+
+export interface GamePlayer extends Pick<GuestPlayer, 'pseudo'> {
+  socketId: string;
+}
+
+export interface GameRoom extends GameInstance {
+  rival: GamePlayer;
+}
+
+export interface GameInstance {
   instanceId: string;
-  data: any;
+}
+
+export interface GameRoomData<T> extends GameInstance {
+  data: T;
 }

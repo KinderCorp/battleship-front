@@ -1,9 +1,11 @@
 import type { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
+import { emitPlayerJoiningGame } from '@socket/emittingEvents';
 import type { GamePageContentProps } from '@game/models';
 import GamePageView from '@game/components/GamePageView';
 import Layout from '@shared/Layout/components/Layout';
 import { PATHS } from '@core/constants';
+import store from '@core/store';
 
 export type GamePageParams = {
   gameId?: string;
@@ -33,8 +35,6 @@ export const getServerSideProps = async ({
 > => {
   const { gameId } = params;
 
-  // TODO: check by the API if game id is correct
-
   if (!gameId) {
     return {
       redirect: {
@@ -43,6 +43,8 @@ export const getServerSideProps = async ({
       },
     };
   }
+
+  emitPlayerJoiningGame(gameId, store.getState().PLAYER.player);
 
   return {
     props: {
