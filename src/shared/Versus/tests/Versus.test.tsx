@@ -4,9 +4,6 @@ import useTranslation from '@hooks/useTranslation';
 import Versus from '@shared/Versus/components/Versus';
 import type { VersusProps } from '@shared/Versus/models';
 
-
-const props: VersusProps = { size: 'medium' };
-
 describe('shared/components/Versus', () => {
   const { result } = renderHook(() => useTranslation());
   const translate = result.current.translate;
@@ -16,7 +13,7 @@ describe('shared/components/Versus', () => {
   });
 
   it('should renders the expected component', () => {
-    render(<Versus {...props} />);
+    render(<Versus />);
 
     const versus = screen.getByTestId('versus');
     
@@ -26,11 +23,11 @@ describe('shared/components/Versus', () => {
   });
 
   it('should render the component with another size', () => {
-    const props: VersusProps = {
+    const localProps: VersusProps = {
       size: 'large',
     };
 
-    render(<Versus {...props} />);
+    render(<Versus {...localProps} />);
 
     const versus = screen.getByTestId('versus');
 
