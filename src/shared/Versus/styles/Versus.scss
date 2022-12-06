@@ -5,12 +5,13 @@
   padding: 0 to-rem(60);
 
   &::before {
-    @include center-element;
-
     border-bottom: to-rem(3) dashed $color-purple-dark-2;
     content: '';
     height: 0;
-    width: 100%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -0%);
+    width: 109px;
   }
 
   &-content {
