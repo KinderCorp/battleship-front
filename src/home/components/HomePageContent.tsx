@@ -1,14 +1,11 @@
 import { useCallback, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Button from '@shared/Button/components/Button';
 import { emitCreateGame } from '@socket/emittingEvents';
 import Image from '@shared/Image/components/Image';
-import { PATHS } from '@core/constants';
-import { selectGameInstance } from '@game/selectors';
+import { initGameRoom } from '@game/reducer';
 import { selectPlayer } from '@player/selectors';
-import UrlHelpers from '@helpers/UrlHelpers';
-import usePrevious from '@hooks/usePrevious';
 import useTranslation from '@hooks/useTranslation';
 
 /**
@@ -19,16 +16,13 @@ import useTranslation from '@hooks/useTranslation';
 const HomePageContent = (): JSX.Element => {
   const { translate } = useTranslation();
 
-  const player = useSelector(selectPlayer);
-  const instanceId = useSelector(selectGameInstance);
+  const dispatch = useDispatch();
 
-  const prevInstanceId = usePrevious(instanceId);
+  const player = useSelector(selectPlayer);
 
   useEffect(() => {
-    if (instanceId && prevInstanceId !== instanceId) {
-      UrlHelpers.changeLocation(`${PATHS.GAME}/${instanceId}`);
-    }
-  }, [instanceId, prevInstanceId]);
+    dispatch(initGameRoom());
+  });
 
   const handleCreateGame = useCallback((): void => {
     emitCreateGame(player);

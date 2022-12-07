@@ -18,7 +18,6 @@ export const selectGameSettings = createSelector(
 );
 
 export const selectGameRoom = createSelector(selectGameState, (state: GameState) => state.gameRoom);
-export const selectGameView = createSelector(selectGameState, (state: GameState) => state.view);
 export const selectGameInstance = createSelector(
   selectGameState,
   (state: GameState) => state.gameRoom.instanceId || '',
@@ -26,4 +25,8 @@ export const selectGameInstance = createSelector(
 export const selectGamePlayerAdmin = createSelector(
   selectGameRoom,
   (state: Partial<GameRoom>) => state?.players?.find((player) => player.isAdmin) || null,
+);
+export const selectGamePlayerRival = createSelector(
+  selectGameRoom,
+  (state: Partial<GameRoom>) => state?.players?.find((player) => !player.isAdmin) || null,
 );

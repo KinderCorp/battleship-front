@@ -10,7 +10,6 @@ export interface GameSettings {
 }
 
 export interface GameState {
-  view: GameView;
   settings: GameSettings;
   gameRoom: Partial<GameRoom>;
 }

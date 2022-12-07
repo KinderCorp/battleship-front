@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectGamePlayerAdmin, selectGameRoom } from '@game/selectors';
+import { selectGamePlayerAdmin, selectGamePlayerRival, selectGameRoom } from '@game/selectors';
 import BlockContainer from '@shared/BlockContainer/components/BlockContainer';
 import Button from '@shared/Button/components/Button';
 import { checkGameIsFull } from '@game/helpers';
@@ -23,6 +23,7 @@ const GameSettingsView = (): JSX.Element => {
 
   const gameRoom = useSelector(selectGameRoom);
   const adminPlayer = useSelector(selectGamePlayerAdmin);
+  const rivalPlayer = useSelector(selectGamePlayerRival);
 
   const [shareLink, setShareLink] = useState<string>('');
   const [clickedButtonCopy, setClickedButtonCopy] = useState<boolean>(false);
@@ -74,17 +75,19 @@ const GameSettingsView = (): JSX.Element => {
 
         <BlockContainer className="players">
           <UserCard
-            name={adminPlayer?.pseudo}
-            characterSrc="/images/characters/character-sam.png"
             characterName="Sam"
+            characterSrc="/images/characters/character-sam.png"
+            name={adminPlayer?.pseudo}
+            priority
           />
           VS
           <UserCard
             characterName="Sam"
             characterSrc="/images/characters/character-sam.png"
             direction="left"
-            name="Player_978"
-            isLoading
+            isLoading={!rivalPlayer}
+            name={rivalPlayer?.pseudo}
+            priority
           />
         </BlockContainer>
 
