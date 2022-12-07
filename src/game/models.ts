@@ -12,10 +12,7 @@ export interface GameSettings {
 export interface GameState {
   settings: GameSettings;
   gameRoom: Partial<GameRoom>;
-}
-
-export interface GameSettingsViewProps {
-  setView: (view: GameView) => void;
+  view: GameView;
 }
 
 export interface GamePlayer extends Pick<GuestPlayer, 'pseudo'> {

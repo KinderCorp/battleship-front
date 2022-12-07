@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import Button from '@shared/Button/components/Button';
 import GameSettingsView from '@game/components/GameSettingsView';
-import type { GameView } from '@game/models';
 import Header from '@shared/Header/components/Header';
 import { PATHS } from '@core/constants';
+import { selectGameView } from '@game/selectors';
 import UrlHelpers from '@helpers/UrlHelpers';
 import useTranslation from '@hooks/useTranslation';
 
@@ -16,7 +16,7 @@ import useTranslation from '@hooks/useTranslation';
 const GamePageView = (): JSX.Element => {
   const { translate } = useTranslation();
 
-  const [view] = useState<GameView>('settings');
+  const view = useSelector(selectGameView);
 
   return (
     <>
