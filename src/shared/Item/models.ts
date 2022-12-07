@@ -1,12 +1,13 @@
-import type { ImageProps } from "@shared/Image/models";
 import type { SyntheticEvent } from "react";
+
+import type { ImageProps } from "@shared/Image/models";
 
 export interface ItemProps {
   className?: string;
-  isLocked: boolean; //pas débloqué par le joueur
-  isSelected: boolean, //choisi pour tirer
-  isDisabled : boolean, //pas choisi dans les paramètres ou plus de tirs dispo
-  numberOfUses : number | string, // - 1 sera égal à infini
+  isLocked?: boolean;
+  isSelected?: boolean,
+  name: string;
+  numberOfUses?: number, // set to -1 to have unlimited uses
   src : ImageProps['src'],
   onClick: (event: SyntheticEvent<EventTarget>) => void;
 }

@@ -17,62 +17,46 @@ const Item = ({
     className = "",
     isLocked = false,
     isSelected = false,
-    isDisabled = false,
-    numberOfUses = 0,
+    name,
+    numberOfUses,
     onClick,
     src,
 }: ItemProps): JSX.Element => {
 
-    const disabled = useMemo(() => isDisabled || isLocked, [isDisabled, isLocked]);
+    const disabled = useMemo(() => numberOfUses === 0 || isLocked, [isLocked, numberOfUses]);
 
     const handleClick = useCallback(
         (event: SyntheticEvent<EventTarget>) => {
-          if (!disabled) onClick(event);
+            event.preventDefault();
+            event.stopPropagation();
+
+            if (!disabled) onClick(event);
         },
         [disabled, onClick],
     );
 
     const itemClassName = useMemo(
         (): string =>
-            classNames('item', className, {
-            'has-orange-border': !!isSelected,
-            }),
-        [className, isSelected],
-    );
-
-    const imgClassName = useMemo(
-        (): string =>
             classNames('item', {
-            'is-disabled': !isDisabled || numberOfUses == 0,
-            'is-locked': !!isLocked,
+                'has-badge': numberOfUses && numberOfUses >= 0,
+                'is-disabled': !!disabled,
+                'is-locked': !!isLocked,
+                'is-selected': !!isSelected,
             }, className),
-        [className, isLocked, isDisabled, numberOfUses],
+        [numberOfUses, disabled, isLocked, isSelected, className],
     );
-
-    const pinClassName = useMemo(
-        (): string => classNames('pin', className, {
-            'not-locked': !isLocked,
-        }),
-        [className, isLocked]
-    )
-
-    /**
-     * Function to display right pin.
-     * 
-     * @return {JSX.Element}
-     */
-    const pin = () : JSX.Element => {
-        return (
-            <div className={pinClassName}>
-                {numberOfUses == -1 ? <Icon name={'Infinity'} color={COLORS.BROWN} borderColor={COLORS.YELLOW}/> : isLocked ? <Icon name={'Lock'} color={COLORS.WHITE} borderColor={COLORS.BLACK}/> : numberOfUses}
-            </div>
-        );
-    }
 
     return (
         <div className={itemClassName} onClick={handleClick}>
-            <Image src={src} alt={''} className={imgClassName}/>
-            { !isDisabled && pin() }
+            <Image src={src} alt={name} className="item-image" />
+
+            {!!isLocked && (
+                <Icon name='Lock' color={COLORS.WHITE} borderColor={COLORS.BLACK} className='item-lock'/>
+            )}
+
+            {numberOfUses && (
+                <div className='item-badge'>{numberOfUses >= 0 ? numberOfUses : <Icon name='Infinity' color={COLORS.BROWN} borderColor={COLORS.ORANGE} />}</div>
+            )}
         </div>
     );
 }
