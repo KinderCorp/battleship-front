@@ -1,5 +1,3 @@
-import type { SyntheticEvent } from "react";
-
 import type { ImageProps } from "@shared/Image/models";
 
 export interface ItemProps {
@@ -9,5 +7,9 @@ export interface ItemProps {
   name: string;
   numberOfUses?: number, // set to -1 to have unlimited uses
   src : ImageProps['src'],
-  onClick: (event: SyntheticEvent<EventTarget>) => void;
+  onClick: (name: Item['name']) => void;
+}
+
+export interface Item {
+  name: string;
 }

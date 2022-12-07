@@ -30,9 +30,9 @@ const Item = ({
             event.preventDefault();
             event.stopPropagation();
 
-            if (!disabled) onClick(event);
+            if (!disabled) onClick(name);
         },
-        [disabled, onClick],
+        [disabled, name, onClick],
     );
 
     const itemClassName = useMemo(
