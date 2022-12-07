@@ -8,7 +8,8 @@ import { PATHS } from '@core/constants';
 import { selectGamePlayerAdmin } from '@game/selectors';
 import { selectPlayer } from '@player/selectors';
 import socket from '@socket/index';
-import store from '@core/store';
+import UrlHelpers from '@helpers/UrlHelpers';
+import { useSelector } from 'react-redux';
 
 export type GamePageParams = {
   gameId?: string;
@@ -17,9 +18,19 @@ export type GamePageParams = {
 /**
  * Game page.
  *
+ * @param {GamePageContentProps} props Props
  * @return {JSX.Element}
  */
-const GamePage = (): JSX.Element => {
+const GamePage = ({ gameId }: GamePageContentProps): JSX.Element => {
+  const adminPlayer = useSelector(selectGamePlayerAdmin);
+  const player = useSelector(selectPlayer);
+
+  if (adminPlayer?.socketId !== socket.id) {
+    emitPlayerJoiningGame(gameId, player);
+  }
+
+  if (!socket.connected) UrlHelpers.changeLocation(PATHS.DEFAULT);
+
   return <GamePageView />;
 };
 
@@ -45,11 +56,6 @@ export const getServerSideProps = async ({
         permanent: false,
       },
     };
-  }
-
-  const adminPlayer = selectGamePlayerAdmin(store.getState());
-  if (adminPlayer?.socketId !== socket.id) {
-    emitPlayerJoiningGame(gameId, selectPlayer(store.getState()));
   }
 
   return {

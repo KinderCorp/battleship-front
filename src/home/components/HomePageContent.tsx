@@ -6,6 +6,7 @@ import Button from '@shared/Button/components/Button';
 import { emitCreateGame } from '@socket/emittingEvents';
 import Image from '@shared/Image/components/Image';
 import { selectPlayer } from '@player/selectors';
+import socket from '@socket/index';
 import useTranslation from '@hooks/useTranslation';
 
 /**
@@ -54,7 +55,12 @@ const HomePageContent = (): JSX.Element => {
           }}
         />
 
-        <Button className="content-play" onClick={handleCreateGame} size="large">
+        <Button
+          className="content-play"
+          onClick={handleCreateGame}
+          size="large"
+          isDisabled={!socket.connected}
+        >
           {translate('create-game')}
         </Button>
       </div>

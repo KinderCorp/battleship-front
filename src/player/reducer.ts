@@ -3,9 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { generatePseudo } from '@player/helpers';
 import { PLAYER_NAME } from '@player/constants';
 import type { PlayerState } from '@player/models';
-import socket from '@socket/index';
 
-const initialState: PlayerState = { player: { pseudo: generatePseudo() }, socketId: socket.id };
+const initialState: PlayerState = { player: { pseudo: generatePseudo() } };
 
 export const playerSlice = createSlice({
   initialState,

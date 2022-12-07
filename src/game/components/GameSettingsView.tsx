@@ -16,6 +16,7 @@ import TextContainer from '@shared/TextContainer/components/TextContainer';
 import UrlHelpers from '@helpers/UrlHelpers';
 import UserCard from '@shared/UserCard/components/UserCard';
 import useTranslation from '@hooks/useTranslation';
+import Versus from '@shared/Versus/components/Versus';
 
 /**
  * Game settings.
@@ -83,7 +84,7 @@ const GameSettingsView = (): JSX.Element => {
             name={adminPlayer?.pseudo}
             priority
           />
-          VS
+          <Versus />
           <UserCard
             characterName="Sam"
             characterSrc="/images/characters/character-sam.png"

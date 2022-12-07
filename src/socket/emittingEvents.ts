@@ -10,7 +10,7 @@ import { SOCKET_EVENTS_EMITTING } from '@socket/constants';
  * @param {GuestPlayer} data Data
  */
 export const emitCreateGame = ({ pseudo }: GuestPlayer) => {
-  socket.emit(SOCKET_EVENTS_EMITTING.CREATE_GAME, { pseudo });
+  socket.emit(SOCKET_EVENTS_EMITTING.CREATE_GAME, { pseudo, socketId: socket.id });
 };
 
 /**
