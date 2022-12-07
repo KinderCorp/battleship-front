@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
 
+import type { GameRoom, GameState } from '@game/models';
 import { GAME_NAME } from '@game/constants';
-import type { GameState } from '@game/models';
 import type { RootState } from '@core/models';
 
 /**
@@ -22,4 +22,8 @@ export const selectGameView = createSelector(selectGameState, (state: GameState)
 export const selectGameInstance = createSelector(
   selectGameState,
   (state: GameState) => state.gameRoom.instanceId || '',
+);
+export const selectGamePlayerAdmin = createSelector(
+  selectGameRoom,
+  (state: Partial<GameRoom>) => state?.players?.find((player) => player.isAdmin) || null,
 );
