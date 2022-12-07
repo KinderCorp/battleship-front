@@ -34,6 +34,6 @@ export const emitPlayerJoiningGame = (instanceId: string, { pseudo }: GuestPlaye
       pseudo,
       socketId: socket.id,
     },
-    instanceId: instanceId,
+    instanceId,
   });
 };
