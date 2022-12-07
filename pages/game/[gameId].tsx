@@ -5,6 +5,9 @@ import type { GamePageContentProps } from '@game/models';
 import GamePageView from '@game/components/GamePageView';
 import Layout from '@shared/Layout/components/Layout';
 import { PATHS } from '@core/constants';
+import { selectGamePlayerAdmin } from '@game/selectors';
+import { selectPlayer } from '@player/selectors';
+import socket from '@socket/index';
 import store from '@core/store';
 
 export type GamePageParams = {
@@ -44,7 +47,10 @@ export const getServerSideProps = async ({
     };
   }
 
-  emitPlayerJoiningGame(gameId, store.getState().PLAYER.player);
+  const adminPlayer = selectGamePlayerAdmin(store.getState());
+  if (adminPlayer?.socketId !== socket.id) {
+    emitPlayerJoiningGame(gameId, selectPlayer(store.getState()));
+  }
 
   return {
     props: {
