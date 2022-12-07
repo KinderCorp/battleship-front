@@ -21,10 +21,11 @@ export interface GameSettingsViewProps {
 
 export interface GamePlayer extends Pick<GuestPlayer, 'pseudo'> {
   socketId: string;
+  isAdmin?: boolean;
 }
 
 export interface GameRoom extends GameInstance {
-  rival: GamePlayer;
+  players: GamePlayer[];
 }
 
 export interface GameInstance {

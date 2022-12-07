@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
+import { selectGamePlayerAdmin, selectGameRoom } from '@game/selectors';
 import BlockContainer from '@shared/BlockContainer/components/BlockContainer';
 import Button from '@shared/Button/components/Button';
-import { selectPlayer } from '@player/selectors';
+import { checkGameIsFull } from '@player/helpers';
 import TextContainer from '@shared/TextContainer/components/TextContainer';
 import UrlHelpers from '@helpers/UrlHelpers';
 import UserCard from '@shared/UserCard/components/UserCard';
@@ -20,7 +21,8 @@ const GameSettingsView = (): JSX.Element => {
 
   // const dispatch = useDispatch();
 
-  const player = useSelector(selectPlayer);
+  const gameRoom = useSelector(selectGameRoom);
+  const adminPlayer = useSelector(selectGamePlayerAdmin);
 
   const [shareLink, setShareLink] = useState<string>('');
   const [clickedButtonCopy, setClickedButtonCopy] = useState<boolean>(false);
@@ -50,6 +52,8 @@ const GameSettingsView = (): JSX.Element => {
     // dispatch(setView('boats_placement'));
   }, []);
 
+  const allPlayersJoined: boolean = useMemo(() => checkGameIsFull(gameRoom), [gameRoom]);
+
   return (
     <div className="game-settings">
       <div className="content">
@@ -70,7 +74,7 @@ const GameSettingsView = (): JSX.Element => {
 
         <BlockContainer className="players">
           <UserCard
-            name={player.pseudo}
+            name={adminPlayer?.pseudo}
             characterSrc="/images/characters/character-sam.png"
             characterName="Sam"
           />
@@ -84,7 +88,7 @@ const GameSettingsView = (): JSX.Element => {
           />
         </BlockContainer>
 
-        <Button onClick={handleStartGame} size="large">
+        <Button onClick={handleStartGame} size="large" isDisabled={!allPlayersJoined}>
           {translate('start')}
         </Button>
       </div>
