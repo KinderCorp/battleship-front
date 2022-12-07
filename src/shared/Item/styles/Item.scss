@@ -1,46 +1,46 @@
-.item{
-    background-color: $color-purple-dark-2;
-    width: to-rem(100);
-    height: to-rem(100);
-    border-radius: $border-radius;
+.item {
+  background-color: $color-purple-dark-2;
+  width: to-rem(100);
+  height: to-rem(100);
+  border-radius: $border-radius;
 
-    &.is-selected {
-        border: 3px solid $color-orange;
+  &.is-selected {
+    border: 3px solid $color-orange;
+  }
+
+  &.is-disabled,
+  &.is-locked {
+    .item-image {
+      -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+      filter: grayscale(100%);
+    }
+  }
+
+  .item-lock {
+    width: to-rem(30);
+    height: to-rem(30);
+    position: relative;
+    left: to-rem(87);
+    bottom: to-rem(10);
+  }
+
+  .item-badge {
+    &::before {
+      @include light-reflection;
     }
 
-    &.is-disabled, &.is-locked{
-        .item-image{
-            -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-            filter: grayscale(100%);
-        }
-    }
-
-    .item-lock{
-        width: to-rem(30);
-        height: to-rem(30);
-        position: relative;
-        left: to-rem(87);
-        bottom: to-rem(10);
-    }
-
-    .item-badge{
-
-        &::before {
-            @include light-reflection;
-        }
-
-        width: to-rem(30);
-        height: to-rem(30);
-        position: relative;
-        left: to-rem(87);
-        bottom: to-rem(10);
-        text-align: center;
-        vertical-align: middle;
-        display: table-cell;
-        color: $color-brown;
-        background-color: $color-orange;
-        border-radius: 50%;
-        border: 1px $color-brown solid;
-        box-shadow: inset 0 $inset-shadow $color-yellow, inset 0 - $inset-shadow $color-orange-dark;
-    }
+    width: to-rem(30);
+    height: to-rem(30);
+    position: relative;
+    left: to-rem(87);
+    bottom: to-rem(10);
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+    color: $color-brown;
+    background-color: $color-orange;
+    border-radius: 50%;
+    border: 1px $color-brown solid;
+    box-shadow: inset 0 $inset-shadow $color-yellow, inset 0 - $inset-shadow $color-orange-dark;
+  }
 }
