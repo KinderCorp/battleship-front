@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
 
+import type { GuestPlayer, PlayerState } from '@player/models';
 import { PLAYER_NAME } from '@player/constants';
-import type { PlayerState } from '@player/models';
 import type { RootState } from '@core/models';
 
 /**
@@ -12,4 +12,7 @@ import type { RootState } from '@core/models';
  */
 const selectPlayerState = (state: RootState): PlayerState => state[PLAYER_NAME];
 
-export const selectPlayer = createSelector(selectPlayerState, (state: PlayerState) => state.player);
+export const selectPlayer = createSelector(
+  selectPlayerState,
+  (state: PlayerState): GuestPlayer => state.player,
+);
