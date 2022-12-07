@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { selectGamePlayerAdmin, selectGameRoom } from '@game/selectors';
 import BlockContainer from '@shared/BlockContainer/components/BlockContainer';
 import Button from '@shared/Button/components/Button';
-import { checkGameIsFull } from '@player/helpers';
+import { checkGameIsFull } from '@game/helpers';
 import TextContainer from '@shared/TextContainer/components/TextContainer';
 import UrlHelpers from '@helpers/UrlHelpers';
 import UserCard from '@shared/UserCard/components/UserCard';
