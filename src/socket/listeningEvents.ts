@@ -1,4 +1,4 @@
-import { addGamePlayer, setInstanceId } from '@game/reducer';
+import { addGamePlayer, setInstanceId, setView } from '@game/reducer';
 import type { GameInstance, GamePlayer, GameRoomData } from '@game/models';
 import { PATHS } from '@core/constants';
 import { selectPlayer } from '@player/selectors';
@@ -26,9 +26,18 @@ export const listeningGameCreated = (payload: GameInstance): void => {
 /**
  * Listening event when player joined.
  *
- * @param {GameInstance} payload Payload
+ * @param {GameRoomData<GamePlayer>} payload Payload
  * @return {void}
  */
 export const listeningPlayerJoined = (payload: GameRoomData<GamePlayer>): void => {
   store.dispatch(addGamePlayer(payload.data));
+};
+
+/**
+ * Listening event for start placing boats.
+ *
+ * @return {void}
+ */
+export const listeningStartPlacingBoats = (): void => {
+  store.dispatch(setView('boats_placement'));
 };

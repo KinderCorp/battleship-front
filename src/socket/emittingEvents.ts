@@ -37,3 +37,15 @@ export const emitPlayerJoiningGame = (instanceId: string, { pseudo }: GuestPlaye
     instanceId,
   });
 };
+
+/**
+ * Emitting event when players are ready to place their boats.
+ *
+ * @param {GameSettings} data Data
+ */
+export const emitPlayersReadyToPlaceBoats = (data: GameSettings) => {
+  socket.emit(
+    SOCKET_EVENTS_EMITTING.PLAYER_READY_TO_PLACE_BOATS,
+    formatGameRoomData<GameSettings>(data),
+  );
+};
