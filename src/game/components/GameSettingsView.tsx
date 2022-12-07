@@ -2,10 +2,16 @@ import { useEffect, useMemo, useState } from 'react';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectGamePlayerAdmin, selectGamePlayerRival, selectGameRoom } from '@game/selectors';
+import {
+  selectGamePlayerAdmin,
+  selectGamePlayerRival,
+  selectGameRoom,
+  selectGameSettings,
+} from '@game/selectors';
 import BlockContainer from '@shared/BlockContainer/components/BlockContainer';
 import Button from '@shared/Button/components/Button';
 import { checkGameIsFull } from '@game/helpers';
+import { emitPlayersReadyToPlaceBoats } from '@socket/emittingEvents';
 import TextContainer from '@shared/TextContainer/components/TextContainer';
 import UrlHelpers from '@helpers/UrlHelpers';
 import UserCard from '@shared/UserCard/components/UserCard';
@@ -19,14 +25,15 @@ import useTranslation from '@hooks/useTranslation';
 const GameSettingsView = (): JSX.Element => {
   const { translate } = useTranslation();
 
-  // const dispatch = useDispatch();
-
+  const settings = useSelector(selectGameSettings);
   const gameRoom = useSelector(selectGameRoom);
   const adminPlayer = useSelector(selectGamePlayerAdmin);
   const rivalPlayer = useSelector(selectGamePlayerRival);
 
   const [shareLink, setShareLink] = useState<string>('');
   const [clickedButtonCopy, setClickedButtonCopy] = useState<boolean>(false);
+
+  const allPlayersJoined: boolean = useMemo(() => checkGameIsFull(gameRoom), [gameRoom]);
 
   useEffect(() => setShareLink(UrlHelpers.getUrl()), []);
 
@@ -37,11 +44,9 @@ const GameSettingsView = (): JSX.Element => {
    */
   const handleCopyShareLink = useCallback((): void => {
     navigator.clipboard.writeText(shareLink);
-    setClickedButtonCopy(true);
 
-    setTimeout(() => {
-      setClickedButtonCopy(false);
-    }, 1000);
+    setClickedButtonCopy(true);
+    setTimeout(() => setClickedButtonCopy(false), 1000);
   }, [shareLink]);
 
   /**
@@ -50,10 +55,8 @@ const GameSettingsView = (): JSX.Element => {
    * @return {void}
    */
   const handleStartGame = useCallback((): void => {
-    // dispatch(setView('boats_placement'));
-  }, []);
-
-  const allPlayersJoined: boolean = useMemo(() => checkGameIsFull(gameRoom), [gameRoom]);
+    if (allPlayersJoined) emitPlayersReadyToPlaceBoats(settings);
+  }, [allPlayersJoined, settings]);
 
   return (
     <div className="game-settings">

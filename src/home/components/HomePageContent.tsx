@@ -1,10 +1,10 @@
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { initGameRoom, setView } from '@game/reducer';
 import Button from '@shared/Button/components/Button';
 import { emitCreateGame } from '@socket/emittingEvents';
 import Image from '@shared/Image/components/Image';
-import { initGameRoom } from '@game/reducer';
 import { selectPlayer } from '@player/selectors';
 import useTranslation from '@hooks/useTranslation';
 
@@ -22,6 +22,7 @@ const HomePageContent = (): JSX.Element => {
 
   useEffect(() => {
     dispatch(initGameRoom());
+    dispatch(setView('settings'));
   });
 
   const handleCreateGame = useCallback((): void => {
