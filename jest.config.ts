@@ -22,6 +22,7 @@ const jestConfig: Config = {
     '^@src/(.*)$': '<rootDir>/src/$1',
     '^@styles/(.*)$': '<rootDir>/styles/$1',
     '^@translation/(.*)$': '<rootDir>/src/translation/$1',
+    '^@weapon/(.*)$': '<rootDir>/src/weapon/$1',
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   testEnvironment: 'jsdom',

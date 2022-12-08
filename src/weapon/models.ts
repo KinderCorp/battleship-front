@@ -1,7 +1,5 @@
-export type WeaponName = 'BOMB';
-
 export interface Weapon {
   id: number;
-  name: WeaponName;
+  name: string;
   maxAmmunition: number;
 }

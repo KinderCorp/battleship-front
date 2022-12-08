@@ -25,7 +25,8 @@
       "@socket/*": ["./src/socket/*"],
       "@src/*": ["./src/*"],
       "@styles/*": ["./styles/*"],
-      "@translation/*": ["./src/translation/*"]
+      "@translation/*": ["./src/translation/*"],
+      "@weapon/*": ["./src/weapon/*"]
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,
