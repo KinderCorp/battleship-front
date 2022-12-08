@@ -1,4 +1,4 @@
-import HomePage from '@home/components/HomePage';
+import HomePageContent from '@home/components/HomePageContent';
 import Layout from '@shared/Layout/components/Layout';
 
 /**
@@ -6,10 +6,10 @@ import Layout from '@shared/Layout/components/Layout';
  *
  * @return {JSX.Element}
  */
-const Home = (): JSX.Element => {
-  return <HomePage />;
+const HomePage = (): JSX.Element => {
+  return <HomePageContent />;
 };
 
-Home.getLayout = (page: JSX.Element): JSX.Element => <Layout>{page}</Layout>;
+HomePage.getLayout = (page: JSX.Element): JSX.Element => <Layout>{page}</Layout>;
 
-export default Home;
+export default HomePage;

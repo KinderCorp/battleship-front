@@ -1,14 +1,14 @@
 import { fireEvent, screen } from '@testing-library/react';
 import type { RenderResult } from '@testing-library/react';
 
-import HomePage from '@home/components/HomePage';
+import HomePageContent from '@home/components/HomePageContent';
 import renderWithProviders from '@core/utils/test.utils';
 
-describe('home/components/HomePage', () => {
+describe('home/components/HomePageContent', () => {
   let component: RenderResult;
 
   beforeEach(() => {
-    component = renderWithProviders(<HomePage />);
+    component = renderWithProviders(<HomePageContent />);
   });
 
   it('should renders component', () => {

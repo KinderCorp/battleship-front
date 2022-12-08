@@ -1,15 +1,13 @@
-interface Props {
-  children: JSX.Element;
-}
+import type { LayoutProps } from '@shared/Layout/models';
 
 /**
  * Layout component.
  *
- * @param {Props} props Props
+ * @param {LayoutProps} props Props
  * @return {JSX.Element}
  */
-const Layout = ({ children }: Props): JSX.Element => {
-  return children;
+const Layout = ({ children }: LayoutProps): JSX.Element => {
+  return <main id="page">{children}</main>;
 };
 
 export default Layout;

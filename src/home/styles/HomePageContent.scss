@@ -1,7 +1,5 @@
-.page-home {
+.home-page-content {
   background: $color-gradient-radial-dark;
-  height: 100vh;
-  width: 100vw;
 
   .button.login {
     z-index: 10;
@@ -20,11 +18,11 @@
   }
 
   .content {
-    @include center-element;
-
     align-items: center;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
 
     .content-logo {
       height: 30vh;

@@ -32,10 +32,7 @@ $header-height-medium: to-rem(120);
   }
 
   .header-title {
-    align-items: center;
     color: rgba($color-white, 0.8);
-    flex: 1;
-    grid-column: 2;
     text-align: center;
     white-space: nowrap;
   }

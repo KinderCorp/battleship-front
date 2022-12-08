@@ -1,4 +1,4 @@
-import HomePage from '@home/components/HomePage';
+import HomePage from '@home/components/HomePageContent';
 import Layout from '@shared/Layout/components/Layout';
 import renderWithProviders from '@core/utils/test.utils';
 

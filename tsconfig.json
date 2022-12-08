@@ -13,16 +13,20 @@
     "paths": {
       "@api/*": ["./src/api/*"],
       "@core/*": ["./src/core/*"],
+      "@game/*": ["./src/game/*"],
       "@helpers/*": ["./src/shared/_helpers/*"],
       "@home/*": ["./src/home/*"],
       "@hooks/*": ["./src/shared/_hooks/*"],
       "@mocks/*": ["./mocks/*"],
       "@pages/*": ["./pages/*"],
+      "@player/*": ["./src/player/*"],
       "@public/*": ["./public/*"],
       "@shared/*": ["./src/shared/*"],
+      "@socket/*": ["./src/socket/*"],
       "@src/*": ["./src/*"],
       "@styles/*": ["./styles/*"],
-      "@translation/*": ["./src/translation/*"]
+      "@translation/*": ["./src/translation/*"],
+      "@weapon/*": ["./src/weapon/*"]
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,

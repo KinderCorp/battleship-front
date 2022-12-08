@@ -9,13 +9,13 @@
   "scripts": {
     "build": "next build",
     "check": "npm run prettier:check & npm run stylelint:check & npm run lint:check",
-    "dev": "next dev",
     "format": "npm run prettier & npm run stylelint",
     "lint:check": "next lint",
     "prepare": "husky install",
     "prettier:check": "prettier --check \"pages/**/*.(ts|tsx)\"",
     "prettier": "prettier --write \"pages/**/*.(ts|tsx)\"",
-    "start": "next start",
+    "start:prod": "next start",
+    "start": "next dev",
     "stylelint:check": "stylelint \"**/styles/**/*.scss\"",
     "stylelint": "stylelint --fix \"**/styles/**/*.scss\"",
     "test:watch": "jest --coverage --watchAll",
@@ -29,6 +29,7 @@
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",
     "redux": "^4.2.0",
+    "sharp": "^0.31.2",
     "socket.io-client": "^4.5.4"
   },
   "devDependencies": {
