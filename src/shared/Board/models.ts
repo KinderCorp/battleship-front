@@ -19,19 +19,22 @@ export interface BoardBoat extends Omit<BoatProps, 'className' | 'height' | 'wid
   widthCell: number;
 }
 
-export interface BoardProps extends Pick<BoardCellProps, 'onClick'> {
+export interface BoardProps {
   boats?: BoardBoat[];
   cellsAffected?: BoardCellAffected[];
   className?: string;
   dimensions: IntRange<8, 13>;
   isActive?: boolean;
   isDisabled?: boolean;
+  onClick?: (x: Position['x'], y: Position['y']) => void;
 }
 
-export interface BoardCellProps extends Pick<BoardProps, 'isActive' | 'isDisabled'>, Position {
+// FIXME: if onClick is in this model => "Property 'onClick' does not exist on type 'BoardProps'"
+export interface BoardCellProps
+  extends Pick<BoardProps, 'isActive' | 'isDisabled' | 'onClick'>,
+    Position {
   className?: string;
   state?: BoardCellState;
-  onClick?: (x: Position['x'], y: Position['y']) => void;
 }
 
 export interface BoardRowProps {
