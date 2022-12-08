@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
  * @param {any} randomValue Random value
  * @return {any}
  */
-const useRandomValue = (randomValue: any): any => {
+const useClientSideValue = (randomValue: any): any => {
   const [value, setValue] = useState(null);
 
   useEffect(() => {
@@ -16,4 +16,4 @@ const useRandomValue = (randomValue: any): any => {
   return value;
 };
 
-export default useRandomValue;
+export default useClientSideValue;

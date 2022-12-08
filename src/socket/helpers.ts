@@ -11,9 +11,7 @@ import store from '@core/store';
 export const formatGameRoomData = <T>(
   data: any,
   instanceId: GameRoom['instanceId'] = store.getState().GAME.gameRoom.instanceId || '',
-): GameRoomData<T> => {
-  return {
-    data,
-    instanceId,
-  };
-};
+): GameRoomData<T> => ({
+  data,
+  instanceId,
+});

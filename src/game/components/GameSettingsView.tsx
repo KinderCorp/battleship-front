@@ -9,7 +9,7 @@ import Button from '@shared/Button/components/Button';
 import { emitPlayersReadyToPlaceBoats } from '@socket/emittingEvents';
 import TextContainer from '@shared/TextContainer/components/TextContainer';
 import UrlHelpers from '@helpers/UrlHelpers';
-import useRandomValue from '@hooks/useRandomValue';
+import useClientSideValue from '@hooks/useClientSideValue';
 import UserCard from '@shared/UserCard/components/UserCard';
 import useTranslation from '@hooks/useTranslation';
 import Versus from '@shared/Versus/components/Versus';
@@ -26,7 +26,7 @@ const GameSettingsView = (): JSX.Element => {
   const adminPlayer = useSelector(selectGamePlayerAdmin);
   const rivalPlayer = useSelector(selectGamePlayerRival);
 
-  const shareLink = useRandomValue(UrlHelpers.getUrl());
+  const shareLink = useClientSideValue(UrlHelpers.getUrl());
   const [clickedButtonCopy, setClickedButtonCopy] = useState<boolean>(false);
 
   const allPlayersJoined = useMemo(() => checkGameIsFull(gameRoom), [gameRoom]);

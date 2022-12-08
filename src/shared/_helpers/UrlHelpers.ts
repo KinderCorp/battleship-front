@@ -8,9 +8,9 @@ class UrlHelpers {
    *
    * @return {string}
    */
-  static getUrl(): string {
+  static getUrl = (): string => {
     return CoreHelpers.hasWindow() ? window.location.href : '';
-  }
+  };
 
   /**
    * Change location.
