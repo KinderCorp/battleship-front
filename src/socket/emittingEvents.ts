@@ -1,6 +1,6 @@
-import type { GameInstance, GameSettings } from '@game/models';
+import type { GameInstance, GamePlayer, GameSettings } from '@game/models';
+import type { GuestPlayer, Player } from '@player/models';
 import { formatGameRoomData } from '@socket/helpers';
-import type { GuestPlayer } from '@player/models';
 import socket from '@socket/index';
 import { SOCKET_EVENTS_EMITTING } from '@socket/constants';
 
@@ -28,14 +28,17 @@ export const emitGameSettings = (data: GameSettings) => {
  * @param {string} instanceId Instance id
  * @param {GuestPlayer} data Data
  */
-export const emitPlayerJoiningGame = (instanceId: string, { pseudo }: GuestPlayer) => {
-  socket.emit(SOCKET_EVENTS_EMITTING.PLAYER_JOINING_GAME, {
-    data: {
-      pseudo,
-      socketId: socket.id,
-    },
-    instanceId,
-  });
+export const emitPlayerJoiningGame = (instanceId: string, { pseudo }: Partial<Player>) => {
+  socket.emit(
+    SOCKET_EVENTS_EMITTING.PLAYER_JOINING_GAME,
+    formatGameRoomData<GamePlayer>(
+      {
+        pseudo,
+        socketId: socket.id,
+      },
+      instanceId,
+    ),
+  );
 };
 
 /**

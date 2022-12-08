@@ -9,6 +9,8 @@ export interface LoggedPlayer extends BasePlayer {
   id: string;
 }
 
+export type Player = GuestPlayer | LoggedPlayer;
+
 export interface PlayerState {
-  player: Partial<GuestPlayer | LoggedPlayer>;
+  player: Partial<Player>;
 }

@@ -1,12 +1,16 @@
+import type { BasePlayer } from '@player/models';
 import type { GamePageParams } from '@pages/game/[gameId]';
-import type { GuestPlayer } from '@player/models';
+import type { Weapon } from '@src/weapon/models';
 
 export type GamePageContentProps = Required<GamePageParams>;
 
 export type GameView = 'boats_placement' | 'playing' | 'settings';
 
 export interface GameSettings {
-  boardSize: number;
+  boardDimensions: number;
+  weapons: Weapon['name'];
+  hasBoatsSafetyZone: boolean;
+  timePerTurn: number;
 }
 
 export interface GameState {
@@ -15,7 +19,7 @@ export interface GameState {
   view: GameView;
 }
 
-export interface GamePlayer extends Pick<GuestPlayer, 'pseudo'> {
+export interface GamePlayer extends Pick<BasePlayer, 'pseudo'> {
   socketId: string;
   isAdmin?: boolean;
 }
