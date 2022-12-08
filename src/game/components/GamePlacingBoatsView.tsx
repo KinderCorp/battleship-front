@@ -36,16 +36,16 @@ const GamePlacingBoatsView = (): JSX.Element => {
 
       <div className="boats-placement">
         <Board dimensions={settings.boardDimensions} />
-      </div>
 
-      <Button
-        className="button-random-boats"
-        iconName="Dice"
-        onClick={() => null}
-        style="secondary"
-      >
-        {translate('random')}
-      </Button>
+        <Button
+          className="button-random-boats"
+          iconName="Dice"
+          onClick={() => null}
+          style="secondary"
+        >
+          {translate('random')}
+        </Button>
+      </div>
 
       <Button
         className="button-ready"

@@ -5,18 +5,18 @@
   }
 
   .boats-placement {
-    align-items: center;
+    align-items: flex-start;
     display: flex;
     flex-direction: row;
     justify-content: center;
   }
 
   .button-random-boats {
-    margin: to-rem(10) auto 0;
+    margin-left: to-rem(10);
   }
 
   .button-ready {
-    margin: to-rem(50) auto 0;
+    margin: to-rem(40) auto 0;
   }
 
   .rival-indication {
