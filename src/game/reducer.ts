@@ -5,7 +5,7 @@ import { GAME_NAME, GAME_SETTINGS } from '@game/constants';
 import type { GamePlayer, GameRoom, GameSettings, GameState, GameView } from '@game/models';
 
 const initialState: GameState = {
-  gameRoom: {},
+  gameRoom: {} as GameRoom,
   settings: GAME_SETTINGS,
   view: 'settings',
 };
@@ -22,7 +22,7 @@ export const gameSlice = createSlice({
       }
     },
     initGameRoom: (state) => {
-      state.gameRoom = {};
+      state.gameRoom = {} as GameRoom;
     },
     setGameRoom: (state, action: PayloadAction<GameRoom>) => {
       state.gameRoom = action.payload;

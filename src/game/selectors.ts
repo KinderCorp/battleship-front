@@ -10,7 +10,7 @@ import type { RootState } from '@core/models';
  * @param {RootState} state Current state
  * @return {GameState}
  */
-const selectGameState = (state: RootState): GameState => state[GAME_NAME];
+const selectGameState = (state: RootState) => state[GAME_NAME];
 
 export const selectGameSettings = createSelector(
   selectGameState,

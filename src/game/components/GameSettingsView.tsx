@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -14,6 +14,7 @@ import { checkGameIsFull } from '@game/helpers';
 import { emitPlayersReadyToPlaceBoats } from '@socket/emittingEvents';
 import TextContainer from '@shared/TextContainer/components/TextContainer';
 import UrlHelpers from '@helpers/UrlHelpers';
+import useRandomValue from '@hooks/useRandomValue';
 import UserCard from '@shared/UserCard/components/UserCard';
 import useTranslation from '@hooks/useTranslation';
 import Versus from '@shared/Versus/components/Versus';
@@ -31,12 +32,10 @@ const GameSettingsView = (): JSX.Element => {
   const adminPlayer = useSelector(selectGamePlayerAdmin);
   const rivalPlayer = useSelector(selectGamePlayerRival);
 
-  const [shareLink, setShareLink] = useState<string>('');
+  const shareLink = useRandomValue(UrlHelpers.getUrl());
   const [clickedButtonCopy, setClickedButtonCopy] = useState<boolean>(false);
 
   const allPlayersJoined: boolean = useMemo(() => checkGameIsFull(gameRoom), [gameRoom]);
-
-  useEffect(() => setShareLink(UrlHelpers.getUrl()), []);
 
   /**
    * Copy share link.

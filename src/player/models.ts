@@ -12,5 +12,5 @@ export interface LoggedPlayer extends BasePlayer {
 export type Player = GuestPlayer | LoggedPlayer;
 
 export interface PlayerState {
-  player: Partial<Player>;
+  player: Player;
 }

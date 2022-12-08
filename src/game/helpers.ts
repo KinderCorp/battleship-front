@@ -1,21 +1,11 @@
-import type { GamePlayer, GameRoom } from '@game/models';
-
-/**
- * Get admin player in the room.
- *
- * @param {Partial<GameRoom>} gameRoom Game room
- * @return {GamePlayer|null}
- */
-export const getAdminPlayer = (gameRoom: Partial<GameRoom>): GamePlayer | null => {
-  return gameRoom?.players?.find((player) => player.isAdmin) || null;
-};
+import type { GameRoom } from '@game/models';
 
 /**
  * Check if a game is full.
  *
- * @param {Partial<GameRoom>} gameRoom Game room
+ * @param {GameRoom} gameRoom Game room
  * @return {boolean}
  */
-export const checkGameIsFull = (gameRoom: Partial<GameRoom>): boolean => {
-  return gameRoom?.players ? gameRoom.players.length >= 2 : false;
+export const checkGameIsFull = (gameRoom: GameRoom): boolean => {
+  return gameRoom?.players?.length >= 2 || false;
 };
