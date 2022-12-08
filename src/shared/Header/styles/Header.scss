@@ -37,6 +37,13 @@ $header-height-medium: to-rem(120);
     white-space: nowrap;
   }
 
+  .header-content {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
   .header-left-side {
     margin-right: auto;
   }

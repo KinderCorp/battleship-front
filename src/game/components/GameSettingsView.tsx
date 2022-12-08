@@ -3,16 +3,15 @@ import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
 import { checkGameIsFull, isPlayerAdmin } from '@game/helpers';
-import { selectGamePlayerAdmin, selectGamePlayerRival, selectGameRoom } from '@game/selectors';
 import BlockContainer from '@shared/BlockContainer/components/BlockContainer';
 import Button from '@shared/Button/components/Button';
 import { emitPlayersReadyToPlaceBoats } from '@socket/emittingEvents';
+import PlayersCards from '@player/components/PlayersCards';
+import { selectGameRoom } from '@game/selectors';
 import TextContainer from '@shared/TextContainer/components/TextContainer';
 import UrlHelpers from '@helpers/UrlHelpers';
 import useClientSideValue from '@hooks/useClientSideValue';
-import UserCard from '@shared/UserCard/components/UserCard';
 import useTranslation from '@hooks/useTranslation';
-import Versus from '@shared/Versus/components/Versus';
 
 /**
  * Game settings.
@@ -23,8 +22,6 @@ const GameSettingsView = (): JSX.Element => {
   const { translate } = useTranslation();
 
   const gameRoom = useSelector(selectGameRoom);
-  const adminPlayer = useSelector(selectGamePlayerAdmin);
-  const rivalPlayer = useSelector(selectGamePlayerRival);
 
   const shareLink = useClientSideValue(UrlHelpers.getUrl());
   const [clickedButtonCopy, setClickedButtonCopy] = useState<boolean>(false);
@@ -71,21 +68,7 @@ const GameSettingsView = (): JSX.Element => {
         </BlockContainer>
 
         <BlockContainer className="players">
-          <UserCard
-            characterName="Sam"
-            characterSrc="/images/characters/character-sam.png"
-            name={adminPlayer?.pseudo}
-            priority
-          />
-          <Versus />
-          <UserCard
-            characterName="Sam"
-            characterSrc="/images/characters/character-sam.png"
-            direction="left"
-            isLoading={!rivalPlayer}
-            name={rivalPlayer?.pseudo}
-            priority
-          />
+          <PlayersCards />
         </BlockContainer>
 
         {isPlayerAdmin() && (

@@ -7,6 +7,7 @@ import { emitCloseRoom } from '@socket/emittingEvents';
 import GameSettingsView from '@game/components/GameSettingsView';
 import Header from '@shared/Header/components/Header';
 import { PATHS } from '@core/constants';
+import PlayersCards from '@player/components/PlayersCards';
 import UrlHelpers from '@helpers/UrlHelpers';
 import useTranslation from '@hooks/useTranslation';
 
@@ -31,13 +32,14 @@ const GamePageView = (): JSX.Element => {
   return (
     <>
       <Header
+        content={view !== 'settings' && <PlayersCards size="small" />}
         height="medium"
         leftSideNode={
           <Button iconName="ArrowLeft" onClick={handleLeaveGame} size="large" style="secondary">
             {translate('leave')}
           </Button>
         }
-        title={view === 'settings' ? translate('create-game') : 'VS'}
+        title={view === 'settings' ? translate('create-game') : ''}
       />
 
       {view === 'settings' && <GameSettingsView />}
