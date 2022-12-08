@@ -28,6 +28,7 @@ export const SOCKET_EVENTS_LISTENING = {
   ERROR_UNKNOWN_SERVER: 'error-unknown-server',
   ERROR_WEAPON_NOT_FOUND: 'error-weapon-not-found',
   GAME_CREATED: 'game-created',
+  GAME_INFORMATION: 'game-information',
   GAME_STARTED: 'game-started',
   ONE_PLAYER_HAS_PLACED_HIS_BOATS: 'one-player-has-placed-his-boats',
   PLAYER_DISCONNECTED: 'player-disconnected',

@@ -1,15 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
-import { generatePseudo } from '@player/helpers';
+import type { BasePlayer, PlayerState } from '@player/models';
 import { PLAYER_NAME } from '@player/constants';
-import type { PlayerState } from '@player/models';
 
-const initialState: PlayerState = { player: { pseudo: generatePseudo() } };
+const initialState: PlayerState = { player: { pseudo: 'Player_name' } };
 
 export const playerSlice = createSlice({
   initialState,
   name: PLAYER_NAME,
-  reducers: {},
+  reducers: {
+    setPseudo: (state, action: PayloadAction<BasePlayer['pseudo']>) => {
+      state.player.pseudo = action.payload;
+    },
+  },
 });
+
+export const { setPseudo } = playerSlice.actions;
 
 export default playerSlice.reducer;

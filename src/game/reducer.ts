@@ -24,6 +24,9 @@ export const gameSlice = createSlice({
     initGameRoom: (state) => {
       state.gameRoom = {};
     },
+    setGameRoom: (state, action: PayloadAction<GameRoom>) => {
+      state.gameRoom = action.payload;
+    },
     setInstanceId: (state, action: PayloadAction<GameRoom['instanceId']>) => {
       state.gameRoom.instanceId = action.payload;
     },
@@ -36,7 +39,7 @@ export const gameSlice = createSlice({
   },
 });
 
-export const { addGamePlayer, initGameRoom, setInstanceId, setView, updateSettings } =
+export const { addGamePlayer, initGameRoom, setGameRoom, setInstanceId, setView, updateSettings } =
   gameSlice.actions;
 
 export default gameSlice.reducer;

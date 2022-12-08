@@ -1,4 +1,5 @@
 import type { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
+import { useEffect } from 'react';
 
 import { emitPlayerJoiningGame } from '@socket/emittingEvents';
 import type { GamePageContentProps } from '@game/models';
@@ -25,14 +26,16 @@ const GamePage = ({ gameId }: GamePageContentProps): JSX.Element | void => {
   const adminPlayer = useSelector(selectGamePlayerAdmin);
   const player = useSelector(selectPlayer);
 
-  if (!socket.connected) {
-    UrlHelpers.changeLocation(PATHS.DEFAULT);
-    return;
-  }
+  // BUG: emitPlayerJoiningGame called two times
+  useEffect(() => {
+    if (!socket.connected) {
+      UrlHelpers.changeLocation(PATHS.DEFAULT);
+    }
 
-  if (adminPlayer?.socketId !== socket.id) {
-    emitPlayerJoiningGame(gameId, player);
-  }
+    if (adminPlayer?.socketId !== socket.id) {
+      emitPlayerJoiningGame(gameId, player);
+    }
+  });
 
   return <GamePageView />;
 };
