@@ -49,6 +49,7 @@ export const listeningStartPlacingBoats = (): void => {
  * @return {void}
  */
 export const listeningErrorGameNotFound = (): void => {
+  // FIXME: Redirect to the home page except that it is not instantaneous so we see the game page for half a second
   UrlHelpers.changeLocation(PATHS.DEFAULT);
 };
 
@@ -58,7 +59,7 @@ export const listeningErrorGameNotFound = (): void => {
  * @param {GameRoom} payload Payload
  * @return {void}
  */
-export const listeningGameInformation = ({ instanceId, data }: GameRoomData<GameRoom>): void => {
+export const listeningGameInformation = ({ data, instanceId }: GameRoomData<GameRoom>): void => {
   store.dispatch(setGameRoom({ instanceId, players: data.players }));
 };
 
