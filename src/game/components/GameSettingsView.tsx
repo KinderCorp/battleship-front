@@ -3,12 +3,7 @@ import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
 import { checkGameIsFull, isPlayerAdmin } from '@game/helpers';
-import {
-  selectGamePlayerAdmin,
-  selectGamePlayerRival,
-  selectGameRoom,
-  selectGameSettings,
-} from '@game/selectors';
+import { selectGamePlayerAdmin, selectGamePlayerRival, selectGameRoom } from '@game/selectors';
 import BlockContainer from '@shared/BlockContainer/components/BlockContainer';
 import Button from '@shared/Button/components/Button';
 import { emitPlayersReadyToPlaceBoats } from '@socket/emittingEvents';
@@ -27,7 +22,6 @@ import Versus from '@shared/Versus/components/Versus';
 const GameSettingsView = (): JSX.Element => {
   const { translate } = useTranslation();
 
-  const settings = useSelector(selectGameSettings);
   const gameRoom = useSelector(selectGameRoom);
   const adminPlayer = useSelector(selectGamePlayerAdmin);
   const rivalPlayer = useSelector(selectGamePlayerRival);
@@ -55,8 +49,8 @@ const GameSettingsView = (): JSX.Element => {
    * @return {void}
    */
   const handleStartGame = useCallback((): void => {
-    if (allPlayersJoined && isPlayerAdmin()) emitPlayersReadyToPlaceBoats(settings);
-  }, [allPlayersJoined, settings]);
+    if (allPlayersJoined && isPlayerAdmin()) emitPlayersReadyToPlaceBoats();
+  }, [allPlayersJoined]);
 
   return (
     <div className="game-settings">
