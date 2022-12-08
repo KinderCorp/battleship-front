@@ -2,10 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 import type { BasePlayer, PlayerState } from '@player/models';
+import { generateGuestPseudo } from '@player/helpers';
 import { PLAYER_NAME } from '@player/constants';
 
-// FIXME: generate random pseudo but with no difference between client/server
-const initialState: PlayerState = { player: { pseudo: 'Player_name' } };
+const initialState: PlayerState = {
+  player: { pseudo: generateGuestPseudo() },
+};
 
 export const playerSlice = createSlice({
   initialState,
