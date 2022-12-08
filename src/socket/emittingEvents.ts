@@ -1,5 +1,5 @@
+import type { GameInstance, GameSettings } from '@game/models';
 import { formatGameRoomData } from '@socket/helpers';
-import type { GameSettings } from '@game/models';
 import type { GuestPlayer } from '@player/models';
 import socket from '@socket/index';
 import { SOCKET_EVENTS_EMITTING } from '@socket/constants';
@@ -48,4 +48,13 @@ export const emitPlayersReadyToPlaceBoats = (data: GameSettings) => {
     SOCKET_EVENTS_EMITTING.PLAYERS_READY_TO_PLACE_BOATS,
     formatGameRoomData<GameSettings>(data),
   );
+};
+
+/**
+ * Emitting event for close room.
+ *
+ * @param {GameInstance['instanceId']} instanceId Instance id
+ */
+export const emitCloseRoom = (instanceId: GameInstance['instanceId']) => {
+  socket.emit(SOCKET_EVENTS_EMITTING.CLOSE_ROOM, { instanceId });
 };

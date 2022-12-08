@@ -19,17 +19,20 @@ export type GamePageParams = {
  * Game page.
  *
  * @param {GamePageContentProps} props Props
- * @return {JSX.Element}
+ * @return {JSX.Element|void}
  */
-const GamePage = ({ gameId }: GamePageContentProps): JSX.Element => {
+const GamePage = ({ gameId }: GamePageContentProps): JSX.Element | void => {
   const adminPlayer = useSelector(selectGamePlayerAdmin);
   const player = useSelector(selectPlayer);
+
+  if (!socket.connected) {
+    UrlHelpers.changeLocation(PATHS.DEFAULT);
+    return;
+  }
 
   if (adminPlayer?.socketId !== socket.id) {
     emitPlayerJoiningGame(gameId, player);
   }
-
-  if (!socket.connected) UrlHelpers.changeLocation(PATHS.DEFAULT);
 
   return <GamePageView />;
 };
