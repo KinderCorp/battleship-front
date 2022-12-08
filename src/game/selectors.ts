@@ -29,7 +29,7 @@ export const selectGameInstance = createSelector(
 
 export const selectGamePlayers = createSelector(
   selectGameRoom,
-  (state: GameRoom) => state.players || {},
+  (state: GameRoom) => state.players || [],
 );
 
 export const selectGamePlayerAdmin = createSelector(
