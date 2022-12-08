@@ -8,6 +8,7 @@
 // Page
 @import '~@home/styles/HomePageContent';
 @import '~@game/styles/GameSettingsView';
+@import '~@game/styles/GamePlacingBoatsView';
 
 // Shared styles
 @import '~@shared/BlockContainer/styles/BlockContainer';
@@ -31,5 +32,6 @@
 @import '~@shared/Modal/styles/Modal';
 @import '~@shared/TextContainer/styles/TextContainer';
 @import '~@shared/Title/styles/Title';
+@import '~@shared/Title/styles/TitleIndication';
 @import '~@shared/UserCard/styles/UserCard';
 @import '~@shared/Versus/styles/Versus';

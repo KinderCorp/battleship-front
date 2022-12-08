@@ -13,7 +13,10 @@ import type { TitleProps } from '@shared/Title/models';
  */
 export const Title = ({
   className = '',
-  iconName = null,
+  iconBorderColor = COLORS.TRANSPARENT,
+  iconColor = COLORS.PURPLE_LIGHT,
+  iconName,
+  iconSize,
   subTitle = '',
   title,
   type = 'h2',
@@ -36,7 +39,7 @@ export const Title = ({
     <div className={titleContainerClassName} data-testid="title">
       <div className="title-content">
         {iconName && (
-          <Icon borderColor={COLORS.TRANSPARENT} color={COLORS.PURPLE_LIGHT} name={iconName} />
+          <Icon borderColor={iconBorderColor} color={iconColor} name={iconName} size={iconSize} />
         )}
         <TitleComponent className={titleClassName}>{title}</TitleComponent>
       </div>

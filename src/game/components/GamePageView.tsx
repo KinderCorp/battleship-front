@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { selectGameInstance, selectGameView } from '@game/selectors';
 import Button from '@shared/Button/components/Button';
 import { emitCloseRoom } from '@socket/emittingEvents';
+import GamePlacingBoatsView from '@game/components/GamePlacingBoatsView';
 import GameSettingsView from '@game/components/GameSettingsView';
 import Header from '@shared/Header/components/Header';
 import { PATHS } from '@core/constants';
@@ -43,6 +44,7 @@ const GamePageView = (): JSX.Element => {
       />
 
       {view === 'settings' && <GameSettingsView />}
+      {view === 'boats_placement' && <GamePlacingBoatsView />}
     </>
   );
 };

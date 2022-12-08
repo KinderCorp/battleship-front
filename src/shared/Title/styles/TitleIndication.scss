@@ -1,0 +1,18 @@
+.title-indication {
+  // FIXME: temporary marge, add un specific class/component for content page
+  margin-top: to-rem(50);
+
+  .title-content {
+    flex-direction: column;
+
+    .icon {
+      margin-right: 0;
+    }
+
+    .title {
+      margin-top: to-rem(10);
+      text-align: center;
+      width: auto;
+    }
+  }
+}
