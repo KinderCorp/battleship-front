@@ -9,7 +9,6 @@ import { PATHS } from '@core/constants';
 import { selectGamePlayerAdmin } from '@game/selectors';
 import { selectPlayer } from '@player/selectors';
 import socket from '@socket/index';
-import UrlHelpers from '@helpers/UrlHelpers';
 import { useSelector } from 'react-redux';
 
 export type GamePageParams = {
@@ -28,9 +27,9 @@ const GamePage = ({ gameId }: GamePageContentProps): JSX.Element | void => {
 
   // BUG: emitPlayerJoiningGame called two times
   useEffect(() => {
-    if (!socket.connected) {
-      UrlHelpers.changeLocation(PATHS.DEFAULT);
-    }
+    // if (!socket.connected) {
+    //   UrlHelpers.changeLocation(PATHS.DEFAULT);
+    // }
 
     if (adminPlayer?.socketId !== socket.id) {
       emitPlayerJoiningGame(gameId, player);
