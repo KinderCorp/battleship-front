@@ -59,6 +59,7 @@ const HomePageContent = (): JSX.Element => {
           className="content-play"
           onClick={handleCreateGame}
           size="large"
+          // FIXME: when socket is connected, button is always disabled
           isDisabled={!socket.connected}
         >
           {translate('create-game')}

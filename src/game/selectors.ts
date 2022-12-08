@@ -29,5 +29,5 @@ export const selectGamePlayerAdmin = createSelector(
 );
 export const selectGamePlayerRival = createSelector(
   selectGameRoom,
-  (state: Partial<GameRoom>) => state?.players?.find((player) => !player.isAdmin) || null,
+  (state: Partial<GameRoom>) => state?.players?.find((player) => !player?.isAdmin) || null,
 );
