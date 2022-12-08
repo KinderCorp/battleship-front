@@ -10,6 +10,8 @@ import { PATHS } from '@core/constants';
 import UrlHelpers from '@helpers/UrlHelpers';
 import useTranslation from '@hooks/useTranslation';
 
+// BUG: Uncaught Error: This Suspense boundary received an update before it finished hydrating. This caused the boundary to switch to client rendering. The usual way to fix this is to wrap the original update in startTransition. => Only for rival player
+
 /**
  * Game page content.
  *
