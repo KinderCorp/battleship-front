@@ -6,7 +6,6 @@ import Button from '@shared/Button/components/Button';
 import { emitCreateGame } from '@socket/emittingEvents';
 import Image from '@shared/Image/components/Image';
 import { selectPlayer } from '@player/selectors';
-import socket from '@socket/index';
 import useTranslation from '@hooks/useTranslation';
 
 /**
@@ -60,7 +59,7 @@ const HomePageContent = (): JSX.Element => {
           onClick={handleCreateGame}
           size="large"
           // FIXME: when socket is connected, button is always disabled
-          isDisabled={!socket.connected}
+          // isDisabled={!socket.connected}
         >
           {translate('create-game')}
         </Button>
