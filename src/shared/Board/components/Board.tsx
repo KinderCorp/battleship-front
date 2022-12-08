@@ -41,7 +41,7 @@ export const Board = ({
 
       // Create the cells
       for (let col = 0; col < dimensions; col++) {
-        const cellAffected = cellsAffected.find(
+        const cellAffected = cellsAffected?.find(
           (stateCell: BoardCellAffected) => stateCell.x === col && stateCell.y === row,
         );
 
@@ -70,7 +70,7 @@ export const Board = ({
         <tbody className="board-body">{createBoard()}</tbody>
       </table>
 
-      {boats.map((boatBoat: BoardBoat, index: number) => {
+      {boats?.map((boatBoat: BoardBoat, index: number) => {
         const style: CSSProperties = {
           height: `${(boatBoat.lengthCell * 100) / dimensions}%`,
           left: `${(boatBoat.x * 100) / dimensions}%`,

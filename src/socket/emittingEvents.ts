@@ -63,3 +63,12 @@ export const emitPlayersReadyToPlaceBoats = (): void => {
 export const emitCloseRoom = (instanceId: GameInstance['instanceId']): void => {
   socket.emit(SOCKET_EVENTS_EMITTING.CLOSE_ROOM, { instanceId });
 };
+
+/**
+ * Emitting event when boats are well placed.
+ *
+ * @return {void}
+ */
+export const emitValidatePlayerBoatsPlacement = (): void => {
+  socket.emit(SOCKET_EVENTS_EMITTING.VALIDATE_PLAYER_BOATS_PLACEMENT);
+};

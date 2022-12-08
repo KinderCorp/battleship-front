@@ -3,6 +3,8 @@ import { selectGamePlayerAdmin } from '@game/selectors';
 import socket from '@socket/index';
 import store from '@core/store';
 
+// FIXME: transform this in selector?
+
 /**
  * Check if a game is full.
  *

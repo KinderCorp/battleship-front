@@ -1,4 +1,5 @@
 import type { BasePlayer } from '@player/models';
+import type { BoardProps } from '@shared/Board/models';
 import type { GamePageParams } from '@pages/game/[gameId]';
 import type { Weapon } from '@weapon/models';
 
@@ -7,7 +8,7 @@ export type GamePageContentProps = Required<GamePageParams>;
 export type GameView = 'boats_placement' | 'playing' | 'settings';
 
 export interface GameSettings {
-  boardDimensions: number;
+  boardDimensions: BoardProps['dimensions'];
   weapons: Weapon['name'][];
   hasBoatsSafetyZone: boolean;
   timePerTurn: number;
