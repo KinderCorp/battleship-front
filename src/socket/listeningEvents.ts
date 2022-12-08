@@ -1,27 +1,21 @@
-import { addGamePlayer, setGameRoom, setInstanceId, setView } from '@game/reducer';
-import type { GameInstance, GamePlayer, GameRoom, GameRoomData } from '@game/models';
+import type { GamePlayer, GameRoom, GameRoomData } from '@game/models';
+import { setGamePlayers, setGameRoom, setInstanceId, setView } from '@game/reducer';
 import { PATHS } from '@core/constants';
-import { selectPlayer } from '@player/selectors';
-import socket from '@socket/index';
+import { selectGamePlayerAdmin } from '@game/selectors';
 import store from '@core/store';
 import UrlHelpers from '@helpers/UrlHelpers';
 
 /**
  * Listening event when game is created.
  *
- * @param {GameInstance} payload Payload
+ * @param {GameRoomData<GamePlayer>} payload Payload
  * @return {void}
  */
-export const listeningGameCreated = (payload: GameInstance): void => {
-  store.dispatch(setInstanceId(payload.instanceId));
+export const listeningGameCreated = ({ data, instanceId }: GameRoomData<GamePlayer>): void => {
+  store.dispatch(setInstanceId(instanceId));
+  store.dispatch(setGamePlayers([data]));
 
-  // FIXME: add player admin in payload to avoid manually creating player in store
-  const player = selectPlayer(store.getState());
-  if (player) {
-    store.dispatch(addGamePlayer({ isAdmin: true, pseudo: player.pseudo, socketId: socket.id }));
-  }
-
-  UrlHelpers.changeLocation(`${PATHS.GAME}/${payload.instanceId}`);
+  UrlHelpers.changeLocation(`${PATHS.GAME}/${instanceId}`);
 };
 
 /**
@@ -30,8 +24,10 @@ export const listeningGameCreated = (payload: GameInstance): void => {
  * @param {GameRoomData<GamePlayer>} payload Payload
  * @return {void}
  */
-export const listeningPlayerJoined = (payload: GameRoomData<GamePlayer>): void => {
-  store.dispatch(addGamePlayer(payload.data));
+export const listeningPlayerJoined = ({ data }: GameRoomData<GamePlayer>): void => {
+  const newPlayers = [selectGamePlayerAdmin(store.getState()) as GamePlayer, data];
+
+  store.dispatch(setGamePlayers(newPlayers));
 };
 
 /**
@@ -60,7 +56,7 @@ export const listeningErrorGameNotFound = (): void => {
  * @return {void}
  */
 export const listeningGameInformation = ({ data, instanceId }: GameRoomData<GameRoom>): void => {
-  store.dispatch(setGameRoom({ instanceId, players: data.players }));
+  store.dispatch(setGameRoom({ instanceId, players: data.players, settings: data.settings }));
 };
 
 /**

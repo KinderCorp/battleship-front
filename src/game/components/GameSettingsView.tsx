@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
+import { checkGameIsFull, isPlayerAdmin } from '@game/helpers';
 import {
   selectGamePlayerAdmin,
   selectGamePlayerRival,
@@ -10,7 +11,6 @@ import {
 } from '@game/selectors';
 import BlockContainer from '@shared/BlockContainer/components/BlockContainer';
 import Button from '@shared/Button/components/Button';
-import { checkGameIsFull } from '@game/helpers';
 import { emitPlayersReadyToPlaceBoats } from '@socket/emittingEvents';
 import TextContainer from '@shared/TextContainer/components/TextContainer';
 import UrlHelpers from '@helpers/UrlHelpers';
@@ -35,7 +35,7 @@ const GameSettingsView = (): JSX.Element => {
   const shareLink = useRandomValue(UrlHelpers.getUrl());
   const [clickedButtonCopy, setClickedButtonCopy] = useState<boolean>(false);
 
-  const allPlayersJoined: boolean = useMemo(() => checkGameIsFull(gameRoom), [gameRoom]);
+  const allPlayersJoined = useMemo(() => checkGameIsFull(gameRoom), [gameRoom]);
 
   /**
    * Copy share link.
@@ -55,7 +55,7 @@ const GameSettingsView = (): JSX.Element => {
    * @return {void}
    */
   const handleStartGame = useCallback((): void => {
-    if (allPlayersJoined) emitPlayersReadyToPlaceBoats(settings);
+    if (allPlayersJoined && isPlayerAdmin()) emitPlayersReadyToPlaceBoats(settings);
   }, [allPlayersJoined, settings]);
 
   return (
@@ -94,9 +94,11 @@ const GameSettingsView = (): JSX.Element => {
           />
         </BlockContainer>
 
-        <Button onClick={handleStartGame} size="large" isDisabled={!allPlayersJoined}>
-          {translate('start')}
-        </Button>
+        {isPlayerAdmin() && (
+          <Button onClick={handleStartGame} size="large" isDisabled={!allPlayersJoined}>
+            {translate('start')}
+          </Button>
+        )}
       </div>
     </div>
   );

@@ -20,12 +20,14 @@ export interface GameState {
 }
 
 export interface GamePlayer extends Pick<BasePlayer, 'pseudo'> {
+  id: string;
   socketId: string;
   isAdmin?: boolean;
 }
 
 export interface GameRoom extends GameInstance {
   players: GamePlayer[];
+  settings: GameSettings;
 }
 
 export interface GameInstance {

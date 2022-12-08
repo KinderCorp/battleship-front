@@ -25,12 +25,8 @@ const GamePage = ({ gameId }: GamePageContentProps): JSX.Element | void => {
   const adminPlayer = useSelector(selectGamePlayerAdmin);
   const player = useSelector(selectPlayer);
 
-  // BUG: emitPlayerJoiningGame called two times
+  // BUG: called two times
   useEffect(() => {
-    // if (!socket.connected) {
-    //   UrlHelpers.changeLocation(PATHS.DEFAULT);
-    // }
-
     if (adminPlayer?.socketId !== socket.id) {
       emitPlayerJoiningGame(gameId, player);
     }

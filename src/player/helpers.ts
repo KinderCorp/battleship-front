@@ -5,6 +5,6 @@ import NumberHelpers from '@helpers/NumberHelpers';
  *
  * @return {string}
  */
-export const generatePseudo = (): string => {
+export const generateGuestPseudo = (): string => {
   return `Player_${NumberHelpers.randomNumber(100, 1000)}`;
 };

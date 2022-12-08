@@ -20,6 +20,7 @@ const HomePageContent = (): JSX.Element => {
 
   const player = useSelector(selectPlayer);
 
+  // BUG: called two times
   useEffect(() => {
     dispatch(initGameRoom());
     dispatch(setView('settings'));
