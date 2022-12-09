@@ -52,20 +52,22 @@ const GameSettingsView = (): JSX.Element => {
   return (
     <div className="game-settings">
       <div className="content">
-        <BlockContainer
-          className="share-link"
-          iconName="Share"
-          title={translate('share-to-friend')}
-        >
-          <TextContainer value={shareLink} />
-          <Button
-            iconName={clickedButtonCopy ? 'Check' : 'Copy'}
-            onClick={handleCopyShareLink}
-            isDisabled={clickedButtonCopy}
-            style="secondary"
-            size="large"
-          />
-        </BlockContainer>
+        {isPlayerAdmin() && (
+          <BlockContainer
+            className="share-link"
+            iconName="Share"
+            title={translate('share-to-friend')}
+          >
+            <TextContainer value={shareLink} />
+            <Button
+              iconName={clickedButtonCopy ? 'Check' : 'Copy'}
+              onClick={handleCopyShareLink}
+              isDisabled={clickedButtonCopy}
+              style="secondary"
+              size="large"
+            />
+          </BlockContainer>
+        )}
 
         <BlockContainer className="players">
           <PlayersCards />
