@@ -41,6 +41,8 @@ export const Board = ({
 
       if (boat) {
         boat.direction = boat.direction === 'vertical' ? 'horizontal' : 'vertical';
+
+        /* eslint-disable no-console */
         console.log('🚀 ~ file: Board.tsx:44 ~ boat', boat);
         console.log('🚀 ~ file: Board.tsx:40 ~ newBoats', newBoats);
         console.log('🚀 ~ file: Board.tsx:40 ~ boats', boats);
