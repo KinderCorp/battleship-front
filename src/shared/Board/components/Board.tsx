@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import classNames from 'clsx';
 import type { CSSProperties } from 'react';
 
@@ -29,27 +29,25 @@ export const Board = ({
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setWidth(ref.current?.offsetWidth || 0);
     setHeight(ref.current?.offsetHeight || 0);
   }, [ref]);
 
   const onBoatRotation = useCallback(
-    (index: number) => {
+    (index: number): void => {
+      // FIXME: best way to update object?
       const newBoats = [...(boats as BoardBoat[])];
-      const boat = { ...newBoats?.[index] };
+      const boat = { ...newBoats[index] };
 
       if (boat) {
         boat.direction = boat.direction === 'vertical' ? 'horizontal' : 'vertical';
+        newBoats[index] = boat;
 
-        /* eslint-disable no-console */
-        console.log('🚀 ~ file: Board.tsx:44 ~ boat', boat);
-        console.log('🚀 ~ file: Board.tsx:40 ~ newBoats', newBoats);
-        console.log('🚀 ~ file: Board.tsx:40 ~ boats', boats);
-        if (checkBoardBoatsPosition(newBoats)) setBoats?.(newBoats);
+        if (checkBoardBoatsPosition(newBoats, dimensions)) setBoats?.(newBoats);
       }
     },
-    [boats, setBoats],
+    [boats, dimensions, setBoats],
   );
 
   const boardClassName = useMemo(

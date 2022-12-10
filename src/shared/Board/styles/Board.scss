@@ -18,31 +18,45 @@
     border-spacing: 0;
     height: 100%;
     width: 100%;
-  }
 
-  .board-body {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
+    .board-body {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
 
-    .board-row:first-child {
-      .board-cell:first-child {
-        border-radius: $border-radius 0 0 0;
+      .board-row:first-child {
+        .board-cell:first-child {
+          border-radius: $border-radius 0 0 0;
+        }
+
+        .board-cell:last-child {
+          border-radius: 0 $border-radius 0 0;
+        }
       }
 
-      .board-cell:last-child {
-        border-radius: 0 $border-radius 0 0;
+      .board-row:last-child {
+        .board-cell:first-child {
+          border-radius: 0 0 0 $border-radius;
+        }
+
+        .board-cell:last-child {
+          border-radius: 0 0 $border-radius 0;
+        }
       }
     }
+  }
 
-    .board-row:last-child {
-      .board-cell:first-child {
-        border-radius: 0 0 0 $border-radius;
-      }
+  .boat {
+    img {
+      transition: 0.2s;
+    }
 
-      .board-cell:last-child {
-        border-radius: 0 0 $border-radius 0;
+    &:hover {
+      background-color: rgba($color-white, 0.1);
+
+      img {
+        transform: scale(0.95);
       }
     }
   }
