@@ -1,4 +1,6 @@
 import classNames from 'clsx';
+import type { CSSProperties } from 'react';
+import { useCallback } from 'react';
 import { useMemo } from 'react';
 
 import type { BoatProps } from '@shared/Boat/models';
@@ -12,29 +14,46 @@ import useTranslation from '@hooks/useTranslation';
  * @return {JSX.Element}
  */
 export const Boat = ({
-  boatName = '',
-  boatSrc,
   className = '',
   direction = 'horizontal',
+  height,
+  index,
+  name = '',
+  onRotation,
   priority,
+  src,
   style,
+  width,
 }: BoatProps): JSX.Element => {
   const { translate } = useTranslation();
+
+  const handleRotation = useCallback(() => {
+    onRotation?.(index);
+  }, [index, onRotation]);
 
   const boatClassName = useMemo(
     (): string => classNames('boat', `boat--${direction}`, className),
     [className, direction],
   );
 
+  const boatStyle: CSSProperties = useMemo(
+    () => ({
+      ...style,
+      height,
+      width,
+    }),
+    [height, style, width],
+  );
+
   return (
-    <div className={boatClassName} data-testid="boat" style={style}>
+    <div className={boatClassName} data-testid="boat" style={boatStyle} onClick={handleRotation}>
       <Image
-        alt={translate('boat', { name: boatName })}
+        alt={translate('boat', { name })}
         className="boat-image"
         objectFit="fill"
         priority={priority}
         sizes={{}}
-        src={boatSrc}
+        src={src}
       />
     </div>
   );

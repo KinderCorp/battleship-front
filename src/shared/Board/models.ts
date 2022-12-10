@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 
+import type { Boat } from '@src/boat/models';
 import type { BoatProps } from '@shared/Boat/models';
 import type { IntRange } from '@core/models';
 
@@ -14,10 +15,7 @@ export interface BoardCellAffected extends Position {
   state: BoardCellState;
 }
 
-export interface BoardBoat extends Omit<BoatProps, 'className' | 'height' | 'width'>, Position {
-  lengthCell: number;
-  widthCell: number;
-}
+export interface BoardBoat extends Boat, Position, Pick<BoatProps, 'direction'> {}
 
 export interface BoardProps {
   boats?: BoardBoat[];
@@ -27,6 +25,7 @@ export interface BoardProps {
   isActive?: boolean;
   isDisabled?: boolean;
   onClick?: (x: Position['x'], y: Position['y']) => void;
+  setBoats?: (boats: BoardBoat[]) => void;
 }
 
 // FIXME: if onClick is in this model => "Property 'onClick' does not exist on type 'BoardProps'"

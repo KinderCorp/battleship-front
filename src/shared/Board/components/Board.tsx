@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import classNames from 'clsx';
 import type { CSSProperties } from 'react';
 
@@ -6,6 +6,7 @@ import type { BoardBoat, BoardCellAffected, BoardProps } from '@shared/Board/mod
 import BoardCell from '@shared/Board/components/BoardCell';
 import BoardRow from '@shared/Board/components/BoardRow';
 import Boat from '@shared/Boat/components/Boat';
+import { checkBoardBoatsPosition } from '../helpers';
 
 /**
  * Board component.
@@ -15,13 +16,40 @@ import Boat from '@shared/Boat/components/Boat';
  */
 export const Board = ({
   boats,
+  cellsAffected,
   className = '',
+  dimensions,
   isActive = false,
   isDisabled = false,
   onClick,
-  dimensions,
-  cellsAffected,
+  setBoats,
 }: BoardProps): JSX.Element => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+
+  useLayoutEffect(() => {
+    setWidth(ref.current?.offsetWidth || 0);
+    setHeight(ref.current?.offsetHeight || 0);
+  }, [ref]);
+
+  const onBoatRotation = useCallback(
+    (index: number) => {
+      const newBoats = [...(boats as BoardBoat[])];
+      const boat = { ...newBoats?.[index] };
+
+      if (boat) {
+        boat.direction = boat.direction === 'vertical' ? 'horizontal' : 'vertical';
+        console.log('🚀 ~ file: Board.tsx:44 ~ boat', boat);
+        console.log('🚀 ~ file: Board.tsx:40 ~ newBoats', newBoats);
+        console.log('🚀 ~ file: Board.tsx:40 ~ boats', boats);
+        if (checkBoardBoatsPosition(newBoats)) setBoats?.(newBoats);
+      }
+    },
+    [boats, setBoats],
+  );
+
   const boardClassName = useMemo(
     (): string => classNames('board', { 'is-disabled': !!isDisabled }, className),
     [className, isDisabled],
@@ -65,27 +93,29 @@ export const Board = ({
   }, [cellsAffected, dimensions, isActive, isDisabled, onClick]);
 
   return (
-    <div className={boardClassName} data-testid="board">
+    <div className={boardClassName} data-testid="board" ref={ref}>
       <table className="board-table">
         <tbody className="board-body">{createBoard()}</tbody>
       </table>
 
-      {boats?.map((boatBoat: BoardBoat, index: number) => {
+      {boats?.map((boardBoat: BoardBoat, index: number) => {
         const style: CSSProperties = {
-          height: `${(boatBoat.lengthCell * 100) / dimensions}%`,
-          left: `${(boatBoat.x * 100) / dimensions}%`,
-          top: `${(boatBoat.y * 100) / dimensions}%`,
-          transformOrigin: `${100 / boatBoat.widthCell / 2}% ${100 / boatBoat.lengthCell / 2}%`,
-          width: `${(boatBoat.widthCell * 100) / dimensions}%`,
+          left: `${(boardBoat.x * 100) / dimensions}%`,
+          top: `${(boardBoat.y * 100) / dimensions}%`,
+          transformOrigin: `${100 / boardBoat.widthCell / 2}% ${100 / boardBoat.lengthCell / 2}%`,
         };
 
         return (
           <Boat
-            boatName={boatBoat.boatName}
-            boatSrc={boatBoat.boatSrc}
-            direction={boatBoat.direction}
+            direction={boardBoat.direction}
+            height={boardBoat.lengthCell * (height / dimensions)}
+            index={index}
             key={index}
+            name={boardBoat.name}
+            onRotation={onBoatRotation}
+            src={boardBoat.src}
             style={style}
+            width={boardBoat.widthCell * (width / dimensions)}
           />
         );
       })}

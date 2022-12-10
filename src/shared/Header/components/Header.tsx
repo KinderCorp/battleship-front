@@ -24,7 +24,7 @@ const Header = ({
   );
 
   return (
-    <div className={headerClassName} data-testid="header">
+    <header className={headerClassName} data-testid="header">
       {leftSideNode && <div className="header-left-side">{leftSideNode}</div>}
 
       {!!title && <Title className="header-title" title={title} type="h2" />}
@@ -32,7 +32,7 @@ const Header = ({
       {!!content && <div className="header-content">{content}</div>}
 
       {rightSideNode && <div className="header-right-side">{rightSideNode}</div>}
-    </div>
+    </header>
   );
 };
 

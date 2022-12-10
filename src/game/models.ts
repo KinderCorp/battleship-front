@@ -1,5 +1,6 @@
 import type { BasePlayer } from '@player/models';
 import type { BoardProps } from '@shared/Board/models';
+import type { Boat } from '@src/boat/models';
 import type { GamePageParams } from '@pages/game/[gameId]';
 import type { Weapon } from '@weapon/models';
 
@@ -12,6 +13,10 @@ export interface GameSettings {
   weapons: Weapon['name'][];
   hasBoatsSafetyZone: boolean;
   timePerTurn: number;
+}
+
+export interface GameExtendedSettings extends GameSettings {
+  boatsAuthorized: Boat[];
 }
 
 export interface GameState {
@@ -28,7 +33,7 @@ export interface GamePlayer extends Pick<BasePlayer, 'pseudo'> {
 
 export interface GameRoom extends GameInstance {
   players: GamePlayer[];
-  settings: GameSettings;
+  settings: GameExtendedSettings;
 }
 
 export interface GameInstance {
