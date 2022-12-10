@@ -12,6 +12,7 @@
     "noEmit": true,
     "paths": {
       "@api/*": ["./src/api/*"],
+      "@boat/*": ["./src/boat/*"],
       "@core/*": ["./src/core/*"],
       "@game/*": ["./src/game/*"],
       "@helpers/*": ["./src/shared/_helpers/*"],

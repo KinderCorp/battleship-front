@@ -27,6 +27,11 @@ export const selectGameInstance = createSelector(
   (state: GameRoom) => state.instanceId || '',
 );
 
+export const selectGameRoomSettings = createSelector(
+  selectGameRoom,
+  (state: GameRoom) => state.settings || {},
+);
+
 export const selectGamePlayers = createSelector(
   selectGameRoom,
   (state: GameRoom) => state.players || [],
