@@ -19,6 +19,7 @@ export const Board = ({
   cellsAffected,
   className = '',
   dimensions,
+  hasBoatsSafetyZone = false,
   isActive = false,
   isDisabled = false,
   onClick,
@@ -36,7 +37,7 @@ export const Board = ({
 
   const onBoatRotation = useCallback(
     (index: number): void => {
-      // FIXME: best way to update object?
+      // FIXME: best way to update object, see deepClone ObjectHelpers
       const newBoats = [...(boats as BoardBoat[])];
       const boat = { ...newBoats[index] };
 
@@ -44,10 +45,10 @@ export const Board = ({
         boat.direction = boat.direction === 'vertical' ? 'horizontal' : 'vertical';
         newBoats[index] = boat;
 
-        if (checkBoardBoatsPosition(newBoats, dimensions)) setBoats?.(newBoats);
+        if (checkBoardBoatsPosition(newBoats, dimensions, hasBoatsSafetyZone)) setBoats?.(newBoats);
       }
     },
-    [boats, dimensions, setBoats],
+    [boats, dimensions, hasBoatsSafetyZone, setBoats],
   );
 
   const boardClassName = useMemo(

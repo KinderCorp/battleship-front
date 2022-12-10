@@ -11,12 +11,14 @@ import NumberHelpers from '@helpers/NumberHelpers';
  * @param {BoardBoat[]} boatsAlreadyPlaced Boats already placed
  * @param {Boat} boat Boat to place in the board
  * @param {number} dimensions Board dimensions
+ * @param {boolean} hasBoatsSafetyZone Safety zone around the boats
  * @return {BoardBoat}
  */
 export const placeRandomBoatInTheBoard = (
   boatsAlreadyPlaced: BoardBoat[],
   boat: Boat,
   dimensions: number,
+  hasBoatsSafetyZone: boolean,
 ): BoardBoat => {
   const randomDirection: BoatDirection = ArrayHelpers.getRandomItem(['horizontal', 'vertical']);
   const randomPosition: Position = {
@@ -30,8 +32,10 @@ export const placeRandomBoatInTheBoard = (
     direction: randomDirection,
   };
 
-  if (!checkBoardBoatsPosition([...boatsAlreadyPlaced, boardBoat], dimensions)) {
-    return placeRandomBoatInTheBoard(boatsAlreadyPlaced, boat, dimensions);
+  if (
+    !checkBoardBoatsPosition([...boatsAlreadyPlaced, boardBoat], dimensions, hasBoatsSafetyZone)
+  ) {
+    return placeRandomBoatInTheBoard(boatsAlreadyPlaced, boat, dimensions, hasBoatsSafetyZone);
   }
 
   return boardBoat;
@@ -42,13 +46,19 @@ export const placeRandomBoatInTheBoard = (
  *
  * @param {Boat[]} boats Boats to place in the board
  * @param {number} dimensions Board dimensions
+ * @param {boolean} hasBoatsSafetyZone Safety zone around the boats
  * @return {BoardBoat[]}
  */
-export const placeRandomBoatsInTheBoard = (boats: Boat[], dimensions: number): BoardBoat[] => {
+export const placeRandomBoatsInTheBoard = (
+  boats: Boat[],
+  dimensions: number,
+  hasBoatsSafetyZone: boolean,
+): BoardBoat[] => {
   const boardBoats = [] as BoardBoat[];
 
+  // FIXME: check is it possible to place all boats, otherwise infinite loop
   for (const boat of boats) {
-    boardBoats.push(placeRandomBoatInTheBoard(boardBoats, boat, dimensions));
+    boardBoats.push(placeRandomBoatInTheBoard(boardBoats, boat, dimensions, hasBoatsSafetyZone));
   }
 
   return boardBoats;

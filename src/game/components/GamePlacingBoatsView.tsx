@@ -1,10 +1,11 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { selectGameOtherPlayer, selectGameRoomSettings } from '@game/selectors';
 import Board from '@shared/Board/components/Board';
 import type { BoardBoat } from '@shared/Board/models';
 import Button from '@shared/Button/components/Button';
+import { checkBoardBoatsPosition } from '@shared/Board/helpers';
 import { emitValidatePlayerBoatsPlacement } from '@socket/emittingEvents';
 import { placeRandomBoatsInTheBoard } from '@boat/helpers';
 import TitleIndication from '@shared/Title/components/TitleIndication';
@@ -18,31 +19,18 @@ import useTranslation from '@hooks/useTranslation';
 const GamePlacingBoatsView = (): JSX.Element => {
   const { translate } = useTranslation();
 
-  // const [boats, setBoats] = useState<BoardBoat[]>([
-  //   {
-  //     lengthCell: 1,
-  //     name: '1x1',
-  //     src: '/images/boats/boat-1x1.png',
-  //     widthCell: 1,
-  //     x: 5,
-  //     y: 5,
-  //   },
-  //   {
-  //     lengthCell: 3,
-  //     name: '3x1',
-  //     src: '/images/boats/boat-3x1.png',
-  //     widthCell: 1,
-  //     x: 3,
-  //     y: 5,
-  //   },
-  // ]);
-
   const [boats, setBoats] = useState<BoardBoat[]>([]);
 
-  const roomSettings = useSelector(selectGameRoomSettings);
+  const { boardDimensions, boatsAuthorized, hasBoatsSafetyZone } =
+    useSelector(selectGameRoomSettings);
   const otherPlayer = useSelector(selectGameOtherPlayer);
 
-  const boatsAreWellPlaced = false;
+  const boatsAreWellPlaced = useMemo(
+    () =>
+      checkBoardBoatsPosition(boats, boardDimensions, hasBoatsSafetyZone) &&
+      boats.length === boatsAuthorized.length,
+    [boats, boardDimensions, boatsAuthorized, hasBoatsSafetyZone],
+  );
 
   /**
    * When player is ready.
@@ -54,17 +42,20 @@ const GamePlacingBoatsView = (): JSX.Element => {
   }, [boatsAreWellPlaced]);
 
   const handleRandomPlaceBoats = useCallback((): void => {
-    setBoats(
-      placeRandomBoatsInTheBoard(roomSettings.boatsAuthorized, roomSettings.boardDimensions),
-    );
-  }, [roomSettings]);
+    setBoats(placeRandomBoatsInTheBoard(boatsAuthorized, boardDimensions, hasBoatsSafetyZone));
+  }, [boardDimensions, boatsAuthorized, hasBoatsSafetyZone]);
 
   return (
     <div className="game-placing-boats">
       <TitleIndication iconName="Boat" title={translate('place-your-boats')} />
 
       <div className="boats-placement">
-        <Board dimensions={roomSettings.boardDimensions} boats={boats} setBoats={setBoats} />
+        <Board
+          dimensions={boardDimensions}
+          boats={boats}
+          hasBoatsSafetyZone={hasBoatsSafetyZone}
+          setBoats={setBoats}
+        />
 
         <Button
           className="button-random-boats"

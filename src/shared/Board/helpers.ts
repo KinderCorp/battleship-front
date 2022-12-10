@@ -5,9 +5,14 @@ import type { BoardBoat, Position } from '@shared/Board/models';
  *
  * @param {BoardBoat[]} boats Boats in the board
  * @param {number} dimensions Board dimensions
+ * @param {boolean} hasBoatsSafetyZone Safety zone around the boats
  * @return {boolean}
  */
-export const checkBoardBoatsPosition = (boats: BoardBoat[], dimensions: number): boolean => {
+export const checkBoardBoatsPosition = (
+  boats: BoardBoat[],
+  dimensions: number,
+  hasBoatsSafetyZone: boolean,
+): boolean => {
   const takenCells = [] as Position[];
 
   for (const boat of boats) {
@@ -25,6 +30,10 @@ export const checkBoardBoatsPosition = (boats: BoardBoat[], dimensions: number):
         takenCells.push({ x, y });
       }
     }
+
+    // TODO: here check safety zone
+    // eslint-disable-next-line no-console
+    console.log(hasBoatsSafetyZone);
   }
 
   return true;

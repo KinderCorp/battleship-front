@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 
 import type { Boat } from '@src/boat/models';
 import type { BoatProps } from '@shared/Boat/models';
+import type { GameSettings } from '@game/models';
 import type { IntRange } from '@core/models';
 
 export interface Position {
@@ -17,7 +18,7 @@ export interface BoardCellAffected extends Position {
 
 export interface BoardBoat extends Boat, Position, Pick<BoatProps, 'direction'> {}
 
-export interface BoardProps {
+export interface BoardProps extends Pick<GameSettings, 'hasBoatsSafetyZone'> {
   boats?: BoardBoat[];
   cellsAffected?: BoardCellAffected[];
   className?: string;

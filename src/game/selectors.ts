@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-import type { GamePlayer, GameRoom, GameState } from '@game/models';
+import type { GameExtendedSettings, GamePlayer, GameRoom, GameState } from '@game/models';
 import { GAME_NAME } from '@game/constants';
 import type { RootState } from '@core/models';
 import socket from '@socket/index';
@@ -29,7 +29,7 @@ export const selectGameInstance = createSelector(
 
 export const selectGameRoomSettings = createSelector(
   selectGameRoom,
-  (state: GameRoom) => state.settings || {},
+  (state: GameRoom) => state.settings || ({} as GameExtendedSettings),
 );
 
 export const selectGamePlayers = createSelector(
