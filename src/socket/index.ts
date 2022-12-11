@@ -7,6 +7,7 @@ import {
   listeningErrorGameNotFound,
   listeningGameCreated,
   listeningGameInformation,
+  listeningGameStarted,
   listeningOnePlayerHasPlacedHisBoats,
   listeningPlayerDisconnected,
   listeningPlayerJoined,
@@ -38,5 +39,6 @@ socket.on(
   SOCKET_EVENTS_LISTENING.ALL_PLAYERS_HAVE_PLACED_THEIR_BOATS,
   listeningAllPlayersHasPlacedTheirBoats,
 );
+socket.on(SOCKET_EVENTS_LISTENING.GAME_STARTED, listeningGameStarted);
 
 export default socket;

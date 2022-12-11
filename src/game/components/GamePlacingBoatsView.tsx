@@ -5,8 +5,13 @@ import {
   emitUnvalidatePlayerBoatsPlacement,
   emitValidatePlayerBoatsPlacement,
 } from '@socket/emittingEvents';
-import { selectGameOtherPlayer, selectGamePlayer, selectGameRoomSettings } from '@game/selectors';
-import { areBoatsReady } from '@game/helpers';
+import {
+  selectGameOtherPlayer,
+  selectGamePlayer,
+  selectGameRoomSettingsBoardDimensions,
+  selectGameRoomSettingsBoatsAuthorized,
+  selectGameRoomSettingsHasBoatsSafetyZone,
+} from '@game/selectors';
 import Board from '@shared/Board/components/Board';
 import type { BoardBoat } from '@shared/Board/models';
 import Button from '@shared/Button/components/Button';
@@ -25,16 +30,22 @@ const GamePlacingBoatsView = (): JSX.Element => {
 
   const [boats, setBoats] = useState<BoardBoat[]>([]);
 
-  const { boardDimensions, boatsAuthorized, hasBoatsSafetyZone } =
-    useSelector(selectGameRoomSettings);
+  // FIXME: use this logic to get settings
+  // const { boardDimensions, boatsAuthorized, hasBoatsSafetyZone } =
+  //   useSelector(selectGameRoomSettings);
+
+  const boardDimensions = useSelector(selectGameRoomSettingsBoardDimensions);
+  const boatsAuthorized = useSelector(selectGameRoomSettingsBoatsAuthorized);
+  const hasBoatsSafetyZone = useSelector(selectGameRoomSettingsHasBoatsSafetyZone);
+
   const otherPlayer = useSelector(selectGameOtherPlayer);
   const player = useSelector(selectGamePlayer);
-  const isReady = useMemo(() => areBoatsReady(player), [player]);
-  const otherPlayerIsReady = useMemo(() => areBoatsReady(otherPlayer), [otherPlayer]);
+
+  const isReady = useMemo(() => !!player.boatsAreReady, [player]);
+  const otherPlayerIsReady = useMemo(() => !!otherPlayer.boatsAreReady, [otherPlayer]);
 
   const boatsAreWellPlaced = useMemo(
     () =>
-      // FIXME: Cannot read properties of undefined (reading 'length' on boatsAuthorized)
       checkBoardBoatsPosition(boats, boardDimensions, hasBoatsSafetyZone) &&
       boats.length === boatsAuthorized.length,
     [boats, boardDimensions, boatsAuthorized, hasBoatsSafetyZone],

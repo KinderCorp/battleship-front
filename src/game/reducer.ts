@@ -7,88 +7,6 @@ import type { Boat } from '@boat/models';
 
 const initialState: GameState = {
   gameRoom: {} as GameRoom,
-  // gameRoom: {
-  //   instanceId: 'VLgJT0odiUJPU0NzUOFL',
-  //   players: [
-  //     {
-  //       id: '1SqKohl9mPf5r2TTYbUB',
-  //       isAdmin: true,
-  //       pseudo: 'Player_401',
-  //       socketId: '-eP10Si_XxD4r2HKAAB7',
-  //     },
-  //     {
-  //       id: 'Chl9Ihi6bHAxIJ2FnMfE',
-  //       isAdmin: false,
-  //       pseudo: 'Player_986',
-  //       socketId: 'aU4gMQc2bvZp5M6mAAB_',
-  //     },
-  //   ],
-  //   settings: {
-  //     ...GAME_SETTINGS,
-  //     boatsAuthorized: [
-  //       {
-  //         lengthCell: 1,
-  //         name: '1x1',
-  //         src: '/images/boats/boat-1x1.png',
-  //         widthCell: 1,
-  //       },
-  //       {
-  //         lengthCell: 1,
-  //         name: '1x1',
-  //         src: '/images/boats/boat-1x1.png',
-  //         widthCell: 1,
-  //       },
-  //       {
-  //         lengthCell: 1,
-  //         name: '1x1',
-  //         src: '/images/boats/boat-1x1.png',
-  //         widthCell: 1,
-  //       },
-  //       {
-  //         lengthCell: 1,
-  //         name: '1x1',
-  //         src: '/images/boats/boat-1x1.png',
-  //         widthCell: 1,
-  //       },
-  //       {
-  //         lengthCell: 2,
-  //         name: '2x1',
-  //         src: '/images/boats/boat-2x1.png',
-  //         widthCell: 1,
-  //       },
-  //       {
-  //         lengthCell: 2,
-  //         name: '2x1',
-  //         src: '/images/boats/boat-2x1.png',
-  //         widthCell: 1,
-  //       },
-  //       {
-  //         lengthCell: 2,
-  //         name: '2x1',
-  //         src: '/images/boats/boat-2x1.png',
-  //         widthCell: 1,
-  //       },
-  //       {
-  //         lengthCell: 3,
-  //         name: '3x1',
-  //         src: '/images/boats/boat-3x1.png',
-  //         widthCell: 1,
-  //       },
-  //       {
-  //         lengthCell: 3,
-  //         name: '3x1',
-  //         src: '/images/boats/boat-3x1.png',
-  //         widthCell: 1,
-  //       },
-  //       {
-  //         lengthCell: 4,
-  //         name: '4x1',
-  //         src: '/images/boats/boat-4x1.png',
-  //         widthCell: 1,
-  //       },
-  //     ],
-  //   },
-  // } as GameRoom,
   settings: GAME_SETTINGS,
   view: 'settings',
 };
@@ -107,6 +25,7 @@ export const gameSlice = createSlice({
       state.gameRoom = action.payload;
     },
     setGameRoomBoatsAuthorized: (state, action: PayloadAction<Boat[]>) => {
+      // FIXME: bad code
       if (state.gameRoom.settings) {
         state.gameRoom.settings.boatsAuthorized = action.payload;
       } else {

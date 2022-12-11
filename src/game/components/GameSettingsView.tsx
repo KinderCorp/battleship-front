@@ -7,6 +7,7 @@ import BlockContainer from '@shared/BlockContainer/components/BlockContainer';
 import Button from '@shared/Button/components/Button';
 import { COLORS } from '@core/constants';
 import { emitPlayersReadyToPlaceBoats } from '@socket/emittingEvents';
+import type { GameRoom } from '@game/models';
 import Icon from '@shared/Icon/components/Icon';
 import PlayersCards from '@player/components/PlayersCards';
 import { selectGameRoom } from '@game/selectors';
@@ -23,9 +24,10 @@ import useTranslation from '@hooks/useTranslation';
 const GameSettingsView = (): JSX.Element => {
   const { translate } = useTranslation();
 
-  const gameRoom = useSelector(selectGameRoom);
+  const gameRoom = useSelector(selectGameRoom) as GameRoom;
 
   const shareLink = useClientSideValue(UrlHelpers.getUrl());
+
   const [clickedButtonCopy, setClickedButtonCopy] = useState<boolean>(false);
 
   const allPlayersJoined = useMemo(() => checkGameIsFull(gameRoom), [gameRoom]);

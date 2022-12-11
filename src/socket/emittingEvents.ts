@@ -84,8 +84,9 @@ export const emitUnvalidatePlayerBoatsPlacement = (): void => {
 /**
  * Emitting event for start the game.
  *
+ * @param {GameInstance['instanceId']} instanceId Instance id
  * @return {void}
  */
-export const emitStartGame = (): void => {
-  socket.emit(SOCKET_EVENTS_EMITTING.START_GAME);
+export const emitStartGame = (instanceId: GameInstance['instanceId']): void => {
+  socket.emit(SOCKET_EVENTS_EMITTING.START_GAME, { instanceId });
 };

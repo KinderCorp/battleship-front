@@ -97,7 +97,7 @@ export const listeningOnePlayerHasPlacedHisBoats = ({ data }: GameRoomData<GameP
   const players = [...selectGamePlayers(store.getState())];
   const playerToUpdateIndex = players.findIndex((player) => player.socketId === data.socketId);
 
-  if (playerToUpdateIndex) {
+  if (playerToUpdateIndex !== -1) {
     players[playerToUpdateIndex] = { ...data, boatsAreReady: true };
     store.dispatch(setGamePlayers(players));
   }
@@ -116,6 +116,15 @@ export const listeningAllPlayersHasPlacedTheirBoats = (payload: GameRoomData<Gam
   const playersAreReady = players.every((player) => !!player.boatsAreReady);
 
   setTimeout(() => {
-    if (playersAreReady) emitStartGame();
+    if (playersAreReady) emitStartGame(payload.instanceId);
   }, 3000);
+};
+
+/**
+ * Listening event when game is started.
+ *
+ * @return {void}
+ */
+export const listeningGameStarted = (): void => {
+  store.dispatch(setView('playing'));
 };
