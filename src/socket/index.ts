@@ -21,6 +21,7 @@ const socket = io(SOCKETS_URL, {
   transports: ['websocket'],
 });
 
+// TODO: order error functions
 socket.on(SOCKET_EVENTS_LISTENING.GAME_CREATED, listeningGameCreated);
 socket.on(SOCKET_EVENTS_LISTENING.PLAYER_JOINED, listeningPlayerJoined);
 socket.on(SOCKET_EVENTS_LISTENING.START_PLACING_BOATS, listeningStartPlacingBoats);

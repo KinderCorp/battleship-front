@@ -37,21 +37,29 @@ export const selectGameRoomSettings = createSelector(
 
 export const selectGamePlayers = createSelector(
   selectGameRoom,
-  (state: GameRoom) => state.players || [],
+  (state: GameRoom): GamePlayer[] => state.players || [],
 );
 
 export const selectGamePlayerAdmin = createSelector(
   selectGamePlayers,
-  (state: GamePlayer[]) => state.find((player) => player?.isAdmin) || null,
+  (state: GamePlayer[]): GamePlayer =>
+    state.find((player) => player?.isAdmin) || ({} as GamePlayer),
 );
 
-// TODO: check for isAdmin player is not optional
 export const selectGamePlayerRival = createSelector(
   selectGamePlayers,
-  (state: GamePlayer[]) => state.find((player) => !player?.isAdmin) || null,
+  (state: GamePlayer[]): GamePlayer =>
+    state.find((player) => !player?.isAdmin) || ({} as GamePlayer),
+);
+
+export const selectGamePlayer = createSelector(
+  selectGamePlayers,
+  (state: GamePlayer[]): GamePlayer =>
+    state.find((player) => player?.socketId === socket.id) || ({} as GamePlayer),
 );
 
 export const selectGameOtherPlayer = createSelector(
   selectGamePlayers,
-  (state: GamePlayer[]) => state.find((player) => player?.socketId !== socket.id) || null,
+  (state: GamePlayer[]): GamePlayer =>
+    state.find((player) => player?.socketId !== socket.id) || ({} as GamePlayer),
 );

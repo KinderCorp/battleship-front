@@ -18,6 +18,16 @@ class ObjectHelpers {
   static isEmpty(value: any): boolean {
     return this.isObject(value) ? Object.keys(value).length === 0 : true;
   }
+
+  /**
+   * Make a deep clone of the object.
+   *
+   * @param {any} value Value to copy
+   * @return {any}
+   */
+  static deepClone(value: any): any {
+    return this.isEmpty(value) ? value : JSON.parse(JSON.stringify(value));
+  }
 }
 
 export default ObjectHelpers;

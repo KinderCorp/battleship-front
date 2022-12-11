@@ -18,6 +18,7 @@ export const Boat = ({
   direction = 'horizontal',
   height,
   index,
+  isPlacementActive = false,
   name = '',
   onRotation,
   priority,
@@ -32,8 +33,14 @@ export const Boat = ({
   }, [index, onRotation]);
 
   const boatClassName = useMemo(
-    (): string => classNames('boat', `boat--${direction}`, className),
-    [className, direction],
+    (): string =>
+      classNames(
+        'boat',
+        `boat--${direction}`,
+        { 'boat--is-placement-active': !!isPlacementActive },
+        className,
+      ),
+    [className, direction, isPlacementActive],
   );
 
   const boatStyle: CSSProperties = useMemo(

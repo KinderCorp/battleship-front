@@ -23,15 +23,16 @@ export interface BoardProps extends Pick<GameSettings, 'hasBoatsSafetyZone'> {
   cellsAffected?: BoardCellAffected[];
   className?: string;
   dimensions: IntRange<8, 13>;
-  isActive?: boolean;
   isDisabled?: boolean;
+  isPlacementActive?: boolean;
+  isShootActive?: boolean;
   onClick?: (x: Position['x'], y: Position['y']) => void;
   setBoats?: (boats: BoardBoat[]) => void;
 }
 
 // FIXME: if onClick is in this model => "Property 'onClick' does not exist on type 'BoardProps'"
 export interface BoardCellProps
-  extends Pick<BoardProps, 'isActive' | 'isDisabled' | 'onClick'>,
+  extends Pick<BoardProps, 'isShootActive' | 'isDisabled' | 'onClick'>,
     Position {
   className?: string;
   state?: BoardCellState;

@@ -20,8 +20,9 @@ export const Board = ({
   className = '',
   dimensions,
   hasBoatsSafetyZone = false,
-  isActive = false,
   isDisabled = false,
+  isPlacementActive = false,
+  isShootActive = false,
   onClick,
   setBoats,
 }: BoardProps): JSX.Element => {
@@ -37,18 +38,21 @@ export const Board = ({
 
   const onBoatRotation = useCallback(
     (index: number): void => {
-      // FIXME: best way to update object, see deepClone ObjectHelpers
-      const newBoats = [...(boats as BoardBoat[])];
-      const boat = { ...newBoats[index] };
+      if (isPlacementActive) {
+        // FIXME: best way to update object, see deepClone ObjectHelpers
+        const newBoats = [...(boats as BoardBoat[])];
+        const boat = { ...newBoats[index] };
 
-      if (boat) {
-        boat.direction = boat.direction === 'vertical' ? 'horizontal' : 'vertical';
-        newBoats[index] = boat;
+        if (boat) {
+          boat.direction = boat.direction === 'vertical' ? 'horizontal' : 'vertical';
+          newBoats[index] = boat;
 
-        if (checkBoardBoatsPosition(newBoats, dimensions, hasBoatsSafetyZone)) setBoats?.(newBoats);
+          if (checkBoardBoatsPosition(newBoats, dimensions, hasBoatsSafetyZone))
+            setBoats?.(newBoats);
+        }
       }
     },
-    [boats, dimensions, hasBoatsSafetyZone, setBoats],
+    [boats, dimensions, isPlacementActive, hasBoatsSafetyZone, setBoats],
   );
 
   const boardClassName = useMemo(
@@ -76,8 +80,8 @@ export const Board = ({
 
         cells.push(
           <BoardCell
-            isActive={isActive}
             isDisabled={isDisabled}
+            isShootActive={isShootActive}
             key={`cell-${row}-${col}`}
             onClick={onClick}
             state={cellAffected?.state}
@@ -91,7 +95,7 @@ export const Board = ({
     }
 
     return board;
-  }, [cellsAffected, dimensions, isActive, isDisabled, onClick]);
+  }, [cellsAffected, dimensions, isDisabled, isShootActive, onClick]);
 
   return (
     <div className={boardClassName} data-testid="board" ref={ref}>
@@ -111,6 +115,7 @@ export const Board = ({
             direction={boardBoat.direction}
             height={boardBoat.lengthCell * (height / dimensions)}
             index={index}
+            isPlacementActive={isPlacementActive}
             key={index}
             name={boardBoat.name}
             onRotation={onBoatRotation}

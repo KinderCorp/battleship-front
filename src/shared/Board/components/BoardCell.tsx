@@ -14,8 +14,8 @@ import Icon from '@shared/Icon/components/Icon';
  */
 export const BoardCell = ({
   className = '',
-  isActive = false,
   isDisabled = false,
+  isShootActive = false,
   onClick,
   state,
   x,
@@ -27,12 +27,12 @@ export const BoardCell = ({
         'board-cell',
         {
           [`board-cell--${state}`]: !!state,
-          'is-active': !!isActive && !state,
           'is-disabled': !!isDisabled,
+          'is-shoot-active': !!isShootActive && !state,
         },
         className,
       ),
-    [className, isActive, isDisabled, state],
+    [className, isDisabled, isShootActive, state],
   );
 
   const handleClick = useCallback(
@@ -40,11 +40,11 @@ export const BoardCell = ({
       event.preventDefault();
       event.stopPropagation();
 
-      if (!isDisabled && !!isActive && !state && onClick) {
+      if (!isDisabled && !!isShootActive && !state && onClick) {
         onClick(x, y);
       }
     },
-    [isActive, isDisabled, onClick, state, x, y],
+    [isDisabled, isShootActive, onClick, state, x, y],
   );
 
   return (

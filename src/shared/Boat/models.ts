@@ -11,6 +11,7 @@ export interface BoatProps extends Pick<ImageProps, 'priority'>, Pick<Boat, 'nam
   height: number; // For the length
   index: number;
   style?: CSSProperties;
+  isPlacementActive?: boolean;
   width: number;
   onRotation?: (index: number) => void;
 }

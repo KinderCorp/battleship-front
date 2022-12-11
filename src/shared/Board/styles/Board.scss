@@ -52,7 +52,7 @@
       transition: 0.2s;
     }
 
-    &:hover {
+    &.boat--is-placement-active:hover {
       background-color: rgba($color-white, 0.1);
 
       img {

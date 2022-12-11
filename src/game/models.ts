@@ -26,9 +26,10 @@ export interface GameState {
 }
 
 export interface GamePlayer extends Pick<BasePlayer, 'pseudo'> {
-  id: string;
+  id: string; // DELETE: because id is not used in front view
   socketId: string;
   isAdmin: boolean;
+  boatsAreReady?: boolean;
 }
 
 export interface GameRoom extends GameInstance {

@@ -1,12 +1,16 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectGameOtherPlayer, selectGameRoomSettings } from '@game/selectors';
+import {
+  emitUnvalidatePlayerBoatsPlacement,
+  emitValidatePlayerBoatsPlacement,
+} from '@socket/emittingEvents';
+import { selectGameOtherPlayer, selectGamePlayer, selectGameRoomSettings } from '@game/selectors';
+import { areBoatsReady } from '@game/helpers';
 import Board from '@shared/Board/components/Board';
 import type { BoardBoat } from '@shared/Board/models';
 import Button from '@shared/Button/components/Button';
 import { checkBoardBoatsPosition } from '@shared/Board/helpers';
-import { emitValidatePlayerBoatsPlacement } from '@socket/emittingEvents';
 import { placeRandomBoatsInTheBoard } from '@boat/helpers';
 import TitleIndication from '@shared/Title/components/TitleIndication';
 import useTranslation from '@hooks/useTranslation';
@@ -24,9 +28,12 @@ const GamePlacingBoatsView = (): JSX.Element => {
   const { boardDimensions, boatsAuthorized, hasBoatsSafetyZone } =
     useSelector(selectGameRoomSettings);
   const otherPlayer = useSelector(selectGameOtherPlayer);
+  const player = useSelector(selectGamePlayer);
+  const isReady = useMemo(() => areBoatsReady(player), [player]);
 
   const boatsAreWellPlaced = useMemo(
     () =>
+      // FIXME: Cannot read properties of undefined (reading 'length' on boatsAuthorized)
       checkBoardBoatsPosition(boats, boardDimensions, hasBoatsSafetyZone) &&
       boats.length === boatsAuthorized.length,
     [boats, boardDimensions, boatsAuthorized, hasBoatsSafetyZone],
@@ -38,12 +45,17 @@ const GamePlacingBoatsView = (): JSX.Element => {
    * @return {void}
    */
   const handlePlayerReady = useCallback((): void => {
-    if (boatsAreWellPlaced) emitValidatePlayerBoatsPlacement(boats);
-  }, [boatsAreWellPlaced, boats]);
+    if (boatsAreWellPlaced) {
+      if (!isReady) emitValidatePlayerBoatsPlacement(boats);
+      else emitUnvalidatePlayerBoatsPlacement();
+    }
+  }, [boatsAreWellPlaced, boats, isReady]);
 
   const handleRandomPlaceBoats = useCallback((): void => {
-    setBoats(placeRandomBoatsInTheBoard(boatsAuthorized, boardDimensions, hasBoatsSafetyZone));
-  }, [boardDimensions, boatsAuthorized, hasBoatsSafetyZone]);
+    if (!isReady) {
+      setBoats(placeRandomBoatsInTheBoard(boatsAuthorized, boardDimensions, hasBoatsSafetyZone));
+    }
+  }, [boardDimensions, boatsAuthorized, hasBoatsSafetyZone, isReady]);
 
   return (
     <div className="game-placing-boats">
@@ -55,6 +67,7 @@ const GamePlacingBoatsView = (): JSX.Element => {
           boats={boats}
           hasBoatsSafetyZone={hasBoatsSafetyZone}
           setBoats={setBoats}
+          isPlacementActive={!isReady}
         />
 
         <Button
@@ -62,6 +75,7 @@ const GamePlacingBoatsView = (): JSX.Element => {
           iconName="Dice"
           onClick={handleRandomPlaceBoats}
           style="secondary"
+          isDisabled={isReady}
         >
           {translate('random')}
         </Button>
@@ -72,9 +86,9 @@ const GamePlacingBoatsView = (): JSX.Element => {
         isDisabled={!boatsAreWellPlaced}
         onClick={handlePlayerReady}
         size="large"
-        style="secondary"
+        style={isReady ? 'primary' : 'secondary'}
       >
-        {translate('i-am-not-ready')}
+        {isReady ? translate('i-am-ready') : translate('i-am-not-ready')}
       </Button>
 
       <p className="rival-indication">

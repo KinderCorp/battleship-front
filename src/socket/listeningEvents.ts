@@ -1,4 +1,5 @@
 import type { GamePlayer, GameRoom, GameRoomData } from '@game/models';
+import { selectGamePlayerAdmin, selectGamePlayers } from '@game/selectors';
 import {
   setGamePlayers,
   setGameRoom,
@@ -8,7 +9,6 @@ import {
 } from '@game/reducer';
 import type { Boat } from '@boat/models';
 import { PATHS } from '@core/constants';
-import { selectGamePlayerAdmin } from '@game/selectors';
 import store from '@core/store';
 import UrlHelpers from '@helpers/UrlHelpers';
 
@@ -92,7 +92,12 @@ export const listeningErrorGameIsFull = (): void => {
  * @param {any} payload Payload
  * @return {void}
  */
-export const listeningOnePlayerHasPlacedHisBoats = (payload: any): void => {
-  // eslint-disable-next-line no-console
-  console.log(payload);
+export const listeningOnePlayerHasPlacedHisBoats = ({ data }: GameRoomData<GamePlayer>): void => {
+  const players = [...selectGamePlayers(store.getState())];
+  // const playerToUpdateIndex = players.findIndex((player) => player.socketId === data.socketId);
+
+  // if (playerToUpdateIndex) {
+  players[0] = { ...data, boatsAreReady: true };
+  store.dispatch(setGamePlayers(players));
+  // }
 };
