@@ -80,3 +80,12 @@ export const emitValidatePlayerBoatsPlacement = (data: BoardBoat[]): void => {
 export const emitUnvalidatePlayerBoatsPlacement = (): void => {
   socket.emit(SOCKET_EVENTS_EMITTING.UNVALIDATE_PLAYER_BOATS_PLACEMENT);
 };
+
+/**
+ * Emitting event for start the game.
+ *
+ * @return {void}
+ */
+export const emitStartGame = (): void => {
+  socket.emit(SOCKET_EVENTS_EMITTING.START_GAME);
+};

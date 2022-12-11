@@ -30,6 +30,7 @@ const GamePlacingBoatsView = (): JSX.Element => {
   const otherPlayer = useSelector(selectGameOtherPlayer);
   const player = useSelector(selectGamePlayer);
   const isReady = useMemo(() => areBoatsReady(player), [player]);
+  const otherPlayerIsReady = useMemo(() => areBoatsReady(otherPlayer), [otherPlayer]);
 
   const boatsAreWellPlaced = useMemo(
     () =>
@@ -86,13 +87,15 @@ const GamePlacingBoatsView = (): JSX.Element => {
         isDisabled={!boatsAreWellPlaced}
         onClick={handlePlayerReady}
         size="large"
-        style={isReady ? 'primary' : 'secondary'}
+        style={!isReady ? 'secondary' : 'primary'}
       >
-        {isReady ? translate('i-am-ready') : translate('i-am-not-ready')}
+        {!isReady ? translate('i-am-not-ready') : translate('i-am-ready')}
       </Button>
 
       <p className="rival-indication">
-        {translate('player-placing-his-boats', { pseudo: otherPlayer?.pseudo || '' })}
+        {!otherPlayerIsReady
+          ? translate('player-placing-his-boats', { pseudo: otherPlayer?.pseudo || '' })
+          : translate('player-ready', { pseudo: otherPlayer?.pseudo || '' })}
       </p>
     </div>
   );

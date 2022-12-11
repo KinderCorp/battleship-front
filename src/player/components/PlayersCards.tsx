@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { selectGamePlayerAdmin, selectGamePlayerRival } from '@game/selectors';
+import ObjectHelpers from '@helpers/ObjectHelpers';
 import type { PlayersCardsProps } from '@player/models';
 import UserCard from '@shared/UserCard/components/UserCard';
 import Versus from '@shared/Versus/components/Versus';
@@ -33,7 +34,7 @@ const PlayersCards = ({ size = 'medium' }: PlayersCardsProps): JSX.Element => {
         characterName="Sam"
         characterSrc="/images/characters/character-sam.png"
         direction="left"
-        isLoading={!rivalPlayer}
+        isLoading={ObjectHelpers.isEmpty(rivalPlayer)}
         name={rivalPlayer?.pseudo}
         priority
         size={userCardSize}

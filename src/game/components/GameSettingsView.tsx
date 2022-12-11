@@ -5,7 +5,9 @@ import { useSelector } from 'react-redux';
 import { checkGameIsFull, isPlayerAdmin } from '@game/helpers';
 import BlockContainer from '@shared/BlockContainer/components/BlockContainer';
 import Button from '@shared/Button/components/Button';
+import { COLORS } from '@core/constants';
 import { emitPlayersReadyToPlaceBoats } from '@socket/emittingEvents';
+import Icon from '@shared/Icon/components/Icon';
 import PlayersCards from '@player/components/PlayersCards';
 import { selectGameRoom } from '@game/selectors';
 import TextContainer from '@shared/TextContainer/components/TextContainer';
@@ -77,6 +79,13 @@ const GameSettingsView = (): JSX.Element => {
           <Button onClick={handleStartGame} size="large" isDisabled={!allPlayersJoined}>
             {translate('start')}
           </Button>
+        )}
+
+        {!isPlayerAdmin() && (
+          <>
+            <Icon name="Loader" borderColor={COLORS.WHITE} />
+            <p>{translate('waiting-for-host')}</p>
+          </>
         )}
       </div>
     </div>

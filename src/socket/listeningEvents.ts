@@ -8,6 +8,7 @@ import {
   setView,
 } from '@game/reducer';
 import type { Boat } from '@boat/models';
+import { emitStartGame } from '@socket/emittingEvents';
 import { PATHS } from '@core/constants';
 import store from '@core/store';
 import UrlHelpers from '@helpers/UrlHelpers';
@@ -94,10 +95,27 @@ export const listeningErrorGameIsFull = (): void => {
  */
 export const listeningOnePlayerHasPlacedHisBoats = ({ data }: GameRoomData<GamePlayer>): void => {
   const players = [...selectGamePlayers(store.getState())];
-  // const playerToUpdateIndex = players.findIndex((player) => player.socketId === data.socketId);
+  const playerToUpdateIndex = players.findIndex((player) => player.socketId === data.socketId);
 
-  // if (playerToUpdateIndex) {
-  players[0] = { ...data, boatsAreReady: true };
-  store.dispatch(setGamePlayers(players));
-  // }
+  if (playerToUpdateIndex) {
+    players[playerToUpdateIndex] = { ...data, boatsAreReady: true };
+    store.dispatch(setGamePlayers(players));
+  }
+};
+
+/**
+ * Listening event when all players has placed their boats.
+ *
+ * @param {any} payload Payload
+ * @return {void}
+ */
+export const listeningAllPlayersHasPlacedTheirBoats = (payload: GameRoomData<GamePlayer>): void => {
+  listeningOnePlayerHasPlacedHisBoats(payload);
+
+  const players = selectGamePlayers(store.getState());
+  const playersAreReady = players.every((player) => !!player.boatsAreReady);
+
+  setTimeout(() => {
+    if (playersAreReady) emitStartGame();
+  }, 3000);
 };
