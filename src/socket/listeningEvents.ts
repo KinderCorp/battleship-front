@@ -1,5 +1,12 @@
 import type { GamePlayer, GameRoom, GameRoomData } from '@game/models';
-import { setGamePlayers, setGameRoom, setInstanceId, setView } from '@game/reducer';
+import {
+  setGamePlayers,
+  setGameRoom,
+  setGameRoomBoatsAuthorized,
+  setInstanceId,
+  setView,
+} from '@game/reducer';
+import type { Boat } from '@boat/models';
 import { PATHS } from '@core/constants';
 import { selectGamePlayerAdmin } from '@game/selectors';
 import store from '@core/store';
@@ -33,9 +40,11 @@ export const listeningPlayerJoined = ({ data }: GameRoomData<GamePlayer>): void 
 /**
  * Listening event for start placing boats.
  *
+ * @param {GameRoomData<Boat[]>} payload Payload
  * @return {void}
  */
-export const listeningStartPlacingBoats = (): void => {
+export const listeningStartPlacingBoats = ({ data }: GameRoomData<Boat[]>): void => {
+  store.dispatch(setGameRoomBoatsAuthorized(data));
   store.dispatch(setView('boats_placement'));
 };
 
@@ -75,4 +84,15 @@ export const listeningPlayerDisconnected = (): void => {
  */
 export const listeningErrorGameIsFull = (): void => {
   UrlHelpers.changeLocation(PATHS.DEFAULT);
+};
+
+/**
+ * Listening event when one player has placed his boats.
+ *
+ * @param {any} payload Payload
+ * @return {void}
+ */
+export const listeningOnePlayerHasPlacedHisBoats = (payload: any): void => {
+  // eslint-disable-next-line no-console
+  console.log(payload);
 };

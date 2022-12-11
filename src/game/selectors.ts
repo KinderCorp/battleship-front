@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
 
+import { GAME_EXTENDED_SETTINGS, GAME_NAME } from '@game/constants';
 import type { GameExtendedSettings, GamePlayer, GameRoom, GameState } from '@game/models';
-import { GAME_NAME } from '@game/constants';
 import type { RootState } from '@core/models';
 import socket from '@socket/index';
 
@@ -18,9 +18,12 @@ export const selectGameSettings = createSelector(
   (state: GameState) => state.settings,
 );
 
-export const selectGameRoom = createSelector(selectGameState, (state: GameState) => state.gameRoom);
-
 export const selectGameView = createSelector(selectGameState, (state: GameState) => state.view);
+
+export const selectGameRoom = createSelector(
+  selectGameState,
+  (state: GameState): GameRoom => state.gameRoom || {},
+);
 
 export const selectGameInstance = createSelector(
   selectGameRoom,
@@ -29,7 +32,7 @@ export const selectGameInstance = createSelector(
 
 export const selectGameRoomSettings = createSelector(
   selectGameRoom,
-  (state: GameRoom) => state.settings || ({} as GameExtendedSettings),
+  (state: GameRoom): GameExtendedSettings => state.settings || GAME_EXTENDED_SETTINGS,
 );
 
 export const selectGamePlayers = createSelector(
@@ -39,7 +42,7 @@ export const selectGamePlayers = createSelector(
 
 export const selectGamePlayerAdmin = createSelector(
   selectGamePlayers,
-  (state: GamePlayer[]) => state.find((player) => player.isAdmin) || null,
+  (state: GamePlayer[]) => state.find((player) => player?.isAdmin) || null,
 );
 
 // TODO: check for isAdmin player is not optional

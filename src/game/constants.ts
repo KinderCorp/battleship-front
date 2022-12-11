@@ -1,5 +1,4 @@
-import type { GameSettings } from '@game/models';
-import type { Weapon } from '@weapon/models';
+import type { GameExtendedSettings, GameSettings } from '@game/models';
 
 export const GAME_NAME = 'GAME';
 
@@ -7,5 +6,10 @@ export const GAME_SETTINGS: GameSettings = {
   boardDimensions: 10,
   hasBoatsSafetyZone: false,
   timePerTurn: 60,
-  weapons: [] as Weapon['name'][],
+  weapons: [],
+};
+
+export const GAME_EXTENDED_SETTINGS: GameExtendedSettings = {
+  ...GAME_SETTINGS,
+  boatsAuthorized: [],
 };

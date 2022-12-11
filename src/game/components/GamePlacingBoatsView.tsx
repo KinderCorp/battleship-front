@@ -38,8 +38,8 @@ const GamePlacingBoatsView = (): JSX.Element => {
    * @return {void}
    */
   const handlePlayerReady = useCallback((): void => {
-    if (boatsAreWellPlaced) emitValidatePlayerBoatsPlacement();
-  }, [boatsAreWellPlaced]);
+    if (boatsAreWellPlaced) emitValidatePlayerBoatsPlacement(boats);
+  }, [boatsAreWellPlaced, boats]);
 
   const handleRandomPlaceBoats = useCallback((): void => {
     setBoats(placeRandomBoatsInTheBoard(boatsAuthorized, boardDimensions, hasBoatsSafetyZone));

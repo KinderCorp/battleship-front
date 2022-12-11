@@ -1,4 +1,5 @@
 import type { GameInstance, GamePlayer, GameSettings } from '@game/models';
+import type { BoardBoat } from '@shared/Board/models';
 import { formatGameRoomData } from '@socket/helpers';
 import type { Player } from '@player/models';
 import socket from '@socket/index';
@@ -65,10 +66,14 @@ export const emitCloseRoom = (instanceId: GameInstance['instanceId']): void => {
 };
 
 /**
- * Emitting event when boats are well placed.
+ * Emitting event when the player is ready after placing their boats.
  *
+ * @param {BoardBoat[]} data Data
  * @return {void}
  */
-export const emitValidatePlayerBoatsPlacement = (): void => {
-  socket.emit(SOCKET_EVENTS_EMITTING.VALIDATE_PLAYER_BOATS_PLACEMENT);
+export const emitValidatePlayerBoatsPlacement = (data: BoardBoat[]): void => {
+  socket.emit(
+    SOCKET_EVENTS_EMITTING.VALIDATE_PLAYER_BOATS_PLACEMENT,
+    formatGameRoomData<BoardBoat[]>(data),
+  );
 };
