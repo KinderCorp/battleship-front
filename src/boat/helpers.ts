@@ -20,7 +20,12 @@ export const placeRandomBoatInTheBoard = (
   dimensions: number,
   hasBoatsSafetyZone: boolean,
 ): BoardBoat => {
-  const randomDirection: BoatDirection = ArrayHelpers.getRandomItem(['horizontal', 'vertical']);
+  const randomDirection: BoatDirection = ArrayHelpers.getRandomItem([
+    'east',
+    'north',
+    'south',
+    'west',
+  ]);
   const randomPosition: Position = {
     x: NumberHelpers.randomNumber(0, dimensions),
     y: NumberHelpers.randomNumber(0, dimensions),
@@ -62,4 +67,27 @@ export const placeRandomBoatsInTheBoard = (
   }
 
   return boardBoats;
+};
+
+/**
+ * Get the next direction of the boat.
+ *
+ * @param {BoatDirection} direction Current boat direction
+ * @return {BoatDirection}
+ */
+export const getNextBoatDirection = (direction?: BoatDirection): BoatDirection => {
+  if (direction === 'north') return 'east';
+  else if (direction === 'east') return 'south';
+  else if (direction === 'south') return 'west';
+  else return 'north';
+};
+
+/**
+ * Check if boat is horizontal.
+ *
+ * @param {BoatDirection} direction Boat direction
+ * @return {boolean}
+ */
+export const isBoatHorizontal = (direction?: BoatDirection): boolean => {
+  return direction === 'west' || direction === 'east';
 };

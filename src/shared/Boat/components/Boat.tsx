@@ -14,7 +14,7 @@ import useTranslation from '@hooks/useTranslation';
  */
 export const Boat = ({
   className = '',
-  direction = 'horizontal',
+  direction = 'west',
   height,
   index,
   isPlacementActive = false,

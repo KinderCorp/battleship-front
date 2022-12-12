@@ -3,7 +3,7 @@ import type { CSSProperties } from 'react';
 import type { Boat } from '@src/boat/models';
 import type { ImageProps } from '@shared/Image/models';
 
-export type BoatDirection = 'horizontal' | 'vertical';
+export type BoatDirection = 'east' | 'north' | 'south' | 'west';
 
 export interface BoatProps extends Pick<ImageProps, 'priority'>, Pick<Boat, 'name' | 'src'> {
   className?: string;

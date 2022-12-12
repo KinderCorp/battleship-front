@@ -7,6 +7,7 @@ import BoardCell from '@shared/Board/components/BoardCell';
 import BoardRow from '@shared/Board/components/BoardRow';
 import Boat from '@shared/Boat/components/Boat';
 import { checkBoardBoatsPosition } from '../helpers';
+import { getNextBoatDirection } from '@boat/helpers';
 
 /**
  * Board component.
@@ -44,7 +45,7 @@ export const Board = ({
         const boat = { ...newBoats[index] };
 
         if (boat) {
-          boat.direction = boat.direction === 'vertical' ? 'horizontal' : 'vertical';
+          boat.direction = getNextBoatDirection(boat.direction);
           newBoats[index] = boat;
 
           if (checkBoardBoatsPosition(newBoats, dimensions, hasBoatsSafetyZone)) {

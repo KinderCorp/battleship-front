@@ -1,4 +1,5 @@
 import type { BoardBoat, Position } from '@shared/Board/models';
+import { isBoatHorizontal } from '@boat/helpers';
 
 /**
  * Check if the boats position is correct in the board.
@@ -15,17 +16,33 @@ export const checkBoardBoatsPosition = (
 ): boolean => {
   const takenCells = [] as Position[];
 
+  // BUG: if boat has at least length of two
   for (const boat of boats) {
-    const newWidth = boat.direction === 'vertical' ? boat.widthCell : boat.lengthCell;
-    const newLength = boat.direction === 'vertical' ? boat.lengthCell : boat.widthCell;
+    const width = isBoatHorizontal(boat.direction) ? boat.lengthCell : boat.widthCell;
+    const height = isBoatHorizontal(boat.direction) ? boat.widthCell : boat.lengthCell;
 
-    for (let x = boat.x; x < boat.x + newWidth; x++) {
-      for (let y = boat.y; y < boat.y + newLength; y++) {
+    for (
+      let x = boat.x;
+      boat.direction === 'east' ? x > boat.x - width : x < boat.x + width;
+      boat.direction === 'east' ? x-- : x++
+    ) {
+      for (
+        let y = boat.y;
+        boat.direction === 'south' ? y > boat.y - height : y < boat.y + height;
+        boat.direction === 'south' ? y-- : y++
+      ) {
         const takenCell = takenCells.find(
           (takenCell: Position) => takenCell.x === x && takenCell.y === y,
         );
 
-        if (takenCell || !checkCellPositionInTheBoard(x, y, dimensions)) return false;
+        if (takenCell || !checkCellPositionInTheBoard(x, y, dimensions)) {
+          return false;
+        }
+
+        if (x === 6 && y === 5) {
+          // console.log('🚀 ~ file: helpers.ts:37 ~ takenCells', takenCells);
+          // console.log('🚀 ~ file: helpers.ts:34 ~ boat', boat);
+        }
 
         takenCells.push({ x, y });
       }

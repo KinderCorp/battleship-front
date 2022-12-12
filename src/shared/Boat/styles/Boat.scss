@@ -18,8 +18,16 @@
     transition: 0.2s;
   }
 
-  &.boat--horizontal {
+  &.boat--east {
+    rotate: 90deg;
+  }
+
+  &.boat--west {
     rotate: -90deg;
+  }
+
+  &.boat--south {
+    rotate: 180deg;
   }
 
   &.boat--is-placement-active {
