@@ -5,6 +5,8 @@
   "boat": "Bateau {name}",
   "create-game": "Créer une partie",
   "game-in-progress": "Partie en cours",
+  "game-is-about-to-begin.counter": "La partie va commencer dans {counter} seconde{plural}...",
+  "game-is-about-to-begin": "La partie va commencer...",
   "i-am-not-ready": "Je ne suis pas prêt",
   "i-am-ready": "Je suis prêt",
   "leave": "Quitter",

@@ -8,7 +8,6 @@ import {
   setView,
 } from '@game/reducer';
 import type { Boat } from '@boat/models';
-import { emitStartGame } from '@socket/emittingEvents';
 import { PATHS } from '@core/constants';
 import store from '@core/store';
 import UrlHelpers from '@helpers/UrlHelpers';
@@ -101,23 +100,6 @@ export const listeningOnePlayerHasPlacedHisBoats = ({ data }: GameRoomData<GameP
     players[playerToUpdateIndex] = { ...data, boatsAreReady: true };
     store.dispatch(setGamePlayers(players));
   }
-};
-
-/**
- * Listening event when all players has placed their boats.
- *
- * @param {any} payload Payload
- * @return {void}
- */
-export const listeningAllPlayersHasPlacedTheirBoats = (payload: GameRoomData<GamePlayer>): void => {
-  listeningOnePlayerHasPlacedHisBoats(payload);
-
-  const players = selectGamePlayers(store.getState());
-  const playersAreReady = players.every((player) => !!player.boatsAreReady);
-
-  setTimeout(() => {
-    if (playersAreReady) emitStartGame(payload.instanceId);
-  }, 3000);
 };
 
 /**

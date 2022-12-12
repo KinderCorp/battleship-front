@@ -2,6 +2,8 @@ import type { GameExtendedSettings, GameSettings } from '@game/models';
 
 export const GAME_NAME = 'GAME';
 
+export const GAME_COUNTER_BEFORE_START = 3;
+
 export const GAME_SETTINGS: GameSettings = {
   boardDimensions: 10,
   hasBoatsSafetyZone: false,

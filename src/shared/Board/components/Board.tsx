@@ -49,6 +49,8 @@ export const Board = ({
 
           if (checkBoardBoatsPosition(newBoats, dimensions, hasBoatsSafetyZone))
             setBoats?.(newBoats);
+
+          // TODO: if boat is not well placed, start error animation
         }
       }
     },
