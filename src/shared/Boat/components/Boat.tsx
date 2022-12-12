@@ -1,7 +1,6 @@
+import { useCallback, useMemo, useState } from 'react';
 import classNames from 'clsx';
 import type { CSSProperties } from 'react';
-import { useCallback } from 'react';
-import { useMemo } from 'react';
 
 import type { BoatProps } from '@shared/Boat/models';
 import Image from '@shared/Image/components/Image';
@@ -28,8 +27,20 @@ export const Boat = ({
 }: BoatProps): JSX.Element => {
   const { translate } = useTranslation();
 
+  const [isError, setIsError] = useState<boolean>(false);
+
   const handleRotation = useCallback(() => {
-    onRotation?.(index);
+    if (onRotation) {
+      if (!onRotation(index)) {
+        setIsError(true);
+
+        setTimeout(() => {
+          setIsError(false);
+        }, 300);
+      } else {
+        setIsError(false);
+      }
+    }
   }, [index, onRotation]);
 
   const boatClassName = useMemo(
@@ -37,10 +48,13 @@ export const Boat = ({
       classNames(
         'boat',
         `boat--${direction}`,
-        { 'boat--is-placement-active': !!isPlacementActive },
+        {
+          'boat--is-error': !!isError,
+          'boat--is-placement-active': !!isPlacementActive,
+        },
         className,
       ),
-    [className, direction, isPlacementActive],
+    [className, direction, isError, isPlacementActive],
   );
 
   const boatStyle: CSSProperties = useMemo(

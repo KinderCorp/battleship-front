@@ -11,6 +11,7 @@ $color-purple-dark-2: #25143c;
 $color-purple-dark: #3a1d62;
 $color-purple-light: #a452da;
 $color-purple: #7e29c2;
+$color-red: #820000;
 $color-transparent: transparent;
 $color-white: #fff;
 $color-yellow: #f9d722;
@@ -53,15 +54,6 @@ $font-weight-bold: 700;
 $font-weight-regular: 400;
 
 // Keyframes
-@-webkit-keyframes keyframes-spin {
-  from {
-    transform: rotate(0);
-  }
-
-  to {
-    transform: rotate(-1turn);
-  }
-}
 @keyframes keyframes-spin {
   from {
     transform: rotate(0);
@@ -72,15 +64,6 @@ $font-weight-regular: 400;
   }
 }
 
-@-webkit-keyframes keyframes-push {
-  from {
-    transform: scale(1);
-  }
-
-  to {
-    transform: scale(0.8);
-  }
-}
 @keyframes keyframes-push {
   from {
     transform: scale(1);
@@ -88,25 +71,6 @@ $font-weight-regular: 400;
 
   to {
     transform: scale(0.98);
-  }
-}
-
-@-webkit-keyframes keyframes-bounce {
-  0%,
-  100% {
-    transform: scale(1, 1);
-  }
-
-  25% {
-    transform: scale(0.9, 1.1);
-  }
-
-  50% {
-    transform: scale(1.1, 0.9);
-  }
-
-  75% {
-    transform: scale(0.95, 1.05);
   }
 }
 

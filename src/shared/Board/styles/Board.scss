@@ -46,18 +46,4 @@
       }
     }
   }
-
-  .boat {
-    img {
-      transition: 0.2s;
-    }
-
-    &.boat--is-placement-active:hover {
-      background-color: rgba($color-white, 0.1);
-
-      img {
-        transform: scale(0.95);
-      }
-    }
-  }
 }

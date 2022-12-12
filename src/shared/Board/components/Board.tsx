@@ -37,7 +37,7 @@ export const Board = ({
   }, [ref]);
 
   const onBoatRotation = useCallback(
-    (index: number): void => {
+    (index: number): boolean => {
       if (isPlacementActive) {
         // FIXME: best way to update object, see deepClone ObjectHelpers
         const newBoats = [...(boats as BoardBoat[])];
@@ -47,12 +47,15 @@ export const Board = ({
           boat.direction = boat.direction === 'vertical' ? 'horizontal' : 'vertical';
           newBoats[index] = boat;
 
-          if (checkBoardBoatsPosition(newBoats, dimensions, hasBoatsSafetyZone))
+          if (checkBoardBoatsPosition(newBoats, dimensions, hasBoatsSafetyZone)) {
             setBoats?.(newBoats);
-
-          // TODO: if boat is not well placed, start error animation
+          } else {
+            return false;
+          }
         }
       }
+
+      return true;
     },
     [boats, dimensions, isPlacementActive, hasBoatsSafetyZone, setBoats],
   );

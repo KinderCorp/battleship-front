@@ -1,8 +1,39 @@
+@keyframes keyframes-error-boat {
+  0%,
+  50%,
+  100% {
+    background-color: rgba($color-red, 0);
+  }
+
+  25%,
+  75% {
+    background-color: rgba($color-red, 0.6);
+  }
+}
+
 .boat {
   position: absolute;
 
+  img {
+    transition: 0.2s;
+  }
+
   &.boat--horizontal {
     rotate: -90deg;
+  }
+
+  &.boat--is-placement-active {
+    &:hover {
+      background-color: rgba($color-white, 0.1);
+
+      img {
+        transform: scale(0.95);
+      }
+    }
+
+    &.boat--is-error {
+      animation: keyframes-error-boat 0.2s linear;
+    }
   }
 
   .boat-image {
