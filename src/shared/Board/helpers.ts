@@ -21,15 +21,18 @@ export const checkBoardBoatsPosition = (
     const width = isBoatHorizontal(boat.direction) ? boat.lengthCell : boat.widthCell;
     const height = isBoatHorizontal(boat.direction) ? boat.widthCell : boat.lengthCell;
 
+    const hasXAxisReversed = boat.direction === 'east' || boat.direction === 'south';
+    const hasYAxisReversed = boat.direction === 'west' || boat.direction === 'south';
+
     for (
       let x = boat.x;
-      boat.direction === 'east' ? x > boat.x - width : x < boat.x + width;
-      boat.direction === 'east' ? x-- : x++
+      hasXAxisReversed ? x > boat.x - width : x < boat.x + width;
+      hasXAxisReversed ? x-- : x++
     ) {
       for (
         let y = boat.y;
-        boat.direction === 'south' ? y > boat.y - height : y < boat.y + height;
-        boat.direction === 'south' ? y-- : y++
+        hasYAxisReversed ? y > boat.y - height : y < boat.y + height;
+        hasYAxisReversed ? y-- : y++
       ) {
         const takenCell = takenCells.find(
           (takenCell: Position) => takenCell.x === x && takenCell.y === y,
@@ -37,11 +40,6 @@ export const checkBoardBoatsPosition = (
 
         if (takenCell || !checkCellPositionInTheBoard(x, y, dimensions)) {
           return false;
-        }
-
-        if (x === 6 && y === 5) {
-          // console.log('🚀 ~ file: helpers.ts:37 ~ takenCells', takenCells);
-          // console.log('🚀 ~ file: helpers.ts:34 ~ boat', boat);
         }
 
         takenCells.push({ x, y });

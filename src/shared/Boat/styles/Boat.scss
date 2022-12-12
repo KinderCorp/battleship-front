@@ -18,15 +18,15 @@
     transition: 0.2s;
   }
 
-  &.boat--east {
+  &.boat--direction-east {
     rotate: 90deg;
   }
 
-  &.boat--west {
+  &.boat--direction-west {
     rotate: -90deg;
   }
 
-  &.boat--south {
+  &.boat--direction-south {
     rotate: 180deg;
   }
 

@@ -47,7 +47,7 @@ export const Boat = ({
     (): string =>
       classNames(
         'boat',
-        `boat--${direction}`,
+        `boat--direction-${direction}`,
         {
           'boat--is-error': !!isError,
           'boat--is-placement-active': !!isPlacementActive,
