@@ -1,4 +1,9 @@
-import type { GamePlayer, GameRoom, GameRoomData } from '@game/models';
+import {
+  parseGameExtendedSettings,
+  parseGamePlayer,
+  parseGamePlayers,
+  parseGameRoomData,
+} from '@game/helpers';
 import { selectGamePlayerAdmin, selectGamePlayers } from '@game/selectors';
 import {
   setGamePlayers,
@@ -7,20 +12,27 @@ import {
   setInstanceId,
   setView,
 } from '@game/reducer';
-import type { Boat } from '@boat/models';
+import type { GamePlayer } from '@game/models';
+import { parseBoats } from '@boat/helpers';
 import { PATHS } from '@core/constants';
 import store from '@core/store';
 import UrlHelpers from '@helpers/UrlHelpers';
 
+// TODO: get room settings here
 /**
  * Listening event when game is created.
  *
- * @param {GameRoomData<GamePlayer>} payload Payload
+ * @param {any} gameRoomData Game room data
  * @return {void}
  */
-export const listeningGameCreated = ({ data, instanceId }: GameRoomData<GamePlayer>): void => {
+export const listeningGameCreated = (gameRoomData: any): void => {
+  const { data, instanceId } = parseGameRoomData(gameRoomData);
+  const player = parseGamePlayer(data);
+
+  if (!instanceId) return;
+
   store.dispatch(setInstanceId(instanceId));
-  store.dispatch(setGamePlayers([data]));
+  store.dispatch(setGamePlayers([player]));
 
   UrlHelpers.changeLocation(`${PATHS.GAME}/${instanceId}`);
 };
@@ -28,11 +40,14 @@ export const listeningGameCreated = ({ data, instanceId }: GameRoomData<GamePlay
 /**
  * Listening event when player joined.
  *
- * @param {GameRoomData<GamePlayer>} payload Payload
+ * @param {any} gameRoomData Game room data
  * @return {void}
  */
-export const listeningPlayerJoined = ({ data }: GameRoomData<GamePlayer>): void => {
-  const newPlayers = [selectGamePlayerAdmin(store.getState()) as GamePlayer, data];
+export const listeningPlayerJoined = (gameRoomData: any): void => {
+  const { data } = parseGameRoomData(gameRoomData);
+  const player = parseGamePlayer(data);
+
+  const newPlayers = [selectGamePlayerAdmin(store.getState()) as GamePlayer, player];
 
   store.dispatch(setGamePlayers(newPlayers));
 };
@@ -40,12 +55,17 @@ export const listeningPlayerJoined = ({ data }: GameRoomData<GamePlayer>): void 
 /**
  * Listening event for start placing boats.
  *
- * @param {GameRoomData<Boat[]>} payload Payload
+ * @param {any} gameRoomData Game room data
  * @return {void}
  */
-export const listeningStartPlacingBoats = ({ data }: GameRoomData<Boat[]>): void => {
-  store.dispatch(setGameRoomBoatsAuthorized(data));
-  store.dispatch(setView('boats_placement'));
+export const listeningStartPlacingBoats = (gameRoomData: any): void => {
+  const { data } = parseGameRoomData(gameRoomData);
+  const boats = parseBoats(data);
+
+  if (boats.length) {
+    store.dispatch(setGameRoomBoatsAuthorized(boats));
+    store.dispatch(setView('boats_placement'));
+  }
 };
 
 /**
@@ -61,11 +81,15 @@ export const listeningErrorGameNotFound = (): void => {
 /**
  * Listening event for game information.
  *
- * @param {GameRoom} payload Payload
+ * @param {any} gameRoomData Game room data
  * @return {void}
  */
-export const listeningGameInformation = ({ data, instanceId }: GameRoomData<GameRoom>): void => {
-  store.dispatch(setGameRoom({ instanceId, players: data.players, settings: data.settings }));
+export const listeningGameInformation = (gameRoomData: any): void => {
+  const { data, instanceId } = parseGameRoomData(gameRoomData);
+  const players = parseGamePlayers(data.players);
+  const settings = parseGameExtendedSettings(data.settings);
+
+  store.dispatch(setGameRoom({ instanceId, players, settings }));
 };
 
 /**
@@ -89,15 +113,18 @@ export const listeningErrorGameIsFull = (): void => {
 /**
  * Listening event when one player has placed his boats.
  *
- * @param {any} payload Payload
+ * @param {any} gameRoomData Game room data
  * @return {void}
  */
-export const listeningOnePlayerHasPlacedHisBoats = ({ data }: GameRoomData<GamePlayer>): void => {
+export const listeningOnePlayerHasPlacedHisBoats = (gameRoomData: any): void => {
+  const { data } = parseGameRoomData(gameRoomData);
+  const player = parseGamePlayer(data);
+
   const players = [...selectGamePlayers(store.getState())];
   const playerToUpdateIndex = players.findIndex((player) => player.socketId === data.socketId);
 
   if (playerToUpdateIndex !== -1) {
-    players[playerToUpdateIndex] = { ...data, boatsAreReady: true };
+    players[playerToUpdateIndex] = { ...player, boatsAreReady: true };
     store.dispatch(setGamePlayers(players));
   }
 };

@@ -91,3 +91,24 @@ export const getNextBoatDirection = (direction?: BoatDirection): BoatDirection =
 export const isBoatHorizontal = (direction?: BoatDirection): boolean => {
   return direction === 'west' || direction === 'east';
 };
+
+/**
+ * Parse a boat.
+ *
+ * @param {any} boat Boat
+ * @return {Boat}
+ */
+export const parseBoat = (boat: any): Boat => ({
+  lengthCell: boat?.lengthCell || 1,
+  name: boat?.name || '',
+  src: boat?.src || '',
+  widthCell: boat?.widthCell || 1,
+});
+
+/**
+ * Parse boats.
+ *
+ * @param {any} boats Boats
+ * @return {Boat[]}
+ */
+export const parseBoats = (boats: any): Boat[] => boats?.map((boat: any) => parseBoat(boat)) || [];
