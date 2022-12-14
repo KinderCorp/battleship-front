@@ -62,7 +62,6 @@ const GamePlacingBoatsView = (): JSX.Element => {
       }, 1000);
     } else {
       clearInterval(interval);
-      setCounterTime(GAME_COUNTER_BEFORE_START);
     }
 
     if (counterTime === 0 && isPlayerAdmin()) emitStartGame(instanceId);
@@ -100,9 +99,7 @@ const GamePlacingBoatsView = (): JSX.Element => {
   const getMessageIndication = useCallback((): string => {
     const keyToReplace = { pseudo: otherPlayer.pseudo || '' };
 
-    if (!otherPlayerIsReady) {
-      return translate('player-placing-his-boats', keyToReplace);
-    } else if (allPlayersAreReady) {
+    if (allPlayersAreReady) {
       if (counterTime > 0) {
         return translate('game-is-about-to-begin.counter', {
           counter: counterTime.toString(),
@@ -111,6 +108,8 @@ const GamePlacingBoatsView = (): JSX.Element => {
       } else {
         return translate('game-is-about-to-begin');
       }
+    } else if (!otherPlayerIsReady) {
+      return translate('player-placing-his-boats', keyToReplace);
     } else {
       return translate('player-ready', keyToReplace);
     }
@@ -122,19 +121,20 @@ const GamePlacingBoatsView = (): JSX.Element => {
 
       <div className="boats-placement">
         <Board
-          dimensions={boardDimensions}
           boats={boats}
+          dimensions={boardDimensions}
           hasBoatsSafetyZone={hasBoatsSafetyZone}
-          setBoats={setBoats}
+          isDisabled={playerIsReady}
           isPlacementActive={!playerIsReady}
+          setBoats={setBoats}
         />
 
         <Button
           className="button-random-boats"
           iconName="Dice"
+          isDisabled={playerIsReady}
           onClick={handleRandomPlaceBoats}
           style="secondary"
-          isDisabled={playerIsReady}
         >
           {translate('random')}
         </Button>
@@ -147,7 +147,7 @@ const GamePlacingBoatsView = (): JSX.Element => {
         size="large"
         style={!playerIsReady ? 'secondary' : 'primary'}
       >
-        {!playerIsReady ? translate('i-am-not-ready') : translate('i-am-ready')}
+        {translate('i-am-ready')}
       </Button>
 
       <p className="rival-indication">{getMessageIndication()}</p>

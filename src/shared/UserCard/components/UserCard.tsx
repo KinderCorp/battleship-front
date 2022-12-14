@@ -6,6 +6,7 @@ import { COLORS } from '@core/constants';
 import Icon from '@shared/Icon/components/Icon';
 import Image from '@shared/Image/components/Image';
 import Level from '@shared/Level/components/Level';
+import useClientSideValue from '@hooks/useClientSideValue';
 import type { UserCardProps } from '@shared/UserCard/models';
 import useTranslation from '@hooks/useTranslation';
 
@@ -31,6 +32,8 @@ export const UserCard = ({
   size = 'large',
 }: UserCardProps): JSX.Element => {
   const { translate } = useTranslation();
+
+  const newName = useClientSideValue(!isLoading ? name : translate('waiting'));
 
   const userCardClassName = useMemo(
     (): string =>
@@ -82,7 +85,7 @@ export const UserCard = ({
 
       {!hideName && (
         <div className="user-card-info">
-          <p className="user-card-name">{!isLoading ? name : translate('waiting')}</p>
+          <p className="user-card-name">{newName}</p>
           {!!onClick && !isLoading && (
             <Button iconName="Pen" onClick={onClick} size="small" style="none" />
           )}

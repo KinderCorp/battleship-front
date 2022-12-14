@@ -6,74 +6,9 @@ import type { GamePlayer, GameRoom, GameSettings, GameState, GameView } from '@g
 import type { Boat } from '@boat/models';
 
 const initialState: GameState = {
-  gameRoom: {
-    settings: {
-      boatsAuthorized: [
-        // {
-        //   lengthCell: 1,
-        //   name: '1x1',
-        //   src: '/images/boats/boat-1x1.png',
-        //   widthCell: 1,
-        // },
-        {
-          lengthCell: 2,
-          name: '2x2',
-          src: '/images/boats/boat-1x1.png',
-          widthCell: 2,
-        },
-        // {
-        //   lengthCell: 1,
-        //   name: '1x1',
-        //   src: '/images/boats/boat-1x1.png',
-        //   widthCell: 1,
-        // },
-        // {
-        //   lengthCell: 1,
-        //   name: '1x1',
-        //   src: '/images/boats/boat-1x1.png',
-        //   widthCell: 1,
-        // },
-        // {
-        //   lengthCell: 2,
-        //   name: '2x1',
-        //   src: '/images/boats/boat-2x1.png',
-        //   widthCell: 1,
-        // },
-        // {
-        //   lengthCell: 2,
-        //   name: '2x1',
-        //   src: '/images/boats/boat-2x1.png',
-        //   widthCell: 1,
-        // },
-        // {
-        //   lengthCell: 2,
-        //   name: '2x1',
-        //   src: '/images/boats/boat-2x1.png',
-        //   widthCell: 1,
-        // },
-        {
-          lengthCell: 3,
-          name: '3x1',
-          src: '/images/boats/boat-3x1.png',
-          widthCell: 1,
-        },
-        {
-          lengthCell: 3,
-          name: '3x1',
-          src: '/images/boats/boat-3x1.png',
-          widthCell: 1,
-        },
-        {
-          lengthCell: 4,
-          name: '4x1',
-          src: '/images/boats/boat-4x1.png',
-          widthCell: 1,
-        },
-      ],
-    },
-  } as GameRoom,
+  gameRoom: {} as GameRoom,
   settings: GAME_SETTINGS,
-  view: 'boats_placement',
+  view: 'settings',
 };
 
 export const gameSlice = createSlice({
