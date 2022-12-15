@@ -1,4 +1,4 @@
-import type { GameRoomSettings, GamePlayer, GameRoom, GameRoomData } from '@game/models';
+import type { GamePlayer, GameRoom, GameRoomData, GameRoomSettings } from '@game/models';
 import ArrayHelpers from '@helpers/ArrayHelpers';
 import { GAME_EXTENDED_SETTINGS } from '@game/constants';
 import { parseAuthorizedFleet } from '@boat/helpers';

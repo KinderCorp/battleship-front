@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
 import type { Boat } from '@src/boat/models';
-import type { BoatProps } from '@shared/Boat/models';
+import type { BoatProps } from '@boat/models';
 import type { GameSettings } from '@game/models';
 import type { IntRange } from '@core/models';
 

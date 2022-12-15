@@ -5,17 +5,21 @@
 @import 'fonts';
 @import 'global';
 
-// Page
+// Home
 @import '~@home/styles/HomePageContent';
 @import '~@game/styles/GameSettingsView';
+
+// Game
 @import '~@game/styles/GamePlacingBoatsView';
+
+// Boat
+@import '~@boat/styles/Boat';
 
 // Shared styles
 @import '~@shared/BlockContainer/styles/BlockContainer';
 @import '~@shared/Board/styles/Board';
 @import '~@shared/Board/styles/BoardCell';
 @import '~@shared/Board/styles/BoardRow';
-@import '~@shared/Boat/styles/Boat';
 @import '~@shared/Button/styles/Button';
 @import '~@shared/ContentPage/styles/ContentPage';
 @import '~@shared/Field/styles/FieldStructure/FieldContainer';
