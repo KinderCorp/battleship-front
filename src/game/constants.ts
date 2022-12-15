@@ -14,4 +14,5 @@ export const GAME_SETTINGS: GameSettings = {
 export const GAME_EXTENDED_SETTINGS: GameExtendedSettings = {
   ...GAME_SETTINGS,
   authorisedFleet: [],
+  weapons: [],
 };
