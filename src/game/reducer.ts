@@ -24,14 +24,14 @@ export const gameSlice = createSlice({
     setGameRoom: (state, action: PayloadAction<GameRoom>) => {
       state.gameRoom = action.payload;
     },
-    setGameRoomBoatsAuthorized: (state, action: PayloadAction<Boat[]>) => {
+    setGameRoomAuthorizedFleet: (state, action: PayloadAction<Boat[]>) => {
       // FIXME: bad code
       if (state.gameRoom.settings) {
-        state.gameRoom.settings.boatsAuthorized = action.payload;
+        state.gameRoom.settings.authorisedFleet = action.payload;
       } else {
         state.gameRoom.settings = {
           ...GAME_SETTINGS,
-          boatsAuthorized: action.payload,
+          authorisedFleet: action.payload,
         };
       }
     },
@@ -51,7 +51,7 @@ export const {
   initGameRoom,
   setGamePlayers,
   setGameRoom,
-  setGameRoomBoatsAuthorized,
+  setGameRoomAuthorizedFleet,
   setInstanceId,
   setView,
   updateSettings,

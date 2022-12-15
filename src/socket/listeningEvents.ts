@@ -8,7 +8,7 @@ import { selectGamePlayerAdmin, selectGamePlayers } from '@game/selectors';
 import {
   setGamePlayers,
   setGameRoom,
-  setGameRoomBoatsAuthorized,
+  setGameRoomAuthorizedFleet,
   setInstanceId,
   setView,
 } from '@game/reducer';
@@ -63,7 +63,7 @@ export const listeningStartPlacingBoats = (gameRoomData: any): void => {
   const boats = parseBoats(data);
 
   if (boats.length) {
-    store.dispatch(setGameRoomBoatsAuthorized(boats));
+    store.dispatch(setGameRoomAuthorizedFleet(boats));
     store.dispatch(setView('boats_placement'));
   }
 };

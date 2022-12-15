@@ -49,12 +49,12 @@ export const selectGameRoomSettings = createSelector(
     state.settings || GAME_EXTENDED_SETTINGS,
 );
 
-export const selectGameRoomSettingsBoatsAuthorized = createSelector(
+export const selectGameRoomSettingsAuthorizedFleet = createSelector(
   selectGameRoomSettings,
   (
     state: GameExtendedSettings | Partial<GameExtendedSettings>,
-  ): GameExtendedSettings['boatsAuthorized'] =>
-    state.boatsAuthorized || GAME_EXTENDED_SETTINGS.boatsAuthorized,
+  ): GameExtendedSettings['authorisedFleet'] =>
+    state.authorisedFleet || GAME_EXTENDED_SETTINGS.authorisedFleet,
 );
 
 export const selectGameRoomSettingsBoardDimensions = createSelector(

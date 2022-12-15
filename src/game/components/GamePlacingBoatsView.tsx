@@ -10,8 +10,8 @@ import {
   selectGameInstance,
   selectGameOtherPlayer,
   selectGamePlayer,
+  selectGameRoomSettingsAuthorizedFleet,
   selectGameRoomSettingsBoardDimensions,
-  selectGameRoomSettingsBoatsAuthorized,
   selectGameRoomSettingsHasBoatsSafetyZone,
 } from '@game/selectors';
 import Board from '@shared/Board/components/Board';
@@ -36,10 +36,10 @@ const GamePlacingBoatsView = (): JSX.Element => {
   const [counterTime, setCounterTime] = useState<number>(GAME_COUNTER_BEFORE_START);
 
   // FIXME: use this logic to get settings
-  // const { boardDimensions, boatsAuthorized, hasBoatsSafetyZone } =
+  // const { authorisedFleet, boardDimensions, hasBoatsSafetyZone } =
   //   useSelector(selectGameRoomSettings);
   const boardDimensions = useSelector(selectGameRoomSettingsBoardDimensions);
-  const boatsAuthorized = useSelector(selectGameRoomSettingsBoatsAuthorized);
+  const authorisedFleet = useSelector(selectGameRoomSettingsAuthorizedFleet);
   const hasBoatsSafetyZone = useSelector(selectGameRoomSettingsHasBoatsSafetyZone);
 
   const instanceId = useSelector(selectGameInstance);
@@ -74,8 +74,8 @@ const GamePlacingBoatsView = (): JSX.Element => {
   const boatsAreWellPlaced = useMemo(
     () =>
       checkBoardBoatsPosition(boats, boardDimensions, hasBoatsSafetyZone) &&
-      boats.length === boatsAuthorized.length,
-    [boats, boardDimensions, boatsAuthorized, hasBoatsSafetyZone],
+      boats.length === authorisedFleet.length,
+    [authorisedFleet, boats, boardDimensions, hasBoatsSafetyZone],
   );
 
   /**
@@ -92,9 +92,9 @@ const GamePlacingBoatsView = (): JSX.Element => {
 
   const handleRandomPlaceBoats = useCallback((): void => {
     if (!playerIsReady) {
-      setBoats(placeRandomBoatsInTheBoard(boatsAuthorized, boardDimensions, hasBoatsSafetyZone));
+      setBoats(placeRandomBoatsInTheBoard(authorisedFleet, boardDimensions, hasBoatsSafetyZone));
     }
-  }, [boardDimensions, boatsAuthorized, hasBoatsSafetyZone, playerIsReady]);
+  }, [authorisedFleet, boardDimensions, hasBoatsSafetyZone, playerIsReady]);
 
   const getMessageIndication = useCallback((): string => {
     const keyToReplace = { pseudo: otherPlayer.pseudo || '' };

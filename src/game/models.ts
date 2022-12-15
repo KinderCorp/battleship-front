@@ -16,7 +16,7 @@ export interface GameSettings {
 }
 
 export interface GameExtendedSettings extends GameSettings {
-  boatsAuthorized: Boat[];
+  authorisedFleet: Boat[];
 }
 
 export interface GameState {
