@@ -5,7 +5,7 @@ import type { CSSProperties } from 'react';
 import type { BoardBoat, BoardCellAffected, BoardProps } from '@shared/Board/models';
 import BoardCell from '@shared/Board/components/BoardCell';
 import BoardRow from '@shared/Board/components/BoardRow';
-import Boat from '@shared/Boat/components/Boat';
+import Boat from '@boat/components/Boat';
 import { checkBoardBoatsPosition } from '../helpers';
 import { getNextBoatDirection } from '@boat/helpers';
 
