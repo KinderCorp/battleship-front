@@ -1,11 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import {
-  emitStartGame,
-  emitUnvalidatePlayerBoatsPlacement,
-  emitValidatePlayerBoatsPlacement,
-} from '@socket/emittingEvents';
+import { emitStartGame, emitValidatePlayerBoatsPlacement } from '@socket/emittingEvents';
 import {
   selectGameInstance,
   selectGameOtherPlayer,
@@ -84,9 +80,8 @@ const GamePlacingBoatsView = (): JSX.Element => {
    * @return {void}
    */
   const handlePlayerReady = useCallback((): void => {
-    if (boatsAreWellPlaced) {
-      if (!playerIsReady) emitValidatePlayerBoatsPlacement(boats);
-      else emitUnvalidatePlayerBoatsPlacement();
+    if (boatsAreWellPlaced && !playerIsReady) {
+      emitValidatePlayerBoatsPlacement(boats);
     }
   }, [boatsAreWellPlaced, boats, playerIsReady]);
 

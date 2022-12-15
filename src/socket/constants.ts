@@ -6,7 +6,6 @@ export const SOCKET_EVENTS_EMITTING = {
   PLAYERS_READY_TO_PLACE_BOATS: 'players-ready-to-place-boats',
   SHOOT: 'shoot',
   START_GAME: 'start-game',
-  UNVALIDATE_PLAYER_BOATS_PLACEMENT: 'unvalidate-player-boats-placement',
   VALIDATE_PLAYER_BOATS_PLACEMENT: 'validate-player-boats-placement',
 };
 

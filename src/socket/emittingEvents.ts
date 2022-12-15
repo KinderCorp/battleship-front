@@ -73,15 +73,6 @@ export const emitValidatePlayerBoatsPlacement = (data: BoardBoat[]): void => {
 };
 
 /**
- * Emitting event when the player is not ready since placing their boats.
- *
- * @return {void}
- */
-export const emitUnvalidatePlayerBoatsPlacement = (): void => {
-  socket.emit(SOCKET_EVENTS_EMITTING.UNVALIDATE_PLAYER_BOATS_PLACEMENT);
-};
-
-/**
  * Emitting event for start the game.
  *
  * @param {GameInstance['instanceId']} instanceId Instance id
