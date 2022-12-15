@@ -133,11 +133,12 @@ export const parseAuthorizedBoat = (authorizedBoat: any): AuthorizedBoat => ({
  * @return {Boat[]}
  */
 export const parseAuthorizedFleet = (authorisedFleet: any): Boat[] => {
+  const newAuthorisedFleet = ArrayHelpers.isArray(authorisedFleet) ? authorisedFleet : [];
   const boats = [] as Boat[];
 
   // FIXME: rename the variable
-  for (const authorizedBoatNotParsed of authorisedFleet) {
-    const authorizedBoat = parseAuthorizedBoat(authorizedBoatNotParsed);
+  for (const authorisedFleetItem of newAuthorisedFleet) {
+    const authorizedBoat = parseAuthorizedBoat(authorisedFleetItem);
 
     for (let index = 0; index < authorizedBoat.authorisedNumber; index++) {
       boats.push(authorizedBoat.boat);
