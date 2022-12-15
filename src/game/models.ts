@@ -41,6 +41,7 @@ export interface GameInstance {
   instanceId: string;
 }
 
+// FIXME: rename this
 export interface GameRoomData<T> extends GameInstance {
   data: T;
 }
