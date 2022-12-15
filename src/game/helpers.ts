@@ -1,10 +1,16 @@
-import type { GamePlayer, GameRoom, GameRoomData, GameRoomSettings } from '@game/models';
+import { GAME_ROOM_SETTINGS, GAME_SETTINGS } from '@game/constants';
+import type {
+  GamePlayer,
+  GameRoom,
+  GameRoomData,
+  GameRoomSettings,
+  GameSettings,
+} from '@game/models';
 import ArrayHelpers from '@helpers/ArrayHelpers';
-import { GAME_EXTENDED_SETTINGS } from '@game/constants';
 import { parseAuthorizedFleet } from '@boat/helpers';
 import { parseWeapons } from '@weapon/helpers';
 import type { Position } from '@shared/Board/models';
-import { selectGamePlayerAdmin } from '@game/selectors';
+import { selectGameRoomPlayerAdmin } from '@game/selectors';
 import socket from '@socket/index';
 import store from '@core/store';
 
@@ -24,7 +30,7 @@ export const checkGameIsFull = (gameRoom: GameRoom): boolean => {
  * @return {boolean}
  */
 export const isPlayerAdmin = (): boolean => {
-  const adminPlayer = selectGamePlayerAdmin(store.getState());
+  const adminPlayer = selectGameRoomPlayerAdmin(store.getState());
 
   return adminPlayer.socketId === socket.id;
 };
@@ -65,18 +71,30 @@ export const parseGamePlayers = (gamePlayers: any): GamePlayer[] =>
     : [];
 
 /**
- * Parse extended game settings.
+ * Parse game settings.
  *
- * @param {any} gameExtendedSettings Game extended settings
+ * @param {any} gameSettings Game settings
+ * @return {GameSettings}
+ */
+export const parseGameSettings = (gameSettings: any): GameSettings => ({
+  boardDimensions: gameSettings?.boardDimensions || GAME_SETTINGS.boardDimensions,
+  hasBoatsSafetyZone: gameSettings?.hasBoatsSafetyZone || GAME_SETTINGS.hasBoatsSafetyZone,
+  timePerTurn: gameSettings?.timePerTurn || GAME_SETTINGS.timePerTurn,
+  weapons: parseWeapons(gameSettings?.weapons).map((weapon) => weapon.name),
+});
+
+/**
+ * Parse game room settings.
+ *
+ * @param {any} gameRoomSettings Game extended settings
  * @return {GameRoomSettings}
  */
-export const parseGameExtendedSettings = (gameExtendedSettings: any): GameRoomSettings => ({
-  authorisedFleet: parseAuthorizedFleet(gameExtendedSettings?.authorisedFleet),
-  boardDimensions: gameExtendedSettings?.boardDimensions || GAME_EXTENDED_SETTINGS.boardDimensions,
-  hasBoatsSafetyZone:
-    gameExtendedSettings?.hasBoatsSafetyZone || GAME_EXTENDED_SETTINGS.hasBoatsSafetyZone,
-  timePerTurn: gameExtendedSettings?.timePerTurn || GAME_EXTENDED_SETTINGS.timePerTurn,
-  weapons: parseWeapons(gameExtendedSettings?.weapons),
+export const parseGameRoomSettings = (gameRoomSettings: any): GameRoomSettings => ({
+  authorisedFleet: parseAuthorizedFleet(gameRoomSettings?.authorisedFleet),
+  boardDimensions: gameRoomSettings?.boardDimensions || GAME_ROOM_SETTINGS.boardDimensions,
+  hasBoatsSafetyZone: gameRoomSettings?.hasBoatsSafetyZone || GAME_ROOM_SETTINGS.hasBoatsSafetyZone,
+  timePerTurn: gameRoomSettings?.timePerTurn || GAME_ROOM_SETTINGS.timePerTurn,
+  weapons: parseWeapons(gameRoomSettings?.weapons),
 });
 
 /**
@@ -88,7 +106,7 @@ export const parseGameExtendedSettings = (gameExtendedSettings: any): GameRoomSe
 export const parseGameRoom = (gameRoom: any): GameRoom => ({
   instanceId: gameRoom?.instanceId || '',
   players: parseGamePlayers(gameRoom?.players),
-  settings: parseGameExtendedSettings(gameRoom?.settings),
+  settings: parseGameRoomSettings(gameRoom?.settings),
 });
 
 /**

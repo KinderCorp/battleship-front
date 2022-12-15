@@ -3,12 +3,10 @@ import { useSelector } from 'react-redux';
 
 import { emitStartGame, emitValidatePlayerBoatsPlacement } from '@socket/emittingEvents';
 import {
-  selectGameInstance,
-  selectGameOtherPlayer,
-  selectGamePlayer,
-  selectGameRoomSettingsAuthorizedFleet,
-  selectGameRoomSettingsBoardDimensions,
-  selectGameRoomSettingsHasBoatsSafetyZone,
+  selectGameRoomInstanceId,
+  selectGameRoomOtherPlayer,
+  selectGameRoomPlayer,
+  selectGameRoomSettings,
 } from '@game/selectors';
 import Board from '@shared/Board/components/Board';
 import type { BoardBoat } from '@shared/Board/models';
@@ -31,16 +29,12 @@ const GamePlacingBoatsView = (): JSX.Element => {
   const [boats, setBoats] = useState<BoardBoat[]>([]);
   const [counterTime, setCounterTime] = useState<number>(GAME_COUNTER_BEFORE_START);
 
-  // FIXME: use this logic to get settings
-  // const { authorisedFleet, boardDimensions, hasBoatsSafetyZone } =
-  //   useSelector(selectGameRoomSettings);
-  const boardDimensions = useSelector(selectGameRoomSettingsBoardDimensions);
-  const authorisedFleet = useSelector(selectGameRoomSettingsAuthorizedFleet);
-  const hasBoatsSafetyZone = useSelector(selectGameRoomSettingsHasBoatsSafetyZone);
+  const { authorisedFleet, boardDimensions, hasBoatsSafetyZone } =
+    useSelector(selectGameRoomSettings);
 
-  const instanceId = useSelector(selectGameInstance);
-  const otherPlayer = useSelector(selectGameOtherPlayer);
-  const player = useSelector(selectGamePlayer);
+  const instanceId = useSelector(selectGameRoomInstanceId);
+  const otherPlayer = useSelector(selectGameRoomOtherPlayer);
+  const player = useSelector(selectGameRoomPlayer);
 
   const playerIsReady = useMemo(() => !!player.boatsAreReady, [player]);
   const otherPlayerIsReady = useMemo(() => !!otherPlayer.boatsAreReady, [otherPlayer]);

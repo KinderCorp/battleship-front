@@ -1,6 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-import { GAME_EXTENDED_SETTINGS, GAME_NAME, GAME_SETTINGS } from '@game/constants';
 import type {
   GamePlayer,
   GameRoom,
@@ -9,6 +8,8 @@ import type {
   GameState,
   GameView,
 } from '@game/models';
+import { parseGameRoom, parseGameSettings } from '@game/helpers';
+import { GAME_NAME } from '@game/constants';
 import type { RootState } from '@core/models';
 import socket from '@socket/index';
 
@@ -18,80 +19,57 @@ import socket from '@socket/index';
  * @param {RootState} state Current state
  * @return {GameState}
  */
-const selectGameState = (state: RootState): GameState | Partial<GameState> =>
-  state[GAME_NAME] || ({} as GameState);
+const selectGameState = (state: RootState): GameState => state[GAME_NAME] || ({} as GameState);
 
 export const selectGameSettings = createSelector(
   selectGameState,
-  (state: GameState | Partial<GameState>): GameSettings | Partial<GameSettings> =>
-    state.settings || GAME_SETTINGS,
+  (state: GameState): GameSettings => parseGameSettings(state.settings),
 );
 
 export const selectGameView = createSelector(
   selectGameState,
-  (state: GameState | Partial<GameState>): GameView | Partial<GameView> => state.view || 'settings',
+  (state: GameState): GameView => state.view || 'settings',
 );
 
 export const selectGameRoom = createSelector(
   selectGameState,
-  (state: GameState | Partial<GameState>): GameRoom | Partial<GameRoom> =>
-    state.gameRoom || ({} as GameRoom),
+  (state: GameState): GameRoom => parseGameRoom(state.gameRoom),
 );
 
-export const selectGameInstance = createSelector(
+export const selectGameRoomInstanceId = createSelector(
   selectGameRoom,
-  (state: GameRoom | Partial<GameRoom>): string => state.instanceId || '',
+  (state: GameRoom): string => state.instanceId,
 );
 
 export const selectGameRoomSettings = createSelector(
   selectGameRoom,
-  (state: GameRoom | Partial<GameRoom>): GameRoomSettings | Partial<GameRoomSettings> =>
-    state.settings || GAME_EXTENDED_SETTINGS,
+  (state: GameRoom): GameRoomSettings => state.settings,
 );
 
-export const selectGameRoomSettingsAuthorizedFleet = createSelector(
-  selectGameRoomSettings,
-  (state: GameRoomSettings | Partial<GameRoomSettings>): GameRoomSettings['authorisedFleet'] =>
-    state.authorisedFleet || GAME_EXTENDED_SETTINGS.authorisedFleet,
-);
-
-export const selectGameRoomSettingsBoardDimensions = createSelector(
-  selectGameRoomSettings,
-  (state: GameRoomSettings | Partial<GameRoomSettings>): GameRoomSettings['boardDimensions'] =>
-    state.boardDimensions || GAME_EXTENDED_SETTINGS.boardDimensions,
-);
-
-export const selectGameRoomSettingsHasBoatsSafetyZone = createSelector(
-  selectGameRoomSettings,
-  (state: GameRoomSettings | Partial<GameRoomSettings>): GameRoomSettings['hasBoatsSafetyZone'] =>
-    state.hasBoatsSafetyZone || GAME_EXTENDED_SETTINGS.hasBoatsSafetyZone,
-);
-
-export const selectGamePlayers = createSelector(
+export const selectGameRoomPlayers = createSelector(
   selectGameRoom,
-  (state: GameRoom | Partial<GameRoom>): GamePlayer[] => state.players || ([] as GamePlayer[]),
+  (state: GameRoom): GamePlayer[] => state.players,
 );
 
-export const selectGamePlayerAdmin = createSelector(
-  selectGamePlayers,
-  (state: GamePlayer[]): GamePlayer | Partial<GamePlayer> =>
-    state.find((player) => player?.isAdmin) || ({} as GamePlayer),
+export const selectGameRoomPlayerAdmin = createSelector(
+  selectGameRoomPlayers,
+  (state: GamePlayer[]): GamePlayer => state.find((player) => player.isAdmin) || ({} as GamePlayer),
 );
 
-export const selectGamePlayerRival = createSelector(
-  selectGamePlayers,
-  (state: GamePlayer[]): GamePlayer | Partial<GamePlayer> =>
-    state.find((player) => !player?.isAdmin) || ({} as GamePlayer),
+export const selectGameRoomPlayerRival = createSelector(
+  selectGameRoomPlayers,
+  (state: GamePlayer[]): GamePlayer =>
+    state.find((player) => !player.isAdmin) || ({} as GamePlayer),
 );
 
-export const selectGamePlayer = createSelector(
-  selectGamePlayers,
-  (state: GamePlayer[]): GamePlayer | Partial<GamePlayer> =>
-    state.find((player) => player?.socketId === socket.id) || ({} as GamePlayer),
+export const selectGameRoomPlayer = createSelector(
+  selectGameRoomPlayers,
+  (state: GamePlayer[]): GamePlayer =>
+    state.find((player) => player.socketId === socket.id) || ({} as GamePlayer),
 );
 
-export const selectGameOtherPlayer = createSelector(
-  selectGamePlayers,
-  (state: GamePlayer[]): GamePlayer | Partial<GamePlayer> =>
-    state.find((player) => player?.socketId !== socket.id) || ({} as GamePlayer),
+export const selectGameRoomOtherPlayer = createSelector(
+  selectGameRoomPlayers,
+  (state: GamePlayer[]): GamePlayer =>
+    state.find((player) => player.socketId !== socket.id) || ({} as GamePlayer),
 );

@@ -1,5 +1,5 @@
 import type { GameRoom, GameRoomData } from '@game/models';
-import { selectGameInstance } from '@game/selectors';
+import { selectGameRoomInstanceId } from '@game/selectors';
 import store from '@core/store';
 
 /**
@@ -11,7 +11,7 @@ import store from '@core/store';
  */
 export const formatGameRoomData = <T>(
   data: any,
-  instanceId: GameRoom['instanceId'] = selectGameInstance(store.getState()),
+  instanceId: GameRoom['instanceId'] = selectGameRoomInstanceId(store.getState()),
 ): GameRoomData<T> => ({
   data,
   instanceId,

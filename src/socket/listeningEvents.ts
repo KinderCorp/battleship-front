@@ -1,5 +1,5 @@
 import { parseGamePlayer, parseGameRoom, parseGameRoomData } from '@game/helpers';
-import { selectGamePlayerAdmin, selectGamePlayers } from '@game/selectors';
+import { selectGameRoomPlayerAdmin, selectGameRoomPlayers } from '@game/selectors';
 import { setGamePlayers, setGameRoom, setView } from '@game/reducer';
 import type { GamePlayer } from '@game/models';
 import { PATHS } from '@core/constants';
@@ -34,7 +34,7 @@ export const listeningPlayerJoined = (gameRoomData: any): void => {
   const { data } = parseGameRoomData(gameRoomData);
   const player = parseGamePlayer(data);
 
-  const newPlayers = [selectGamePlayerAdmin(store.getState()) as GamePlayer, player];
+  const newPlayers = [selectGameRoomPlayerAdmin(store.getState()) as GamePlayer, player];
 
   store.dispatch(setGamePlayers(newPlayers));
 };
@@ -99,7 +99,7 @@ export const listeningOnePlayerHasPlacedHisBoats = (gameRoomData: any): void => 
   const { data } = parseGameRoomData(gameRoomData);
   const player = parseGamePlayer(data);
 
-  const players = [...selectGamePlayers(store.getState())];
+  const players = [...selectGameRoomPlayers(store.getState())];
   const playerToUpdateIndex = players.findIndex((player) => player.socketId === data.socketId);
 
   if (playerToUpdateIndex !== -1) {

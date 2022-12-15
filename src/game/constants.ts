@@ -11,7 +11,7 @@ export const GAME_SETTINGS: GameSettings = {
   weapons: [],
 };
 
-export const GAME_EXTENDED_SETTINGS: GameRoomSettings = {
+export const GAME_ROOM_SETTINGS: GameRoomSettings = {
   ...GAME_SETTINGS,
   authorisedFleet: [],
   weapons: [],

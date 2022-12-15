@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectGameInstance, selectGameView } from '@game/selectors';
+import { selectGameRoomInstanceId, selectGameView } from '@game/selectors';
 import Button from '@shared/Button/components/Button';
 import { emitCloseRoom } from '@socket/emittingEvents';
 import GamePlacingBoatsView from '@game/components/GamePlacingBoatsView';
@@ -12,8 +12,6 @@ import PlayersCards from '@player/components/PlayersCards';
 import UrlHelpers from '@helpers/UrlHelpers';
 import useTranslation from '@hooks/useTranslation';
 
-// BUG: Uncaught Error: This Suspense boundary received an update before it finished hydrating. This caused the boundary to switch to client rendering. The usual way to fix this is to wrap the original update in startTransition. => Only for rival player
-
 /**
  * Game page content.
  *
@@ -23,7 +21,7 @@ const GamePageView = (): JSX.Element => {
   const { translate } = useTranslation();
 
   const view = useSelector(selectGameView);
-  const instanceId = useSelector(selectGameInstance);
+  const instanceId = useSelector(selectGameRoomInstanceId);
 
   const handleLeaveGame = useCallback(() => {
     UrlHelpers.changeLocation(PATHS.DEFAULT);
