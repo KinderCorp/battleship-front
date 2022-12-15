@@ -1,7 +1,7 @@
 import type { AuthorizedBoat, Boat } from '@boat/models';
 import type { BoardBoat, Position } from '@shared/Board/models';
 import ArrayHelpers from '@helpers/ArrayHelpers';
-import type { BoatDirection } from '@shared/Boat/models';
+import type { BoatDirection } from '@boat/models';
 import { checkBoardBoatsPosition } from '@shared/Board/helpers';
 import NumberHelpers from '@helpers/NumberHelpers';
 
@@ -112,7 +112,8 @@ export const parseBoat = (boat: any): Boat => ({
  * @param {any} boats Boats
  * @return {Boat[]}
  */
-export const parseBoats = (boats: any): Boat[] => boats?.map((boat: any) => parseBoat(boat)) || [];
+export const parseBoats = (boats: any): Boat[] =>
+  ArrayHelpers.isArray(boats) ? boats.map((boat: any) => parseBoat(boat)) : [];
 
 /**
  * Parse authorized boat.

@@ -1,6 +1,9 @@
 import type { GameExtendedSettings, GamePlayer, GameRoom, GameRoomData } from '@game/models';
+import ArrayHelpers from '@helpers/ArrayHelpers';
 import { GAME_EXTENDED_SETTINGS } from '@game/constants';
 import { parseAuthorizedFleet } from '@boat/helpers';
+import { parseWeapons } from '@weapon/helpers';
+import type { Position } from '@shared/Board/models';
 import { selectGamePlayerAdmin } from '@game/selectors';
 import socket from '@socket/index';
 import store from '@core/store';
@@ -45,7 +48,6 @@ export const parseGameRoomData = (gameRoomData: any): GameRoomData<any> => ({
  */
 export const parseGamePlayer = (gamePlayer: any): GamePlayer => ({
   boatsAreReady: gamePlayer?.boatsAreReady || false,
-  id: gamePlayer?.id || '',
   isAdmin: gamePlayer?.isAdmin || false,
   pseudo: gamePlayer?.pseudo || '',
   socketId: gamePlayer?.socketId || '',
@@ -58,7 +60,9 @@ export const parseGamePlayer = (gamePlayer: any): GamePlayer => ({
  * @return {GamePlayer[]}
  */
 export const parseGamePlayers = (gamePlayers: any): GamePlayer[] =>
-  gamePlayers?.map((gamePlayer: any) => parseGamePlayer(gamePlayer)) || [];
+  ArrayHelpers.isArray(gamePlayers)
+    ? gamePlayers.map((gamePlayer: any) => parseGamePlayer(gamePlayer))
+    : [];
 
 /**
  * Parse extended game settings.
@@ -67,12 +71,12 @@ export const parseGamePlayers = (gamePlayers: any): GamePlayer[] =>
  * @return {GameExtendedSettings}
  */
 export const parseGameExtendedSettings = (gameExtendedSettings: any): GameExtendedSettings => ({
-  authorisedFleet: parseAuthorizedFleet(gameExtendedSettings.authorisedFleet),
-  boardDimensions: gameExtendedSettings.boardDimensions || GAME_EXTENDED_SETTINGS.boardDimensions,
+  authorisedFleet: parseAuthorizedFleet(gameExtendedSettings?.authorisedFleet),
+  boardDimensions: gameExtendedSettings?.boardDimensions || GAME_EXTENDED_SETTINGS.boardDimensions,
   hasBoatsSafetyZone:
-    gameExtendedSettings.hasBoatsSafetyZone || GAME_EXTENDED_SETTINGS.hasBoatsSafetyZone,
-  timePerTurn: gameExtendedSettings.timePerTurn || GAME_EXTENDED_SETTINGS.timePerTurn,
-  weapons: [],
+    gameExtendedSettings?.hasBoatsSafetyZone || GAME_EXTENDED_SETTINGS.hasBoatsSafetyZone,
+  timePerTurn: gameExtendedSettings?.timePerTurn || GAME_EXTENDED_SETTINGS.timePerTurn,
+  weapons: parseWeapons(gameExtendedSettings?.weapons),
 });
 
 /**
@@ -82,7 +86,27 @@ export const parseGameExtendedSettings = (gameExtendedSettings: any): GameExtend
  * @return {GameRoom}
  */
 export const parseGameRoom = (gameRoom: any): GameRoom => ({
-  instanceId: gameRoom.instanceId || '',
-  players: parseGamePlayers(gameRoom.players),
-  settings: parseGameExtendedSettings(gameRoom.settings),
+  instanceId: gameRoom?.instanceId || '',
+  players: parseGamePlayers(gameRoom?.players),
+  settings: parseGameExtendedSettings(gameRoom?.settings),
 });
+
+/**
+ * Parse a position.
+ *
+ * @param {any} position Position
+ * @return {Position}
+ */
+export const parsePosition = (position: any): Position => ({
+  x: position?.[0] || 0,
+  y: position?.[1] || 0,
+});
+
+/**
+ * Parse positions.
+ *
+ * @param {any} positions Positions
+ * @return {Position[]}
+ */
+export const parsePositions = (positions: any): Position[] =>
+  ArrayHelpers.isArray(positions) ? positions.map((position: any) => parsePosition(position)) : [];

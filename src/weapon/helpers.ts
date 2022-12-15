@@ -1,3 +1,5 @@
+import ArrayHelpers from '@helpers/ArrayHelpers';
+import { parsePositions } from '@game/helpers';
 import type { Weapon } from '@weapon/models';
 
 /**
@@ -7,8 +9,9 @@ import type { Weapon } from '@weapon/models';
  * @return {Weapon}
  */
 export const parseWeapon = (weapon: any): Weapon => ({
+  damageArea: parsePositions(weapon?.damageArea),
   id: weapon?.id || '',
-  maxAmmunition: weapon?.maxAmmunition || -1,
+  maxAmmunition: weapon?.maxAmmunition || 0,
   name: weapon?.name || '',
 });
 
@@ -19,4 +22,4 @@ export const parseWeapon = (weapon: any): Weapon => ({
  * @return {Weapon[]}
  */
 export const parseWeapons = (weapons: any): Weapon[] =>
-  weapons?.map((weapon: any) => parseWeapon(weapon)) || [];
+  ArrayHelpers.isArray(weapons) ? weapons.map((weapon: any) => parseWeapon(weapon)) : [];
