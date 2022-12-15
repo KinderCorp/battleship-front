@@ -2,9 +2,9 @@ import { createSelector } from '@reduxjs/toolkit';
 
 import { GAME_EXTENDED_SETTINGS, GAME_NAME, GAME_SETTINGS } from '@game/constants';
 import type {
-  GameExtendedSettings,
   GamePlayer,
   GameRoom,
+  GameRoomSettings,
   GameSettings,
   GameState,
   GameView,
@@ -45,31 +45,25 @@ export const selectGameInstance = createSelector(
 
 export const selectGameRoomSettings = createSelector(
   selectGameRoom,
-  (state: GameRoom | Partial<GameRoom>): GameExtendedSettings | Partial<GameExtendedSettings> =>
+  (state: GameRoom | Partial<GameRoom>): GameRoomSettings | Partial<GameRoomSettings> =>
     state.settings || GAME_EXTENDED_SETTINGS,
 );
 
 export const selectGameRoomSettingsAuthorizedFleet = createSelector(
   selectGameRoomSettings,
-  (
-    state: GameExtendedSettings | Partial<GameExtendedSettings>,
-  ): GameExtendedSettings['authorisedFleet'] =>
+  (state: GameRoomSettings | Partial<GameRoomSettings>): GameRoomSettings['authorisedFleet'] =>
     state.authorisedFleet || GAME_EXTENDED_SETTINGS.authorisedFleet,
 );
 
 export const selectGameRoomSettingsBoardDimensions = createSelector(
   selectGameRoomSettings,
-  (
-    state: GameExtendedSettings | Partial<GameExtendedSettings>,
-  ): GameExtendedSettings['boardDimensions'] =>
+  (state: GameRoomSettings | Partial<GameRoomSettings>): GameRoomSettings['boardDimensions'] =>
     state.boardDimensions || GAME_EXTENDED_SETTINGS.boardDimensions,
 );
 
 export const selectGameRoomSettingsHasBoatsSafetyZone = createSelector(
   selectGameRoomSettings,
-  (
-    state: GameExtendedSettings | Partial<GameExtendedSettings>,
-  ): GameExtendedSettings['hasBoatsSafetyZone'] =>
+  (state: GameRoomSettings | Partial<GameRoomSettings>): GameRoomSettings['hasBoatsSafetyZone'] =>
     state.hasBoatsSafetyZone || GAME_EXTENDED_SETTINGS.hasBoatsSafetyZone,
 );
 

@@ -1,4 +1,4 @@
-import type { GameExtendedSettings, GamePlayer, GameRoom, GameRoomData } from '@game/models';
+import type { GameRoomSettings, GamePlayer, GameRoom, GameRoomData } from '@game/models';
 import ArrayHelpers from '@helpers/ArrayHelpers';
 import { GAME_EXTENDED_SETTINGS } from '@game/constants';
 import { parseAuthorizedFleet } from '@boat/helpers';
@@ -68,9 +68,9 @@ export const parseGamePlayers = (gamePlayers: any): GamePlayer[] =>
  * Parse extended game settings.
  *
  * @param {any} gameExtendedSettings Game extended settings
- * @return {GameExtendedSettings}
+ * @return {GameRoomSettings}
  */
-export const parseGameExtendedSettings = (gameExtendedSettings: any): GameExtendedSettings => ({
+export const parseGameExtendedSettings = (gameExtendedSettings: any): GameRoomSettings => ({
   authorisedFleet: parseAuthorizedFleet(gameExtendedSettings?.authorisedFleet),
   boardDimensions: gameExtendedSettings?.boardDimensions || GAME_EXTENDED_SETTINGS.boardDimensions,
   hasBoatsSafetyZone:

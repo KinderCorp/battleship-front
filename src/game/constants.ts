@@ -1,4 +1,4 @@
-import type { GameExtendedSettings, GameSettings } from '@game/models';
+import type { GameRoomSettings, GameSettings } from '@game/models';
 
 export const GAME_NAME = 'GAME';
 
@@ -11,7 +11,7 @@ export const GAME_SETTINGS: GameSettings = {
   weapons: [],
 };
 
-export const GAME_EXTENDED_SETTINGS: GameExtendedSettings = {
+export const GAME_EXTENDED_SETTINGS: GameRoomSettings = {
   ...GAME_SETTINGS,
   authorisedFleet: [],
   weapons: [],

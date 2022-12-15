@@ -16,7 +16,7 @@ export interface GameSettings {
 }
 
 // FIXME: weapons contain only name, not all properties
-export interface GameExtendedSettings extends Omit<GameSettings, 'weapons'> {
+export interface GameRoomSettings extends Omit<GameSettings, 'weapons'> {
   authorisedFleet: Boat[];
   weapons: Weapon[];
 }
@@ -35,7 +35,7 @@ export interface GamePlayer extends BasePlayer {
 
 export interface GameRoom extends GameInstance {
   players: GamePlayer[];
-  settings: GameExtendedSettings;
+  settings: GameRoomSettings;
 }
 
 export interface GameInstance {
