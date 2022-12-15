@@ -6,3 +6,8 @@ export interface Boat {
   src: ImageProps['src'];
   widthCell: number;
 }
+
+export interface AuthorizedBoat {
+  authorisedNumber: number;
+  boat: Boat;
+}

@@ -1,6 +1,6 @@
 import type { GameExtendedSettings, GamePlayer, GameRoom, GameRoomData } from '@game/models';
 import { GAME_EXTENDED_SETTINGS } from '@game/constants';
-import { parseBoats } from '@boat/helpers';
+import { parseAuthorizedFleet } from '@boat/helpers';
 import { selectGamePlayerAdmin } from '@game/selectors';
 import socket from '@socket/index';
 import store from '@core/store';
@@ -67,7 +67,7 @@ export const parseGamePlayers = (gamePlayers: any): GamePlayer[] =>
  * @return {GameExtendedSettings}
  */
 export const parseGameExtendedSettings = (gameExtendedSettings: any): GameExtendedSettings => ({
-  authorisedFleet: parseBoats(gameExtendedSettings.authorisedFleet),
+  authorisedFleet: parseAuthorizedFleet(gameExtendedSettings.authorisedFleet),
   boardDimensions: gameExtendedSettings.boardDimensions || GAME_EXTENDED_SETTINGS.boardDimensions,
   hasBoatsSafetyZone:
     gameExtendedSettings.hasBoatsSafetyZone || GAME_EXTENDED_SETTINGS.hasBoatsSafetyZone,
