@@ -66,6 +66,7 @@ export const emitCloseRoom = (instanceId: GameInstance['instanceId']): void => {
  * @return {void}
  */
 export const emitValidatePlayerBoatsPlacement = (data: BoardBoat[]): void => {
+  // FIXME: send right data
   socket.emit(
     SOCKET_EVENTS_EMITTING.VALIDATE_PLAYER_BOATS_PLACEMENT,
     formatGameRoomData<BoardBoat[]>(data),
