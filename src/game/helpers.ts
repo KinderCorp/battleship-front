@@ -33,7 +33,7 @@ export const isPlayerAdmin = (): boolean => {
  * @return {GameRoomData<any>}
  */
 export const parseGameRoomData = (gameRoomData: any): GameRoomData<any> => ({
-  data: gameRoomData?.data,
+  data: gameRoomData?.data || null,
   instanceId: gameRoomData?.instanceId || '',
 });
 
@@ -44,6 +44,7 @@ export const parseGameRoomData = (gameRoomData: any): GameRoomData<any> => ({
  * @return {GamePlayer}
  */
 export const parseGamePlayer = (gamePlayer: any): GamePlayer => ({
+  boatsAreReady: gamePlayer?.boatsAreReady || false,
   id: gamePlayer?.id || '',
   isAdmin: gamePlayer?.isAdmin || false,
   pseudo: gamePlayer?.pseudo || '',
@@ -72,4 +73,16 @@ export const parseGameExtendedSettings = (gameExtendedSettings: any): GameExtend
     gameExtendedSettings.hasBoatsSafetyZone || GAME_EXTENDED_SETTINGS.hasBoatsSafetyZone,
   timePerTurn: gameExtendedSettings.timePerTurn || GAME_EXTENDED_SETTINGS.timePerTurn,
   weapons: [],
+});
+
+/**
+ * Parse game room.
+ *
+ * @param {any} gameRoom Game room
+ * @return {GameRoom}
+ */
+export const parseGameRoom = (gameRoom: any): GameRoom => ({
+  instanceId: gameRoom.instanceId || '',
+  players: parseGamePlayers(gameRoom.players),
+  settings: parseGameExtendedSettings(gameRoom.settings),
 });

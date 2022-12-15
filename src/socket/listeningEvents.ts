@@ -1,24 +1,12 @@
-import {
-  parseGameExtendedSettings,
-  parseGamePlayer,
-  parseGamePlayers,
-  parseGameRoomData,
-} from '@game/helpers';
+import { parseGamePlayer, parseGameRoom, parseGameRoomData } from '@game/helpers';
 import { selectGamePlayerAdmin, selectGamePlayers } from '@game/selectors';
-import {
-  setGamePlayers,
-  setGameRoom,
-  setGameRoomAuthorizedFleet,
-  setInstanceId,
-  setView,
-} from '@game/reducer';
+import { setGamePlayers, setGameRoom, setView } from '@game/reducer';
 import type { GamePlayer } from '@game/models';
-import { parseBoats } from '@boat/helpers';
 import { PATHS } from '@core/constants';
 import store from '@core/store';
 import UrlHelpers from '@helpers/UrlHelpers';
 
-// TODO: get room settings here
+// FIXME: assign the right type for parameter or just 'any' ?
 /**
  * Listening event when game is created.
  *
@@ -27,12 +15,11 @@ import UrlHelpers from '@helpers/UrlHelpers';
  */
 export const listeningGameCreated = (gameRoomData: any): void => {
   const { data, instanceId } = parseGameRoomData(gameRoomData);
-  const player = parseGamePlayer(data);
+  const gameRoom = parseGameRoom({ ...data, instanceId });
 
-  if (!instanceId) return;
+  if (!gameRoom.instanceId) return;
 
-  store.dispatch(setInstanceId(instanceId));
-  store.dispatch(setGamePlayers([player]));
+  store.dispatch(setGameRoom(gameRoom));
 
   UrlHelpers.changeLocation(`${PATHS.GAME}/${instanceId}`);
 };
@@ -55,17 +42,10 @@ export const listeningPlayerJoined = (gameRoomData: any): void => {
 /**
  * Listening event for start placing boats.
  *
- * @param {any} gameRoomData Game room data
  * @return {void}
  */
-export const listeningStartPlacingBoats = (gameRoomData: any): void => {
-  const { data } = parseGameRoomData(gameRoomData);
-  const boats = parseBoats(data);
-
-  if (boats.length) {
-    store.dispatch(setGameRoomAuthorizedFleet(boats));
-    store.dispatch(setView('boats_placement'));
-  }
+export const listeningStartPlacingBoats = (): void => {
+  store.dispatch(setView('boats_placement'));
 };
 
 /**
@@ -86,10 +66,9 @@ export const listeningErrorGameNotFound = (): void => {
  */
 export const listeningGameInformation = (gameRoomData: any): void => {
   const { data, instanceId } = parseGameRoomData(gameRoomData);
-  const players = parseGamePlayers(data.players);
-  const settings = parseGameExtendedSettings(data.settings);
+  const gameRoom = parseGameRoom({ ...data, instanceId });
 
-  store.dispatch(setGameRoom({ instanceId, players, settings }));
+  store.dispatch(setGameRoom(gameRoom));
 };
 
 /**
