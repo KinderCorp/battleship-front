@@ -15,8 +15,10 @@ export interface GameSettings {
   timePerTurn: number;
 }
 
-export interface GameExtendedSettings extends GameSettings {
+// FIXME: weapons contain only name, not all properties
+export interface GameExtendedSettings extends Omit<GameSettings, 'weapons'> {
   authorisedFleet: Boat[];
+  weapons: Weapon[];
 }
 
 export interface GameState {
@@ -25,8 +27,7 @@ export interface GameState {
   view: GameView;
 }
 
-export interface GamePlayer extends Pick<BasePlayer, 'pseudo'> {
-  id: string; // DELETE: because id is not used in front view
+export interface GamePlayer extends BasePlayer {
   socketId: string;
   isAdmin: boolean;
   boatsAreReady?: boolean;
