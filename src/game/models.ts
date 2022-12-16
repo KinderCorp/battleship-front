@@ -22,8 +22,8 @@ export interface GameRoomSettings extends Omit<GameSettings, 'weapons'> {
 }
 
 export interface GameState {
-  settings: GameSettings;
   gameRoom: GameRoom;
+  settings: GameSettings;
   view: GameView;
 }
 
