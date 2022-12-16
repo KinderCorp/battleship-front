@@ -8,8 +8,8 @@ import type {
   GameState,
   GameView,
 } from '@game/models';
-import { parseGameRoom, parseGameSettings } from '@game/helpers';
 import { GAME_NAME } from '@game/constants';
+import { parseGameState } from '@game/helpers';
 import type { RootState } from '@core/models';
 import socket from '@socket/index';
 
@@ -19,21 +19,21 @@ import socket from '@socket/index';
  * @param {RootState} state Current state
  * @return {GameState}
  */
-const selectGameState = (state: RootState): GameState => state[GAME_NAME] || ({} as GameState);
+const selectGameState = (state: RootState): GameState => parseGameState(state[GAME_NAME]);
 
 export const selectGameSettings = createSelector(
   selectGameState,
-  (state: GameState): GameSettings => parseGameSettings(state.settings),
+  (state: GameState): GameSettings => state.settings,
 );
 
 export const selectGameView = createSelector(
   selectGameState,
-  (state: GameState): GameView => state.view || 'settings',
+  (state: GameState): GameView => state.view,
 );
 
 export const selectGameRoom = createSelector(
   selectGameState,
-  (state: GameState): GameRoom => parseGameRoom(state.gameRoom),
+  (state: GameState): GameRoom => state.gameRoom,
 );
 
 export const selectGameRoomInstanceId = createSelector(

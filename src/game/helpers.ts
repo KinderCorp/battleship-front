@@ -5,6 +5,7 @@ import type {
   GameRoomData,
   GameRoomSettings,
   GameSettings,
+  GameState,
 } from '@game/models';
 import ArrayHelpers from '@helpers/ArrayHelpers';
 import { parseAuthorizedFleet } from '@boat/helpers';
@@ -34,6 +35,18 @@ export const isPlayerAdmin = (): boolean => {
 
   return adminPlayer.socketId === socket.id;
 };
+
+/**
+ * Parse game state.
+ *
+ * @param {any} gameState Game state
+ * @return {GameState}
+ */
+export const parseGameState = (gameState: any): GameState => ({
+  gameRoom: parseGameRoom(gameState.gameRoom),
+  settings: parseGameSettings(gameState.settings),
+  view: gameState.view || 'settings',
+});
 
 /**
  * Parse a game room data.

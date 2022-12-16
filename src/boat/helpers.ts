@@ -100,10 +100,10 @@ export const isBoatHorizontal = (direction?: BoatDirection): boolean => {
  * @return {Boat}
  */
 export const parseBoat = (boat: any): Boat => ({
-  lengthCell: boat?.['length'] || 1,
+  lengthCell: NumberHelpers.parseInt(boat?.['length'] || boat?.lengthCell) || 1,
   name: boat?.name || '',
   src: boat?.src || '',
-  widthCell: boat?.width || 1,
+  widthCell: NumberHelpers.parseInt(boat?.width || boat?.widthCell) || 1,
 });
 
 /**
@@ -133,10 +133,10 @@ export const parseAuthorizedBoat = (authorizedBoat: any): AuthorizedBoat => ({
  * @return {Boat[]}
  */
 export const parseAuthorizedFleet = (authorisedFleet: any): Boat[] => {
+  // FIXME: change this bad parsed
   const newAuthorisedFleet = ArrayHelpers.isArray(authorisedFleet) ? authorisedFleet : [];
   const boats = [] as Boat[];
 
-  // FIXME: rename the variable
   for (const authorisedFleetItem of newAuthorisedFleet) {
     const authorizedBoat = parseAuthorizedBoat(authorisedFleetItem);
 
@@ -145,5 +145,5 @@ export const parseAuthorizedFleet = (authorisedFleet: any): Boat[] => {
     }
   }
 
-  return boats;
+  return ArrayHelpers.isEmpty(boats) ? parseBoats(newAuthorisedFleet) : boats;
 };
