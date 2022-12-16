@@ -22,7 +22,7 @@ export interface BoardProps extends Pick<GameSettings, 'hasBoatsSafetyZone'> {
   boats?: BoardBoat[];
   cellsAffected?: BoardCellAffected[];
   className?: string;
-  dimensions: IntRange<8, 13>;
+  dimensions: IntRange<8, 12>;
   isDisabled?: boolean;
   isPlacementActive?: boolean;
   isShootActive?: boolean;
