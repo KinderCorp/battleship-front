@@ -16,6 +16,7 @@ export interface BoardCellAffected extends Position {
   state: BoardCellState;
 }
 
+// FIXME: models to put here?
 export interface BoardBoat extends Boat, Position, Pick<BoatProps, 'direction'> {}
 
 export interface BoardProps extends Pick<GameSettings, 'hasBoatsSafetyZone'> {
