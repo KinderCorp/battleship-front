@@ -14,14 +14,11 @@ export const gameSlice = createSlice({
   initialState,
   name: GAME_NAME,
   reducers: {
-    initGameRoom: (state) => {
-      state.gameRoom = {} as GameRoom;
-    },
-    setGamePlayers: (state, action: PayloadAction<GamePlayer[]>) => {
-      state.gameRoom.players = action.payload;
-    },
     setGameRoom: (state, action: PayloadAction<GameRoom>) => {
       state.gameRoom = action.payload;
+    },
+    setGameRoomPlayers: (state, action: PayloadAction<GamePlayer[]>) => {
+      state.gameRoom.players = action.payload;
     },
     setGameRoomSettings: (state, action: PayloadAction<GameRoomSettings>) => {
       state.gameRoom.settings = action.payload;
@@ -36,8 +33,7 @@ export const gameSlice = createSlice({
 });
 
 export const {
-  initGameRoom,
-  setGamePlayers,
+  setGameRoomPlayers,
   setGameRoom,
   setView,
   // updateSettings,

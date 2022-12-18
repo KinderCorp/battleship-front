@@ -1,9 +1,10 @@
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { initGameRoom, setView } from '@game/reducer';
+import { setGameRoom, setView } from '@game/reducer';
 import Button from '@shared/Button/components/Button';
 import { emitCreateGame } from '@socket/emittingEvents';
+import type { GameRoom } from '@game/models';
 import Image from '@shared/Image/components/Image';
 import { selectPlayer } from '@player/selectors';
 import useTranslation from '@hooks/useTranslation';
@@ -22,7 +23,7 @@ const HomePageContent = (): JSX.Element => {
 
   // BUG: called two times
   useEffect(() => {
-    dispatch(initGameRoom());
+    dispatch(setGameRoom({} as GameRoom));
     dispatch(setView('settings'));
   });
 

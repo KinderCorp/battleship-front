@@ -1,6 +1,6 @@
 import { parseGamePlayer, parseGameRoom, parseGameRoomData } from '@game/helpers';
 import { selectGameRoomPlayerAdmin, selectGameRoomPlayers } from '@game/selectors';
-import { setGamePlayers, setGameRoom, setView } from '@game/reducer';
+import { setGameRoom, setGameRoomPlayers, setView } from '@game/reducer';
 import type { GamePlayer } from '@game/models';
 import { PATHS } from '@core/constants';
 import store from '@core/store';
@@ -36,7 +36,7 @@ export const listeningPlayerJoined = (gameRoomData: any): void => {
 
   const newPlayers = [selectGameRoomPlayerAdmin(store.getState()) as GamePlayer, player];
 
-  store.dispatch(setGamePlayers(newPlayers));
+  store.dispatch(setGameRoomPlayers(newPlayers));
 };
 
 /**
@@ -104,7 +104,7 @@ export const listeningOnePlayerHasPlacedHisBoats = (gameRoomData: any): void => 
 
   if (playerToUpdateIndex !== -1) {
     players[playerToUpdateIndex] = { ...player, boatsAreReady: true };
-    store.dispatch(setGamePlayers(players));
+    store.dispatch(setGameRoomPlayers(players));
   }
 };
 
