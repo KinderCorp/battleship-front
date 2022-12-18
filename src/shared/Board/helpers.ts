@@ -1,6 +1,7 @@
 import type { BoardBoat, Position } from '@shared/Board/models';
-import { isBoatHorizontal } from '@boat/helpers';
+import { hasXAxisReversed, hasYAxisReversed, isBoatHorizontal } from '@boat/helpers';
 
+// TASK: placement of the boats in the table such as [[x, y], [x', y']], top left corner and lower right corner
 /**
  * Check if the boats position is correct in the board.
  *
@@ -16,23 +17,21 @@ export const checkBoardBoatsPosition = (
 ): boolean => {
   const takenCells = [] as Position[];
 
-  // BUG: if boat has at least length of two
   for (const boat of boats) {
     const width = isBoatHorizontal(boat.direction) ? boat.lengthCell : boat.widthCell;
     const height = isBoatHorizontal(boat.direction) ? boat.widthCell : boat.lengthCell;
-
-    const hasXAxisReversed = boat.direction === 'east' || boat.direction === 'south';
-    const hasYAxisReversed = boat.direction === 'west' || boat.direction === 'south';
+    const xAxisReversed = hasXAxisReversed(boat.direction);
+    const yAxisReversed = hasYAxisReversed(boat.direction);
 
     for (
       let x = boat.x;
-      hasXAxisReversed ? x > boat.x - width : x < boat.x + width;
-      hasXAxisReversed ? x-- : x++
+      xAxisReversed ? x > boat.x - width : x < boat.x + width;
+      xAxisReversed ? x-- : x++
     ) {
       for (
         let y = boat.y;
-        hasYAxisReversed ? y > boat.y - height : y < boat.y + height;
-        hasYAxisReversed ? y-- : y++
+        yAxisReversed ? y > boat.y - height : y < boat.y + height;
+        yAxisReversed ? y-- : y++
       ) {
         const takenCell = takenCells.find(
           (takenCell: Position) => takenCell.x === x && takenCell.y === y,

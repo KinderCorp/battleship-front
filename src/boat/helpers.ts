@@ -1,4 +1,4 @@
-import type { AuthorizedBoat, Boat } from '@boat/models';
+import type { AuthorizedBoat, BoardBoatApi, Boat, PositionArray } from '@boat/models';
 import type { BoardBoat, Position } from '@shared/Board/models';
 import ArrayHelpers from '@helpers/ArrayHelpers';
 import type { BoatDirection } from '@boat/models';
@@ -92,6 +92,26 @@ export const isBoatHorizontal = (direction?: BoatDirection): boolean => {
   return direction === 'west' || direction === 'east';
 };
 
+/**
+ * Check if boat has x axis reversed.
+ *
+ * @param {BoatDirection} direction Boat direction
+ * @return {boolean}
+ */
+export const hasXAxisReversed = (direction?: BoatDirection): boolean => {
+  return direction === 'east' || direction === 'south';
+};
+
+/**
+ * Check if boat has y axis reversed.
+ *
+ * @param {BoatDirection} direction Boat direction
+ * @return {boolean}
+ */
+export const hasYAxisReversed = (direction?: BoatDirection): boolean => {
+  return direction === 'west' || direction === 'south';
+};
+
 // FIXME: rename length/width API properties to lengthCell/widthCell
 /**
  * Parse a boat.
@@ -147,3 +167,55 @@ export const parseAuthorizedFleet = (authorisedFleet: any): Boat[] => {
 
   return ArrayHelpers.isEmpty(boats) ? parseBoats(newAuthorisedFleet) : boats;
 };
+
+/**
+ * Get boat bow cells.
+ *
+ * @param {BoardBoat} boardBoat Board boat.
+ * @return {PositionArray[]}
+ */
+export const getBoatBowCells = (boardBoat: BoardBoat): PositionArray[] => {
+  const bowCells = [] as PositionArray[];
+
+  for (let index = 0; index < boardBoat.widthCell; index++) {
+    if (isBoatHorizontal(boardBoat.direction)) {
+      if (hasYAxisReversed(boardBoat.direction)) {
+        bowCells.push([boardBoat.x, boardBoat.y - index]);
+      } else {
+        bowCells.push([boardBoat.x, boardBoat.y + index]);
+      }
+    } else {
+      if (hasXAxisReversed(boardBoat.direction)) {
+        bowCells.push([boardBoat.x - index, boardBoat.y]);
+      } else {
+        bowCells.push([boardBoat.x + index, boardBoat.y]);
+      }
+    }
+  }
+
+  return bowCells;
+};
+
+/**
+ * Parse game board boat for API.
+ *
+ * @param {BoardBoat} boardBoat Board boat.
+ * @return {BoardBoatApi}
+ */
+export const parseGameBoardBoatForApi = (boardBoat: BoardBoat): BoardBoatApi => ({
+  bowCells: getBoatBowCells(boardBoat),
+  // FIXME: default direction in constants file
+  direction: boardBoat.direction || 'north',
+  name: boardBoat.name,
+});
+
+/**
+ * Parse game board boats for API.
+ *
+ * @param {BoardBoat[]} boardBoats Board boats.
+ * @return {BoardBoatApi[]}
+ */
+export const parseGameBoardBoatsForApi = (boardBoats: BoardBoat[]): BoardBoatApi[] =>
+  ArrayHelpers.isArray(boardBoats)
+    ? boardBoats.map((boardBoat: any) => parseGameBoardBoatForApi(boardBoat))
+    : [];

@@ -26,3 +26,9 @@ export interface AuthorizedBoat {
   authorisedNumber: number;
   boat: Boat;
 }
+
+export type PositionArray = [x: number, y: number];
+
+export interface BoardBoatApi extends Pick<Boat, 'name'>, Pick<BoatProps, 'direction'> {
+  bowCells: PositionArray[];
+}

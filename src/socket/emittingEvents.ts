@@ -1,6 +1,7 @@
 import type { GameInstance, GameSettings } from '@game/models';
 import type { BoardBoat } from '@shared/Board/models';
 import { formatGameRoomData } from '@socket/helpers';
+import { parseGameBoardBoatsForApi } from '@boat/helpers';
 import type { Player } from '@player/models';
 import socket from '@socket/index';
 import { SOCKET_EVENTS_EMITTING } from '@socket/constants';
@@ -66,10 +67,11 @@ export const emitCloseRoom = (instanceId: GameInstance['instanceId']): void => {
  * @return {void}
  */
 export const emitValidatePlayerBoatsPlacement = (data: BoardBoat[]): void => {
-  // FIXME: send right data
+  const boardBoat = parseGameBoardBoatsForApi(data);
+
   socket.emit(
     SOCKET_EVENTS_EMITTING.VALIDATE_PLAYER_BOATS_PLACEMENT,
-    formatGameRoomData<BoardBoat[]>(data),
+    formatGameRoomData<BoardBoat[]>(boardBoat),
   );
 };
 
