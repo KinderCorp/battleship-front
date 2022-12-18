@@ -24,6 +24,7 @@ const socket = io(SOCKETS_URL, {
 
 // TODO: order error functions
 socket.on(SOCKET_EVENTS_LISTENING.GAME_CREATED, listeningGameCreated);
+socket.on(SOCKET_EVENTS_LISTENING.GAME_ALREADY_CREATED, listeningGameCreated);
 socket.on(SOCKET_EVENTS_LISTENING.PLAYER_JOINED, listeningPlayerJoined);
 socket.on(SOCKET_EVENTS_LISTENING.START_PLACING_BOATS, listeningStartPlacingBoats);
 socket.on(SOCKET_EVENTS_LISTENING.ERROR_GAME_NOT_FOUND, listeningErrorGameNotFound);

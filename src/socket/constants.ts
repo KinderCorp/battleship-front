@@ -27,6 +27,7 @@ export const SOCKET_EVENTS_LISTENING = {
   ERROR_UNABLE_TO_CREATE_GAME: 'error-unable-to-create-game',
   ERROR_UNKNOWN_SERVER: 'error-unknown-server',
   ERROR_WEAPON_NOT_FOUND: 'error-weapon-not-found',
+  GAME_ALREADY_CREATED: 'game-already-created',
   GAME_CREATED: 'game-created',
   GAME_INFORMATION: 'game-information',
   GAME_STARTED: 'game-started',
