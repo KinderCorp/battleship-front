@@ -116,3 +116,12 @@ export const listeningOnePlayerHasPlacedHisBoats = (gameRoomData: any): void => 
 export const listeningGameStarted = (): void => {
   store.dispatch(setView('playing'));
 };
+
+/**
+ * Listening event when game is closed.
+ *
+ * @return {void}
+ */
+export const listeningClosedRoom = (): void => {
+  UrlHelpers.changeLocation(PATHS.DEFAULT);
+};

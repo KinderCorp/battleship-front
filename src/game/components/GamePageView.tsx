@@ -7,9 +7,7 @@ import { emitCloseRoom } from '@socket/emittingEvents';
 import GamePlacingBoatsView from '@game/components/GamePlacingBoatsView';
 import GameSettingsView from '@game/components/GameSettingsView';
 import Header from '@shared/Header/components/Header';
-import { PATHS } from '@core/constants';
 import PlayersCards from '@player/components/PlayersCards';
-import UrlHelpers from '@helpers/UrlHelpers';
 import useTranslation from '@hooks/useTranslation';
 
 /**
@@ -24,7 +22,6 @@ const GamePageView = (): JSX.Element => {
   const instanceId = useSelector(selectGameRoomInstanceId);
 
   const handleLeaveGame = useCallback(() => {
-    UrlHelpers.changeLocation(PATHS.DEFAULT);
     emitCloseRoom(instanceId);
   }, [instanceId]);
 

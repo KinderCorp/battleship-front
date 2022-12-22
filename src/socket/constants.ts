@@ -11,6 +11,7 @@ export const SOCKET_EVENTS_EMITTING = {
 
 export const SOCKET_EVENTS_LISTENING = {
   ALL_PLAYERS_HAVE_PLACED_THEIR_BOATS: 'all-players-have-placed-their-boats',
+  CLOSED_ROOM: 'closed-room',
   END_GAME: 'end-game',
   ERROR_CELL_ALREADY_HIT: 'error-cell-already-hit',
   ERROR_GAME_IS_FULL: 'error-game-is-full',

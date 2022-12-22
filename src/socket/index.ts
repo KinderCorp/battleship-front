@@ -2,6 +2,7 @@ import getConfig from 'next/config';
 import io from 'socket.io-client';
 
 import {
+  listeningClosedRoom,
   listeningErrorGameIsFull,
   listeningErrorGameNotFound,
   listeningGameCreated,
@@ -31,6 +32,7 @@ socket.on(SOCKET_EVENTS_LISTENING.ERROR_GAME_NOT_FOUND, listeningErrorGameNotFou
 socket.on(SOCKET_EVENTS_LISTENING.GAME_INFORMATION, listeningGameInformation);
 socket.on(SOCKET_EVENTS_LISTENING.PLAYER_DISCONNECTED, listeningPlayerDisconnected);
 socket.on(SOCKET_EVENTS_LISTENING.ERROR_GAME_IS_FULL, listeningErrorGameIsFull);
+socket.on(SOCKET_EVENTS_LISTENING.CLOSED_ROOM, listeningClosedRoom);
 socket.on(
   SOCKET_EVENTS_LISTENING.ONE_PLAYER_HAS_PLACED_HIS_BOATS,
   listeningOnePlayerHasPlacedHisBoats,
