@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
-import { checkGameIsFull, isPlayerAdmin } from '@game/helpers';
+import { checkGameIsFull, isPlayerHost } from '@game/helpers';
 import BlockContainer from '@shared/BlockContainer/components/BlockContainer';
 import Button from '@shared/Button/components/Button';
 import { COLORS } from '@core/constants';
@@ -50,13 +50,13 @@ const GameSettingsView = (): JSX.Element => {
    * @return {void}
    */
   const handleStartGame = useCallback((): void => {
-    if (allPlayersJoined && isPlayerAdmin()) emitPlayersReadyToPlaceBoats();
+    if (allPlayersJoined && isPlayerHost()) emitPlayersReadyToPlaceBoats();
   }, [allPlayersJoined]);
 
   return (
     <div className="game-settings">
       <div className="content">
-        {isPlayerAdmin() && (
+        {isPlayerHost() && (
           <BlockContainer
             className="share-link"
             iconName="Share"
@@ -77,13 +77,13 @@ const GameSettingsView = (): JSX.Element => {
           <PlayersCards />
         </BlockContainer>
 
-        {isPlayerAdmin() && (
+        {isPlayerHost() && (
           <Button onClick={handleStartGame} size="large" isDisabled={!allPlayersJoined}>
             {translate('start')}
           </Button>
         )}
 
-        {!isPlayerAdmin() && (
+        {!isPlayerHost() && (
           <>
             <Icon name="Loader" borderColor={COLORS.WHITE} />
             <p>{translate('waiting-for-host')}</p>

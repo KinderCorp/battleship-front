@@ -1,5 +1,5 @@
 import { parseGamePlayer, parseGameRoom, parseGameRoomData } from '@game/helpers';
-import { selectGameRoomPlayerAdmin, selectGameRoomPlayers } from '@game/selectors';
+import { selectGameRoomPlayerHost, selectGameRoomPlayers } from '@game/selectors';
 import { setGameRoom, setGameRoomPlayers, setView } from '@game/reducer';
 import type { GamePlayer } from '@game/models';
 import { PATHS } from '@core/constants';
@@ -34,7 +34,7 @@ export const listeningPlayerJoined = (gameRoomData: any): void => {
   const { data } = parseGameRoomData(gameRoomData);
   const player = parseGamePlayer(data);
 
-  const newPlayers = [selectGameRoomPlayerAdmin(store.getState()) as GamePlayer, player];
+  const newPlayers = [selectGameRoomPlayerHost(store.getState()) as GamePlayer, player];
 
   store.dispatch(setGameRoomPlayers(newPlayers));
 };

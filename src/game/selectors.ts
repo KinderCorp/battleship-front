@@ -51,15 +51,14 @@ export const selectGameRoomPlayers = createSelector(
   (state: GameRoom): GamePlayer[] => state.players,
 );
 
-export const selectGameRoomPlayerAdmin = createSelector(
+export const selectGameRoomPlayerHost = createSelector(
   selectGameRoomPlayers,
-  (state: GamePlayer[]): GamePlayer => state.find((player) => player.isAdmin) || ({} as GamePlayer),
+  (state: GamePlayer[]): GamePlayer => state.find((player) => player.isHost) || ({} as GamePlayer),
 );
 
 export const selectGameRoomPlayerRival = createSelector(
   selectGameRoomPlayers,
-  (state: GamePlayer[]): GamePlayer =>
-    state.find((player) => !player.isAdmin) || ({} as GamePlayer),
+  (state: GamePlayer[]): GamePlayer => state.find((player) => !player.isHost) || ({} as GamePlayer),
 );
 
 export const selectGameRoomPlayer = createSelector(

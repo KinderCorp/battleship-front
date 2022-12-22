@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { emitPlayerJoiningGame } from '@socket/emittingEvents';
 import type { GamePageContentProps } from '@game/models';
 import GamePageView from '@game/components/GamePageView';
-import { isPlayerAdmin } from '@game/helpers';
+import { isPlayerHost } from '@game/helpers';
 import Layout from '@shared/Layout/components/Layout';
 import { PATHS } from '@core/constants';
 import { selectPlayer } from '@player/selectors';
@@ -25,7 +25,7 @@ const GamePage = ({ gameId }: GamePageContentProps): JSX.Element | void => {
 
   // BUG: called multiple times
   useEffect(() => {
-    if (!isPlayerAdmin()) emitPlayerJoiningGame(gameId, player);
+    if (!isPlayerHost()) emitPlayerJoiningGame(gameId, player);
   });
 
   return <GamePageView />;

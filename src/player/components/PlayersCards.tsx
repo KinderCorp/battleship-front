@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectGameRoomPlayerAdmin, selectGameRoomPlayerRival } from '@game/selectors';
+import { selectGameRoomPlayerHost, selectGameRoomPlayerRival } from '@game/selectors';
 import ObjectHelpers from '@helpers/ObjectHelpers';
 import type { PlayersCardsProps } from '@player/models';
 import UserCard from '@shared/UserCard/components/UserCard';
@@ -14,7 +14,7 @@ import Versus from '@shared/Versus/components/Versus';
  * @return {JSX.Element}
  */
 const PlayersCards = ({ size = 'medium' }: PlayersCardsProps): JSX.Element => {
-  const adminPlayer = useSelector(selectGameRoomPlayerAdmin);
+  const hostPlayer = useSelector(selectGameRoomPlayerHost);
   const rivalPlayer = useSelector(selectGameRoomPlayerRival);
 
   const userCardSize = useMemo(() => (size === 'small' ? 'small' : 'large'), [size]);
@@ -25,7 +25,7 @@ const PlayersCards = ({ size = 'medium' }: PlayersCardsProps): JSX.Element => {
       <UserCard
         characterName="Sam"
         characterSrc="/images/characters/character-sam.png"
-        name={adminPlayer?.pseudo}
+        name={hostPlayer?.pseudo}
         priority
         size={userCardSize}
       />

@@ -28,9 +28,9 @@ export interface GameState {
 }
 
 export interface GamePlayer extends BasePlayer {
-  socketId: string;
-  isAdmin: boolean;
   boatsAreReady?: boolean;
+  isHost: boolean;
+  socketId: string;
 }
 
 export interface GameRoom extends GameInstance {

@@ -11,7 +11,7 @@ import ArrayHelpers from '@helpers/ArrayHelpers';
 import { parseAuthorizedFleet } from '@boat/helpers';
 import { parseWeapons } from '@weapon/helpers';
 import type { Position } from '@shared/Board/models';
-import { selectGameRoomPlayerAdmin } from '@game/selectors';
+import { selectGameRoomPlayerHost } from '@game/selectors';
 import socket from '@socket/index';
 import store from '@core/store';
 
@@ -26,14 +26,13 @@ export const checkGameIsFull = (gameRoom: GameRoom): boolean => {
 };
 
 /**
- * Check if the player is admin.
+ * Check if the player is host.
  *
  * @return {boolean}
  */
-export const isPlayerAdmin = (): boolean => {
-  const adminPlayer = selectGameRoomPlayerAdmin(store.getState());
-
-  return adminPlayer.socketId === socket.id;
+export const isPlayerHost = (): boolean => {
+  const hostPlayer = selectGameRoomPlayerHost(store.getState());
+  return hostPlayer.socketId === socket.id;
 };
 
 /**
@@ -67,7 +66,7 @@ export const parseGameRoomData = (gameRoomData: any): GameRoomData<any> => ({
  */
 export const parseGamePlayer = (gamePlayer: any): GamePlayer => ({
   boatsAreReady: gamePlayer?.boatsAreReady || false,
-  isAdmin: gamePlayer?.isAdmin || false,
+  isHost: gamePlayer?.isHost || false,
   pseudo: gamePlayer?.pseudo || '',
   socketId: gamePlayer?.socketId || '',
 });

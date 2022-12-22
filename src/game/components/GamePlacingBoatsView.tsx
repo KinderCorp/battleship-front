@@ -13,7 +13,7 @@ import type { BoardBoat } from '@shared/Board/models';
 import Button from '@shared/Button/components/Button';
 import { checkBoardBoatsPosition } from '@shared/Board/helpers';
 import { GAME_COUNTER_BEFORE_START } from '@game/constants';
-import { isPlayerAdmin } from '@game/helpers';
+import { isPlayerHost } from '@game/helpers';
 import { placeRandomBoatsInTheBoard } from '@boat/helpers';
 import TitleIndication from '@shared/Title/components/TitleIndication';
 import useTranslation from '@hooks/useTranslation';
@@ -54,7 +54,7 @@ const GamePlacingBoatsView = (): JSX.Element => {
       clearInterval(interval);
     }
 
-    if (counterTime === 0 && isPlayerAdmin()) emitStartGame(instanceId);
+    if (counterTime === 0 && isPlayerHost()) emitStartGame(instanceId);
 
     return () => {
       clearInterval(interval);
