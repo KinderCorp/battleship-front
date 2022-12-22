@@ -120,10 +120,10 @@ export const hasYAxisReversed = (direction?: BoatDirection): boolean => {
  * @return {Boat}
  */
 export const parseBoat = (boat: any): Boat => ({
-  lengthCell: NumberHelpers.parseInt(boat?.['length'] || boat?.lengthCell) || 1,
+  lengthCell: boat?.lengthCell || 1,
   name: boat?.name || '',
   src: boat?.src || '',
-  widthCell: NumberHelpers.parseInt(boat?.width || boat?.widthCell) || 1,
+  widthCell: boat?.widthCell || 1,
 });
 
 /**
