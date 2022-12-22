@@ -31,7 +31,6 @@ const GamePlacingBoatsView = (): JSX.Element => {
 
   const { authorisedFleet, boardDimensions, hasBoatsSafetyZone } =
     useSelector(selectGameRoomSettings);
-
   const instanceId = useSelector(selectGameRoomInstanceId);
   const otherPlayer = useSelector(selectGameRoomOtherPlayer);
   const player = useSelector(selectGameRoomPlayer);
