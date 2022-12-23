@@ -51,13 +51,13 @@ export const emitPlayersReadyToPlaceBoats = (): void => {
 };
 
 /**
- * Emitting event for close room.
+ * Emitting event when player leave room.
  *
  * @param {GameInstance['instanceId']} instanceId Instance id
  * @return {void}
  */
-export const emitCloseRoom = (instanceId: GameInstance['instanceId']): void => {
-  socket.emit(SOCKET_EVENTS_EMITTING.CLOSE_ROOM, { instanceId });
+export const emitLeaveRoom = (instanceId: GameInstance['instanceId']): void => {
+  socket.emit(SOCKET_EVENTS_EMITTING.LEAVE_ROOM, { instanceId });
 };
 
 /**

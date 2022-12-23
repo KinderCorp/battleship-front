@@ -1,7 +1,7 @@
 export const SOCKET_EVENTS_EMITTING = {
-  CLOSE_ROOM: 'close-room',
   CREATE_GAME: 'create-game',
   GAME_SETTINGS: 'game-settings',
+  LEAVE_ROOM: 'leave-room',
   PLAYER_JOINING_GAME: 'player-joining-game',
   PLAYERS_READY_TO_PLACE_BOATS: 'players-ready-to-place-boats',
   SHOOT: 'shoot',
