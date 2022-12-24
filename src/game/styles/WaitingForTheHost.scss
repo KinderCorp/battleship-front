@@ -1,0 +1,13 @@
+.waiting-for-the-host {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  &-text {
+    @include font-label-small;
+
+    margin-left: to-rem(20);
+    opacity: 0.7;
+  }
+}

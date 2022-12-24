@@ -4,6 +4,10 @@ import type { Boat } from '@src/boat/models';
 import type { GamePageParams } from '@pages/game/[gameId]';
 import type { Weapon } from '@weapon/models';
 
+export interface WaitingForTheHostProps {
+  className?: string;
+}
+
 export type GamePageContentProps = Required<GamePageParams>;
 
 export type GameView = 'boats_placement' | 'playing' | 'settings';

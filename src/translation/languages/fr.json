@@ -21,5 +21,5 @@
   "test.keyWithReplacedValue": "Pour moi, c’est un {value}. Un {value}, tout le monde sait ce que c’est…",
   "versus": "VS",
   "waiting": "En attente...",
-  "waiting-for-host": "En attente de l'hôte de la partie..."
+  "waiting-for-host": "En attente de l'hôte..."
 }

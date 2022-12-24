@@ -5,16 +5,15 @@ import { useSelector } from 'react-redux';
 import { checkGameIsFull, isPlayerHost } from '@game/helpers';
 import BlockContainer from '@shared/BlockContainer/components/BlockContainer';
 import Button from '@shared/Button/components/Button';
-import { COLORS } from '@core/constants';
 import { emitPlayersReadyToPlaceBoats } from '@socket/emittingEvents';
 import type { GameRoom } from '@game/models';
-import Icon from '@shared/Icon/components/Icon';
 import PlayersCards from '@player/components/PlayersCards';
 import { selectGameRoom } from '@game/selectors';
 import TextContainer from '@shared/TextContainer/components/TextContainer';
 import UrlHelpers from '@helpers/UrlHelpers';
 import useClientSideValue from '@hooks/useClientSideValue';
 import useTranslation from '@hooks/useTranslation';
+import WaitingForTheHost from '@game/components/WaitingForTheHost';
 
 /**
  * Game settings.
@@ -82,13 +81,7 @@ const GameSettingsView = (): JSX.Element => {
         </Button>
       )}
 
-      {/* // FIXME: make a component for this */}
-      {!isPlayerHost() && (
-        <>
-          <Icon name="Loader" borderColor={COLORS.WHITE} />
-          <p>{translate('waiting-for-host')}</p>
-        </>
-      )}
+      {!isPlayerHost() && <WaitingForTheHost />}
     </div>
   );
 };
