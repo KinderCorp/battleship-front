@@ -2,7 +2,7 @@ import type { GameRoomSettings, GameSettings } from '@game/models';
 
 export const GAME_NAME = 'GAME';
 
-export const GAME_COUNTER_BEFORE_START = 3;
+export const GAME_COUNTER_BEFORE_START = 3; // in seconds
 
 export const GAME_SETTINGS: GameSettings = {
   boardDimensions: 10,
@@ -11,6 +11,7 @@ export const GAME_SETTINGS: GameSettings = {
   weapons: [],
 };
 
+// FIXME: when the API call is complete to retrieve the weapons remove the 'weapons' property
 export const GAME_ROOM_SETTINGS: GameRoomSettings = {
   ...GAME_SETTINGS,
   authorisedFleet: [],

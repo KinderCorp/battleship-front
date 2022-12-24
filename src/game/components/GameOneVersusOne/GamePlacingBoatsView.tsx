@@ -55,6 +55,7 @@ const GamePlacingBoatsView = (): JSX.Element => {
 
     if (counterTime === 0 && isPlayerHost()) emitStartGame(instanceId);
 
+    // FIXME: necessary to do this?
     return () => {
       clearInterval(interval);
     };
