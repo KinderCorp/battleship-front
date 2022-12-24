@@ -1,5 +1,6 @@
-import type { AuthorizedBoat, BoardBoatApi, Boat, PositionArray } from '@boat/models';
-import type { BoardBoat, Position } from '@shared/Board/models';
+import type { AuthorizedBoat, Boat } from '@boat/models';
+import type { BoardBoat, Position, PositionInArray } from '@shared/Board/models';
+import type { ApiBoardBoat } from '@api/models';
 import ArrayHelpers from '@helpers/ArrayHelpers';
 import type { BoatDirection } from '@boat/models';
 import { checkBoardBoatsPosition } from '@shared/Board/helpers';
@@ -172,10 +173,10 @@ export const parseAuthorizedFleet = (authorisedFleet: any): Boat[] => {
  * Get boat bow cells.
  *
  * @param {BoardBoat} boardBoat Board boat.
- * @return {PositionArray[]}
+ * @return {PositionInArray[]}
  */
-export const getBoatBowCells = (boardBoat: BoardBoat): PositionArray[] => {
-  const bowCells = [] as PositionArray[];
+export const getBoatBowCells = (boardBoat: BoardBoat): PositionInArray[] => {
+  const bowCells = [] as PositionInArray[];
 
   for (let index = 0; index < boardBoat.widthCell; index++) {
     if (isBoatHorizontal(boardBoat.direction)) {
@@ -200,9 +201,9 @@ export const getBoatBowCells = (boardBoat: BoardBoat): PositionArray[] => {
  * Parse game board boat for API.
  *
  * @param {BoardBoat} boardBoat Board boat.
- * @return {BoardBoatApi}
+ * @return {ApiBoardBoat}
  */
-export const parseGameBoardBoatForApi = (boardBoat: BoardBoat): BoardBoatApi => ({
+export const parseGameBoardBoatForApi = (boardBoat: BoardBoat): ApiBoardBoat => ({
   bowCells: getBoatBowCells(boardBoat),
   // FIXME: default direction in constants file
   direction: boardBoat.direction || 'north',
@@ -213,9 +214,9 @@ export const parseGameBoardBoatForApi = (boardBoat: BoardBoat): BoardBoatApi => 
  * Parse game board boats for API.
  *
  * @param {BoardBoat[]} boardBoats Board boats.
- * @return {BoardBoatApi[]}
+ * @return {ApiBoardBoat[]}
  */
-export const parseGameBoardBoatsForApi = (boardBoats: BoardBoat[]): BoardBoatApi[] =>
+export const parseGameBoardBoatsForApi = (boardBoats: BoardBoat[]): ApiBoardBoat[] =>
   ArrayHelpers.isArray(boardBoats)
     ? boardBoats.map((boardBoat: any) => parseGameBoardBoatForApi(boardBoat))
     : [];
