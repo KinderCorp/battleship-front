@@ -1,0 +1,12 @@
+.page-container {
+  padding-top: $header-height-medium;
+
+  .page-container-header {
+    position: fixed;
+    top: 0;
+  }
+
+  .page-container-content {
+    padding: 6vh 25%;
+  }
+}
