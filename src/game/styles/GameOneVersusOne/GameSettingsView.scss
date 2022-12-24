@@ -1,4 +1,10 @@
 .game-settings {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+
   .block-container {
     margin-bottom: to-rem(30);
     max-width: to-rem(900);
