@@ -8,6 +8,7 @@ import BoardRow from '@shared/Board/components/BoardRow';
 import Boat from '@boat/components/Boat';
 import { checkBoardBoatsPosition } from '../helpers';
 import { getNextBoatDirection } from '@boat/helpers';
+import ObjectHelpers from '@helpers/ObjectHelpers';
 
 /**
  * Board component.
@@ -40,9 +41,8 @@ export const Board = ({
   const onBoatRotation = useCallback(
     (index: number): boolean => {
       if (isPlacementActive) {
-        // FIXME: best way to update object, see deepClone ObjectHelpers
-        const newBoats = [...(boats as BoardBoat[])];
-        const boat = { ...newBoats[index] };
+        const newBoats = ObjectHelpers.deepClone(boats);
+        const boat = newBoats[index];
 
         if (boat) {
           boat.direction = getNextBoatDirection(boat.direction);

@@ -1,3 +1,5 @@
+import ArrayHelpers from '@helpers/ArrayHelpers';
+
 class ObjectHelpers {
   /**
    * Check if the given argument is an object or not.
@@ -20,13 +22,24 @@ class ObjectHelpers {
   }
 
   /**
-   * Make a deep clone of the object.
+   * Make a deep copy of nested objects or arrays.
    *
    * @param {any} value Value to copy
    * @return {any}
    */
   static deepClone(value: any): any {
-    return this.isEmpty(value) ? value : JSON.parse(JSON.stringify(value));
+    // Return the value if it is not an object
+    if (typeof value !== 'object' || value === null) return value;
+
+    // Create an array or object to hold the values
+    const output = ArrayHelpers.isArray(value) ? ([] as any[]) : ({} as Record<string, any>);
+
+    // Recursively (deep) copy for nested objects, including arrays
+    for (const key in value) {
+      output[key] = this.deepClone(value[key]);
+    }
+
+    return output;
   }
 }
 
