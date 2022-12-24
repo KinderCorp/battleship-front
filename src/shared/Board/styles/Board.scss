@@ -1,5 +1,5 @@
 .board {
-  @include fixed-size(to-rem(600));
+  @include fixed-size(to-rem(500));
 
   background-color: $color-purple-dark;
   border-radius: $border-radius;
