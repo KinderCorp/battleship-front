@@ -24,10 +24,12 @@ export const TitleIndication = ({
   return (
     <Title
       className={titleIndicationClassName}
-      iconBorderColor={COLORS.PURPLE_DARK}
-      iconColor={COLORS.WHITE}
-      iconName={iconName}
-      iconSize="large"
+      icon={{
+        borderColor: COLORS.PURPLE_DARK,
+        color: COLORS.WHITE,
+        name: iconName,
+        size: 'large',
+      }}
       title={title}
     />
   );

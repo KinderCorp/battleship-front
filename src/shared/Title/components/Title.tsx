@@ -13,10 +13,7 @@ import type { TitleProps } from '@shared/Title/models';
  */
 export const Title = ({
   className = '',
-  iconBorderColor = COLORS.TRANSPARENT,
-  iconColor = COLORS.PURPLE_LIGHT,
-  iconName,
-  iconSize,
+  icon,
   subTitle = '',
   title,
   type = 'h2',
@@ -26,9 +23,9 @@ export const Title = ({
   const titleContainerClassName = useMemo(
     (): string =>
       classNames('title-container', className, {
-        'has-icon': !!iconName,
+        'has-icon': !!icon,
       }),
-    [className, iconName],
+    [className, icon],
   );
 
   const titleClassName = useMemo((): string => classNames('title', type), [type]);
@@ -38,9 +35,15 @@ export const Title = ({
   return (
     <div className={titleContainerClassName} data-testid="title">
       <div className="title-content">
-        {iconName && (
-          <Icon borderColor={iconBorderColor} color={iconColor} name={iconName} size={iconSize} />
+        {!!icon && (
+          <Icon
+            borderColor={icon.borderColor || COLORS.TRANSPARENT}
+            color={icon.color || COLORS.PURPLE_LIGHT}
+            name={icon.name}
+            size={icon.size}
+          />
         )}
+
         <TitleComponent className={titleClassName}>{title}</TitleComponent>
       </div>
 
