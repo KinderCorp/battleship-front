@@ -1,11 +1,9 @@
 import * as apiHelpers from '@api/helpers';
-import * as homeConstants from '@home/constants';
 import homeReducer, * as homeReducerAction from '@home/reducer';
 import apiGetHelloWorldResponseMock from '@mocks/api/apiGetHelloWorldResponse.mock';
+import { HOME_NAME } from '@home/constants';
 import type { HomeState } from '@home/models';
 import homeStateMock from '@mocks/state/homeState.mock';
-
-const { NAME } = homeConstants;
 
 describe('home/reducer', () => {
   it('should return the initial state', () => {
@@ -22,7 +20,7 @@ describe('home/reducer', () => {
   });
 
   it('should decrement the value', () => {
-    const previousState: HomeState = { ...homeStateMock[NAME], value: 4 };
+    const previousState: HomeState = { ...homeStateMock[HOME_NAME], value: 4 };
     const state = homeReducer(previousState, homeReducerAction.decrement);
     expect(state.value).toBe(3);
   });
