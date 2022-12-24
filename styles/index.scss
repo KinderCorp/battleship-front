@@ -7,10 +7,10 @@
 
 // Home
 @import '~@home/styles/HomePageContent';
-@import '~@game/styles/GameSettingsView';
 
 // Game
-@import '~@game/styles/GamePlacingBoatsView';
+@import '~@game/styles/GameOneVersusOne/GamePlacingBoatsView';
+@import '~@game/styles/GameOneVersusOne/GameSettingsView';
 
 // Boat
 @import '~@boat/styles/Boat';
@@ -21,7 +21,6 @@
 @import '~@shared/Board/styles/BoardCell';
 @import '~@shared/Board/styles/BoardRow';
 @import '~@shared/Button/styles/Button';
-@import '~@shared/ContentPage/styles/ContentPage';
 @import '~@shared/Field/styles/FieldStructure/FieldContainer';
 @import '~@shared/Field/styles/FieldStructure/FieldError';
 @import '~@shared/Field/styles/FieldStructure/FieldLabel';
@@ -34,6 +33,7 @@
 @import '~@shared/Level/styles/Level';
 @import '~@shared/Modal/styles/BehindOverlay';
 @import '~@shared/Modal/styles/Modal';
+@import '~@shared/PageContainer/styles/PageContainer';
 @import '~@shared/TextContainer/styles/TextContainer';
 @import '~@shared/Title/styles/Title';
 @import '~@shared/Title/styles/TitleIndication';
