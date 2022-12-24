@@ -16,7 +16,7 @@ describe('shared/components/Versus', () => {
     render(<Versus />);
 
     const versus = screen.getByTestId('versus');
-    
+
     expect(versus).toBeInTheDocument();
     expect(versus).toHaveClass('medium');
     expect(versus).toHaveTextContent(translate('versus'));
