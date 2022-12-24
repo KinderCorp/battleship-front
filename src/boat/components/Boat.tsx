@@ -34,6 +34,7 @@ export const Boat = ({
       if (!onRotation(index)) {
         setIsError(true);
 
+        // FIXME: clearInterval?
         setTimeout(() => {
           setIsError(false);
         }, 300);
