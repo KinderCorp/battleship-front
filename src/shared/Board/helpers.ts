@@ -13,6 +13,7 @@ import { hasXAxisReversed, hasYAxisReversed, isBoatHorizontal } from '@boat/help
 export const checkBoardBoatsPosition = (
   boats: BoardBoat[],
   dimensions: number,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   hasBoatsSafetyZone: boolean,
 ): boolean => {
   const takenCells = [] as Position[];
@@ -45,9 +46,7 @@ export const checkBoardBoatsPosition = (
       }
     }
 
-    // TODO: here check safety zone
-    // eslint-disable-next-line no-console
-    console.log(hasBoatsSafetyZone);
+    // TODO: here check safety zone, easy to do with the new placement of the boats, see TASK above
   }
 
   return true;
