@@ -5,6 +5,10 @@
   justify-content: center;
   width: 100%;
 
+  & > .button {
+    margin: 0 auto;
+  }
+
   .block-container {
     margin-bottom: to-rem(30);
     max-width: to-rem(900);
@@ -32,9 +36,5 @@
         justify-content: center;
       }
     }
-  }
-
-  & > .button {
-    margin: 0 auto;
   }
 }
