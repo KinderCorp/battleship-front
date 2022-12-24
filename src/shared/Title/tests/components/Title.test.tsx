@@ -29,7 +29,7 @@ describe('shared/components/Title', () => {
   });
 
   it('should renders the component with an icon', async () => {
-    const newProps: TitleProps = { ...props, iconName: 'Boat' };
+    const newProps: TitleProps = { ...props, icon: { name: 'Boat' } };
 
     await act(async () => {
       render(<Title {...newProps} />);
