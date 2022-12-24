@@ -29,7 +29,7 @@ const Header = ({
 
       {!!title && <Title className="header-title" title={title} type="h2" />}
 
-      {!!content && <div className="header-content">{content}</div>}
+      {!!content && !title && <div className="header-content">{content}</div>}
 
       {rightSideNode && <div className="header-right-side">{rightSideNode}</div>}
     </header>
