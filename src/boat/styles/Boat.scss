@@ -13,21 +13,23 @@
 
 .boat {
   position: absolute;
+  transition-duration: 0.2s;
+  transition-property: transform, rotate, top, left;
 
   img {
     transition: 0.2s;
   }
 
   &.boat--direction-east {
-    rotate: 90deg;
+    transform: rotate(90deg);
   }
 
   &.boat--direction-west {
-    rotate: -90deg;
+    transform: rotate(270deg);
   }
 
   &.boat--direction-south {
-    rotate: 180deg;
+    transform: rotate(180deg);
   }
 
   &.boat--is-placement-active {
