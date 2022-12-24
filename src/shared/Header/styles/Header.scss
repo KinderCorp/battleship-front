@@ -11,6 +11,7 @@ $header-height-medium: to-rem(120);
   grid-template-columns: 1fr minmax(auto, 40%) 1fr;
   overflow: hidden;
   width: 100%;
+  z-index: 400; // FIXME: z-index variables
 
   @include bp-phablet {
     column-gap: to-rem(20);
