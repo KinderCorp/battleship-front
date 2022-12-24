@@ -1,6 +1,6 @@
+import type { ApiBoardBoat, ApiPosition } from '@api/models';
 import type { AuthorizedBoat, Boat } from '@boat/models';
-import type { BoardBoat, Position, PositionInArray } from '@shared/Board/models';
-import type { ApiBoardBoat } from '@api/models';
+import type { BoardBoat, Position } from '@shared/Board/models';
 import ArrayHelpers from '@helpers/ArrayHelpers';
 import type { BoatDirection } from '@boat/models';
 import { checkBoardBoatsPosition } from '@shared/Board/helpers';
@@ -173,10 +173,10 @@ export const parseAuthorizedFleet = (authorisedFleet: any): Boat[] => {
  * Get boat bow cells.
  *
  * @param {BoardBoat} boardBoat Board boat.
- * @return {PositionInArray[]}
+ * @return {ApiPosition[]}
  */
-export const getBoatBowCells = (boardBoat: BoardBoat): PositionInArray[] => {
-  const bowCells = [] as PositionInArray[];
+export const getBoatBowCells = (boardBoat: BoardBoat): ApiPosition[] => {
+  const bowCells = [] as ApiPosition[];
 
   for (let index = 0; index < boardBoat.widthCell; index++) {
     if (isBoatHorizontal(boardBoat.direction)) {

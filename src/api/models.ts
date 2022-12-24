@@ -1,6 +1,5 @@
 import type { Boat, BoatProps } from '@boat/models';
 import type { GetHelloWorldResponse } from '@home/models';
-import type { PositionInArray } from '@shared/Board/models';
 
 export interface HttpResponse {
   data: any;
@@ -26,5 +25,7 @@ export type ApiResponseParsed<T = any> = {
 export type ApiGetHelloWorldResponse = GetHelloWorldResponse;
 
 export interface ApiBoardBoat extends Pick<Boat, 'name'>, Pick<BoatProps, 'direction'> {
-  bowCells: PositionInArray[];
+  bowCells: ApiPosition[];
 }
+
+export type ApiPosition = [x: number, y: number];

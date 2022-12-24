@@ -10,8 +10,6 @@ export interface Position {
   y: number;
 }
 
-export type PositionInArray = [x: number, y: number];
-
 export type BoardCellState = 'hit' | 'miss';
 
 export interface BoardCellAffected extends Position {
