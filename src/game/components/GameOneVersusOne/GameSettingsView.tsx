@@ -16,7 +16,7 @@ import useTranslation from '@hooks/useTranslation';
 import WaitingForTheHost from '@game/components/WaitingForTheHost';
 
 /**
- * Game settings.
+ * Game settings view.
  *
  * @return {JSX.Element}
  */

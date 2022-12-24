@@ -19,7 +19,7 @@ import TitleIndication from '@shared/Title/components/TitleIndication';
 import useTranslation from '@hooks/useTranslation';
 
 /**
- * Game settings.
+ * Game placing boats view.
  *
  * @return {JSX.Element}
  */

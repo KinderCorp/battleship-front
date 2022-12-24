@@ -12,7 +12,7 @@ import UrlHelpers from '@helpers/UrlHelpers';
 import useTranslation from '@hooks/useTranslation';
 
 /**
- * Game page content.
+ * Game page view.
  *
  * @return {JSX.Element}
  */
