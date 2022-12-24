@@ -1,9 +1,4 @@
 .game-placing-boats {
-  .title-indication {
-    // FIXME: temporary marge, add un specific class/component for content page
-    margin: to-rem(50) 0 to-rem(40);
-  }
-
   .boats-placement {
     align-items: flex-start;
     display: flex;

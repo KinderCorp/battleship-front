@@ -2,11 +2,10 @@ import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
 import { selectGameRoomInstanceId, selectGameView } from '@game/selectors';
-import Button from '@shared/Button/components/Button';
 import { emitLeaveRoom } from '@socket/emittingEvents';
-import GamePlacingBoatsView from '@game/components/GamePlacingBoatsView';
-import GameSettingsView from '@game/components/GameSettingsView';
-import Header from '@shared/Header/components/Header';
+import GamePlacingBoatsView from '@game/components/GameOneVersusOne/GamePlacingBoatsView';
+import GameSettingsView from '@game/components/GameOneVersusOne/GameSettingsView';
+import PageContainer from '@shared/PageContainer/components/PageContainer';
 import { PATHS } from '@core/constants';
 import PlayersCards from '@player/components/PlayersCards';
 import UrlHelpers from '@helpers/UrlHelpers';
@@ -29,21 +28,16 @@ const GamePageView = (): JSX.Element => {
   }, [instanceId]);
 
   return (
-    <>
-      <Header
-        content={view !== 'settings' && <PlayersCards size="small" />}
-        height="medium"
-        leftSideNode={
-          <Button iconName="ArrowLeft" onClick={handleLeaveGame} size="large" style="secondary">
-            {translate('leave')}
-          </Button>
-        }
-        title={view === 'settings' ? translate('create-game') : ''}
-      />
-
+    <PageContainer
+      header={{
+        content: view !== 'settings' && <PlayersCards size="small" />,
+        onLeave: handleLeaveGame,
+        title: view === 'settings' ? translate('create-game') : '',
+      }}
+    >
       {view === 'settings' && <GameSettingsView />}
       {view === 'boats_placement' && <GamePlacingBoatsView />}
-    </>
+    </PageContainer>
   );
 };
 

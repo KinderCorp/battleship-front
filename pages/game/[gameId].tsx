@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 import { emitPlayerJoiningGame } from '@socket/emittingEvents';
 import type { GamePageContentProps } from '@game/models';
-import GamePageView from '@game/components/GamePageView';
+import GamePageView from '@game/components/GameOneVersusOne/GamePageView';
 import { isPlayerHost } from '@game/helpers';
 import Layout from '@shared/Layout/components/Layout';
 import { PATHS } from '@core/constants';

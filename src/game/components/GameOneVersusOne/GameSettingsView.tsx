@@ -55,41 +55,40 @@ const GameSettingsView = (): JSX.Element => {
 
   return (
     <div className="game-settings">
-      <div className="content">
-        {isPlayerHost() && (
-          <BlockContainer
-            className="share-link"
-            iconName="Share"
-            title={translate('share-to-friend')}
-          >
-            <TextContainer value={shareLink} />
-            <Button
-              iconName={clickedButtonCopy ? 'Check' : 'Copy'}
-              onClick={handleCopyShareLink}
-              isDisabled={clickedButtonCopy}
-              style="secondary"
-              size="large"
-            />
-          </BlockContainer>
-        )}
-
-        <BlockContainer className="players">
-          <PlayersCards />
+      {isPlayerHost() && (
+        <BlockContainer
+          className="share-link"
+          iconName="Share"
+          title={translate('share-to-friend')}
+        >
+          <TextContainer value={shareLink} />
+          <Button
+            iconName={clickedButtonCopy ? 'Check' : 'Copy'}
+            onClick={handleCopyShareLink}
+            isDisabled={clickedButtonCopy}
+            style="secondary"
+            size="large"
+          />
         </BlockContainer>
+      )}
 
-        {isPlayerHost() && (
-          <Button onClick={handleStartGame} size="large" isDisabled={!allPlayersJoined}>
-            {translate('start')}
-          </Button>
-        )}
+      <BlockContainer className="players">
+        <PlayersCards />
+      </BlockContainer>
 
-        {!isPlayerHost() && (
-          <>
-            <Icon name="Loader" borderColor={COLORS.WHITE} />
-            <p>{translate('waiting-for-host')}</p>
-          </>
-        )}
-      </div>
+      {isPlayerHost() && (
+        <Button onClick={handleStartGame} size="large" isDisabled={!allPlayersJoined}>
+          {translate('start')}
+        </Button>
+      )}
+
+      {/* // FIXME: make a component for this */}
+      {!isPlayerHost() && (
+        <>
+          <Icon name="Loader" borderColor={COLORS.WHITE} />
+          <p>{translate('waiting-for-host')}</p>
+        </>
+      )}
     </div>
   );
 };

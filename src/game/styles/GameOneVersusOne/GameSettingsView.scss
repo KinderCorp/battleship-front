@@ -1,16 +1,9 @@
 .game-settings {
-  .content {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    padding: to-rem(100) 25%;
+  .block-container {
+    margin-bottom: to-rem(30);
+    max-width: to-rem(900);
 
-    .block-container {
-      margin-bottom: to-rem(30);
-      max-width: to-rem(900);
-    }
-
-    .share-link {
+    &.share-link {
       .block-container-content {
         display: flex;
         flex-direction: row;
@@ -25,7 +18,7 @@
       }
     }
 
-    .players {
+    &.players {
       .block-container-content {
         align-items: center;
         display: flex;
@@ -33,5 +26,9 @@
         justify-content: center;
       }
     }
+  }
+
+  & > .button {
+    margin: 0 auto;
   }
 }
