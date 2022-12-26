@@ -74,6 +74,7 @@ export const Boat = ({
         className="boat-image"
         objectFit="fill"
         priority={priority}
+        // FIXME: add sizes
         sizes={{}}
         src={src}
       />
