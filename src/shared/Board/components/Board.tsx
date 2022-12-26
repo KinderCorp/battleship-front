@@ -6,7 +6,7 @@ import type { BoardBoat, BoardCellAffected, BoardProps } from '@shared/Board/mod
 import BoardCell from '@shared/Board/components/BoardCell';
 import BoardRow from '@shared/Board/components/BoardRow';
 import Boat from '@boat/components/Boat';
-import { checkBoardBoatsPosition } from '../helpers';
+import { checkBoardBoatsPosition } from '@shared/Board/helpers';
 import { getNextBoatDirection } from '@boat/helpers';
 import ObjectHelpers from '@helpers/ObjectHelpers';
 
