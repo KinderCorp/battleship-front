@@ -17,3 +17,9 @@ export const GAME_ROOM_SETTINGS: GameRoomSettings = {
   authorisedFleet: [],
   weapons: [],
 };
+
+export enum GameView {
+  BOATS_PLACEMENT = 'boats_placement',
+  PLAYING = 'playing',
+  SETTINGS = 'settings',
+}

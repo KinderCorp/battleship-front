@@ -1,14 +1,8 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-import type {
-  GamePlayer,
-  GameRoom,
-  GameRoomSettings,
-  GameSettings,
-  GameState,
-  GameView,
-} from '@game/models';
+import type { GamePlayer, GameRoom, GameRoomSettings, GameSettings, GameState } from '@game/models';
 import { GAME_NAME } from '@game/constants';
+import type { GameView } from '@game/constants';
 import { parseGameState } from '@game/helpers';
 import type { RootState } from '@core/models';
 import socket from '@socket/index';

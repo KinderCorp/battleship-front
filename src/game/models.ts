@@ -2,6 +2,7 @@ import type { BasePlayer } from '@player/models';
 import type { BoardProps } from '@shared/Board/models';
 import type { Boat } from '@src/boat/models';
 import type { GamePageParams } from '@pages/game/[gameId]';
+import type { GameView } from '@game/constants';
 import type { Weapon } from '@weapon/models';
 
 export interface WaitingForTheHostProps {
@@ -9,8 +10,6 @@ export interface WaitingForTheHostProps {
 }
 
 export type GamePageContentProps = Required<GamePageParams>;
-
-export type GameView = 'boats_placement' | 'playing' | 'settings';
 
 export interface GameSettings {
   boardDimensions: BoardProps['dimensions'];

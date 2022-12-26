@@ -5,6 +5,7 @@ import { selectGameRoomInstanceId, selectGameView } from '@game/selectors';
 import { emitLeaveRoom } from '@socket/emittingEvents';
 import GamePlacingBoatsView from '@game/components/GameOneVersusOne/GamePlacingBoatsView';
 import GameSettingsView from '@game/components/GameOneVersusOne/GameSettingsView';
+import { GameView } from '@game/constants';
 import PageContainer from '@shared/PageContainer/components/PageContainer';
 import { PATHS } from '@core/constants';
 import PlayersCards from '@player/components/PlayersCards';
@@ -30,13 +31,13 @@ const GamePageView = (): JSX.Element => {
   return (
     <PageContainer
       header={{
-        content: view !== 'settings' && <PlayersCards size="small" />,
+        content: view !== GameView.SETTINGS && <PlayersCards size="small" />,
         onLeave: handleLeaveGame,
-        title: view === 'settings' ? translate('create-game') : '',
+        title: view === GameView.SETTINGS ? translate('create-game') : '',
       }}
     >
-      {view === 'settings' && <GameSettingsView />}
-      {view === 'boats_placement' && <GamePlacingBoatsView />}
+      {view === GameView.SETTINGS && <GameSettingsView />}
+      {view === GameView.BOATS_PLACEMENT && <GamePlacingBoatsView />}
     </PageContainer>
   );
 };
