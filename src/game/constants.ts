@@ -8,7 +8,7 @@ export const GAME_SETTINGS: GameSettings = {
   boardDimensions: 10,
   hasBoatsSafetyZone: false,
   timePerTurn: 60,
-  weapons: [],
+  weaponNames: [],
 };
 
 // FIXME: when the API call is complete to retrieve the weapons remove the 'weapons' property
