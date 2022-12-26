@@ -1,5 +1,6 @@
 import type { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import { emitPlayerJoiningGame } from '@socket/emittingEvents';
 import type { GamePageContentProps } from '@game/models';
@@ -8,7 +9,6 @@ import { isPlayerHost } from '@game/helpers';
 import Layout from '@shared/Layout/components/Layout';
 import { PATHS } from '@core/constants';
 import { selectPlayer } from '@player/selectors';
-import { useSelector } from 'react-redux';
 
 export type GamePageParams = {
   gameId?: string;
