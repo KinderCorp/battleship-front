@@ -1,9 +1,9 @@
 import type { ApiBoardBoat, ApiPosition } from '@api/models';
 import type { AuthorizedBoat, Boat } from '@boat/models';
 import type { BoardBoat, Position } from '@shared/Board/models';
-import { BOAT_DEFAULT_DIRECTION, BoatDirection } from '@boat/constants';
 import { checkBoardBoatsPosition, parseBoardBoat } from '@shared/Board/helpers';
 import ArrayHelpers from '@helpers/ArrayHelpers';
+import { BoatDirection } from '@boat/constants';
 import NumberHelpers from '@helpers/NumberHelpers';
 
 /**
@@ -80,7 +80,7 @@ export const getNextBoatDirection = (direction?: BoatDirection): BoatDirection =
     case BoatDirection.SOUTH:
       return BoatDirection.WEST;
     default:
-      return BOAT_DEFAULT_DIRECTION;
+      return BoatDirection.NORTH;
   }
 };
 
@@ -121,7 +121,6 @@ export const hasYAxisReversed = (direction: BoatDirection): boolean => {
  * @return {Boat}
  */
 export const parseBoat = (boat: any): Boat => ({
-  defaultDirection: boat?.defaultDirection || BOAT_DEFAULT_DIRECTION,
   lengthCell: boat?.lengthCell || 1,
   name: boat?.name || '',
   src: boat?.src || '',
@@ -157,7 +156,7 @@ export const parseAuthorizedBoat = (authorizedBoat: any): AuthorizedBoat => ({
 export const parseAuthorizedFleet = (authorisedFleet: any): Boat[] => {
   // FIXME: change this bad parsed
   const newAuthorisedFleet = ArrayHelpers.isArray(authorisedFleet) ? authorisedFleet : [];
-  const boats = [] as Boat[];
+  const boats: Boat[] = [];
 
   for (const authorisedFleetItem of newAuthorisedFleet) {
     const authorizedBoat = parseAuthorizedBoat(authorisedFleetItem);
@@ -177,7 +176,7 @@ export const parseAuthorizedFleet = (authorisedFleet: any): Boat[] => {
  * @return {ApiPosition[]}
  */
 export const getBoatBowCells = (boardBoat: BoardBoat): ApiPosition[] => {
-  const bowCells = [] as ApiPosition[];
+  const bowCells: ApiPosition[] = [];
 
   for (let index = 0; index < boardBoat.widthCell; index++) {
     if (isBoatHorizontal(boardBoat.direction)) {

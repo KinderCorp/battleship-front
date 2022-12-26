@@ -15,7 +15,6 @@ export interface BoatProps extends Pick<ImageProps, 'priority'>, Pick<Boat, 'nam
 }
 
 export interface Boat {
-  defaultDirection: BoatDirection;
   lengthCell: number;
   name: string;
   src: ImageProps['src'];
