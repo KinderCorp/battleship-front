@@ -23,12 +23,12 @@ export const UserCard = ({
   className = '',
   direction = 'right',
   hideLevel = false,
+  hideName = false,
   isLoading = false,
   name = '',
-  onClick,
+  onEdit,
   priority,
   rank,
-  hideName = false,
   size = 'large',
 }: UserCardProps): JSX.Element => {
   const { translate } = useTranslation();
@@ -86,8 +86,8 @@ export const UserCard = ({
       {!hideName && (
         <div className="user-card-info">
           <p className="user-card-name">{newName}</p>
-          {!!onClick && !isLoading && (
-            <Button iconName="Pen" onClick={onClick} size="small" style="none" />
+          {!!onEdit && !isLoading && (
+            <Button iconName="Pen" onClick={onEdit} size="small" style="none" />
           )}
         </div>
       )}

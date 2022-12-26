@@ -19,6 +19,5 @@ export interface UserCardProps
   isLoading?: boolean;
   name?: string;
   size?: UserCardSize;
-  // FIXME: rename to onEdit
-  onClick?: (event: SyntheticEvent<EventTarget>) => void;
+  onEdit?: (event: SyntheticEvent<EventTarget>) => void;
 }
