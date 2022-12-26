@@ -3,7 +3,7 @@ class ArrayHelpers {
    * Get a random item in the array.
    *
    * @param {any[]} array Array
-   * @return {boolean}
+   * @return {any}
    */
   static getRandomItem(array: any[]): any {
     return array[Math.floor(Math.random() * array.length)];
@@ -15,7 +15,7 @@ class ArrayHelpers {
    * @param {any} value Value to check
    * @return {boolean}
    */
-  static isArray(value: any): any {
+  static isArray(value: any): boolean {
     return Array.isArray(value);
   }
 
@@ -25,7 +25,7 @@ class ArrayHelpers {
    * @param {any} value Value to check
    * @return {boolean}
    */
-  static isEmpty(value: any): any {
+  static isEmpty(value: any): boolean {
     return this.isArray(value) ? value.length === 0 : true;
   }
 }
