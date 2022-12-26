@@ -2,12 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 import { GAME_NAME, GAME_SETTINGS } from '@game/constants';
-import type { GamePlayer, GameRoom, GameRoomSettings, GameState, GameView } from '@game/models';
+import type { GamePlayer, GameRoom, GameRoomSettings, GameState } from '@game/models';
+import { GameView } from '@game/constants';
 
 const initialState: GameState = {
   gameRoom: {} as GameRoom,
   settings: GAME_SETTINGS,
-  view: 'settings',
+  view: GameView.SETTINGS,
 };
 
 export const gameSlice = createSlice({

@@ -5,6 +5,7 @@ import { setGameRoom, setView } from '@game/reducer';
 import Button from '@shared/Button/components/Button';
 import { emitCreateGame } from '@socket/emittingEvents';
 import type { GameRoom } from '@game/models';
+import { GameView } from '@game/constants';
 import Image from '@shared/Image/components/Image';
 import { selectPlayer } from '@player/selectors';
 import useTranslation from '@hooks/useTranslation';
@@ -24,7 +25,7 @@ const HomePageContent = (): JSX.Element => {
   // BUG: called two times
   useEffect(() => {
     dispatch(setGameRoom({} as GameRoom));
-    dispatch(setView('settings'));
+    dispatch(setView(GameView.SETTINGS));
   });
 
   const handleCreateGame = useCallback((): void => {

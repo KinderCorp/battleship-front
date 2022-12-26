@@ -1,4 +1,4 @@
-import { GAME_ROOM_SETTINGS, GAME_SETTINGS } from '@game/constants';
+import { GAME_ROOM_SETTINGS, GAME_SETTINGS, GameView } from '@game/constants';
 import type { GamePlayer, GameRoom, GameRoomSettings, GameSettings, GameState } from '@game/models';
 import type { ApiGameRoomData } from '@api/models';
 import ArrayHelpers from '@helpers/ArrayHelpers';
@@ -38,7 +38,7 @@ export const isPlayerHost = (): boolean => {
 export const parseGameState = (gameState: any): GameState => ({
   gameRoom: parseGameRoom(gameState.gameRoom),
   settings: parseGameSettings(gameState.settings),
-  view: gameState.view || 'settings',
+  view: gameState.view || GameView.SETTINGS,
 });
 
 /**
