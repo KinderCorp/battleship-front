@@ -17,7 +17,7 @@ describe('shared/components/UserCard', () => {
       characterName: 'Sam',
       characterSrc: '/images/image-test-character.png',
       name: 'Player_487',
-      onClick: jest.fn(),
+      onEdit: jest.fn(),
     };
 
     await act(async () => {
@@ -52,7 +52,7 @@ describe('shared/components/UserCard', () => {
     expect(button).toContainElement(iconPen);
 
     fireEvent.click(button);
-    expect(localProps.onClick).toBeCalledTimes(1);
+    expect(localProps.onEdit).toBeCalledTimes(1);
   });
 
   it('should render the component for logged player', () => {
@@ -120,7 +120,7 @@ describe('shared/components/UserCard', () => {
   it('should render the component when is loading', async () => {
     const localProps: UserCardProps = {
       isLoading: true,
-      onClick: jest.fn(),
+      onEdit: jest.fn(),
     };
 
     await act(async () => {
