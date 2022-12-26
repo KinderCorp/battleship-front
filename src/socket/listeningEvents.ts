@@ -2,6 +2,7 @@ import { parseGamePlayer, parseGameRoom, parseGameRoomData } from '@game/helpers
 import { selectGameRoomPlayerHost, selectGameRoomPlayers } from '@game/selectors';
 import { setGameRoom, setGameRoomPlayers, setView } from '@game/reducer';
 import type { GamePlayer } from '@game/models';
+import { GameView } from '@game/constants';
 import { PATHS } from '@core/constants';
 import store from '@core/store';
 import UrlHelpers from '@helpers/UrlHelpers';
@@ -45,7 +46,7 @@ export const listeningPlayerJoined = (gameRoomData: any): void => {
  * @return {void}
  */
 export const listeningStartPlacingBoats = (): void => {
-  store.dispatch(setView('boats_placement'));
+  store.dispatch(setView(GameView.BOATS_PLACEMENT));
 };
 
 /**
@@ -114,7 +115,7 @@ export const listeningOnePlayerHasPlacedHisBoats = (gameRoomData: any): void => 
  * @return {void}
  */
 export const listeningGameStarted = (): void => {
-  store.dispatch(setView('playing'));
+  store.dispatch(setView(GameView.PLAYING));
 };
 
 /**
