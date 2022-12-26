@@ -1,9 +1,9 @@
 import type { ApiBoardBoat, ApiPosition } from '@api/models';
 import type { AuthorizedBoat, Boat } from '@boat/models';
 import type { BoardBoat, Position } from '@shared/Board/models';
+import { BOAT_DEFAULT_DIRECTION, BoatDirection } from '@boat/constants';
+import { checkBoardBoatsPosition, parseBoardBoat } from '@shared/Board/helpers';
 import ArrayHelpers from '@helpers/ArrayHelpers';
-import type { BoatDirection } from '@boat/models';
-import { checkBoardBoatsPosition } from '@shared/Board/helpers';
 import NumberHelpers from '@helpers/NumberHelpers';
 
 /**
@@ -21,23 +21,17 @@ export const placeRandomBoatInTheBoard = (
   dimensions: number,
   hasBoatsSafetyZone: boolean,
 ): BoardBoat => {
-  // FIXME: replace with enums
-  const randomDirection: BoatDirection = ArrayHelpers.getRandomItem([
-    'east',
-    'north',
-    'south',
-    'west',
-  ]);
+  const randomDirection: BoatDirection = ArrayHelpers.getRandomItem(Object.values(BoatDirection));
   const randomPosition: Position = {
     x: NumberHelpers.randomNumber(0, dimensions),
     y: NumberHelpers.randomNumber(0, dimensions),
   };
 
-  const boardBoat: BoardBoat = {
+  const boardBoat: BoardBoat = parseBoardBoat({
     ...boat,
     ...randomPosition,
     direction: randomDirection,
-  };
+  });
 
   if (
     !checkBoardBoatsPosition([...boatsAlreadyPlaced, boardBoat], dimensions, hasBoatsSafetyZone)
@@ -78,16 +72,15 @@ export const placeRandomBoatsInTheBoard = (
  * @return {BoatDirection}
  */
 export const getNextBoatDirection = (direction?: BoatDirection): BoatDirection => {
-  // FIXME: replace with enums
   switch (direction) {
-    case 'north':
-      return 'east';
-    case 'east':
-      return 'south';
-    case 'south':
-      return 'west';
+    case BoatDirection.NORTH:
+      return BoatDirection.EAST;
+    case BoatDirection.EAST:
+      return BoatDirection.SOUTH;
+    case BoatDirection.SOUTH:
+      return BoatDirection.WEST;
     default:
-      return 'north';
+      return BOAT_DEFAULT_DIRECTION;
   }
 };
 
@@ -97,8 +90,8 @@ export const getNextBoatDirection = (direction?: BoatDirection): BoatDirection =
  * @param {BoatDirection} direction Boat direction
  * @return {boolean}
  */
-export const isBoatHorizontal = (direction?: BoatDirection): boolean => {
-  return direction === 'west' || direction === 'east';
+export const isBoatHorizontal = (direction: BoatDirection): boolean => {
+  return direction === BoatDirection.WEST || direction === BoatDirection.EAST;
 };
 
 /**
@@ -107,8 +100,8 @@ export const isBoatHorizontal = (direction?: BoatDirection): boolean => {
  * @param {BoatDirection} direction Boat direction
  * @return {boolean}
  */
-export const hasXAxisReversed = (direction?: BoatDirection): boolean => {
-  return direction === 'east' || direction === 'south';
+export const hasXAxisReversed = (direction: BoatDirection): boolean => {
+  return direction === BoatDirection.EAST || direction === BoatDirection.SOUTH;
 };
 
 /**
@@ -117,11 +110,10 @@ export const hasXAxisReversed = (direction?: BoatDirection): boolean => {
  * @param {BoatDirection} direction Boat direction
  * @return {boolean}
  */
-export const hasYAxisReversed = (direction?: BoatDirection): boolean => {
-  return direction === 'west' || direction === 'south';
+export const hasYAxisReversed = (direction: BoatDirection): boolean => {
+  return direction === BoatDirection.WEST || direction === BoatDirection.SOUTH;
 };
 
-// FIXME: rename length/width API properties to lengthCell/widthCell
 /**
  * Parse a boat.
  *
@@ -129,6 +121,7 @@ export const hasYAxisReversed = (direction?: BoatDirection): boolean => {
  * @return {Boat}
  */
 export const parseBoat = (boat: any): Boat => ({
+  defaultDirection: boat?.defaultDirection || BOAT_DEFAULT_DIRECTION,
   lengthCell: boat?.lengthCell || 1,
   name: boat?.name || '',
   src: boat?.src || '',
@@ -213,8 +206,7 @@ export const getBoatBowCells = (boardBoat: BoardBoat): ApiPosition[] => {
  */
 export const parseGameBoardBoatForApi = (boardBoat: BoardBoat): ApiBoardBoat => ({
   bowCells: getBoatBowCells(boardBoat),
-  // FIXME: default direction in constants file
-  direction: boardBoat.direction || 'north',
+  direction: boardBoat.direction,
   name: boardBoat.name,
 });
 

@@ -63,3 +63,19 @@ export const checkBoardBoatsPosition = (
 export const checkCellPositionInTheBoard = (x: number, y: number, dimensions: number): boolean => {
   return x >= 0 && x < dimensions && y >= 0 && y < dimensions;
 };
+
+/**
+ * Parse board boat.
+ *
+ * @param {any} boardBoat Board boat.
+ * @return {BoardBoat}
+ */
+export const parseBoardBoat = (boardBoat: any): BoardBoat => ({
+  direction: boardBoat?.direction,
+  lengthCell: boardBoat?.lengthCell,
+  name: boardBoat?.name,
+  src: boardBoat?.src,
+  widthCell: boardBoat?.widthCell,
+  x: boardBoat?.x,
+  y: boardBoat?.y,
+});

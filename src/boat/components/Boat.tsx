@@ -2,6 +2,7 @@ import { useCallback, useMemo, useState } from 'react';
 import classNames from 'clsx';
 import type { CSSProperties } from 'react';
 
+import { BoatDirection } from '@boat/constants';
 import type { BoatProps } from '@boat/models';
 import Image from '@shared/Image/components/Image';
 import useTranslation from '@hooks/useTranslation';
@@ -14,7 +15,7 @@ import useTranslation from '@hooks/useTranslation';
  */
 export const Boat = ({
   className = '',
-  direction = 'west',
+  direction = BoatDirection.WEST,
   height,
   index,
   isPlacementActive = false,

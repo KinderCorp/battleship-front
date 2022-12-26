@@ -17,7 +17,10 @@ export interface BoardCellAffected extends Position {
 }
 
 // FIXME: models to put here?
-export interface BoardBoat extends Boat, Position, Pick<BoatProps, 'direction'> {}
+export interface BoardBoat
+  extends Omit<Boat, 'defaultDirection'>,
+    Position,
+    Pick<BoatProps, 'direction'> {}
 
 export interface BoardProps extends Pick<GameSettings, 'hasBoatsSafetyZone'> {
   boats?: BoardBoat[];
