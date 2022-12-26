@@ -11,7 +11,7 @@ import type { Weapon } from '@weapon/models';
 export const parseWeapon = (weapon: any): Weapon => ({
   damageArea: parsePositions(weapon?.damageArea),
   id: weapon?.id || '',
-  maxAmmunition: weapon?.maxAmmunition || 0,
+  maxAmmunition: weapon?.maxAmmunition ?? 0,
   name: weapon?.name || '',
 });
 
