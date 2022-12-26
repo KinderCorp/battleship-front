@@ -104,7 +104,7 @@ export const parseGameSettings = (gameSettings: any): GameSettings => ({
 export const parseGameRoomSettings = (gameRoomSettings: any): GameRoomSettings => ({
   authorisedFleet: parseAuthorizedFleet(gameRoomSettings?.authorisedFleet),
   boardDimensions: gameRoomSettings?.boardDimensions || GAME_ROOM_SETTINGS.boardDimensions,
-  hasBoatsSafetyZone: gameRoomSettings?.hasBoatsSafetyZone || GAME_ROOM_SETTINGS.hasBoatsSafetyZone,
+  hasBoatsSafetyZone: gameRoomSettings?.hasBoatsSafetyZone ?? GAME_ROOM_SETTINGS.hasBoatsSafetyZone,
   timePerTurn: gameRoomSettings?.timePerTurn || GAME_ROOM_SETTINGS.timePerTurn,
   weapons: parseWeapons(gameRoomSettings?.weapons),
 });
