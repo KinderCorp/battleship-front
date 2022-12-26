@@ -21,6 +21,7 @@ export const placeRandomBoatInTheBoard = (
   dimensions: number,
   hasBoatsSafetyZone: boolean,
 ): BoardBoat => {
+  // FIXME: replace with enums
   const randomDirection: BoatDirection = ArrayHelpers.getRandomItem([
     'east',
     'north',
@@ -77,10 +78,17 @@ export const placeRandomBoatsInTheBoard = (
  * @return {BoatDirection}
  */
 export const getNextBoatDirection = (direction?: BoatDirection): BoatDirection => {
-  if (direction === 'north') return 'east';
-  else if (direction === 'east') return 'south';
-  else if (direction === 'south') return 'west';
-  else return 'north';
+  // FIXME: replace with enums
+  switch (direction) {
+    case 'north':
+      return 'east';
+    case 'east':
+      return 'south';
+    case 'south':
+      return 'west';
+    default:
+      return 'north';
+  }
 };
 
 /**
