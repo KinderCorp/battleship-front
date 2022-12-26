@@ -6,7 +6,6 @@ import { checkGameIsFull, isPlayerHost } from '@game/helpers';
 import BlockContainer from '@shared/BlockContainer/components/BlockContainer';
 import Button from '@shared/Button/components/Button';
 import { emitPlayersReadyToPlaceBoats } from '@socket/emittingEvents';
-import type { GameRoom } from '@game/models';
 import PlayersCards from '@player/components/PlayersCards';
 import { selectGameRoom } from '@game/selectors';
 import TextContainer from '@shared/TextContainer/components/TextContainer';
@@ -23,12 +22,9 @@ import WaitingForTheHost from '@game/components/WaitingForTheHost';
 const GameSettingsView = (): JSX.Element => {
   const { translate } = useTranslation();
 
-  const gameRoom = useSelector(selectGameRoom) as GameRoom;
-
+  const gameRoom = useSelector(selectGameRoom);
   const shareLink = useClientSideValue(UrlHelpers.getUrl());
-
   const [clickedButtonCopy, setClickedButtonCopy] = useState<boolean>(false);
-
   const allPlayersJoined = useMemo(() => checkGameIsFull(gameRoom), [gameRoom]);
 
   /**
