@@ -4,7 +4,7 @@ import type { DynamicOptions } from 'next/dynamic';
 
 import type { IconName, IconSvgProps } from '@shared/Icon/models';
 
-const OPTIONS: DynamicOptions<IconSvgProps> = { suspense: false };
+const OPTIONS: DynamicOptions<IconSvgProps> = { ssr: false };
 
 export const ICON_LIST: Record<IconName, ComponentType<IconSvgProps>> = {
   Add: dynamic(() => import('@shared/Icon/components/IconAdd'), OPTIONS),
