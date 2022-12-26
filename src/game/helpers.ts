@@ -1,12 +1,6 @@
 import { GAME_ROOM_SETTINGS, GAME_SETTINGS } from '@game/constants';
-import type {
-  GamePlayer,
-  GameRoom,
-  GameRoomData,
-  GameRoomSettings,
-  GameSettings,
-  GameState,
-} from '@game/models';
+import type { GamePlayer, GameRoom, GameRoomSettings, GameSettings, GameState } from '@game/models';
+import type { ApiGameRoomData } from '@api/models';
 import ArrayHelpers from '@helpers/ArrayHelpers';
 import { parseAuthorizedFleet } from '@boat/helpers';
 import { parseWeapons } from '@weapon/helpers';
@@ -51,9 +45,9 @@ export const parseGameState = (gameState: any): GameState => ({
  * Parse a game room data.
  *
  * @param {any} gameRoomData Game room data
- * @return {GameRoomData<any>}
+ * @return {ApiGameRoomData<any>}
  */
-export const parseGameRoomData = (gameRoomData: any): GameRoomData<any> => ({
+export const parseGameRoomData = (gameRoomData: any): ApiGameRoomData<any> => ({
   data: gameRoomData?.data || null,
   instanceId: gameRoomData?.instanceId || '',
 });

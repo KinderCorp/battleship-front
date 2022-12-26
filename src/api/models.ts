@@ -1,4 +1,5 @@
 import type { Boat, BoatProps } from '@boat/models';
+import type { GameInstance } from '@game/models';
 import type { GetHelloWorldResponse } from '@home/models';
 
 export interface HttpResponse {
@@ -26,6 +27,10 @@ export type ApiGetHelloWorldResponse = GetHelloWorldResponse;
 
 export interface ApiBoardBoat extends Pick<Boat, 'name'>, Pick<BoatProps, 'direction'> {
   bowCells: ApiPosition[];
+}
+
+export interface ApiGameRoomData<T> extends GameInstance {
+  data: T;
 }
 
 export type ApiPosition = [x: number, y: number];
