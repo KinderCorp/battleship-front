@@ -16,7 +16,7 @@ export const checkBoardBoatsPosition = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   hasBoatsSafetyZone: boolean,
 ): boolean => {
-  const takenCells = [] as Position[];
+  const takenCells: Position[] = [];
 
   for (const boat of boats) {
     const width = isBoatHorizontal(boat.direction) ? boat.lengthCell : boat.widthCell;
