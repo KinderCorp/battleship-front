@@ -13,13 +13,13 @@ export type GamePageContentProps = Required<GamePageParams>;
 
 export interface GameSettings {
   boardDimensions: BoardProps['dimensions'];
-  weapons: Weapon['name'][];
+  weaponNames: Weapon['name'][];
   hasBoatsSafetyZone: boolean;
   timePerTurn: number;
 }
 
 // FIXME: weapons contain only name, not all properties
-export interface GameRoomSettings extends Omit<GameSettings, 'weapons'> {
+export interface GameRoomSettings extends Omit<GameSettings, 'weaponNames'> {
   authorisedFleet: Boat[];
   weapons: Weapon[];
 }

@@ -92,7 +92,7 @@ export const parseGameSettings = (gameSettings: any): GameSettings => ({
   boardDimensions: gameSettings?.boardDimensions || GAME_SETTINGS.boardDimensions,
   hasBoatsSafetyZone: gameSettings?.hasBoatsSafetyZone || GAME_SETTINGS.hasBoatsSafetyZone,
   timePerTurn: gameSettings?.timePerTurn || GAME_SETTINGS.timePerTurn,
-  weapons: parseWeapons(gameSettings?.weapons).map((weapon) => weapon.name),
+  weaponNames: parseWeapons(gameSettings?.weapons).map((weapon) => weapon.name),
 });
 
 /**
