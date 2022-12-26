@@ -62,7 +62,7 @@ export const placeRandomBoatsInTheBoard = (
 ): BoardBoat[] => {
   const boardBoats = [] as BoardBoat[];
 
-  // FIXME: check is it possible to place all boats, otherwise infinite loop
+  // FIXME: check if it is possible to place all boats, otherwise infinite loop
   for (const boat of boats) {
     boardBoats.push(placeRandomBoatInTheBoard(boardBoats, boat, dimensions, hasBoatsSafetyZone));
   }
