@@ -94,14 +94,16 @@ const GamePlacingBoatsView = (): JSX.Element => {
           counter: counterTime.toString(),
           plural: counterTime > 1 ? 's' : '',
         });
-      } else {
-        return translate('game-is-about-to-begin');
       }
-    } else if (!otherPlayerIsReady) {
-      return translate('player-placing-his-boats', keyToReplace);
-    } else {
-      return translate('player-ready', keyToReplace);
+
+      return translate('game-is-about-to-begin');
     }
+
+    if (!otherPlayerIsReady) {
+      return translate('player-placing-his-boats', keyToReplace);
+    }
+
+    return translate('player-ready', keyToReplace);
   }, [allPlayersAreReady, counterTime, otherPlayerIsReady, otherPlayer, translate]);
 
   return (
