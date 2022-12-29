@@ -5,7 +5,7 @@ class ArrayHelpers {
    * @param {unknown[]} array Array
    * @return {any}
    */
-  static getRandomItem(array: unknown[]): any {
+  static getRandomItem<T>(array: T[]): T {
     return array[Math.floor(Math.random() * array.length)];
   }
 

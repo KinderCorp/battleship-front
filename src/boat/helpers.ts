@@ -21,13 +21,13 @@ export const placeRandomBoatInTheBoard = (
   dimensions: number,
   hasBoatsSafetyZone: boolean,
 ): BoardBoat => {
-  const randomDirection: BoatDirection = ArrayHelpers.getRandomItem(Object.values(BoatDirection));
+  const randomDirection = ArrayHelpers.getRandomItem(Object.values(BoatDirection));
   const randomPosition: Position = {
     x: NumberHelpers.randomNumber(0, dimensions),
     y: NumberHelpers.randomNumber(0, dimensions),
   };
 
-  const boardBoat: BoardBoat = parseBoardBoat({
+  const boardBoat = parseBoardBoat({
     ...boat,
     ...randomPosition,
     direction: randomDirection,
