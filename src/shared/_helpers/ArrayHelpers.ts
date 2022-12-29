@@ -15,7 +15,7 @@ class ArrayHelpers {
    * @param {any} value Value to check
    * @return {boolean}
    */
-  static isArray(value: any): boolean {
+  static isArray(value: any): value is any[] {
     return Array.isArray(value);
   }
 

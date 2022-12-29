@@ -7,7 +7,7 @@ class ObjectHelpers {
    * @param {any} value Value to check
    * @return {boolean}
    */
-  static isObject(value: any): boolean {
+  static isObject(value: any): value is Record<string, any> {
     return !!value && Object.getPrototypeOf(value) === Object.prototype;
   }
 
@@ -32,7 +32,7 @@ class ObjectHelpers {
     if (typeof value !== 'object' || value === null) return value;
 
     // Create an array or object to hold the values
-    const output = ArrayHelpers.isArray(value) ? ([] as any[]) : ({} as Record<string, any>);
+    const output = ArrayHelpers.isArray(value) ? [] : ({} as Record<string, any>);
 
     // Recursively (deep) copy for nested objects, including arrays
     for (const key in value) {

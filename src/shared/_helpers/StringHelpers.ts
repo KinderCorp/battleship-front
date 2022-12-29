@@ -5,7 +5,7 @@ class StringHelpers {
    * @param {any} value Value to check
    * @return {boolean}
    */
-  static isString(value: any): boolean {
+  static isString(value: any): value is string {
     return typeof value === 'string';
   }
 
