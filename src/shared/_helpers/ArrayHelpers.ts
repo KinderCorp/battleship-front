@@ -12,20 +12,20 @@ class ArrayHelpers {
   /**
    * Check if a value is an array.
    *
-   * @param {any} value Value to check
+   * @param {unknown} value Value to check
    * @return {boolean}
    */
-  static isArray(value: any): value is any[] {
+  static isArray(value: unknown): value is any[] {
     return Array.isArray(value);
   }
 
   /**
    * Check if an array has at least one item.
    *
-   * @param {any} value Value to check
+   * @param {unknown} value Value to check
    * @return {boolean}
    */
-  static isEmpty(value: any): boolean {
+  static isEmpty(value: unknown): boolean {
     return this.isArray(value) ? value.length === 0 : true;
   }
 }
