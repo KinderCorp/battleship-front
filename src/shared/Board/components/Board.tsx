@@ -49,11 +49,11 @@ export const Board = ({
           newBoats[index] = boat;
 
           // FIXME: check only the specific boat and not all boats
-          if (checkBoardBoatsPosition(newBoats, dimensions, hasBoatsSafetyZone)) {
-            setBoats?.(newBoats);
-          } else {
+          if (!checkBoardBoatsPosition(newBoats, dimensions, hasBoatsSafetyZone)) {
             return false;
           }
+
+          setBoats?.(newBoats);
         }
       }
 
