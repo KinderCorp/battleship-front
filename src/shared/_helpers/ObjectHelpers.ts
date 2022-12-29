@@ -4,20 +4,20 @@ class ObjectHelpers {
   /**
    * Check if the given argument is an object or not.
    *
-   * @param {any} value Value to check
+   * @param {unknown} value Value to check
    * @return {boolean}
    */
-  static isObject(value: any): value is Record<string, any> {
+  static isObject(value: unknown): value is Record<string, any> {
     return !!value && Object.getPrototypeOf(value) === Object.prototype;
   }
 
   /**
    * Check if an object has at least one property.
    *
-   * @param {any} value Value to check
+   * @param {unknown} value Value to check
    * @return {boolean}
    */
-  static isEmpty(value: any): boolean {
+  static isEmpty(value: unknown): boolean {
     return this.isObject(value) ? Object.keys(value).length === 0 : true;
   }
 

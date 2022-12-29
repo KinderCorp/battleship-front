@@ -2,10 +2,10 @@ class ArrayHelpers {
   /**
    * Get a random item in the array.
    *
-   * @param {any[]} array Array
+   * @param {unknown[]} array Array
    * @return {any}
    */
-  static getRandomItem(array: any[]): any {
+  static getRandomItem(array: unknown[]): any {
     return array[Math.floor(Math.random() * array.length)];
   }
 

@@ -1,4 +1,5 @@
 import type { IntRange } from '@core/models';
+import StringHelpers from '@helpers/StringHelpers';
 
 class NumberHelpers {
   /**
@@ -13,14 +14,14 @@ class NumberHelpers {
   }
 
   /**
-   * Parse a number.
+   * Parse a value to number.
    *
-   * @param {any} value Value to convert
+   * @param {unknown} value Value to convert
    * @param {number} radix Base of the number
    * @return {number}
    */
-  static parseInt(value: any, radix?: IntRange<2, 36>): number {
-    return parseInt(value, radix || 10);
+  static parseInt(value: unknown, radix?: IntRange<2, 36>): number {
+    return parseInt(StringHelpers.parseString(value), radix || 10);
   }
 }
 
