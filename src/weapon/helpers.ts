@@ -13,6 +13,7 @@ export const parseWeapon = (weapon: any): Weapon => ({
   id: weapon?.id || '',
   maxAmmunition: weapon?.maxAmmunition ?? 0,
   name: weapon?.name || '',
+  src: weapon?.src || '',
 });
 
 /**
