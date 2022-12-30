@@ -7,6 +7,7 @@ import { parseGameState } from '@game/helpers';
 import type { RootState } from '@core/models';
 import socket from '@socket/index';
 
+// FIXME: do not use a parser here
 /**
  * Select global game state.
  *
@@ -47,22 +48,24 @@ export const selectGameRoomPlayers = createSelector(
 
 export const selectGameRoomPlayerHost = createSelector(
   selectGameRoomPlayers,
-  (state: GamePlayer[]): GamePlayer => state.find((player) => player.isHost) || ({} as GamePlayer),
+  (state: GamePlayer[]): GamePlayer | Partial<GamePlayer> =>
+    state.find((player) => player.isHost) || ({} as Partial<GamePlayer>),
 );
 
 export const selectGameRoomPlayerRival = createSelector(
   selectGameRoomPlayers,
-  (state: GamePlayer[]): GamePlayer => state.find((player) => !player.isHost) || ({} as GamePlayer),
+  (state: GamePlayer[]): GamePlayer | Partial<GamePlayer> =>
+    state.find((player) => !player.isHost) || ({} as Partial<GamePlayer>),
 );
 
 export const selectGameRoomPlayer = createSelector(
   selectGameRoomPlayers,
-  (state: GamePlayer[]): GamePlayer =>
-    state.find((player) => player.socketId === socket.id) || ({} as GamePlayer),
+  (state: GamePlayer[]): GamePlayer | Partial<GamePlayer> =>
+    state.find((player) => player.socketId === socket.id) || ({} as Partial<GamePlayer>),
 );
 
 export const selectGameRoomOtherPlayer = createSelector(
   selectGameRoomPlayers,
-  (state: GamePlayer[]): GamePlayer =>
-    state.find((player) => player.socketId !== socket.id) || ({} as GamePlayer),
+  (state: GamePlayer[]): GamePlayer | Partial<GamePlayer> =>
+    state.find((player) => player.socketId !== socket.id) || ({} as Partial<GamePlayer>),
 );
