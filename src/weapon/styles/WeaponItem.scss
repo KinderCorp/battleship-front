@@ -13,15 +13,16 @@ $inset-shadow: to-rem(2);
 
   .weapon-item-image {
     border-radius: $border-radius;
+    border: 0 solid $color-orange;
     filter: grayscale(100%);
     height: 100%;
     left: 0;
-    border: 0 solid $color-orange;
     overflow: hidden;
     pointer-events: none;
     position: absolute;
     top: 0;
-    transition: border-width 0.1s;
+    transition-duration: 0.1s;
+    transition-property: border-width, filter;
     width: 100%;
   }
 
