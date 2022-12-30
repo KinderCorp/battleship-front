@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { selectGameRoomInstanceId, selectGameView } from '@game/selectors';
 import { emitLeaveRoom } from '@socket/emittingEvents';
 import GamePlacingBoatsView from '@game/components/GameOneVersusOne/GamePlacingBoatsView';
+import GamePlayingView from '@game/components/GameOneVersusOne/GamePlayingView';
 import GameSettingsView from '@game/components/GameOneVersusOne/GameSettingsView';
 import { GameView } from '@game/constants';
 import PageContainer from '@shared/PageContainer/components/PageContainer';
@@ -33,11 +34,12 @@ const GamePageView = (): JSX.Element => {
       header={{
         content: view !== GameView.SETTINGS && <PlayersCards size="small" />,
         onLeave: handleLeaveGame,
-        title: view === GameView.SETTINGS ? translate('create-game') : '',
+        title: view === GameView.SETTINGS ? translate('game-configuration') : '',
       }}
     >
       {view === GameView.SETTINGS && <GameSettingsView />}
       {view === GameView.BOATS_PLACEMENT && <GamePlacingBoatsView />}
+      {view === GameView.PLAYING && <GamePlayingView />}
     </PageContainer>
   );
 };

@@ -1,10 +1,18 @@
+import type { BoardCellAffected, Position } from '@shared/Board/models';
 import { GAME_ROOM_SETTINGS, GAME_SETTINGS, GameView } from '@game/constants';
-import type { GamePlayer, GameRoom, GameRoomSettings, GameSettings, GameState } from '@game/models';
+import type {
+  GamePlayer,
+  GamePlayerBoard,
+  GameRoom,
+  GameRoomSettings,
+  GameSettings,
+  GameState,
+} from '@game/models';
 import type { ApiGameRoomData } from '@api/models';
 import ArrayHelpers from '@helpers/ArrayHelpers';
+import { BoardCellState } from '@shared/Board/constants';
 import { parseAuthorizedFleet } from '@boat/helpers';
 import { parseWeapons } from '@weapon/helpers';
-import type { Position } from '@shared/Board/models';
 import { selectGameRoomPlayerHost } from '@game/selectors';
 import socket from '@socket/index';
 import store from '@core/store';
@@ -53,14 +61,52 @@ export const parseGameRoomData = (gameRoomData: any): ApiGameRoomData<any> => ({
 });
 
 /**
+ * Parse a game board cell affected.
+ *
+ * @param {any} gameBoardCellAffected Game board cell affected
+ * @return {GamePlayerBoard}
+ */
+export const parseGameBoardCellAffected = (gameBoardCellAffected: any): BoardCellAffected => ({
+  state: gameBoardCellAffected?.state || BoardCellState.MISS,
+  x: gameBoardCellAffected?.x ?? 0,
+  y: gameBoardCellAffected?.y ?? 0,
+});
+
+/**
+ * Parse a game board cells affected.
+ *
+ * @param {any} gameBoardCellsAffected Game board cells affected
+ * @return {BoardCellAffected}
+ */
+export const parseGameBoardCellsAffected = (gameBoardCellsAffected: any): BoardCellAffected[] =>
+  ArrayHelpers.isArray(gameBoardCellsAffected)
+    ? gameBoardCellsAffected.map((gameBoardCellAffected: any) =>
+        parseGameBoardCellAffected(gameBoardCellAffected),
+      )
+    : [];
+
+/**
+ * Parse a game player board.
+ *
+ * @param {any} gamePlayerBoard Game player board
+ * @return {GamePlayerBoard}
+ */
+export const parseGamePlayerBoard = (gamePlayerBoard: any): GamePlayerBoard => ({
+  boardBoats: [],
+  cellsAffected: parseGameBoardCellsAffected(gamePlayerBoard?.cellsAffected),
+});
+
+/**
  * Parse a game player.
  *
  * @param {any} gamePlayer Game player
  * @return {GamePlayer}
  */
 export const parseGamePlayer = (gamePlayer: any): GamePlayer => ({
+  board: parseGamePlayerBoard(gamePlayer?.board),
   boatsAreReady: gamePlayer?.boatsAreReady || false,
   isHost: gamePlayer?.isHost || false,
+  isTurn: gamePlayer?.isTurn || false,
   pseudo: gamePlayer?.pseudo || '',
   socketId: gamePlayer?.socketId || '',
 });

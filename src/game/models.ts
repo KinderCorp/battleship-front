@@ -1,5 +1,5 @@
+import type { BoardBoat, BoardCellAffected, BoardProps } from '@shared/Board/models';
 import type { BasePlayer } from '@player/models';
-import type { BoardProps } from '@shared/Board/models';
 import type { Boat } from '@src/boat/models';
 import type { GamePageParams } from '@pages/game/[gameId]';
 import type { GameView } from '@game/constants';
@@ -30,9 +30,16 @@ export interface GameState {
   view: GameView;
 }
 
+export interface GamePlayerBoard {
+  cellsAffected: BoardCellAffected[];
+  boardBoats: BoardBoat[];
+}
+
 export interface GamePlayer extends BasePlayer {
+  board: GamePlayerBoard;
   boatsAreReady?: boolean;
   isHost: boolean;
+  isTurn?: boolean;
   socketId: string;
 }
 
