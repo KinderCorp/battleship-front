@@ -90,7 +90,9 @@ export const getNextBoatDirection = (direction?: BoatDirection): BoatDirection =
  * @param {BoatDirection} direction Boat direction
  * @return {boolean}
  */
-export const isBoatHorizontal = (direction: BoatDirection): boolean => {
+export const isBoatHorizontal = (
+  direction: BoatDirection,
+): direction is BoatDirection.WEST | BoatDirection.EAST => {
   return direction === BoatDirection.WEST || direction === BoatDirection.EAST;
 };
 
@@ -100,7 +102,9 @@ export const isBoatHorizontal = (direction: BoatDirection): boolean => {
  * @param {BoatDirection} direction Boat direction
  * @return {boolean}
  */
-export const hasXAxisReversed = (direction: BoatDirection): boolean => {
+export const hasXAxisReversed = (
+  direction: BoatDirection,
+): direction is BoatDirection.EAST | BoatDirection.SOUTH => {
   return direction === BoatDirection.EAST || direction === BoatDirection.SOUTH;
 };
 
@@ -110,7 +114,9 @@ export const hasXAxisReversed = (direction: BoatDirection): boolean => {
  * @param {BoatDirection} direction Boat direction
  * @return {boolean}
  */
-export const hasYAxisReversed = (direction: BoatDirection): boolean => {
+export const hasYAxisReversed = (
+  direction: BoatDirection,
+): direction is BoatDirection.WEST | BoatDirection.SOUTH => {
   return direction === BoatDirection.WEST || direction === BoatDirection.SOUTH;
 };
 
