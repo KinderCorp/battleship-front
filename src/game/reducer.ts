@@ -8,7 +8,7 @@ import { GameView } from '@game/constants';
 const initialState: GameState = {
   gameRoom: {} as GameRoom,
   settings: GAME_SETTINGS,
-  view: GameView.SETTINGS,
+  view: GameView.PLAYING,
 };
 
 export const gameSlice = createSlice({
