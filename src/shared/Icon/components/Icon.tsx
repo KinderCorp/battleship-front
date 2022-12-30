@@ -1,5 +1,5 @@
-import { Suspense, useMemo } from 'react';
 import classNames from 'clsx';
+import { useMemo } from 'react';
 
 import { COLORS } from '@core/constants';
 import { ICON_LIST } from '@shared/Icon/constants';
@@ -26,11 +26,9 @@ const Icon = ({
   );
 
   return (
-    <Suspense fallback={null}>
-      <span className={iconClassName} data-testid="icon">
-        <IconComponent borderColor={borderColor} color={color} />
-      </span>
-    </Suspense>
+    <span className={iconClassName} data-testid="icon">
+      <IconComponent borderColor={borderColor} color={color} />
+    </span>
   );
 };
 

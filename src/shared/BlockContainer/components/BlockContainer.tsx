@@ -13,7 +13,7 @@ import Title from '@shared/Title/components/Title';
 const BlockContainer = ({
   children,
   className = '',
-  iconName = null,
+  iconName,
   title = '',
 }: BlockContainerProps): JSX.Element => {
   const blockContainerClassName = useMemo(
@@ -23,7 +23,13 @@ const BlockContainer = ({
 
   return (
     <div className={blockContainerClassName} data-testid="block-container">
-      <Title className="block-container-title" iconName={iconName} title={title} type="h2" />
+      <Title
+        className="block-container-title"
+        // FIXME: bad code
+        icon={iconName ? { name: iconName } : undefined}
+        title={title}
+        type="h2"
+      />
       <div className="block-container-content">{children}</div>
     </div>
   );

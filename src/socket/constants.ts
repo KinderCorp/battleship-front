@@ -1,7 +1,7 @@
 export const SOCKET_EVENTS_EMITTING = {
-  CLOSE_ROOM: 'close-room',
   CREATE_GAME: 'create-game',
   GAME_SETTINGS: 'game-settings',
+  LEAVE_ROOM: 'leave-room',
   PLAYER_JOINING_GAME: 'player-joining-game',
   PLAYERS_READY_TO_PLACE_BOATS: 'players-ready-to-place-boats',
   SHOOT: 'shoot',
@@ -11,6 +11,7 @@ export const SOCKET_EVENTS_EMITTING = {
 
 export const SOCKET_EVENTS_LISTENING = {
   ALL_PLAYERS_HAVE_PLACED_THEIR_BOATS: 'all-players-have-placed-their-boats',
+  CLOSED_ROOM: 'closed-room',
   END_GAME: 'end-game',
   ERROR_CELL_ALREADY_HIT: 'error-cell-already-hit',
   ERROR_GAME_IS_FULL: 'error-game-is-full',
@@ -27,6 +28,7 @@ export const SOCKET_EVENTS_LISTENING = {
   ERROR_UNABLE_TO_CREATE_GAME: 'error-unable-to-create-game',
   ERROR_UNKNOWN_SERVER: 'error-unknown-server',
   ERROR_WEAPON_NOT_FOUND: 'error-weapon-not-found',
+  GAME_ALREADY_CREATED: 'game-already-created',
   GAME_CREATED: 'game-created',
   GAME_INFORMATION: 'game-information',
   GAME_STARTED: 'game-started',

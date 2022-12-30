@@ -5,12 +5,21 @@
   "boat": "Bateau {name}",
   "create-game": "Créer une partie",
   "game-in-progress": "Partie en cours",
+  "game-is-about-to-begin.counter": "La partie va commencer dans {counter} seconde{plural}...",
+  "game-is-about-to-begin": "La partie va commencer...",
+  "i-am-not-ready": "Je ne suis pas prêt",
+  "i-am-ready": "Je suis prêt",
   "leave": "Quitter",
+  "place-your-boats": "Placez vos bateaux",
+  "player-placing-his-boats": "{pseudo} place ses bateaux...",
+  "player-ready": "{pseudo} est prêt !",
+  "random": "Aléatoire",
   "share-to-friend": "Partager ce lien à un ami",
   "skin": "Skin {name}",
   "start": "Commencer",
   "test.key": "Clé de test",
   "test.keyWithReplacedValue": "Pour moi, c’est un {value}. Un {value}, tout le monde sait ce que c’est…",
   "versus": "VS",
-  "waiting": "En attente..."
+  "waiting": "En attente...",
+  "waiting-for-host": "En attente de l'hôte..."
 }

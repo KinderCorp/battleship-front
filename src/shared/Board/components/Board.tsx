@@ -1,11 +1,14 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import classNames from 'clsx';
 import type { CSSProperties } from 'react';
 
 import type { BoardBoat, BoardCellAffected, BoardProps } from '@shared/Board/models';
 import BoardCell from '@shared/Board/components/BoardCell';
 import BoardRow from '@shared/Board/components/BoardRow';
-import Boat from '@shared/Boat/components/Boat';
+import Boat from '@boat/components/Boat';
+import { checkBoardBoatsPosition } from '@shared/Board/helpers';
+import { getNextBoatDirection } from '@boat/helpers';
+import ObjectHelpers from '@helpers/ObjectHelpers';
 
 /**
  * Board component.
@@ -15,13 +18,50 @@ import Boat from '@shared/Boat/components/Boat';
  */
 export const Board = ({
   boats,
-  className = '',
-  isActive = false,
-  isDisabled = false,
-  onClick,
-  dimensions,
   cellsAffected,
+  className = '',
+  dimensions,
+  hasBoatsSafetyZone = false,
+  isDisabled = false,
+  isPlacementActive = false,
+  isShootActive = false,
+  onClick,
+  setBoats,
 }: BoardProps): JSX.Element => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    setWidth(ref.current?.offsetWidth || 0);
+    setHeight(ref.current?.offsetHeight || 0);
+  }, [ref]);
+
+  const onBoatRotation = useCallback(
+    (index: number): boolean => {
+      if (isPlacementActive) {
+        const newBoats = ObjectHelpers.deepClone(boats);
+        const boat = newBoats[index];
+
+        if (boat) {
+          boat.direction = getNextBoatDirection(boat.direction);
+          newBoats[index] = boat;
+
+          // FIXME: check only the specific boat and not all boats
+          if (!checkBoardBoatsPosition(newBoats, dimensions, hasBoatsSafetyZone)) {
+            return false;
+          }
+
+          setBoats?.(newBoats);
+        }
+      }
+
+      return true;
+    },
+    [boats, dimensions, isPlacementActive, hasBoatsSafetyZone, setBoats],
+  );
+
   const boardClassName = useMemo(
     (): string => classNames('board', { 'is-disabled': !!isDisabled }, className),
     [className, isDisabled],
@@ -41,14 +81,14 @@ export const Board = ({
 
       // Create the cells
       for (let col = 0; col < dimensions; col++) {
-        const cellAffected = cellsAffected.find(
+        const cellAffected = cellsAffected?.find(
           (stateCell: BoardCellAffected) => stateCell.x === col && stateCell.y === row,
         );
 
         cells.push(
           <BoardCell
-            isActive={isActive}
             isDisabled={isDisabled}
+            isShootActive={isShootActive}
             key={`cell-${row}-${col}`}
             onClick={onClick}
             state={cellAffected?.state}
@@ -62,30 +102,33 @@ export const Board = ({
     }
 
     return board;
-  }, [cellsAffected, dimensions, isActive, isDisabled, onClick]);
+  }, [cellsAffected, dimensions, isDisabled, isShootActive, onClick]);
 
   return (
-    <div className={boardClassName} data-testid="board">
+    <div className={boardClassName} data-testid="board" ref={ref}>
       <table className="board-table">
         <tbody className="board-body">{createBoard()}</tbody>
       </table>
 
-      {boats.map((boatBoat: BoardBoat, index: number) => {
+      {boats?.map((boardBoat: BoardBoat, index: number) => {
         const style: CSSProperties = {
-          height: `${(boatBoat.lengthCell * 100) / dimensions}%`,
-          left: `${(boatBoat.x * 100) / dimensions}%`,
-          top: `${(boatBoat.y * 100) / dimensions}%`,
-          transformOrigin: `${100 / boatBoat.widthCell / 2}% ${100 / boatBoat.lengthCell / 2}%`,
-          width: `${(boatBoat.widthCell * 100) / dimensions}%`,
+          left: `${(boardBoat.x * 100) / dimensions}%`,
+          top: `${(boardBoat.y * 100) / dimensions}%`,
+          transformOrigin: `${100 / boardBoat.widthCell / 2}% ${100 / boardBoat.lengthCell / 2}%`,
         };
 
         return (
           <Boat
-            boatName={boatBoat.boatName}
-            boatSrc={boatBoat.boatSrc}
-            direction={boatBoat.direction}
+            direction={boardBoat.direction}
+            height={boardBoat.lengthCell * (height / dimensions)}
+            index={index}
+            isPlacementActive={isPlacementActive}
             key={index}
+            name={boardBoat.name}
+            onRotation={onBoatRotation}
+            src={boardBoat.src}
             style={style}
+            width={boardBoat.widthCell * (width / dimensions)}
           />
         );
       })}

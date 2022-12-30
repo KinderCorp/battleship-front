@@ -4,6 +4,7 @@ export type HeaderHeight = 'medium' | 'small';
 
 export interface HeaderProps {
   className?: string;
+  content?: ReactNode;
   height?: HeaderHeight;
   leftSideNode?: ReactNode;
   rightSideNode?: ReactNode;

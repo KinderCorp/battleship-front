@@ -35,7 +35,7 @@
     }
   }
 
-  &.is-active:not(.is-disabled, .board-cell--hit, .board-cell--miss) {
+  &.is-shoot-active:not(.is-disabled, .board-cell--hit, .board-cell--miss) {
     cursor: pointer;
 
     &:hover::before {

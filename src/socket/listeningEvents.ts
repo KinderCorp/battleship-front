@@ -1,19 +1,26 @@
-import type { GamePlayer, GameRoom, GameRoomData } from '@game/models';
-import { setGamePlayers, setGameRoom, setInstanceId, setView } from '@game/reducer';
+import { parseGamePlayer, parseGameRoom, parseGameRoomData } from '@game/helpers';
+import { selectGameRoomPlayerHost, selectGameRoomPlayers } from '@game/selectors';
+import { setGameRoom, setGameRoomPlayers, setView } from '@game/reducer';
+import type { GamePlayer } from '@game/models';
+import { GameView } from '@game/constants';
 import { PATHS } from '@core/constants';
-import { selectGamePlayerAdmin } from '@game/selectors';
 import store from '@core/store';
 import UrlHelpers from '@helpers/UrlHelpers';
 
+// FIXME: assign the right type for parameter or just 'any' ?
 /**
  * Listening event when game is created.
  *
- * @param {GameRoomData<GamePlayer>} payload Payload
+ * @param {any} gameRoomData Game room data
  * @return {void}
  */
-export const listeningGameCreated = ({ data, instanceId }: GameRoomData<GamePlayer>): void => {
-  store.dispatch(setInstanceId(instanceId));
-  store.dispatch(setGamePlayers([data]));
+export const listeningGameCreated = (gameRoomData: any): void => {
+  const { data, instanceId } = parseGameRoomData(gameRoomData);
+  const gameRoom = parseGameRoom({ ...data, instanceId });
+
+  if (!gameRoom.instanceId) return;
+
+  store.dispatch(setGameRoom(gameRoom));
 
   UrlHelpers.changeLocation(`${PATHS.GAME}/${instanceId}`);
 };
@@ -21,13 +28,16 @@ export const listeningGameCreated = ({ data, instanceId }: GameRoomData<GamePlay
 /**
  * Listening event when player joined.
  *
- * @param {GameRoomData<GamePlayer>} payload Payload
+ * @param {any} gameRoomData Game room data
  * @return {void}
  */
-export const listeningPlayerJoined = ({ data }: GameRoomData<GamePlayer>): void => {
-  const newPlayers = [selectGamePlayerAdmin(store.getState()) as GamePlayer, data];
+export const listeningPlayerJoined = (gameRoomData: any): void => {
+  const { data } = parseGameRoomData(gameRoomData);
+  const player = parseGamePlayer(data);
 
-  store.dispatch(setGamePlayers(newPlayers));
+  const newPlayers = [selectGameRoomPlayerHost(store.getState()) as GamePlayer, player];
+
+  store.dispatch(setGameRoomPlayers(newPlayers));
 };
 
 /**
@@ -36,7 +46,7 @@ export const listeningPlayerJoined = ({ data }: GameRoomData<GamePlayer>): void 
  * @return {void}
  */
 export const listeningStartPlacingBoats = (): void => {
-  store.dispatch(setView('boats_placement'));
+  store.dispatch(setView(GameView.BOATS_PLACEMENT));
 };
 
 /**
@@ -52,11 +62,14 @@ export const listeningErrorGameNotFound = (): void => {
 /**
  * Listening event for game information.
  *
- * @param {GameRoom} payload Payload
+ * @param {any} gameRoomData Game room data
  * @return {void}
  */
-export const listeningGameInformation = ({ data, instanceId }: GameRoomData<GameRoom>): void => {
-  store.dispatch(setGameRoom({ instanceId, players: data.players, settings: data.settings }));
+export const listeningGameInformation = (gameRoomData: any): void => {
+  const { data, instanceId } = parseGameRoomData(gameRoomData);
+  const gameRoom = parseGameRoom({ ...data, instanceId });
+
+  store.dispatch(setGameRoom(gameRoom));
 };
 
 /**
@@ -74,5 +87,42 @@ export const listeningPlayerDisconnected = (): void => {
  * @return {void}
  */
 export const listeningErrorGameIsFull = (): void => {
+  UrlHelpers.changeLocation(PATHS.DEFAULT);
+};
+
+/**
+ * Listening event when one player has placed his boats.
+ *
+ * @param {any} gameRoomData Game room data
+ * @return {void}
+ */
+export const listeningOnePlayerHasPlacedHisBoats = (gameRoomData: any): void => {
+  const { data } = parseGameRoomData(gameRoomData);
+  const player = parseGamePlayer(data);
+
+  const players = [...selectGameRoomPlayers(store.getState())];
+  const playerToUpdateIndex = players.findIndex((player) => player.socketId === data.socketId);
+
+  if (playerToUpdateIndex !== -1) {
+    players[playerToUpdateIndex] = { ...player, boatsAreReady: true };
+    store.dispatch(setGameRoomPlayers(players));
+  }
+};
+
+/**
+ * Listening event when game is started.
+ *
+ * @return {void}
+ */
+export const listeningGameStarted = (): void => {
+  store.dispatch(setView(GameView.PLAYING));
+};
+
+/**
+ * Listening event when game is closed.
+ *
+ * @return {void}
+ */
+export const listeningClosedRoom = (): void => {
   UrlHelpers.changeLocation(PATHS.DEFAULT);
 };

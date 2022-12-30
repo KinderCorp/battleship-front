@@ -54,7 +54,6 @@ For naming the commit (use [gitmoji](https://gitmoji.dev/)) :
 
 - [Alexandra FARINA](https://github.com/DrakenLine)
 - [Manon FARGUES](https://github.com/ManonFargues)
-- [Baptiste BONNIN](https://github.com/exender)
 - [Quentin MASBERNAT](https://github.com/MASBERNATQ)
 
 ### Back

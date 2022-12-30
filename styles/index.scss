@@ -5,18 +5,23 @@
 @import 'fonts';
 @import 'global';
 
-// Page
+// Home
 @import '~@home/styles/HomePageContent';
-@import '~@game/styles/GameSettingsView';
+
+// Game
+@import '~@game/styles/GameOneVersusOne/GamePlacingBoatsView';
+@import '~@game/styles/GameOneVersusOne/GameSettingsView';
+@import '~@game/styles/WaitingForTheHost';
+
+// Boat
+@import '~@boat/styles/Boat';
 
 // Shared styles
 @import '~@shared/BlockContainer/styles/BlockContainer';
 @import '~@shared/Board/styles/Board';
 @import '~@shared/Board/styles/BoardCell';
 @import '~@shared/Board/styles/BoardRow';
-@import '~@shared/Boat/styles/Boat';
 @import '~@shared/Button/styles/Button';
-@import '~@shared/ContentPage/styles/ContentPage';
 @import '~@shared/Field/styles/FieldStructure/FieldContainer';
 @import '~@shared/Field/styles/FieldStructure/FieldError';
 @import '~@shared/Field/styles/FieldStructure/FieldLabel';
@@ -29,7 +34,9 @@
 @import '~@shared/Level/styles/Level';
 @import '~@shared/Modal/styles/BehindOverlay';
 @import '~@shared/Modal/styles/Modal';
+@import '~@shared/PageContainer/styles/PageContainer';
 @import '~@shared/TextContainer/styles/TextContainer';
 @import '~@shared/Title/styles/Title';
+@import '~@shared/Title/styles/TitleIndication';
 @import '~@shared/UserCard/styles/UserCard';
 @import '~@shared/Versus/styles/Versus';

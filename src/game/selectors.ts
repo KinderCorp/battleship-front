@@ -1,8 +1,11 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-import type { GameRoom, GameState } from '@game/models';
+import type { GamePlayer, GameRoom, GameRoomSettings, GameSettings, GameState } from '@game/models';
 import { GAME_NAME } from '@game/constants';
+import type { GameView } from '@game/constants';
+import { parseGameState } from '@game/helpers';
 import type { RootState } from '@core/models';
+import socket from '@socket/index';
 
 /**
  * Select global game state.
@@ -10,24 +13,56 @@ import type { RootState } from '@core/models';
  * @param {RootState} state Current state
  * @return {GameState}
  */
-const selectGameState = (state: RootState) => state[GAME_NAME];
+const selectGameState = (state: RootState): GameState => parseGameState(state[GAME_NAME]);
 
 export const selectGameSettings = createSelector(
   selectGameState,
-  (state: GameState) => state.settings,
+  (state: GameState): GameSettings => state.settings,
 );
 
-export const selectGameRoom = createSelector(selectGameState, (state: GameState) => state.gameRoom);
-export const selectGameView = createSelector(selectGameState, (state: GameState) => state.view);
-export const selectGameInstance = createSelector(
+export const selectGameView = createSelector(
   selectGameState,
-  (state: GameState) => state.gameRoom.instanceId || '',
+  (state: GameState): GameView => state.view,
 );
-export const selectGamePlayerAdmin = createSelector(
-  selectGameRoom,
-  (state: Partial<GameRoom>) => state?.players?.find((player) => player.isAdmin) || null,
+
+export const selectGameRoom = createSelector(
+  selectGameState,
+  (state: GameState): GameRoom => state.gameRoom,
 );
-export const selectGamePlayerRival = createSelector(
+
+export const selectGameRoomInstanceId = createSelector(
   selectGameRoom,
-  (state: Partial<GameRoom>) => state?.players?.find((player) => !player?.isAdmin) || null,
+  (state: GameRoom): string => state.instanceId,
+);
+
+export const selectGameRoomSettings = createSelector(
+  selectGameRoom,
+  (state: GameRoom): GameRoomSettings => state.settings,
+);
+
+export const selectGameRoomPlayers = createSelector(
+  selectGameRoom,
+  (state: GameRoom): GamePlayer[] => state.players,
+);
+
+export const selectGameRoomPlayerHost = createSelector(
+  selectGameRoomPlayers,
+  (state: GamePlayer[]): GamePlayer => state.find((player) => player.isHost) || ({} as GamePlayer),
+);
+
+export const selectGameRoomPlayerRival = createSelector(
+  selectGameRoomPlayers,
+  (state: GamePlayer[]): GamePlayer => state.find((player) => !player.isHost) || ({} as GamePlayer),
+);
+
+export const selectGameRoomPlayer = createSelector(
+  selectGameRoomPlayers,
+  (state: GamePlayer[]): GamePlayer =>
+    state.find((player) => player.socketId === socket.id) || ({} as GamePlayer),
+);
+
+export const selectGameRoomOtherPlayer = createSelector(
+  selectGameRoomPlayers,
+  (state: GamePlayer[]): GamePlayer =>
+    state.find((player) => player.socketId !== socket.id) || ({} as GamePlayer),
 );

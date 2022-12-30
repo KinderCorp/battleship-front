@@ -19,5 +19,5 @@ export interface UserCardProps
   isLoading?: boolean;
   name?: string;
   size?: UserCardSize;
-  onClick?: (event: SyntheticEvent<EventTarget>) => void;
+  onEdit?: (event: SyntheticEvent<EventTarget>) => void;
 }

@@ -1,4 +1,6 @@
-import type { GameRoom, GameRoomData } from '@game/models';
+import type { ApiGameRoomData } from '@api/models';
+import type { GameRoom } from '@game/models';
+import { selectGameRoomInstanceId } from '@game/selectors';
 import store from '@core/store';
 
 /**
@@ -6,12 +8,12 @@ import store from '@core/store';
  *
  * @param {any} data Data
  * @param {GameRoom['instanceId']} instanceId Instance id
- * @return {GameRoomData}
+ * @return {ApiGameRoomData}
  */
 export const formatGameRoomData = <T>(
   data: any,
-  instanceId: GameRoom['instanceId'] = store.getState().GAME.gameRoom.instanceId || '',
-): GameRoomData<T> => ({
+  instanceId: GameRoom['instanceId'] = selectGameRoomInstanceId(store.getState()),
+): ApiGameRoomData<T> => ({
   data,
   instanceId,
 });

@@ -1,0 +1,17 @@
+.title-indication {
+  margin-bottom: to-rem(40);
+
+  .title-content {
+    flex-direction: column;
+
+    .icon {
+      margin-right: 0;
+    }
+
+    .title {
+      margin-top: to-rem(10);
+      text-align: center;
+      width: auto;
+    }
+  }
+}

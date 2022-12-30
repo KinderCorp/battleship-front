@@ -11,6 +11,13 @@ export interface LoggedPlayer extends BasePlayer {
 
 export type Player = GuestPlayer | LoggedPlayer;
 
+// Reducer
 export interface PlayerState {
   player: Player;
+}
+
+// PlayersCards
+export type PlayersCardsSize = 'medium' | 'small';
+export interface PlayersCardsProps {
+  size?: PlayersCardsSize;
 }

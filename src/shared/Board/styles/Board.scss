@@ -1,4 +1,6 @@
 .board {
+  @include fixed-size(to-rem(500));
+
   background-color: $color-purple-dark;
   border-radius: $border-radius;
   display: inline-block;
@@ -12,35 +14,35 @@
   }
 
   .board-table {
-    @include fixed-size(400px);
-
     border-collapse: collapse;
     border-spacing: 0;
-  }
-
-  .board-body {
-    display: flex;
-    flex-direction: column;
     height: 100%;
     width: 100%;
 
-    .board-row:first-child {
-      .board-cell:first-child {
-        border-radius: $border-radius 0 0 0;
+    .board-body {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+
+      .board-row:first-child {
+        .board-cell:first-child {
+          border-radius: $border-radius 0 0 0;
+        }
+
+        .board-cell:last-child {
+          border-radius: 0 $border-radius 0 0;
+        }
       }
 
-      .board-cell:last-child {
-        border-radius: 0 $border-radius 0 0;
-      }
-    }
+      .board-row:last-child {
+        .board-cell:first-child {
+          border-radius: 0 0 0 $border-radius;
+        }
 
-    .board-row:last-child {
-      .board-cell:first-child {
-        border-radius: 0 0 0 $border-radius;
-      }
-
-      .board-cell:last-child {
-        border-radius: 0 0 $border-radius 0;
+        .board-cell:last-child {
+          border-radius: 0 0 $border-radius 0;
+        }
       }
     }
   }

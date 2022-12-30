@@ -12,6 +12,7 @@ import Title from '@shared/Title/components/Title';
  */
 const Header = ({
   className = '',
+  content,
   height = 'small',
   leftSideNode = null,
   rightSideNode = null,
@@ -23,11 +24,15 @@ const Header = ({
   );
 
   return (
-    <div className={headerClassName} data-testid="header">
+    <header className={headerClassName} data-testid="header">
       {leftSideNode && <div className="header-left-side">{leftSideNode}</div>}
-      <Title className="header-title" title={title} type="h2" />
+
+      {!!title && <Title className="header-title" title={title} type="h2" />}
+
+      {!!content && !title && <div className="header-content">{content}</div>}
+
       {rightSideNode && <div className="header-right-side">{rightSideNode}</div>}
-    </div>
+    </header>
   );
 };
 

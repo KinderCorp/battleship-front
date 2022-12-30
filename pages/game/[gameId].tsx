@@ -1,15 +1,14 @@
 import type { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import { emitPlayerJoiningGame } from '@socket/emittingEvents';
 import type { GamePageContentProps } from '@game/models';
-import GamePageView from '@game/components/GamePageView';
+import GamePageView from '@game/components/GameOneVersusOne/GamePageView';
+import { isPlayerHost } from '@game/helpers';
 import Layout from '@shared/Layout/components/Layout';
 import { PATHS } from '@core/constants';
-import { selectGamePlayerAdmin } from '@game/selectors';
 import { selectPlayer } from '@player/selectors';
-import socket from '@socket/index';
-import { useSelector } from 'react-redux';
 
 export type GamePageParams = {
   gameId?: string;
@@ -22,14 +21,11 @@ export type GamePageParams = {
  * @return {JSX.Element|void}
  */
 const GamePage = ({ gameId }: GamePageContentProps): JSX.Element | void => {
-  const adminPlayer = useSelector(selectGamePlayerAdmin);
   const player = useSelector(selectPlayer);
 
-  // BUG: called two times
+  // BUG: called multiple times
   useEffect(() => {
-    if (adminPlayer?.socketId !== socket.id) {
-      emitPlayerJoiningGame(gameId, player);
-    }
+    if (!isPlayerHost()) emitPlayerJoiningGame(gameId, player);
   });
 
   return <GamePageView />;

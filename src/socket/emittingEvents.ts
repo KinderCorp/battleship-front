@@ -1,5 +1,7 @@
-import type { GameInstance, GamePlayer, GameSettings } from '@game/models';
+import type { GameInstance, GameSettings } from '@game/models';
+import type { BoardBoat } from '@shared/Board/models';
 import { formatGameRoomData } from '@socket/helpers';
+import { parseGameBoardBoatsForApi } from '@boat/helpers';
 import type { Player } from '@player/models';
 import socket from '@socket/index';
 import { SOCKET_EVENTS_EMITTING } from '@socket/constants';
@@ -11,8 +13,8 @@ import { SOCKET_EVENTS_EMITTING } from '@socket/constants';
  * @return {void}
  */
 export const emitCreateGame = ({ pseudo }: Player): void => {
-  // TODO: send also settings
-  socket.emit(SOCKET_EVENTS_EMITTING.CREATE_GAME, { pseudo, socketId: socket.id });
+  // TODO: send settings
+  socket.emit(SOCKET_EVENTS_EMITTING.CREATE_GAME, { pseudo });
 };
 
 /**
@@ -35,13 +37,7 @@ export const emitGameSettings = (data: GameSettings): void => {
 export const emitPlayerJoiningGame = (instanceId: string, { pseudo }: Player): void => {
   socket.emit(
     SOCKET_EVENTS_EMITTING.PLAYER_JOINING_GAME,
-    formatGameRoomData<GamePlayer>(
-      {
-        pseudo,
-        socketId: socket.id,
-      },
-      instanceId,
-    ),
+    formatGameRoomData<Player>({ pseudo }, instanceId),
   );
 };
 
@@ -55,11 +51,36 @@ export const emitPlayersReadyToPlaceBoats = (): void => {
 };
 
 /**
- * Emitting event for close room.
+ * Emitting event when player leave room.
  *
  * @param {GameInstance['instanceId']} instanceId Instance id
  * @return {void}
  */
-export const emitCloseRoom = (instanceId: GameInstance['instanceId']): void => {
-  socket.emit(SOCKET_EVENTS_EMITTING.CLOSE_ROOM, { instanceId });
+export const emitLeaveRoom = (instanceId: GameInstance['instanceId']): void => {
+  socket.emit(SOCKET_EVENTS_EMITTING.LEAVE_ROOM, { instanceId });
+};
+
+/**
+ * Emitting event when the player is ready after placing their boats.
+ *
+ * @param {BoardBoat[]} data Data
+ * @return {void}
+ */
+export const emitValidatePlayerBoatsPlacement = (data: BoardBoat[]): void => {
+  const boardBoat = parseGameBoardBoatsForApi(data);
+
+  socket.emit(
+    SOCKET_EVENTS_EMITTING.VALIDATE_PLAYER_BOATS_PLACEMENT,
+    formatGameRoomData<BoardBoat[]>(boardBoat),
+  );
+};
+
+/**
+ * Emitting event for start the game.
+ *
+ * @param {GameInstance['instanceId']} instanceId Instance id
+ * @return {void}
+ */
+export const emitStartGame = (instanceId: GameInstance['instanceId']): void => {
+  socket.emit(SOCKET_EVENTS_EMITTING.START_GAME, { instanceId });
 };
