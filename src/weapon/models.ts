@@ -6,14 +6,14 @@ export interface Weapon {
   id: number;
   maxAmmunition: number;
   name: string;
+  src: ImageProps['src'];
 }
 
-export interface ItemProps {
+export interface WeaponItemProps {
   className?: string;
+  counter?: number;
   isLocked?: boolean;
   isSelected?: boolean;
-  name: string;
-  numberOfUses?: number; // set to -1 to have unlimited uses
-  src: ImageProps['src'];
+  weapon: Weapon;
   onClick: (name: Weapon['name']) => void;
 }

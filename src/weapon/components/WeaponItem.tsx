@@ -5,32 +5,35 @@ import type { SyntheticEvent } from 'react';
 import { COLORS } from '@core/constants';
 import Icon from '@shared/Icon/components/Icon';
 import Image from '@shared/Image/components/Image';
-import type { ItemProps } from '@weapon/models';
 import NumberHelpers from '@helpers/NumberHelpers';
+import type { WeaponItemProps } from '@weapon/models';
 
 /**
  * WeaponItem component.
  *
- * @param {ItemProps} props Props
+ * @param {WeaponItemProps} props Props
  * @return {JSX.Element}
  */
 const WeaponItem = ({
   className = '',
+  counter,
   isLocked = false,
   isSelected = false,
-  name,
-  numberOfUses,
   onClick,
-  src,
-}: ItemProps): JSX.Element => {
-  const numberOfUsesActive = useMemo(
-    () => NumberHelpers.isNumber(numberOfUses) && numberOfUses >= -1,
-    [numberOfUses],
-  );
-  const disabled = useMemo(
-    () => !numberOfUsesActive || numberOfUses === 0 || isLocked,
-    [isLocked, numberOfUses, numberOfUsesActive],
-  );
+  weapon,
+}: WeaponItemProps): JSX.Element => {
+  const { name, src } = weapon;
+
+  const checkIsDisabled = useCallback(() => {
+    if (isLocked) return true;
+
+    if (NumberHelpers.isNumber(counter) && (counter < -1 || counter === 0)) return true;
+
+    return false;
+  }, [counter, isLocked]);
+
+  const counterActive = useMemo(() => NumberHelpers.isNumber(counter) && counter >= -1, [counter]);
+  const disabled = useMemo(() => checkIsDisabled(), [checkIsDisabled]);
 
   const handleClick = useCallback(
     (event: SyntheticEvent<EventTarget>) => {
@@ -47,14 +50,14 @@ const WeaponItem = ({
       classNames(
         'weapon-item',
         {
-          'weapon-item--has-counter': !!numberOfUsesActive,
+          'weapon-item--has-counter': !!counterActive && !isLocked,
           'weapon-item--is-disabled': !!disabled,
           'weapon-item--is-locked': !!isLocked,
           'weapon-item--is-selected': !!isSelected,
         },
         className,
       ),
-    [numberOfUsesActive, disabled, isLocked, isSelected, className],
+    [className, counterActive, disabled, isLocked, isSelected],
   );
 
   return (
@@ -76,12 +79,12 @@ const WeaponItem = ({
         />
       )}
 
-      {!!numberOfUsesActive && !isLocked && (
+      {!!counterActive && !isLocked && (
         <div className="weapon-item-counter">
-          {numberOfUses === -1 ? (
+          {counter === -1 ? (
             <Icon name="Infinity" color={COLORS.BROWN} borderColor={COLORS.ORANGE} size="small" />
           ) : (
-            numberOfUses
+            counter
           )}
         </div>
       )}

@@ -13,16 +13,15 @@ $inset-shadow: to-rem(2);
 
   .weapon-item-image {
     border-radius: $border-radius;
-    border: to-rem(3) solid $color-transparent;
     filter: grayscale(100%);
     height: 100%;
     left: 0;
+    border: 0 solid $color-orange;
     overflow: hidden;
     pointer-events: none;
     position: absolute;
     top: 0;
-    transition-duration: 0.2s;
-    transition-property: border, filter;
+    transition: border-width 0.1s;
     width: 100%;
   }
 
@@ -38,10 +37,10 @@ $inset-shadow: to-rem(2);
   }
 
   &.weapon-item--has-counter:not(.weapon-item--is-locked) {
-    box-shadow: 0 to-rem(4) $color-purple-dark-2;
+    border-bottom: to-rem(4) solid $color-purple-dark-2;
 
     &.weapon-item--is-selected:not(.weapon-item--is-disabled) .weapon-item-image {
-      border-color: $color-orange;
+      border-width: to-rem(3);
     }
 
     .weapon-item-counter {
