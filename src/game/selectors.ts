@@ -42,29 +42,29 @@ export const selectGameRoomSettings = createSelector(
 
 export const selectGameRoomPlayers = createSelector(
   selectGameRoom,
-  (state: Partial<GameRoom>): (GamePlayer | undefined)[] => state.players || [],
+  (state: Partial<GameRoom>): GamePlayer[] => state.players || [],
 );
 
 export const selectGameRoomPlayerHost = createSelector(
   selectGameRoomPlayers,
-  (state: (GamePlayer | undefined)[]): Partial<GamePlayer> =>
+  (state: GamePlayer[]): Partial<GamePlayer> =>
     state.find((player) => player?.isHost) || ({} as Partial<GamePlayer>),
 );
 
 export const selectGameRoomPlayerRival = createSelector(
   selectGameRoomPlayers,
-  (state: (GamePlayer | undefined)[]): Partial<GamePlayer> =>
+  (state: GamePlayer[]): Partial<GamePlayer> =>
     state.find((player) => !player?.isHost) || ({} as Partial<GamePlayer>),
 );
 
 export const selectGameRoomPlayer = createSelector(
   selectGameRoomPlayers,
-  (state: (GamePlayer | undefined)[]): Partial<GamePlayer> =>
+  (state: GamePlayer[]): Partial<GamePlayer> =>
     state.find((player) => player?.socketId === socket.id) || ({} as Partial<GamePlayer>),
 );
 
 export const selectGameRoomOtherPlayer = createSelector(
   selectGameRoomPlayers,
-  (state: (GamePlayer | undefined)[]): Partial<GamePlayer> =>
+  (state: GamePlayer[]): Partial<GamePlayer> =>
     state.find((player) => player?.socketId !== socket.id) || ({} as Partial<GamePlayer>),
 );
