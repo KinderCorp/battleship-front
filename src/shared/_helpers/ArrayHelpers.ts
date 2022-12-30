@@ -4,7 +4,7 @@ class ArrayHelpers {
    *
    * @template T
    * @param {T} array Array
-   * @return {any}
+   * @return {T}
    */
   static getRandomItem<T>(array: T[]): T {
     return array[Math.floor(Math.random() * array.length)];
