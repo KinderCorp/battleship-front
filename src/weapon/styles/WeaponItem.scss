@@ -1,46 +1,72 @@
-.item {
+$inset-shadow: to-rem(2);
+
+.weapon-item {
+  @include fixed-size(to-rem(100));
+
   background-color: $color-purple-dark-2;
-  width: to-rem(100);
-  height: to-rem(100);
   border-radius: $border-radius;
+  position: relative;
 
-  &.is-selected {
-    border: 3px solid $color-orange;
+  &:not(.weapon-item--is-disabled) {
+    cursor: pointer;
   }
 
-  &.is-disabled,
-  &.is-locked {
-    .item-image {
-      -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-      filter: grayscale(100%);
+  .weapon-item-image {
+    border-radius: $border-radius;
+    border: to-rem(3) solid $color-transparent;
+    filter: grayscale(100%);
+    height: 100%;
+    left: 0;
+    overflow: hidden;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    transition-duration: 0.2s;
+    transition-property: border, filter;
+    width: 100%;
+  }
+
+  &.weapon-item--is-selected:not(.weapon-item--is-disabled) .weapon-item-image {
+    filter: none;
+  }
+
+  .weapon-item-lock {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(35%, -35%);
+  }
+
+  &.weapon-item--has-counter:not(.weapon-item--is-locked) {
+    box-shadow: 0 to-rem(4) $color-purple-dark-2;
+
+    &.weapon-item--is-selected:not(.weapon-item--is-disabled) .weapon-item-image {
+      border-color: $color-orange;
     }
-  }
 
-  .item-lock {
-    width: to-rem(30);
-    height: to-rem(30);
-    position: relative;
-    left: to-rem(87);
-    bottom: to-rem(10);
-  }
+    .weapon-item-counter {
+      @include fixed-size(to-rem(30));
+      @include font-text-small;
 
-  .item-badge {
-    &::before {
-      @include light-reflection;
+      align-items: center;
+      background-color: $color-orange;
+      border-radius: 50%;
+      border: to-rem(1) solid $color-brown;
+      box-shadow: inset 0 $inset-shadow $color-yellow, inset 0 - $inset-shadow $color-orange-dark;
+      color: $color-brown;
+      display: flex;
+      font-weight: $font-weight-black;
+      justify-content: center;
+      overflow: hidden;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transform: translate(35%, -35%);
+
+      &::before {
+        @include light-reflection-round;
+      }
     }
-
-    width: to-rem(30);
-    height: to-rem(30);
-    position: relative;
-    left: to-rem(87);
-    bottom: to-rem(10);
-    text-align: center;
-    vertical-align: middle;
-    display: table-cell;
-    color: $color-brown;
-    background-color: $color-orange;
-    border-radius: 50%;
-    border: 1px $color-brown solid;
-    box-shadow: inset 0 $inset-shadow $color-yellow, inset 0 - $inset-shadow $color-orange-dark;
   }
 }

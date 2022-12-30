@@ -6,9 +6,10 @@ import { COLORS } from '@core/constants';
 import Icon from '@shared/Icon/components/Icon';
 import Image from '@shared/Image/components/Image';
 import type { ItemProps } from '@weapon/models';
+import NumberHelpers from '@helpers/NumberHelpers';
 
 /**
- * Item component.
+ * WeaponItem component.
  *
  * @param {ItemProps} props Props
  * @return {JSX.Element}
@@ -22,7 +23,14 @@ const WeaponItem = ({
   onClick,
   src,
 }: ItemProps): JSX.Element => {
-  const disabled = useMemo(() => numberOfUses === 0 || isLocked, [isLocked, numberOfUses]);
+  const numberOfUsesActive = useMemo(
+    () => NumberHelpers.isNumber(numberOfUses) && numberOfUses >= -1,
+    [numberOfUses],
+  );
+  const disabled = useMemo(
+    () => !numberOfUsesActive || numberOfUses === 0 || isLocked,
+    [isLocked, numberOfUses, numberOfUsesActive],
+  );
 
   const handleClick = useCallback(
     (event: SyntheticEvent<EventTarget>) => {
@@ -37,32 +45,43 @@ const WeaponItem = ({
   const itemClassName = useMemo(
     (): string =>
       classNames(
-        'item',
+        'weapon-item',
         {
-          'has-badge': numberOfUses && numberOfUses >= 0,
-          'is-disabled': !!disabled,
-          'is-locked': !!isLocked,
-          'is-selected': !!isSelected,
+          'weapon-item--has-counter': !!numberOfUsesActive,
+          'weapon-item--is-disabled': !!disabled,
+          'weapon-item--is-locked': !!isLocked,
+          'weapon-item--is-selected': !!isSelected,
         },
         className,
       ),
-    [numberOfUses, disabled, isLocked, isSelected, className],
+    [numberOfUsesActive, disabled, isLocked, isSelected, className],
   );
 
   return (
     <div className={itemClassName} onClick={handleClick}>
-      <Image src={src} alt={name} className="item-image" />
+      <Image
+        alt={name}
+        className="weapon-item-image"
+        objectFit="cover"
+        sizes={{ default: '100px' }}
+        src={src}
+      />
 
       {!!isLocked && (
-        <Icon name="Lock" color={COLORS.WHITE} borderColor={COLORS.BLACK} className="item-lock" />
+        <Icon
+          borderColor={COLORS.BLACK}
+          className="weapon-item-lock"
+          color={COLORS.WHITE}
+          name="Lock"
+        />
       )}
 
-      {numberOfUses && (
-        <div className="item-badge">
-          {numberOfUses >= 0 ? (
-            numberOfUses
+      {!!numberOfUsesActive && !isLocked && (
+        <div className="weapon-item-counter">
+          {numberOfUses === -1 ? (
+            <Icon name="Infinity" color={COLORS.BROWN} borderColor={COLORS.ORANGE} size="small" />
           ) : (
-            <Icon name="Infinity" color={COLORS.BROWN} borderColor={COLORS.ORANGE} />
+            numberOfUses
           )}
         </div>
       )}
