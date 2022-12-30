@@ -20,6 +20,7 @@
   "test.key": "Clé de test",
   "test.keyWithReplacedValue": "Pour moi, c’est un {value}. Un {value}, tout le monde sait ce que c’est…",
   "versus": "VS",
+  "waiting-for-host": "En attente de l'hôte...",
   "waiting": "En attente...",
-  "waiting-for-host": "En attente de l'hôte..."
+  "weapon": "Arme {name}"
 }

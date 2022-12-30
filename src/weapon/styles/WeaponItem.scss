@@ -1,0 +1,72 @@
+$inset-shadow: to-rem(2);
+
+.weapon-item {
+  @include fixed-size(to-rem(100));
+
+  background-color: $color-purple-dark-2;
+  border-radius: $border-radius;
+  position: relative;
+
+  &:not(.weapon-item--is-disabled) {
+    cursor: pointer;
+  }
+
+  .weapon-item-image {
+    border-radius: $border-radius;
+    border: 0 solid $color-orange;
+    filter: grayscale(100%);
+    height: 100%;
+    left: 0;
+    overflow: hidden;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    transition-duration: 0.1s;
+    transition-property: border-width, filter;
+    width: 100%;
+  }
+
+  &.weapon-item--is-selected:not(.weapon-item--is-disabled) .weapon-item-image {
+    filter: none;
+  }
+
+  .weapon-item-lock {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(35%, -35%);
+  }
+
+  &.weapon-item--has-counter:not(.weapon-item--is-locked) {
+    border-bottom: to-rem(4) solid $color-purple-dark-2;
+
+    &.weapon-item--is-selected:not(.weapon-item--is-disabled) .weapon-item-image {
+      border-width: to-rem(3);
+    }
+
+    .weapon-item-counter {
+      @include fixed-size(to-rem(30));
+      @include font-text-small;
+
+      align-items: center;
+      background-color: $color-orange;
+      border-radius: 50%;
+      border: to-rem(1) solid $color-brown;
+      box-shadow: inset 0 $inset-shadow $color-yellow, inset 0 - $inset-shadow $color-orange-dark;
+      color: $color-brown;
+      display: flex;
+      font-weight: $font-weight-black;
+      justify-content: center;
+      overflow: hidden;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transform: translate(35%, -35%);
+
+      &::before {
+        @include light-reflection-round;
+      }
+    }
+  }
+}
