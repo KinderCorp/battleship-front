@@ -3,6 +3,16 @@ import StringHelpers from '@helpers/StringHelpers';
 
 class NumberHelpers {
   /**
+   * Check if the value is a number.
+   *
+   * @param {unknown} value Value to check
+   * @return {boolean}
+   */
+  static isNumber(value: unknown): value is number {
+    return typeof value === 'number';
+  }
+
+  /**
    * Generate random number in given range.
    *
    * @param {number} min Minimum value
