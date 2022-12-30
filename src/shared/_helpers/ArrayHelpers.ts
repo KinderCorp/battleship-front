@@ -2,7 +2,8 @@ class ArrayHelpers {
   /**
    * Get a random item in the array.
    *
-   * @param {unknown[]} array Array
+   * @template T
+   * @param {T} array Array
    * @return {any}
    */
   static getRandomItem<T>(array: T[]): T {
