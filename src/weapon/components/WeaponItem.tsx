@@ -6,6 +6,7 @@ import { COLORS } from '@core/constants';
 import Icon from '@shared/Icon/components/Icon';
 import Image from '@shared/Image/components/Image';
 import NumberHelpers from '@helpers/NumberHelpers';
+import useTranslation from '@hooks/useTranslation';
 import type { WeaponItemProps } from '@weapon/models';
 
 /**
@@ -22,6 +23,8 @@ const WeaponItem = ({
   onClick,
   weapon,
 }: WeaponItemProps): JSX.Element => {
+  const { translate } = useTranslation();
+
   const { name, src } = weapon;
 
   const checkIsDisabled = useCallback(() => {
@@ -63,7 +66,7 @@ const WeaponItem = ({
   return (
     <div className={itemClassName} onClick={handleClick}>
       <Image
-        alt={name}
+        alt={translate('weapon', { name })}
         className="weapon-item-image"
         objectFit="cover"
         sizes={{ default: '100px' }}
