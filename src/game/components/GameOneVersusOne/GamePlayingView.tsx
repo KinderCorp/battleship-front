@@ -1,4 +1,4 @@
-// import { useCallback } from 'react';
+import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
 import {
@@ -7,7 +7,7 @@ import {
   selectGameRoomSettings,
 } from '@game/selectors';
 import Board from '@shared/Board/components/Board';
-// import type { Position } from '@shared/Board/models';
+import type { Position } from '@shared/Board/models';
 import TitleIndication from '@shared/Title/components/TitleIndication';
 import useTranslation from '@hooks/useTranslation';
 
@@ -23,7 +23,8 @@ const GamePlayingView = (): JSX.Element => {
   const otherPlayer = useSelector(selectGameRoomOtherPlayer);
   const { boardDimensions } = useSelector(selectGameRoomSettings);
 
-  // const handleShoot = useCallback((position: Position) => {}, []);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+  const handleShoot = useCallback((position: Position) => {}, []);
 
   return (
     <div className="game-playing">
@@ -47,7 +48,7 @@ const GamePlayingView = (): JSX.Element => {
           dimensions={boardDimensions}
           isDisabled={!!otherPlayer.isTurn}
           isShootActive={!!player.isTurn}
-          // onClick={handleShoot}
+          onClick={handleShoot}
         />
       </div>
     </div>

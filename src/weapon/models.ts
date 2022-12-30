@@ -17,3 +17,8 @@ export interface WeaponItemProps {
   weapon: Weapon;
   onClick: (name: Weapon['name']) => void;
 }
+
+export interface WeaponListProps extends Pick<WeaponItemProps, 'onClick'> {
+  className?: string;
+  weaponItems: Omit<WeaponItemProps, 'className' | 'onClick'>[];
+}

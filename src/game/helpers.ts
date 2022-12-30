@@ -1,12 +1,11 @@
 import type { BoardCellAffected, Position } from '@shared/Board/models';
-import { GAME_ROOM_SETTINGS, GAME_SETTINGS, GameView } from '@game/constants';
+import { GAME_ROOM_SETTINGS, GAME_SETTINGS } from '@game/constants';
 import type {
   GamePlayer,
   GamePlayerBoard,
   GameRoom,
   GameRoomSettings,
   GameSettings,
-  GameState,
 } from '@game/models';
 import type { ApiGameRoomData } from '@api/models';
 import ArrayHelpers from '@helpers/ArrayHelpers';
@@ -20,11 +19,11 @@ import store from '@core/store';
 /**
  * Check if a game is full.
  *
- * @param {GameRoom} gameRoom Game room
+ * @param {Partial<GameRoom>} gameRoom Game room
  * @return {boolean}
  */
-export const checkGameIsFull = (gameRoom: GameRoom): boolean => {
-  return gameRoom?.players?.length >= 2 || false;
+export const checkGameIsFull = (gameRoom: Partial<GameRoom>): boolean => {
+  return (ArrayHelpers.isArray(gameRoom?.players) && gameRoom.players.length >= 2) || false;
 };
 
 /**
@@ -36,18 +35,6 @@ export const isPlayerHost = (): boolean => {
   const hostPlayer = selectGameRoomPlayerHost(store.getState());
   return hostPlayer.socketId === socket.id;
 };
-
-/**
- * Parse game state.
- *
- * @param {any} gameState Game state
- * @return {GameState}
- */
-export const parseGameState = (gameState: any): GameState => ({
-  gameRoom: parseGameRoom(gameState.gameRoom),
-  settings: parseGameSettings(gameState.settings),
-  view: gameState.view || GameView.SETTINGS,
-});
 
 /**
  * Parse a game room data.

@@ -48,7 +48,7 @@ const WeaponItem = ({
     [disabled, name, onClick],
   );
 
-  const itemClassName = useMemo(
+  const weaponItemClassName = useMemo(
     (): string =>
       classNames(
         'weapon-item',
@@ -64,7 +64,7 @@ const WeaponItem = ({
   );
 
   return (
-    <div className={itemClassName} onClick={handleClick}>
+    <div className={weaponItemClassName} onClick={handleClick}>
       <Image
         alt={translate('weapon', { name })}
         className="weapon-item-image"
