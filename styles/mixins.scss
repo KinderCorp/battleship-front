@@ -155,6 +155,13 @@
   width: 100%;
 }
 
+@mixin light-reflection-round {
+  @include light-reflection;
+
+  border-radius: 50%;
+  height: 60%;
+}
+
 // Media breakpoints
 @mixin bp-phablet {
   @media (min-width: $breakpoint-extra-small) {
