@@ -16,6 +16,9 @@
 // Boat
 @import '~@boat/styles/Boat';
 
+// Weapon
+@import '~@weapon/styles/WeaponItem';
+
 // Shared styles
 @import '~@shared/BlockContainer/styles/BlockContainer';
 @import '~@shared/Board/styles/Board';
@@ -40,4 +43,3 @@
 @import '~@shared/Title/styles/TitleIndication';
 @import '~@shared/UserCard/styles/UserCard';
 @import '~@shared/Versus/styles/Versus';
-@import '~@shared/WeaponItem/styles/WeaponItem';
