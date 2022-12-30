@@ -56,6 +56,7 @@ const GameSettingsView = (): JSX.Element => {
           iconName="Share"
           title={translate('share-to-friend')}
         >
+          {/* // TODO: make a component <ShareLink /> */}
           <TextContainer value={shareLink} />
           <Button
             iconName={clickedButtonCopy ? 'Check' : 'Copy'}
