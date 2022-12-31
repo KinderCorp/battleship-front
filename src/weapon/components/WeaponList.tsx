@@ -10,16 +10,29 @@ import type { WeaponListProps } from '@weapon/models';
  * @param {WeaponListProps} props Props
  * @return {JSX.Element}
  */
-const WeaponList = ({ className = '', onClick, weaponItems }: WeaponListProps): JSX.Element => {
+const WeaponList = ({
+  className = '',
+  isDisabled = false,
+  onClick,
+  weaponItems,
+}: WeaponListProps): JSX.Element => {
   const weaponListClassName = useMemo(
-    (): string => classNames('weapon-list', className),
-    [className],
+    (): string =>
+      classNames('weapon-list', { 'weapon-list--is-disabled': !!isDisabled }, className),
+    [className, isDisabled],
   );
 
   return (
     <div className={weaponListClassName}>
-      {weaponItems.map(({ weapon }, index) => (
-        <WeaponItem key={index} onClick={onClick} weapon={weapon} />
+      {weaponItems.map(({ counter, isLocked, isSelected, weapon }, index) => (
+        <WeaponItem
+          counter={counter}
+          isLocked={isLocked}
+          isSelected={isSelected}
+          key={index}
+          onClick={onClick}
+          weapon={weapon}
+        />
       ))}
     </div>
   );
