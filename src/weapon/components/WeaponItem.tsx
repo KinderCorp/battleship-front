@@ -43,9 +43,9 @@ const WeaponItem = ({
       event.preventDefault();
       event.stopPropagation();
 
-      if (!disabled) onClick(name);
+      if (!disabled) onClick(weapon);
     },
-    [disabled, name, onClick],
+    [disabled, onClick, weapon],
   );
 
   const weaponItemClassName = useMemo(
