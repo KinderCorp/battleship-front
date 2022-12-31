@@ -126,3 +126,11 @@ export const listeningGameStarted = (): void => {
 export const listeningClosedRoom = (): void => {
   UrlHelpers.changeLocation(PATHS.DEFAULT);
 };
+
+/* eslint-disable @typescript-eslint/no-empty-function */
+/**
+ * Listening event when player is shot.
+ *
+ * @return {void}
+ */
+export const listeningShot = (): void => {};

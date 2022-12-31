@@ -11,6 +11,7 @@ import {
   listeningOnePlayerHasPlacedHisBoats,
   listeningPlayerDisconnected,
   listeningPlayerJoined,
+  listeningShot,
   listeningStartPlacingBoats,
 } from '@socket/listeningEvents';
 import { SOCKET_EVENTS_LISTENING } from '@socket/constants';
@@ -42,5 +43,6 @@ socket.on(
   listeningOnePlayerHasPlacedHisBoats,
 );
 socket.on(SOCKET_EVENTS_LISTENING.GAME_STARTED, listeningGameStarted);
+socket.on(SOCKET_EVENTS_LISTENING.SHOT, listeningShot);
 
 export default socket;
