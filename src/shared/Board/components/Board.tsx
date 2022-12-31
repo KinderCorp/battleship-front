@@ -89,7 +89,7 @@ export const Board = ({
           <BoardCell
             isDisabled={isDisabled}
             isShootActive={isShootActive}
-            key={`cell-${row}-${col}`}
+            key={`cell-${col}-${row}`}
             onClick={onClick}
             state={cellAffected?.state}
             x={col}
@@ -98,7 +98,7 @@ export const Board = ({
         );
       }
 
-      board.push(<BoardRow key={`line-${row}`}>{cells}</BoardRow>);
+      board.unshift(<BoardRow key={`line-${row}`}>{cells}</BoardRow>);
     }
 
     return board;
@@ -113,7 +113,7 @@ export const Board = ({
       {boats?.map((boardBoat: BoardBoat, index: number) => {
         const style: CSSProperties = {
           left: `${(boardBoat.x * 100) / dimensions}%`,
-          top: `${(boardBoat.y * 100) / dimensions}%`,
+          top: `${((dimensions - boardBoat.y - 1) * 100) / dimensions}%`,
           transformOrigin: `${100 / boardBoat.widthCell / 2}% ${100 / boardBoat.lengthCell / 2}%`,
         };
 

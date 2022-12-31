@@ -116,8 +116,8 @@ export const hasXAxisReversed = (
  */
 export const hasYAxisReversed = (
   direction: BoatDirection,
-): direction is BoatDirection.WEST | BoatDirection.SOUTH => {
-  return direction === BoatDirection.WEST || direction === BoatDirection.SOUTH;
+): direction is BoatDirection.EAST | BoatDirection.NORTH => {
+  return direction === BoatDirection.EAST || direction === BoatDirection.NORTH;
 };
 
 /**
