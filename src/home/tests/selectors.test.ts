@@ -1,6 +1,6 @@
 import * as homeSelectors from '@home/selectors';
 import { HOME_NAME } from '@home/constants';
-import homeStateMock from '@mocks/state/homeState.mock';
+import homeStateMock from '@mocks/store/homeState.mock';
 import { setupStore } from '@core/store';
 
 const state = setupStore().getState();
