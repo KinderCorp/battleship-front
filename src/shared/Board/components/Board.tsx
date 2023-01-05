@@ -17,7 +17,7 @@ import ObjectHelpers from '@helpers/ObjectHelpers';
  * @return {JSX.Element}
  */
 export const Board = ({
-  boats,
+  boats = [],
   cellsAffected,
   className = '',
   dimensions,
