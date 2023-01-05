@@ -12,7 +12,9 @@
   box-shadow: 0 to-rem(-4) to-rem(14) to-rem(8) rgba($color-black, 0.3);
 
   &.weapon-list--is-disabled {
-    opacity: 0.6;
-    pointer-events: none;
+    .weapon-item {
+      opacity: 0.6;
+      pointer-events: none;
+    }
   }
 }
