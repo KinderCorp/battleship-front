@@ -59,6 +59,7 @@ export const emitPlayersReadyToPlaceBoats = (): void => {
  * @return {void}
  */
 export const emitLeaveRoom = (instanceId: GameInstance['instanceId']): void => {
+  // TASK: don't send instanceId, get instance id thanks to user socket id
   socket.emit(SOCKET_EVENTS_EMITTING.LEAVE_ROOM, { instanceId });
 };
 
@@ -84,7 +85,7 @@ export const emitValidatePlayerBoatsPlacement = (data: BoardBoat[]): void => {
  * @return {void}
  */
 export const emitStartGame = (instanceId: GameInstance['instanceId']): void => {
-  // TASK: send only "instanceId" in parameters, not in a object?
+  // TASK: don't send instanceId, get instance id thanks to user socket id
   socket.emit(SOCKET_EVENTS_EMITTING.START_GAME, { instanceId });
 };
 
