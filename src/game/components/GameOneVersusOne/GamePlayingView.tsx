@@ -25,7 +25,6 @@ import WeaponList from '@src/weapon/components/WeaponList';
 const GamePlayingView = (): JSX.Element => {
   const { translate } = useTranslation();
 
-  // TODO: Get API weapons
   const weapons = parseWeapons(apiGetWeaponsResponseMock.data);
   const [selectedWeapon, setSelectedWeapon] = useState<Weapon>(
     weapons.find((weapon) => weapon.maxAmmunition === -1) || ({} as Weapon),
