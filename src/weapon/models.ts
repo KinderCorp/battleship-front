@@ -26,3 +26,5 @@ export interface WeaponListProps extends Pick<WeaponItemProps, 'onClick'> {
   isDisabled?: boolean;
   weaponItems: WeaponItem[];
 }
+
+export type GetWeaponsResponse = Weapon[];
