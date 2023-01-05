@@ -14,6 +14,10 @@
 
   .button-ready {
     margin: to-rem(40) auto 0;
+
+    &.primary {
+      pointer-events: none;
+    }
   }
 
   .rival-indication {
