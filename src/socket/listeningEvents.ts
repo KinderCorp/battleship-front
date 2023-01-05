@@ -3,6 +3,7 @@ import { selectGameRoomPlayerHost, selectGameRoomPlayers } from '@game/selectors
 import { setGameRoom, setGameRoomPlayers, setView } from '@game/reducer';
 import type { GamePlayer } from '@game/models';
 import { GameView } from '@game/constants';
+import ObjectHelpers from '@helpers/ObjectHelpers';
 import { PATHS } from '@core/constants';
 import store from '@core/store';
 import UrlHelpers from '@helpers/UrlHelpers';
@@ -112,10 +113,22 @@ export const listeningOnePlayerHasPlacedHisBoats = (gameRoomData: any): void => 
 /**
  * Listening event when game is started.
  *
+ * @param {any} gameRoomData Game room data
  * @return {void}
  */
-export const listeningGameStarted = (): void => {
+export const listeningGameStarted = (gameRoomData: any): void => {
+  const { data } = parseGameRoomData(gameRoomData);
+  const playerTurn = parseGamePlayer(data.isTurnOf);
+
+  const players = ObjectHelpers.deepClone(selectGameRoomPlayers(store.getState()));
+  const player = players.find((player) => player.socketId === playerTurn.socketId);
+
+  if (!player) return;
+
+  player.isTurn = true;
+
   store.dispatch(setView(GameView.PLAYING));
+  store.dispatch(setGameRoomPlayers(players));
 };
 
 /**
