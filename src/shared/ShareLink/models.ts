@@ -1,4 +1,4 @@
-export interface TextContainerProps {
+export interface ShareLinkProps {
   className?: string;
   value: string;
 }

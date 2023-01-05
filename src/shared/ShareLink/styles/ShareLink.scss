@@ -1,0 +1,28 @@
+.share-link {
+  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+
+  .share-link-value {
+    @include fixed-size(initial, to-rem(60));
+    @include font-text;
+
+    align-items: center;
+    background-color: $color-purple-dark-2;
+    border-radius: $border-radius;
+    display: flex;
+    margin-right: to-rem(10);
+    margin: 0 to-rem(10) 0 0;
+    min-width: to-rem(100);
+    overflow: hidden;
+    padding: 0 to-rem(20);
+    text-overflow: ellipsis;
+    user-select: text;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  .share-link-button:not(.is-disabled) {
+    border-color: $color-purple-dark-2;
+  }
+}
