@@ -16,8 +16,8 @@ import type { WeaponItemProps } from '@weapon/models';
  * @return {JSX.Element}
  */
 const WeaponItem = ({
+  ammunition,
   className = '',
-  counter,
   isLocked = false,
   isSelected = false,
   onClick,
@@ -30,12 +30,15 @@ const WeaponItem = ({
   const checkIsDisabled = useCallback(() => {
     if (isLocked) return true;
 
-    if (NumberHelpers.isNumber(counter) && (counter < -1 || counter === 0)) return true;
+    if (NumberHelpers.isNumber(ammunition) && (ammunition < -1 || ammunition === 0)) return true;
 
     return false;
-  }, [counter, isLocked]);
+  }, [ammunition, isLocked]);
 
-  const counterActive = useMemo(() => NumberHelpers.isNumber(counter) && counter >= -1, [counter]);
+  const ammunitionActive = useMemo(
+    () => NumberHelpers.isNumber(ammunition) && ammunition >= -1,
+    [ammunition],
+  );
   const disabled = useMemo(() => checkIsDisabled(), [checkIsDisabled]);
 
   const handleClick = useCallback(
@@ -53,14 +56,14 @@ const WeaponItem = ({
       classNames(
         'weapon-item',
         {
-          'weapon-item--has-counter': !!counterActive && !isLocked,
+          'weapon-item--has-ammunition': !!ammunitionActive && !isLocked,
           'weapon-item--is-disabled': !!disabled,
           'weapon-item--is-locked': !!isLocked,
           'weapon-item--is-selected': !!isSelected,
         },
         className,
       ),
-    [className, counterActive, disabled, isLocked, isSelected],
+    [className, ammunitionActive, disabled, isLocked, isSelected],
   );
 
   return (
@@ -82,12 +85,12 @@ const WeaponItem = ({
         />
       )}
 
-      {!!counterActive && !isLocked && (
-        <div className="weapon-item-counter">
-          {counter === -1 ? (
+      {!!ammunitionActive && !isLocked && (
+        <div className="weapon-item-ammunition">
+          {ammunition === -1 ? (
             <Icon name="Infinity" color={COLORS.BROWN} borderColor={COLORS.ORANGE} size="small" />
           ) : (
-            counter
+            ammunition
           )}
         </div>
       )}

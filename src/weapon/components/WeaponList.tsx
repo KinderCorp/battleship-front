@@ -27,9 +27,9 @@ const WeaponList = ({
 
   return (
     <div className={weaponListClassName}>
-      {weaponItems.map(({ counter, isLocked, isSelected, weapon }, index) => (
+      {weaponItems.map(({ ammunition, isLocked, isSelected, weapon }, index) => (
         <WeaponItem
-          counter={counter}
+          ammunition={ammunition}
           isLocked={isLocked}
           isSelected={isSelected}
           key={index}

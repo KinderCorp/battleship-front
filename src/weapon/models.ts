@@ -10,7 +10,7 @@ export interface Weapon {
 }
 
 export interface WeaponItem {
-  counter?: number;
+  ammunition?: number;
   isLocked?: boolean;
   isSelected?: boolean;
   weapon: Weapon;
