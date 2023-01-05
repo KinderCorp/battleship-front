@@ -35,12 +35,18 @@ export interface GamePlayerBoard {
   boardBoats: BoardBoat[];
 }
 
+export interface GamePlayerWeaponStorage {
+  ammunition: number;
+  weaponName: Weapon['name'];
+}
+
 export interface GamePlayer extends BasePlayer {
   board: GamePlayerBoard;
-  boatsAreReady?: boolean;
+  boatsAreReady: boolean;
   isHost: boolean;
-  isTurn?: boolean;
+  isTurn: boolean;
   socketId: string;
+  weaponsStorage: GamePlayerWeaponStorage[];
 }
 
 export interface GameRoom extends GameInstance {

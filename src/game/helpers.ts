@@ -96,6 +96,7 @@ export const parseGamePlayer = (gamePlayer: any): GamePlayer => ({
   isTurn: gamePlayer?.isTurn || false,
   pseudo: gamePlayer?.pseudo || '',
   socketId: gamePlayer?.socketId || '',
+  weaponsStorage: gamePlayer?.weaponsStorage || [],
 });
 
 /**

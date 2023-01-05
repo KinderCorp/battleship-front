@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import {
@@ -10,6 +10,7 @@ import type { Weapon, WeaponItem } from '@src/weapon/models';
 import apiGetWeaponsResponseMock from '@mocks/api/apiGetWeaponsResponse.mock';
 import Board from '@shared/Board/components/Board';
 import { emitShoot } from '@socket/emittingEvents';
+import type { GamePlayerWeaponStorage } from '@game/models';
 import { parseWeapons } from '@src/weapon/helpers';
 import type { Position } from '@shared/Board/models';
 import TitleIndication from '@shared/Title/components/TitleIndication';
@@ -26,28 +27,31 @@ const GamePlayingView = (): JSX.Element => {
 
   // TODO: Get API weapons
   const weapons = parseWeapons(apiGetWeaponsResponseMock.data);
-  const [selectedWeapon, setSelectedWeapon] = useState<Weapon>(weapons[0]);
+  const [selectedWeapon, setSelectedWeapon] = useState<Weapon>(
+    weapons.find((weapon) => weapon.maxAmmunition === -1) || ({} as Weapon),
+  );
 
   const player = useSelector(selectGameRoomPlayer);
   const otherPlayer = useSelector(selectGameRoomOtherPlayer);
   const { boardDimensions } = useSelector(selectGameRoomSettings);
+
+  const weaponsItems = useMemo(
+    () =>
+      player.weaponsStorage?.map(
+        ({ ammunition, weaponName }: GamePlayerWeaponStorage): WeaponItem => ({
+          ammunition,
+          isSelected: selectedWeapon.name === weaponName,
+          weapon: weapons.find((weapon) => weapon.name === weaponName) || ({} as Weapon),
+        }),
+      ) || [],
+    [player, selectedWeapon, weapons],
+  );
 
   const handleShoot = useCallback(
     (position: Position) => {
       emitShoot(selectedWeapon.name, position);
     },
     [selectedWeapon],
-  );
-
-  const getWeaponItems = useCallback(
-    (): WeaponItem[] =>
-      weapons.map((weapon) => ({
-        counter: weapon.maxAmmunition,
-        isLocked: false,
-        isSelected: selectedWeapon.name === weapon.name,
-        weapon,
-      })),
-    [selectedWeapon, weapons],
   );
 
   return (
@@ -79,7 +83,7 @@ const GamePlayingView = (): JSX.Element => {
       <WeaponList
         isDisabled={!player.isTurn}
         onClick={setSelectedWeapon}
-        weaponItems={getWeaponItems()}
+        weaponItems={weaponsItems}
       />
     </div>
   );
