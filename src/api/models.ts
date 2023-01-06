@@ -26,9 +26,15 @@ export type ApiResponseParsed<T> = {
 
 // Response
 export type ApiGetHelloWorldResponse = GetHelloWorldResponse;
-export type ApiGetWeaponResponse = Partial<ApiWeapon>;
+
+export type ApiWeaponResponse = Partial<ApiWeapon>;
+export type ApiGetWeaponResponse = ApiWeaponResponse;
+
+export type ApiBoatResponse = Partial<ApiBoat>;
 
 // Boat
+export type ApiBoat = Boat;
+
 export interface ApiBoardBoat extends Pick<Boat, 'name'>, Pick<BoatProps, 'direction'> {
   bowCells: ApiPosition[];
 }
