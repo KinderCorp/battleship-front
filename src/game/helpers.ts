@@ -1,3 +1,4 @@
+import type { ApiGameRoomData, ApiPosition } from '@api/models';
 import type { BoardCellAffected, Position } from '@shared/Board/models';
 import { GAME_ROOM_SETTINGS, GAME_SETTINGS } from '@game/constants';
 import type {
@@ -7,7 +8,6 @@ import type {
   GameRoomSettings,
   GameSettings,
 } from '@game/models';
-import type { ApiGameRoomData } from '@api/models';
 import ArrayHelpers from '@helpers/ArrayHelpers';
 import { BoardCellState } from '@shared/Board/constants';
 import { parseAuthorizedFleet } from '@boat/helpers';
@@ -152,10 +152,10 @@ export const parseGameRoom = (gameRoom: any): GameRoom => ({
 /**
  * Parse a position.
  *
- * @param {any} position Position
+ * @param {ApiPosition} position Position
  * @return {Position}
  */
-export const parsePosition = (position: any): Position => ({
+export const parsePosition = (position: ApiPosition): Position => ({
   x: position?.[0] || 0,
   y: position?.[1] || 0,
 });
@@ -163,8 +163,10 @@ export const parsePosition = (position: any): Position => ({
 /**
  * Parse positions.
  *
- * @param {any} positions Positions
+ * @param {ApiPosition[]} positions Positions
  * @return {Position[]}
  */
-export const parsePositions = (positions: any): Position[] =>
-  ArrayHelpers.isArray(positions) ? positions.map((position: any) => parsePosition(position)) : [];
+export const parsePositions = (positions: ApiPosition[]): Position[] =>
+  ArrayHelpers.isArray(positions)
+    ? positions.map((position: ApiPosition) => parsePosition(position))
+    : [];

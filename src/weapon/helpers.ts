@@ -21,7 +21,7 @@ export const parseWeapons = (weapons: ApiGetWeaponResponse[]): Weapon[] =>
  * @return {Weapon}
  */
 export const parseWeapon = (weapon: ApiGetWeaponResponse): Weapon => ({
-  damageArea: parsePositions(weapon?.damageArea),
+  damageArea: parsePositions(weapon?.damageArea || []),
   id: weapon?.id || 0,
   maxAmmunition: weapon?.maxAmmunition ?? 0,
   name: weapon?.name || '',
