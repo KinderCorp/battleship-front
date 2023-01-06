@@ -3,7 +3,7 @@ import type { ApiGetWeaponsResponse, ApiResponse } from '@api/models';
 const apiGetWeaponsResponse: ApiResponse<ApiGetWeaponsResponse> = {
   data: [
     {
-      damageArea: [{ x: 0, y: 0 }],
+      damageArea: [[0, 0]],
       id: 1,
       maxAmmunition: -1,
       name: 'bomb',
@@ -11,9 +11,9 @@ const apiGetWeaponsResponse: ApiResponse<ApiGetWeaponsResponse> = {
     },
     {
       damageArea: [
-        { x: 0, y: 1 },
-        { x: 0, y: 0 },
-        { x: 0, y: -1 },
+        [0, 1],
+        [0, 0],
+        [0, -1],
       ],
       id: 2,
       maxAmmunition: 2,
