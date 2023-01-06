@@ -39,7 +39,7 @@ describe('home/reducer', () => {
     const state = homeReducer(
       undefined,
       homeReducerAction.getHelloWorldResponse(
-        apiHelpers.parseApiResponse(apiGetHelloWorldResponseMock),
+        apiHelpers.parseResponse(apiGetHelloWorldResponseMock),
       ),
     );
     expect(state.helloWorld).toBe('Hello world!');

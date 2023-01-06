@@ -1,6 +1,6 @@
-import type { ApiGetWeaponsResponse, ApiResponse } from '@api/models';
+import type { ApiGetWeaponResponse, ApiResponse } from '@api/models';
 
-const apiGetWeaponsResponse: ApiResponse<ApiGetWeaponsResponse> = {
+const apiGetWeaponsResponse: ApiResponse<ApiGetWeaponResponse[]> = {
   data: [
     {
       damageArea: [[0, 0]],

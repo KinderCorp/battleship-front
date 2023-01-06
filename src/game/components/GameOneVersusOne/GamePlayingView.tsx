@@ -11,6 +11,7 @@ import apiGetWeaponsResponseMock from '@mocks/api/apiGetWeaponsResponse.mock';
 import Board from '@shared/Board/components/Board';
 import { emitShoot } from '@socket/emittingEvents';
 import type { GamePlayerWeaponStorage } from '@game/models';
+import { parseResponse } from '@api/helpers';
 import { parseWeapons } from '@src/weapon/helpers';
 import type { Position } from '@shared/Board/models';
 import TitleIndication from '@shared/Title/components/TitleIndication';
@@ -25,7 +26,7 @@ import WeaponList from '@src/weapon/components/WeaponList';
 const GamePlayingView = (): JSX.Element => {
   const { translate } = useTranslation();
 
-  const weapons = parseWeapons(apiGetWeaponsResponseMock.data);
+  const weapons = parseWeapons(parseResponse(apiGetWeaponsResponseMock).data);
   const [selectedWeapon, setSelectedWeapon] = useState<Weapon>(
     weapons.find((weapon) => weapon.maxAmmunition === -1) || ({} as Weapon),
   );

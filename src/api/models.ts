@@ -16,17 +16,17 @@ export type Action = {
   meta?: Record<string, any>;
 };
 
-export type ApiResponse<T = any> = {
+export type ApiResponse<T> = {
   data?: T;
 };
 
-export type ApiResponseParsed<T = any> = {
+export type ApiResponseParsed<T> = {
   data: T;
 };
 
 // Response
 export type ApiGetHelloWorldResponse = GetHelloWorldResponse;
-export type ApiGetWeaponsResponse = ApiWeapon[];
+export type ApiGetWeaponResponse = Partial<ApiWeapon>;
 
 // Boat
 export interface ApiBoardBoat extends Pick<Boat, 'name'>, Pick<BoatProps, 'direction'> {
