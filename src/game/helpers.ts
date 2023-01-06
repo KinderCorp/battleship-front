@@ -1,10 +1,12 @@
-import type { ApiGameRoomData, ApiPosition } from '@api/models';
+import type { ApiGameRoom, ApiGameRoomData, ApiPosition } from '@api/models';
 import type { BoardCellAffected, Position } from '@shared/Board/models';
 import { GAME_ROOM_SETTINGS, GAME_SETTINGS } from '@game/constants';
 import type {
+  GameInstance,
   GamePlayer,
   GamePlayerBoard,
   GameRoom,
+  GameRoomData,
   GameRoomSettings,
   GameSettings,
 } from '@game/models';
@@ -39,11 +41,12 @@ export const isPlayerHost = (): boolean => {
 /**
  * Parse a game room data.
  *
- * @param {any} gameRoomData Game room data
- * @return {ApiGameRoomData<any>}
+ * @template T
+ * @param {T} gameRoomData Game room data
+ * @return {ApiGameRoomData<T>}
  */
-export const parseGameRoomData = (gameRoomData: any): ApiGameRoomData<any> => ({
-  data: gameRoomData?.data || null,
+export const parseGameRoomData = <T>(gameRoomData: ApiGameRoomData<T>): GameRoomData<T> => ({
+  data: gameRoomData?.data as T,
   instanceId: gameRoomData?.instanceId || '',
 });
 
@@ -140,10 +143,10 @@ export const parseGameRoomSettings = (gameRoomSettings: any): GameRoomSettings =
 /**
  * Parse game room.
  *
- * @param {any} gameRoom Game room
+ * @param {ApiGameRoom} gameRoom Game room
  * @return {GameRoom}
  */
-export const parseGameRoom = (gameRoom: any): GameRoom => ({
+export const parseGameRoom = (gameRoom: ApiGameRoom & GameInstance): GameRoom => ({
   instanceId: gameRoom?.instanceId || '',
   players: parseGamePlayers(gameRoom?.players),
   settings: parseGameRoomSettings(gameRoom?.settings),
@@ -156,8 +159,8 @@ export const parseGameRoom = (gameRoom: any): GameRoom => ({
  * @return {Position}
  */
 export const parsePosition = (position: ApiPosition): Position => ({
-  x: position?.[0] || 0,
-  y: position?.[1] || 0,
+  x: position?.[0] ?? 0,
+  y: position?.[1] ?? 0,
 });
 
 /**

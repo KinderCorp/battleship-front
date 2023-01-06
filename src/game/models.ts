@@ -49,6 +49,10 @@ export interface GamePlayer extends BasePlayer {
   weaponsStorage: GamePlayerWeaponStorage[];
 }
 
+export interface GameRoomData<T> extends GameInstance {
+  data: T;
+}
+
 export interface GameRoom extends GameInstance {
   players: GamePlayer[];
   settings: GameRoomSettings;

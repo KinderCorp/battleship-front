@@ -1,6 +1,7 @@
 import type { Boat, BoatProps } from '@boat/models';
-import type { GameInstance } from '@game/models';
+import type { GamePlayer, GameRoom, GameRoomData } from '@game/models';
 import type { GetHelloWorldResponse } from '@home/models';
+import type { IntRange } from '@core/models';
 import type { Weapon } from '@src/weapon/models';
 
 export interface HttpResponse {
@@ -39,10 +40,18 @@ export interface ApiBoardBoat extends Pick<Boat, 'name'>, Pick<BoatProps, 'direc
   bowCells: ApiPosition[];
 }
 
+// Player
+export type ApiGamePlayer = Partial<Pick<GamePlayer, 'isHost' | 'pseudo' | 'socketId'>>;
+
 // Game
-export interface ApiGameRoomData<T> extends GameInstance {
-  data: T;
-}
+export type ApiGameRoomData<T> = Partial<GameRoomData<T>>;
+export type ApiGameTurn = Partial<{
+  actionRemaining: IntRange<0, 2>;
+  isTurnOf: ApiGamePlayer;
+  nextPlayer: ApiGamePlayer;
+}>;
+
+export type ApiGameRoom = Partial<Omit<GameRoom, 'instanceId'>>;
 
 export type ApiPosition = [x: number, y: number];
 
