@@ -13,7 +13,7 @@ export type GamePageContentProps = Required<GamePageParams>;
 
 export interface GameSettings {
   boardDimensions: BoardProps['dimensions'];
-  weaponNames: Weapon['name'][];
+  weapons: Weapon[];
   hasBoatsSafetyZone: boolean;
   timePerTurn: number;
 }
@@ -35,7 +35,7 @@ export interface GamePlayerBoard {
 
 export interface GamePlayerWeapon {
   ammunition: number;
-  weaponName: Weapon['name'];
+  weapon: Weapon;
 }
 
 export interface GamePlayer extends BasePlayer {

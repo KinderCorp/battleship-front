@@ -38,10 +38,10 @@ const GamePlayingView = (): JSX.Element => {
   const weaponsItems = useMemo(
     () =>
       player.weapons?.map(
-        ({ ammunition, weaponName }: GamePlayerWeapon): WeaponItem => ({
+        ({ ammunition, weapon: playerWeapon }: GamePlayerWeapon): WeaponItem => ({
           ammunition,
-          isSelected: selectedWeapon.name === weaponName,
-          weapon: weapons.find((weapon) => weapon.name === weaponName) || ({} as Weapon),
+          isSelected: selectedWeapon.name === playerWeapon.name,
+          weapon: weapons.find((weapon) => weapon.name === playerWeapon.name) || ({} as Weapon),
         }),
       ) || [],
     [player, selectedWeapon, weapons],

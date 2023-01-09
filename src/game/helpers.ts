@@ -10,11 +10,11 @@ import type {
   GameRoomSettings,
   GameSettings,
 } from '@game/models';
+import { parseWeapon, parseWeapons } from '@weapon/helpers';
 import ArrayHelpers from '@helpers/ArrayHelpers';
 import { BoardCellState } from '@shared/Board/constants';
 import { GAME_SETTINGS } from '@game/constants';
 import { parseAuthorizedFleet } from '@boat/helpers';
-import { parseWeapons } from '@weapon/helpers';
 import { selectGameRoomPlayerHost } from '@game/selectors';
 import socket from '@socket/index';
 import store from '@core/store';
@@ -95,7 +95,7 @@ export const parseGamePlayerBoard = (gamePlayerBoard: any): GamePlayerBoard => (
  */
 export const parseGamePlayerWeapon = (gamePlayerWeapon: any): GamePlayerWeapon => ({
   ammunition: gamePlayerWeapon?.ammunition || -1,
-  weaponName: gamePlayerWeapon?.weaponName || '',
+  weapon: parseWeapon(gamePlayerWeapon?.weapon),
 });
 
 /**
@@ -146,7 +146,7 @@ export const parseGameSettings = (gameSettings: any): GameSettings => ({
   boardDimensions: gameSettings?.boardDimensions || GAME_SETTINGS.boardDimensions,
   hasBoatsSafetyZone: gameSettings?.hasBoatsSafetyZone ?? GAME_SETTINGS.hasBoatsSafetyZone,
   timePerTurn: gameSettings?.timePerTurn || GAME_SETTINGS.timePerTurn,
-  weaponNames: parseWeapons(gameSettings?.weapons).map((weapon) => weapon.name),
+  weapons: parseWeapons(gameSettings?.weapons),
 });
 
 /**
