@@ -18,8 +18,10 @@ export type Action = {
 };
 
 export type ApiResponse<T> = {
-  data: T;
+  data?: T;
 };
+
+export type ApiResponseParsed<T> = Required<ApiResponse<T>>;
 
 // Response
 export type ApiGetHelloWorldResponse = GetHelloWorldResponse;
@@ -35,6 +37,7 @@ export interface ApiBoardBoat extends Pick<Boat, 'name'>, Pick<BoatProps, 'direc
 }
 
 // Player
+
 export type ApiGamePlayer = Partial<
   Pick<GamePlayer, 'isHost' | 'pseudo' | 'socketId'> & { id: number }
 >;

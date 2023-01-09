@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 import * as homeHelpers from '@home/helpers';
-import type { ApiGetHelloWorldResponse, ApiResponse } from '@api/models';
+import type { ApiGetHelloWorldResponse, ApiResponseParsed } from '@api/models';
 import { HOME_NAME } from '@home/constants';
 import type { HomeState } from '@home/models';
 
@@ -22,7 +22,7 @@ export const homeSlice = createSlice({
     getHelloWorldRequest: (state) => state,
     getHelloWorldResponse: (
       state,
-      action: PayloadAction<ApiResponse<ApiGetHelloWorldResponse>>,
+      action: PayloadAction<ApiResponseParsed<ApiGetHelloWorldResponse>>,
     ) => {
       if (action.payload.data) {
         const parsedHelloWorld = homeHelpers.parseHelloWorld(action.payload.data);

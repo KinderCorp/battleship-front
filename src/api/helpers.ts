@@ -2,7 +2,7 @@ import axios from 'axios';
 import type { AxiosRequestConfig } from 'axios';
 
 import * as apiHelpers from '@api/helpers';
-import type { Action, ApiResponse } from '@api/models';
+import type { Action, ApiResponse, ApiResponseParsed } from '@api/models';
 import store from '@core/store';
 
 // Override axios inteceptors to pervent it from throwing errors
@@ -72,6 +72,6 @@ export const getAuthorizationHeaders = (token: string): Record<string, Record<st
  * @param {Partial<ApiResponse<T>>} apiResponse Api response
  * @return {ApiResponse<T>}
  */
-export const parseResponse = <T>(apiResponse: Partial<ApiResponse<T>>): ApiResponse<T> => ({
+export const parseResponse = <T>(apiResponse: ApiResponse<T>): ApiResponseParsed<T> => ({
   data: apiResponse.data as T,
 });
