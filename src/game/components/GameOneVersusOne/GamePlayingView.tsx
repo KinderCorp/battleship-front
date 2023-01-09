@@ -10,7 +10,7 @@ import type { Weapon, WeaponItem } from '@src/weapon/models';
 import apiGetWeaponsResponseMock from '@mocks/api/apiGetWeaponsResponse.mock';
 import Board from '@shared/Board/components/Board';
 import { emitShoot } from '@socket/emittingEvents';
-import type { GamePlayerWeaponStorage } from '@game/models';
+import type { GamePlayerWeapon } from '@game/models';
 import { parseResponse } from '@api/helpers';
 import { parseWeapons } from '@src/weapon/helpers';
 import type { Position } from '@shared/Board/models';
@@ -37,8 +37,8 @@ const GamePlayingView = (): JSX.Element => {
 
   const weaponsItems = useMemo(
     () =>
-      player.weaponsStorage?.map(
-        ({ ammunition, weaponName }: GamePlayerWeaponStorage): WeaponItem => ({
+      player.weapons?.map(
+        ({ ammunition, weaponName }: GamePlayerWeapon): WeaponItem => ({
           ammunition,
           isSelected: selectedWeapon.name === weaponName,
           weapon: weapons.find((weapon) => weapon.name === weaponName) || ({} as Weapon),

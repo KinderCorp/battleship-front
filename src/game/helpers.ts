@@ -1,10 +1,10 @@
 import type { ApiExtendedGamePlayer, ApiGameRoom, ApiGameRoomData, ApiPosition } from '@api/models';
 import type { BoardCellAffected, Position } from '@shared/Board/models';
-import { GAME_ROOM_SETTINGS, GAME_SETTINGS } from '@game/constants';
 import type {
   GameInstance,
   GamePlayer,
   GamePlayerBoard,
+  GamePlayerWeapon,
   GameRoom,
   GameRoomData,
   GameRoomSettings,
@@ -12,6 +12,7 @@ import type {
 } from '@game/models';
 import ArrayHelpers from '@helpers/ArrayHelpers';
 import { BoardCellState } from '@shared/Board/constants';
+import { GAME_SETTINGS } from '@game/constants';
 import { parseAuthorizedFleet } from '@boat/helpers';
 import { parseWeapons } from '@weapon/helpers';
 import { selectGameRoomPlayerHost } from '@game/selectors';
@@ -87,6 +88,28 @@ export const parseGamePlayerBoard = (gamePlayerBoard: any): GamePlayerBoard => (
 });
 
 /**
+ * Parse a game player weapon.
+ *
+ * @param {any} gamePlayerWeapon Game player weapon.
+ * @return {GamePlayerWeapon}
+ */
+export const parseGamePlayerWeapon = (gamePlayerWeapon: any): GamePlayerWeapon => ({
+  ammunition: gamePlayerWeapon?.ammunition || -1,
+  weaponName: gamePlayerWeapon?.weaponName || '',
+});
+
+/**
+ * Parse game player weapons.
+ *
+ * @param {any} gamePlayerWeapons Game player weapons.
+ * @return {GamePlayerWeapon[]}
+ */
+export const parseGamePlayerWeapons = (gamePlayerWeapons: any): GamePlayerWeapon[] =>
+  ArrayHelpers.isArray(gamePlayerWeapons)
+    ? gamePlayerWeapons.map((gamePlayerWeapon) => parseGamePlayerWeapon(gamePlayerWeapon))
+    : [];
+
+/**
  * Parse a game player.
  *
  * @param {ApiExtendedGamePlayer} apiGamePlayer Api extended game player
@@ -99,7 +122,7 @@ export const parseGamePlayer = (apiGamePlayer: ApiExtendedGamePlayer): GamePlaye
   isTurn: apiGamePlayer?.isTurn || false,
   pseudo: apiGamePlayer?.pseudo || '',
   socketId: apiGamePlayer?.socketId || '',
-  weaponsStorage: apiGamePlayer?.weaponsStorage || [],
+  weapons: parseGamePlayerWeapons(apiGamePlayer?.weapons),
 });
 
 /**
@@ -133,11 +156,8 @@ export const parseGameSettings = (gameSettings: any): GameSettings => ({
  * @return {GameRoomSettings}
  */
 export const parseGameRoomSettings = (gameRoomSettings: any): GameRoomSettings => ({
+  ...parseGameSettings(gameRoomSettings),
   authorisedFleet: parseAuthorizedFleet(gameRoomSettings?.authorisedFleet),
-  boardDimensions: gameRoomSettings?.boardDimensions || GAME_ROOM_SETTINGS.boardDimensions,
-  hasBoatsSafetyZone: gameRoomSettings?.hasBoatsSafetyZone ?? GAME_ROOM_SETTINGS.hasBoatsSafetyZone,
-  timePerTurn: gameRoomSettings?.timePerTurn || GAME_ROOM_SETTINGS.timePerTurn,
-  weapons: parseWeapons(gameRoomSettings?.weapons),
 });
 
 /**

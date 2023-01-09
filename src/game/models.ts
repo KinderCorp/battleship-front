@@ -18,10 +18,8 @@ export interface GameSettings {
   timePerTurn: number;
 }
 
-// FIXME: weapons contain only name, not all properties
-export interface GameRoomSettings extends Omit<GameSettings, 'weaponNames'> {
+export interface GameRoomSettings extends GameSettings {
   authorisedFleet: Boat[];
-  weapons: Weapon[];
 }
 
 export interface GameState {
@@ -35,7 +33,7 @@ export interface GamePlayerBoard {
   boardBoats: BoardBoat[];
 }
 
-export interface GamePlayerWeaponStorage {
+export interface GamePlayerWeapon {
   ammunition: number;
   weaponName: Weapon['name'];
 }
@@ -46,7 +44,7 @@ export interface GamePlayer extends BasePlayer {
   isHost: boolean;
   isTurn: boolean;
   socketId: string;
-  weaponsStorage: GamePlayerWeaponStorage[];
+  weapons: GamePlayerWeapon[];
 }
 
 export interface GameRoomData<T> extends GameInstance {
