@@ -24,10 +24,11 @@ class ObjectHelpers {
   /**
    * Make a deep copy of nested objects or arrays.
    *
-   * @param {any} value Value to copy
-   * @return {any}
+   * @template T
+   * @param {T} value Value to copy
+   * @return {T}
    */
-  static deepClone(value: any): any {
+  static deepClone<T>(value: T): T {
     // Return the value if it is not an object
     if (typeof value !== 'object' || value === null) return value;
 
@@ -39,7 +40,7 @@ class ObjectHelpers {
       output[key] = this.deepClone(value[key]);
     }
 
-    return output;
+    return output as T;
   }
 }
 

@@ -8,14 +8,13 @@ export const GAME_SETTINGS: GameSettings = {
   boardDimensions: 10,
   hasBoatsSafetyZone: false,
   timePerTurn: 60,
-  weaponNames: [],
+  weapons: [],
 };
 
 // FIXME: when the API call is complete to retrieve the weapons remove the 'weapons' property
 export const GAME_ROOM_SETTINGS: GameRoomSettings = {
   ...GAME_SETTINGS,
   authorisedFleet: [],
-  weapons: [],
 };
 
 export enum GameView {

@@ -3,7 +3,7 @@ import homeReducer, * as homeReducerAction from '@home/reducer';
 import apiGetHelloWorldResponseMock from '@mocks/api/apiGetHelloWorldResponse.mock';
 import { HOME_NAME } from '@home/constants';
 import type { HomeState } from '@home/models';
-import homeStateMock from '@mocks/state/homeState.mock';
+import homeStateMock from '@mocks/store/homeState.mock';
 
 describe('home/reducer', () => {
   it('should return the initial state', () => {
@@ -39,7 +39,7 @@ describe('home/reducer', () => {
     const state = homeReducer(
       undefined,
       homeReducerAction.getHelloWorldResponse(
-        apiHelpers.parseApiResponse(apiGetHelloWorldResponseMock),
+        apiHelpers.parseResponse(apiGetHelloWorldResponseMock),
       ),
     );
     expect(state.helloWorld).toBe('Hello world!');

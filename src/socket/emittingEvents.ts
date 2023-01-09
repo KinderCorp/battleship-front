@@ -1,10 +1,12 @@
+import type { ApiBoardBoat, ApiGameShoot } from '@api/models';
+import type { BoardBoat, Position } from '@shared/Board/models';
 import type { GameInstance, GameSettings } from '@game/models';
-import type { BoardBoat } from '@shared/Board/models';
 import { formatGameRoomData } from '@socket/helpers';
 import { parseGameBoardBoatsForApi } from '@boat/helpers';
 import type { Player } from '@player/models';
 import socket from '@socket/index';
 import { SOCKET_EVENTS_EMITTING } from '@socket/constants';
+import type { Weapon } from '@src/weapon/models';
 
 /**
  * Emitting event for create the game.
@@ -57,6 +59,7 @@ export const emitPlayersReadyToPlaceBoats = (): void => {
  * @return {void}
  */
 export const emitLeaveRoom = (instanceId: GameInstance['instanceId']): void => {
+  // TASK: don't send instanceId, get instance id thanks to user socket id
   socket.emit(SOCKET_EVENTS_EMITTING.LEAVE_ROOM, { instanceId });
 };
 
@@ -71,7 +74,7 @@ export const emitValidatePlayerBoatsPlacement = (data: BoardBoat[]): void => {
 
   socket.emit(
     SOCKET_EVENTS_EMITTING.VALIDATE_PLAYER_BOATS_PLACEMENT,
-    formatGameRoomData<BoardBoat[]>(boardBoat),
+    formatGameRoomData<ApiBoardBoat[]>(boardBoat),
   );
 };
 
@@ -82,5 +85,23 @@ export const emitValidatePlayerBoatsPlacement = (data: BoardBoat[]): void => {
  * @return {void}
  */
 export const emitStartGame = (instanceId: GameInstance['instanceId']): void => {
+  // TASK: don't send instanceId, get instance id thanks to user socket id
   socket.emit(SOCKET_EVENTS_EMITTING.START_GAME, { instanceId });
+};
+
+/**
+ * Emitting event to shoot a player.
+ *
+ * @param {Weapon['name']} weaponName Weapon name
+ * @param {Position} position Position
+ * @return {void}
+ */
+export const emitShoot = (weaponName: Weapon['name'], position: Position): void => {
+  socket.emit(
+    SOCKET_EVENTS_EMITTING.SHOOT,
+    formatGameRoomData<ApiGameShoot>({
+      originCell: [position.x, position.y],
+      weaponName,
+    }),
+  );
 };

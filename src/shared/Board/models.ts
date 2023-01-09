@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 
+import type { BoardCellState } from '@shared/Board/constants';
 import type { Boat } from '@src/boat/models';
 import type { BoatProps } from '@boat/models';
 import type { GameSettings } from '@game/models';
@@ -10,19 +11,14 @@ export interface Position {
   y: number;
 }
 
-export type BoardCellState = 'hit' | 'miss';
-
 export interface BoardCellAffected extends Position {
   state: BoardCellState;
 }
 
 // FIXME: models to put here?
-export interface BoardBoat
-  extends Omit<Boat, 'defaultDirection'>,
-    Position,
-    Pick<BoatProps, 'direction'> {}
+export interface BoardBoat extends Boat, Position, Pick<BoatProps, 'direction'> {}
 
-export interface BoardProps extends Pick<GameSettings, 'hasBoatsSafetyZone'> {
+export interface BoardProps extends Pick<Partial<GameSettings>, 'hasBoatsSafetyZone'> {
   boats?: BoardBoat[];
   cellsAffected?: BoardCellAffected[];
   className?: string;
@@ -30,7 +26,7 @@ export interface BoardProps extends Pick<GameSettings, 'hasBoatsSafetyZone'> {
   isDisabled?: boolean;
   isPlacementActive?: boolean;
   isShootActive?: boolean;
-  onClick?: (x: Position['x'], y: Position['y']) => void;
+  onClick?: (position: Position) => void;
   setBoats?: (boats: BoardBoat[]) => void;
 }
 

@@ -37,14 +37,14 @@ $inset-shadow: to-rem(2);
     transform: translate(35%, -35%);
   }
 
-  &.weapon-item--has-counter:not(.weapon-item--is-locked) {
+  &.weapon-item--has-ammunition:not(.weapon-item--is-locked) {
     border-bottom: to-rem(4) solid $color-purple-dark-2;
 
     &.weapon-item--is-selected:not(.weapon-item--is-disabled) .weapon-item-image {
       border-width: to-rem(3);
     }
 
-    .weapon-item-counter {
+    .weapon-item-ammunition {
       @include fixed-size(to-rem(30));
       @include font-text-small;
 

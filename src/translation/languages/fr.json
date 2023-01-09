@@ -4,6 +4,7 @@
   "battleship-logo": "Logo Battleship",
   "boat": "Bateau {name}",
   "create-game": "Créer une partie",
+  "game-configuration": "Configuration de la partie",
   "game-in-progress": "Partie en cours",
   "game-is-about-to-begin.counter": "La partie va commencer dans {counter} seconde{plural}...",
   "game-is-about-to-begin": "La partie va commencer...",
@@ -14,6 +15,7 @@
   "player-placing-his-boats": "{pseudo} place ses bateaux...",
   "player-ready": "{pseudo} est prêt !",
   "random": "Aléatoire",
+  "rival-turn-playing": "Au tour de {pseudo}",
   "share-to-friend": "Partager ce lien à un ami",
   "skin": "Skin {name}",
   "start": "Commencer",
@@ -22,5 +24,6 @@
   "versus": "VS",
   "waiting-for-host": "En attente de l'hôte...",
   "waiting": "En attente...",
-  "weapon": "Arme {name}"
+  "weapon": "Arme {name}",
+  "your-turn-playing": "À votre tour de jouer"
 }

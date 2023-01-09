@@ -12,7 +12,7 @@ describe('home/helpers', () => {
   });
 
   it('should parse hello world when the data is here', () => {
-    const { data: message } = apiHelpers.parseApiResponse(apiGetHelloWorldResponseMock);
+    const { data: message } = apiHelpers.parseResponse(apiGetHelloWorldResponseMock);
     expect(homeHelpers.parseHelloWorld(message)).toEqual('Hello world!');
   });
 });

@@ -1,4 +1,4 @@
-import type { ApiBoardBoat, ApiPosition } from '@api/models';
+import type { ApiBoardBoat, ApiBoatResponse, ApiPosition } from '@api/models';
 import type { AuthorizedBoat, Boat } from '@boat/models';
 import type { BoardBoat, Position } from '@shared/Board/models';
 import { checkBoardBoatsPosition, parseBoardBoat } from '@shared/Board/helpers';
@@ -116,17 +116,17 @@ export const hasXAxisReversed = (
  */
 export const hasYAxisReversed = (
   direction: BoatDirection,
-): direction is BoatDirection.WEST | BoatDirection.SOUTH => {
-  return direction === BoatDirection.WEST || direction === BoatDirection.SOUTH;
+): direction is BoatDirection.EAST | BoatDirection.NORTH => {
+  return direction === BoatDirection.EAST || direction === BoatDirection.NORTH;
 };
 
 /**
  * Parse a boat.
  *
- * @param {any} boat Boat
+ * @param {ApiBoatResponse} boat Boat
  * @return {Boat}
  */
-export const parseBoat = (boat: any): Boat => ({
+export const parseBoat = (boat: ApiBoatResponse): Boat => ({
   lengthCell: boat?.lengthCell || 1,
   name: boat?.name || '',
   src: boat?.src || '',
@@ -136,11 +136,11 @@ export const parseBoat = (boat: any): Boat => ({
 /**
  * Parse boats.
  *
- * @param {any} boats Boats
+ * @param {ApiBoatResponse} boats Boats
  * @return {Boat[]}
  */
-export const parseBoats = (boats: any): Boat[] =>
-  ArrayHelpers.isArray(boats) ? boats.map((boat: any) => parseBoat(boat)) : [];
+export const parseBoats = (boats: ApiBoatResponse[]): Boat[] =>
+  ArrayHelpers.isArray(boats) ? boats.map((boat: ApiBoatResponse) => parseBoat(boat)) : [];
 
 /**
  * Parse authorized boat.
@@ -172,16 +172,16 @@ export const parseAuthorizedFleet = (authorisedFleet: any): Boat[] => {
     }
   }
 
-  return ArrayHelpers.isEmpty(boats) ? parseBoats(newAuthorisedFleet) : boats;
+  return ArrayHelpers.isEmpty(boats) ? parseBoats(newAuthorisedFleet as ApiBoatResponse[]) : boats;
 };
 
 /**
- * Get boat bow cells.
+ * Parse boat bow cells for API.
  *
  * @param {BoardBoat} boardBoat Board boat.
  * @return {ApiPosition[]}
  */
-export const getBoatBowCells = (boardBoat: BoardBoat): ApiPosition[] => {
+export const parseBoatBowCellsForApi = (boardBoat: BoardBoat): ApiPosition[] => {
   const bowCells: ApiPosition[] = [];
 
   for (let index = 0; index < boardBoat.widthCell; index++) {
@@ -210,7 +210,7 @@ export const getBoatBowCells = (boardBoat: BoardBoat): ApiPosition[] => {
  * @return {ApiBoardBoat}
  */
 export const parseGameBoardBoatForApi = (boardBoat: BoardBoat): ApiBoardBoat => ({
-  bowCells: getBoatBowCells(boardBoat),
+  bowCells: parseBoatBowCellsForApi(boardBoat),
   direction: boardBoat.direction,
   name: boardBoat.name,
 });
@@ -223,5 +223,5 @@ export const parseGameBoardBoatForApi = (boardBoat: BoardBoat): ApiBoardBoat => 
  */
 export const parseGameBoardBoatsForApi = (boardBoats: BoardBoat[]): ApiBoardBoat[] =>
   ArrayHelpers.isArray(boardBoats)
-    ? boardBoats.map((boardBoat: any) => parseGameBoardBoatForApi(boardBoat))
+    ? boardBoats.map((boardBoat: BoardBoat) => parseGameBoardBoatForApi(boardBoat))
     : [];

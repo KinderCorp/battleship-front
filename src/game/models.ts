@@ -1,5 +1,5 @@
+import type { BoardBoat, BoardCellAffected, BoardProps } from '@shared/Board/models';
 import type { BasePlayer } from '@player/models';
-import type { BoardProps } from '@shared/Board/models';
 import type { Boat } from '@src/boat/models';
 import type { GamePageParams } from '@pages/game/[gameId]';
 import type { GameView } from '@game/constants';
@@ -13,15 +13,13 @@ export type GamePageContentProps = Required<GamePageParams>;
 
 export interface GameSettings {
   boardDimensions: BoardProps['dimensions'];
-  weaponNames: Weapon['name'][];
+  weapons: Weapon[];
   hasBoatsSafetyZone: boolean;
   timePerTurn: number;
 }
 
-// FIXME: weapons contain only name, not all properties
-export interface GameRoomSettings extends Omit<GameSettings, 'weaponNames'> {
+export interface GameRoomSettings extends GameSettings {
   authorisedFleet: Boat[];
-  weapons: Weapon[];
 }
 
 export interface GameState {
@@ -30,10 +28,27 @@ export interface GameState {
   view: GameView;
 }
 
+export interface GamePlayerBoard {
+  cellsAffected: BoardCellAffected[];
+  boardBoats: BoardBoat[];
+}
+
+export interface GamePlayerWeapon {
+  ammunition: number;
+  weapon: Weapon;
+}
+
 export interface GamePlayer extends BasePlayer {
-  boatsAreReady?: boolean;
+  board: GamePlayerBoard;
+  boatsAreReady: boolean;
   isHost: boolean;
+  isTurn: boolean;
   socketId: string;
+  weapons: GamePlayerWeapon[];
+}
+
+export interface GameRoomData<T> extends GameInstance {
+  data: T;
 }
 
 export interface GameRoom extends GameInstance {

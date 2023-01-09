@@ -11,7 +11,7 @@ import store from '@core/store';
  * @return {ApiGameRoomData}
  */
 export const formatGameRoomData = <T>(
-  data: any,
+  data: T,
   instanceId: GameRoom['instanceId'] = selectGameRoomInstanceId(store.getState()),
 ): ApiGameRoomData<T> => ({
   data,

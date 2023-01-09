@@ -13,21 +13,6 @@
     margin-bottom: to-rem(30);
     max-width: to-rem(900);
 
-    &.share-link {
-      .block-container-content {
-        display: flex;
-        flex-direction: row;
-
-        .text-container {
-          margin-right: to-rem(10);
-        }
-
-        .button:not(.is-disabled) {
-          border-color: $color-purple-dark-2;
-        }
-      }
-    }
-
     &.players {
       .block-container-content {
         align-items: center;

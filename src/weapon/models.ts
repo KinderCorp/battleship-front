@@ -9,11 +9,20 @@ export interface Weapon {
   src: ImageProps['src'];
 }
 
-export interface WeaponItemProps {
-  className?: string;
-  counter?: number;
+export interface WeaponItem {
+  ammunition?: number;
   isLocked?: boolean;
   isSelected?: boolean;
   weapon: Weapon;
-  onClick: (name: Weapon['name']) => void;
+}
+
+export interface WeaponItemProps extends WeaponItem {
+  className?: string;
+  onClick: (weapon: Weapon) => void;
+}
+
+export interface WeaponListProps extends Pick<WeaponItemProps, 'onClick'> {
+  className?: string;
+  isDisabled?: boolean;
+  weaponItems: WeaponItem[];
 }

@@ -1,10 +1,20 @@
-import { GAME_ROOM_SETTINGS, GAME_SETTINGS, GameView } from '@game/constants';
-import type { GamePlayer, GameRoom, GameRoomSettings, GameSettings, GameState } from '@game/models';
-import type { ApiGameRoomData } from '@api/models';
+import type { ApiExtendedGamePlayer, ApiGameRoom, ApiGameRoomData, ApiPosition } from '@api/models';
+import type { BoardCellAffected, Position } from '@shared/Board/models';
+import type {
+  GameInstance,
+  GamePlayer,
+  GamePlayerBoard,
+  GamePlayerWeapon,
+  GameRoom,
+  GameRoomData,
+  GameRoomSettings,
+  GameSettings,
+} from '@game/models';
+import { parseWeapon, parseWeapons } from '@weapon/helpers';
 import ArrayHelpers from '@helpers/ArrayHelpers';
+import { BoardCellState } from '@shared/Board/constants';
+import { GAME_SETTINGS } from '@game/constants';
 import { parseAuthorizedFleet } from '@boat/helpers';
-import { parseWeapons } from '@weapon/helpers';
-import type { Position } from '@shared/Board/models';
 import { selectGameRoomPlayerHost } from '@game/selectors';
 import socket from '@socket/index';
 import store from '@core/store';
@@ -12,11 +22,11 @@ import store from '@core/store';
 /**
  * Check if a game is full.
  *
- * @param {GameRoom} gameRoom Game room
+ * @param {Partial<GameRoom>} gameRoom Game room
  * @return {boolean}
  */
-export const checkGameIsFull = (gameRoom: GameRoom): boolean => {
-  return gameRoom?.players?.length >= 2 || false;
+export const checkGameIsFull = (gameRoom: Partial<GameRoom>): boolean => {
+  return (ArrayHelpers.isArray(gameRoom?.players) && gameRoom.players.length >= 2) || false;
 };
 
 /**
@@ -30,39 +40,89 @@ export const isPlayerHost = (): boolean => {
 };
 
 /**
- * Parse game state.
- *
- * @param {any} gameState Game state
- * @return {GameState}
- */
-export const parseGameState = (gameState: any): GameState => ({
-  gameRoom: parseGameRoom(gameState.gameRoom),
-  settings: parseGameSettings(gameState.settings),
-  view: gameState.view || GameView.SETTINGS,
-});
-
-/**
  * Parse a game room data.
  *
- * @param {any} gameRoomData Game room data
- * @return {ApiGameRoomData<any>}
+ * @template T
+ * @param {T} gameRoomData Game room data
+ * @return {ApiGameRoomData<T>}
  */
-export const parseGameRoomData = (gameRoomData: any): ApiGameRoomData<any> => ({
-  data: gameRoomData?.data || null,
+export const parseGameRoomData = <T>(gameRoomData: ApiGameRoomData<T>): GameRoomData<T> => ({
+  data: gameRoomData?.data as T,
   instanceId: gameRoomData?.instanceId || '',
 });
 
 /**
+ * Parse a game board cell affected.
+ *
+ * @param {any} gameBoardCellAffected Game board cell affected
+ * @return {GamePlayerBoard}
+ */
+export const parseGameBoardCellAffected = (gameBoardCellAffected: any): BoardCellAffected => ({
+  state: gameBoardCellAffected?.state || BoardCellState.MISS,
+  x: gameBoardCellAffected?.x ?? 0,
+  y: gameBoardCellAffected?.y ?? 0,
+});
+
+/**
+ * Parse a game board cells affected.
+ *
+ * @param {any} gameBoardCellsAffected Game board cells affected
+ * @return {BoardCellAffected}
+ */
+export const parseGameBoardCellsAffected = (gameBoardCellsAffected: any): BoardCellAffected[] =>
+  ArrayHelpers.isArray(gameBoardCellsAffected)
+    ? gameBoardCellsAffected.map((gameBoardCellAffected: any) =>
+        parseGameBoardCellAffected(gameBoardCellAffected),
+      )
+    : [];
+
+/**
+ * Parse a game player board.
+ *
+ * @param {any} gamePlayerBoard Game player board
+ * @return {GamePlayerBoard}
+ */
+export const parseGamePlayerBoard = (gamePlayerBoard: any): GamePlayerBoard => ({
+  boardBoats: [],
+  cellsAffected: parseGameBoardCellsAffected(gamePlayerBoard?.cellsAffected),
+});
+
+/**
+ * Parse a game player weapon.
+ *
+ * @param {any} gamePlayerWeapon Game player weapon.
+ * @return {GamePlayerWeapon}
+ */
+export const parseGamePlayerWeapon = (gamePlayerWeapon: any): GamePlayerWeapon => ({
+  ammunition: gamePlayerWeapon?.ammunition || -1,
+  weapon: parseWeapon(gamePlayerWeapon?.weapon),
+});
+
+/**
+ * Parse game player weapons.
+ *
+ * @param {any} gamePlayerWeapons Game player weapons.
+ * @return {GamePlayerWeapon[]}
+ */
+export const parseGamePlayerWeapons = (gamePlayerWeapons: any): GamePlayerWeapon[] =>
+  ArrayHelpers.isArray(gamePlayerWeapons)
+    ? gamePlayerWeapons.map((gamePlayerWeapon) => parseGamePlayerWeapon(gamePlayerWeapon))
+    : [];
+
+/**
  * Parse a game player.
  *
- * @param {any} gamePlayer Game player
+ * @param {ApiExtendedGamePlayer} apiGamePlayer Api extended game player
  * @return {GamePlayer}
  */
-export const parseGamePlayer = (gamePlayer: any): GamePlayer => ({
-  boatsAreReady: gamePlayer?.boatsAreReady || false,
-  isHost: gamePlayer?.isHost || false,
-  pseudo: gamePlayer?.pseudo || '',
-  socketId: gamePlayer?.socketId || '',
+export const parseGamePlayer = (apiGamePlayer: ApiExtendedGamePlayer): GamePlayer => ({
+  board: parseGamePlayerBoard(apiGamePlayer?.board),
+  boatsAreReady: apiGamePlayer?.boatsAreReady || false,
+  isHost: apiGamePlayer?.isHost || false,
+  isTurn: apiGamePlayer?.isTurn || false,
+  pseudo: apiGamePlayer?.pseudo || '',
+  socketId: apiGamePlayer?.socketId || '',
+  weapons: parseGamePlayerWeapons(apiGamePlayer?.weapons),
 });
 
 /**
@@ -86,7 +146,7 @@ export const parseGameSettings = (gameSettings: any): GameSettings => ({
   boardDimensions: gameSettings?.boardDimensions || GAME_SETTINGS.boardDimensions,
   hasBoatsSafetyZone: gameSettings?.hasBoatsSafetyZone ?? GAME_SETTINGS.hasBoatsSafetyZone,
   timePerTurn: gameSettings?.timePerTurn || GAME_SETTINGS.timePerTurn,
-  weaponNames: parseWeapons(gameSettings?.weapons).map((weapon) => weapon.name),
+  weapons: parseWeapons(gameSettings?.weapons),
 });
 
 /**
@@ -96,20 +156,17 @@ export const parseGameSettings = (gameSettings: any): GameSettings => ({
  * @return {GameRoomSettings}
  */
 export const parseGameRoomSettings = (gameRoomSettings: any): GameRoomSettings => ({
+  ...parseGameSettings(gameRoomSettings),
   authorisedFleet: parseAuthorizedFleet(gameRoomSettings?.authorisedFleet),
-  boardDimensions: gameRoomSettings?.boardDimensions || GAME_ROOM_SETTINGS.boardDimensions,
-  hasBoatsSafetyZone: gameRoomSettings?.hasBoatsSafetyZone ?? GAME_ROOM_SETTINGS.hasBoatsSafetyZone,
-  timePerTurn: gameRoomSettings?.timePerTurn || GAME_ROOM_SETTINGS.timePerTurn,
-  weapons: parseWeapons(gameRoomSettings?.weapons),
 });
 
 /**
  * Parse game room.
  *
- * @param {any} gameRoom Game room
+ * @param {ApiGameRoom} gameRoom Game room
  * @return {GameRoom}
  */
-export const parseGameRoom = (gameRoom: any): GameRoom => ({
+export const parseGameRoom = (gameRoom: ApiGameRoom & GameInstance): GameRoom => ({
   instanceId: gameRoom?.instanceId || '',
   players: parseGamePlayers(gameRoom?.players),
   settings: parseGameRoomSettings(gameRoom?.settings),
@@ -118,19 +175,21 @@ export const parseGameRoom = (gameRoom: any): GameRoom => ({
 /**
  * Parse a position.
  *
- * @param {any} position Position
+ * @param {ApiPosition} position Position
  * @return {Position}
  */
-export const parsePosition = (position: any): Position => ({
-  x: position?.[0] || 0,
-  y: position?.[1] || 0,
+export const parsePosition = (position: ApiPosition): Position => ({
+  x: position?.[0] ?? 0,
+  y: position?.[1] ?? 0,
 });
 
 /**
  * Parse positions.
  *
- * @param {any} positions Positions
+ * @param {ApiPosition[]} positions Positions
  * @return {Position[]}
  */
-export const parsePositions = (positions: any): Position[] =>
-  ArrayHelpers.isArray(positions) ? positions.map((position: any) => parsePosition(position)) : [];
+export const parsePositions = (positions: ApiPosition[]): Position[] =>
+  ArrayHelpers.isArray(positions)
+    ? positions.map((position: ApiPosition) => parsePosition(position))
+    : [];

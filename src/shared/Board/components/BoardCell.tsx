@@ -41,7 +41,7 @@ export const BoardCell = ({
       event.stopPropagation();
 
       if (!isDisabled && !!isShootActive && !state && onClick) {
-        onClick(x, y);
+        onClick({ x, y });
       }
     },
     [isDisabled, isShootActive, onClick, state, x, y],

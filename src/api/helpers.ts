@@ -40,7 +40,7 @@ export const requestWithAxios = async (
 
     store.dispatch({
       ...actionResponse,
-      payload: apiHelpers.parseApiResponse(data),
+      payload: apiHelpers.parseResponse(data),
     });
   } catch (error: any) {
     store.dispatch({
@@ -68,9 +68,10 @@ export const getAuthorizationHeaders = (token: string): Record<string, Record<st
 /**
  * Parse api response.
  *
- * @param {ApiResponse} apiResponse Api response
- * @return {ApiResponseParsed}
+ * @template T Data type
+ * @param {Partial<ApiResponse<T>>} apiResponse Api response
+ * @return {ApiResponse<T>}
  */
-export const parseApiResponse = (apiResponse: ApiResponse = {}): ApiResponseParsed => ({
-  data: apiResponse.data || {},
+export const parseResponse = <T>(apiResponse: ApiResponse<T>): ApiResponseParsed<T> => ({
+  data: apiResponse.data as T,
 });

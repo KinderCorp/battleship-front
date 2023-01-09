@@ -1,43 +1,43 @@
+import type { ApiGamePlayer, ApiGameRoom, ApiGameRoomData, ApiGameTurn } from '@api/models';
 import { parseGamePlayer, parseGameRoom, parseGameRoomData } from '@game/helpers';
-import { selectGameRoomPlayerHost, selectGameRoomPlayers } from '@game/selectors';
 import { setGameRoom, setGameRoomPlayers, setView } from '@game/reducer';
-import type { GamePlayer } from '@game/models';
 import { GameView } from '@game/constants';
+import ObjectHelpers from '@helpers/ObjectHelpers';
 import { PATHS } from '@core/constants';
+import { selectGameRoomPlayers } from '@game/selectors';
 import store from '@core/store';
 import UrlHelpers from '@helpers/UrlHelpers';
 
-// FIXME: assign the right type for parameter or just 'any' ?
 /**
  * Listening event when game is created.
  *
- * @param {any} gameRoomData Game room data
+ * @param {ApiGameRoomData<ApiGameRoom>} apiGameRoomData Api game room data
  * @return {void}
  */
-export const listeningGameCreated = (gameRoomData: any): void => {
-  const { data, instanceId } = parseGameRoomData(gameRoomData);
+export const listeningGameCreated = (apiGameRoomData: ApiGameRoomData<ApiGameRoom>): void => {
+  const { data, instanceId } = parseGameRoomData(apiGameRoomData);
   const gameRoom = parseGameRoom({ ...data, instanceId });
 
   if (!gameRoom.instanceId) return;
 
   store.dispatch(setGameRoom(gameRoom));
-
-  UrlHelpers.changeLocation(`${PATHS.GAME}/${instanceId}`);
+  UrlHelpers.changeLocation(`${PATHS.GAME}/${gameRoom.instanceId}`);
 };
 
 /**
  * Listening event when player joined.
  *
- * @param {any} gameRoomData Game room data
+ * @param {ApiGameRoomData<ApiGamePlayer>} apiGameRoomData Api game room data
  * @return {void}
  */
-export const listeningPlayerJoined = (gameRoomData: any): void => {
-  const { data } = parseGameRoomData(gameRoomData);
+export const listeningPlayerJoined = (apiGameRoomData: ApiGameRoomData<ApiGamePlayer>): void => {
+  const { data } = parseGameRoomData(apiGameRoomData);
   const player = parseGamePlayer(data);
 
-  const newPlayers = [selectGameRoomPlayerHost(store.getState()) as GamePlayer, player];
+  const players = ObjectHelpers.deepClone(selectGameRoomPlayers(store.getState()));
+  players.push(player);
 
-  store.dispatch(setGameRoomPlayers(newPlayers));
+  store.dispatch(setGameRoomPlayers(players));
 };
 
 /**
@@ -62,11 +62,11 @@ export const listeningErrorGameNotFound = (): void => {
 /**
  * Listening event for game information.
  *
- * @param {any} gameRoomData Game room data
+ * @param {ApiGameRoomData<ApiGameRoom>} apiGameRoomData Api game room data
  * @return {void}
  */
-export const listeningGameInformation = (gameRoomData: any): void => {
-  const { data, instanceId } = parseGameRoomData(gameRoomData);
+export const listeningGameInformation = (apiGameRoomData: ApiGameRoomData<ApiGameRoom>): void => {
+  const { data, instanceId } = parseGameRoomData(apiGameRoomData);
   const gameRoom = parseGameRoom({ ...data, instanceId });
 
   store.dispatch(setGameRoom(gameRoom));
@@ -93,29 +93,42 @@ export const listeningErrorGameIsFull = (): void => {
 /**
  * Listening event when one player has placed his boats.
  *
- * @param {any} gameRoomData Game room data
+ * @param {ApiGameRoomData<ApiGamePlayer>} apiGameRoomData Api game room data
  * @return {void}
  */
-export const listeningOnePlayerHasPlacedHisBoats = (gameRoomData: any): void => {
-  const { data } = parseGameRoomData(gameRoomData);
-  const player = parseGamePlayer(data);
+export const listeningOnePlayerHasPlacedHisBoats = (
+  apiGameRoomData: ApiGameRoomData<ApiGamePlayer>,
+): void => {
+  const { data } = parseGameRoomData(apiGameRoomData);
+  const playerIsReady = parseGamePlayer(data);
 
-  const players = [...selectGameRoomPlayers(store.getState())];
-  const playerToUpdateIndex = players.findIndex((player) => player.socketId === data.socketId);
+  const players = ObjectHelpers.deepClone(selectGameRoomPlayers(store.getState()));
+  const player = players.find((player) => player.socketId === playerIsReady.socketId);
 
-  if (playerToUpdateIndex !== -1) {
-    players[playerToUpdateIndex] = { ...player, boatsAreReady: true };
-    store.dispatch(setGameRoomPlayers(players));
-  }
+  if (!player) return;
+
+  player.boatsAreReady = true;
+  store.dispatch(setGameRoomPlayers(players));
 };
 
 /**
  * Listening event when game is started.
  *
+ * @param {ApiGameRoomData<ApiGameTurn>} apiGameRoomData Api game room data
  * @return {void}
  */
-export const listeningGameStarted = (): void => {
+export const listeningGameStarted = (apiGameRoomData: ApiGameRoomData<ApiGameTurn>): void => {
+  const { data } = parseGameRoomData(apiGameRoomData);
+  const playerTurn = parseGamePlayer(data.isTurnOf as ApiGamePlayer);
+
+  const players = ObjectHelpers.deepClone(selectGameRoomPlayers(store.getState()));
+  const player = players.find((player) => player.socketId === playerTurn.socketId);
+
+  if (!player) return;
+
+  player.isTurn = true;
   store.dispatch(setView(GameView.PLAYING));
+  store.dispatch(setGameRoomPlayers(players));
 };
 
 /**
@@ -126,3 +139,11 @@ export const listeningGameStarted = (): void => {
 export const listeningClosedRoom = (): void => {
   UrlHelpers.changeLocation(PATHS.DEFAULT);
 };
+
+/* eslint-disable @typescript-eslint/no-empty-function */
+/**
+ * Listening event when player is shot.
+ *
+ * @return {void}
+ */
+export const listeningShot = (): void => {};

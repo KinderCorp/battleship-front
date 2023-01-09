@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react';
 import { useCallback } from 'react';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { checkGameIsFull, isPlayerHost } from '@game/helpers';
@@ -8,7 +8,7 @@ import Button from '@shared/Button/components/Button';
 import { emitPlayersReadyToPlaceBoats } from '@socket/emittingEvents';
 import PlayersCards from '@player/components/PlayersCards';
 import { selectGameRoom } from '@game/selectors';
-import TextContainer from '@shared/TextContainer/components/TextContainer';
+import ShareLink from '@shared/ShareLink/components/ShareLink';
 import UrlHelpers from '@helpers/UrlHelpers';
 import useClientSideValue from '@hooks/useClientSideValue';
 import useTranslation from '@hooks/useTranslation';
@@ -24,20 +24,7 @@ const GameSettingsView = (): JSX.Element => {
 
   const gameRoom = useSelector(selectGameRoom);
   const shareLink = useClientSideValue(UrlHelpers.getUrl());
-  const [clickedButtonCopy, setClickedButtonCopy] = useState<boolean>(false);
   const allPlayersJoined = useMemo(() => checkGameIsFull(gameRoom), [gameRoom]);
-
-  /**
-   * Copy share link.
-   *
-   * @return {void}
-   */
-  const handleCopyShareLink = useCallback((): void => {
-    navigator.clipboard.writeText(shareLink);
-
-    setClickedButtonCopy(true);
-    setTimeout(() => setClickedButtonCopy(false), 1000);
-  }, [shareLink]);
 
   /**
    * Start game.
@@ -51,19 +38,8 @@ const GameSettingsView = (): JSX.Element => {
   return (
     <div className="game-settings">
       {isPlayerHost() && (
-        <BlockContainer
-          className="share-link"
-          iconName="Share"
-          title={translate('share-to-friend')}
-        >
-          <TextContainer value={shareLink} />
-          <Button
-            iconName={clickedButtonCopy ? 'Check' : 'Copy'}
-            onClick={handleCopyShareLink}
-            isDisabled={clickedButtonCopy}
-            style="secondary"
-            size="large"
-          />
+        <BlockContainer iconName="Share" title={translate('share-to-friend')}>
+          <ShareLink value={shareLink} />
         </BlockContainer>
       )}
 

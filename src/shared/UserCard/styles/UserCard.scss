@@ -41,7 +41,11 @@
     margin-top: to-rem(20);
 
     .user-card-name {
-      margin: 0 to-rem(8) 0 0;
+      margin: 0;
+    }
+
+    .icon {
+      margin-left: to-rem(8);
     }
   }
 
