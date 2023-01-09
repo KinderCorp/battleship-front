@@ -18,10 +18,6 @@ export type Action = {
 };
 
 export type ApiResponse<T> = {
-  data?: T;
-};
-
-export type ApiResponseParsed<T> = {
   data: T;
 };
 
@@ -31,17 +27,19 @@ export type ApiGetHelloWorldResponse = GetHelloWorldResponse;
 export type ApiWeaponResponse = Partial<ApiWeapon>;
 export type ApiGetWeaponResponse = ApiWeaponResponse;
 
-export type ApiBoatResponse = Partial<ApiBoat>;
+export type ApiBoatResponse = Partial<Boat>;
 
 // Boat
-export type ApiBoat = Boat;
-
 export interface ApiBoardBoat extends Pick<Boat, 'name'>, Pick<BoatProps, 'direction'> {
   bowCells: ApiPosition[];
 }
 
 // Player
-export type ApiGamePlayer = Partial<Pick<GamePlayer, 'isHost' | 'pseudo' | 'socketId'>>;
+export type ApiGamePlayer = Partial<
+  Pick<GamePlayer, 'isHost' | 'pseudo' | 'socketId'> & { id: number }
+>;
+
+export type ApiExtendedGamePlayer = ApiGamePlayer & Partial<Omit<GamePlayer, keyof ApiGamePlayer>>;
 
 // Game
 export type ApiGameRoomData<T> = Partial<GameRoomData<T>>;

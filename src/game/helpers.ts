@@ -1,4 +1,4 @@
-import type { ApiGameRoom, ApiGameRoomData, ApiPosition } from '@api/models';
+import type { ApiExtendedGamePlayer, ApiGameRoom, ApiGameRoomData, ApiPosition } from '@api/models';
 import type { BoardCellAffected, Position } from '@shared/Board/models';
 import { GAME_ROOM_SETTINGS, GAME_SETTINGS } from '@game/constants';
 import type {
@@ -89,17 +89,17 @@ export const parseGamePlayerBoard = (gamePlayerBoard: any): GamePlayerBoard => (
 /**
  * Parse a game player.
  *
- * @param {any} gamePlayer Game player
+ * @param {ApiExtendedGamePlayer} apiGamePlayer Api extended game player
  * @return {GamePlayer}
  */
-export const parseGamePlayer = (gamePlayer: any): GamePlayer => ({
-  board: parseGamePlayerBoard(gamePlayer?.board),
-  boatsAreReady: gamePlayer?.boatsAreReady || false,
-  isHost: gamePlayer?.isHost || false,
-  isTurn: gamePlayer?.isTurn || false,
-  pseudo: gamePlayer?.pseudo || '',
-  socketId: gamePlayer?.socketId || '',
-  weaponsStorage: gamePlayer?.weaponsStorage || [],
+export const parseGamePlayer = (apiGamePlayer: ApiExtendedGamePlayer): GamePlayer => ({
+  board: parseGamePlayerBoard(apiGamePlayer?.board),
+  boatsAreReady: apiGamePlayer?.boatsAreReady || false,
+  isHost: apiGamePlayer?.isHost || false,
+  isTurn: apiGamePlayer?.isTurn || false,
+  pseudo: apiGamePlayer?.pseudo || '',
+  socketId: apiGamePlayer?.socketId || '',
+  weaponsStorage: apiGamePlayer?.weaponsStorage || [],
 });
 
 /**

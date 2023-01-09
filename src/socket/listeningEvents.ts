@@ -119,7 +119,7 @@ export const listeningOnePlayerHasPlacedHisBoats = (
  */
 export const listeningGameStarted = (apiGameRoomData: ApiGameRoomData<ApiGameTurn>): void => {
   const { data } = parseGameRoomData(apiGameRoomData);
-  const playerTurn = parseGamePlayer(data.isTurnOf);
+  const playerTurn = parseGamePlayer(data.isTurnOf as ApiGamePlayer);
 
   const players = ObjectHelpers.deepClone(selectGameRoomPlayers(store.getState()));
   const player = players.find((player) => player.socketId === playerTurn.socketId);
